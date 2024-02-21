@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'home_viewmodel.dart';
+import 'play_viewmodel.dart';
 
-class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+class PlayView extends StackedView<PlayViewModel> {
+  const PlayView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    HomeViewModel viewModel,
+    PlayViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -21,8 +21,8 @@ class HomeView extends StackedView<HomeViewModel> {
   }
 
   @override
-  HomeViewModel viewModelBuilder(
+  PlayViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      HomeViewModel();
+      PlayViewModel();
 }

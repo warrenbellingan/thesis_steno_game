@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'home_viewmodel.dart';
+import 'strokes_multiplayer_viewmodel.dart';
 
-class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
+  const StrokesMultiplayerView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    HomeViewModel viewModel,
+    StrokesMultiplayerViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -21,8 +21,8 @@ class HomeView extends StackedView<HomeViewModel> {
   }
 
   @override
-  HomeViewModel viewModelBuilder(
+  StrokesMultiplayerViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      HomeViewModel();
+      StrokesMultiplayerViewModel();
 }

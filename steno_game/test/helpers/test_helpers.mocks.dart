@@ -10,6 +10,9 @@ import 'package:flutter/material.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
 import 'package:stacked_services/stacked_services.dart' as _i2;
+import 'package:steno_game/services/authentication_service.dart' as _i7;
+import 'package:steno_game/services/image_service.dart' as _i9;
+import 'package:steno_game/services/shared_preference_service.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -670,3 +673,20 @@ class MockDialogService extends _i1.Mock implements _i2.DialogService {
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [AuthenticationService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthenticationService extends _i1.Mock
+    implements _i7.AuthenticationService {}
+
+/// A class which mocks [SharedPreferenceService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreferenceService extends _i1.Mock
+    implements _i8.SharedPreferenceService {}
+
+/// A class which mocks [ImageService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockImageService extends _i1.Mock implements _i9.ImageService {}

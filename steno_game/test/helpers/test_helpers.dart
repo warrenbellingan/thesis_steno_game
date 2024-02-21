@@ -2,6 +2,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:steno_game/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/services/authentication_service.dart';
+import 'package:steno_game/services/shared_preference_service.dart';
+import 'package:steno_game/services/image_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -10,13 +13,19 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  // @stacked-mock-spec
+  MockSpec<AuthenticationService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<SharedPreferenceService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ImageService>(onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
 ])
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterAuthenticationService();
+  getAndRegisterSharedPreferenceService();
+  getAndRegisterImageService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -69,6 +78,26 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockAuthenticationService getAndRegisterAuthenticationService() {
+  _removeRegistrationIfExists<AuthenticationService>();
+  final service = MockAuthenticationService();
+  locator.registerSingleton<AuthenticationService>(service);
+  return service;
+}
+
+MockSharedPreferenceService getAndRegisterSharedPreferenceService() {
+  _removeRegistrationIfExists<SharedPreferenceService>();
+  final service = MockSharedPreferenceService();
+  locator.registerSingleton<SharedPreferenceService>(service);
+  return service;
+}
+
+MockImageService getAndRegisterImageService() {
+  _removeRegistrationIfExists<ImageService>();
+  final service = MockImageService();
+  locator.registerSingleton<ImageService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {
