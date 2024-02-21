@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "181073997803",
+    "project_id": "steno-game",
+    "storage_bucket": "steno-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181073997803:android:dbe52e264d5d17d215f3ae",
+        "android_client_info": {
+          "package_name": "com.example.steno_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoV57OlFzceoGBE-Nbnw5o8_6FlqarmPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
