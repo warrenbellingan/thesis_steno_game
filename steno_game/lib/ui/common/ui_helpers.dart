@@ -19,6 +19,23 @@ const Widget verticalSpaceMedium = SizedBox(height: _mediumSize);
 const Widget verticalSpaceLarge = SizedBox(height: _largeSize);
 const Widget verticalSpaceMassive = SizedBox(height: _massiveSize);
 
+BoxShadow primaryShadow() => BoxShadow(
+      color: const Color(0xFF948D8D),
+      offset: Offset.fromDirection(-15, -4),
+      blurStyle: BlurStyle.normal,
+      spreadRadius: 1,
+      blurRadius: 6,
+    );
+
+const EdgeInsets gamePadding = EdgeInsets.symmetric(horizontal: 7, vertical: 8);
+
+double keyWidth(BuildContext context) =>
+    screenWidthFraction(context, dividedBy: 11);
+
+Widget keyVerticalSpace(double width) => SizedBox(
+      width: width,
+    );
+
 Widget spacedDivider = const Column(
   children: <Widget>[
     verticalSpaceMedium,
@@ -30,6 +47,7 @@ Widget spacedDivider = const Column(
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 double screenHeightFraction(BuildContext context,
@@ -51,6 +69,7 @@ double quarterScreenWidth(BuildContext context) =>
 
 double getResponsiveHorizontalSpaceMedium(BuildContext context) =>
     screenWidthFraction(context, dividedBy: 10);
+
 double getResponsiveSmallFontSize(BuildContext context) =>
     getResponsiveFontSize(context, fontSize: 14, max: 15);
 
