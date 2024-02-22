@@ -42,7 +42,6 @@ import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart'
 import 'package:steno_game/ui/views/typing_play/typing_play_view.dart' as _i22;
 
 class Routes {
-  static const homeView = '/home-view';
 
   static const startupView = '/startup-view';
 
@@ -51,6 +50,8 @@ class Routes {
   static const signUpView = '/sign-up-view';
 
   static const forgotPasswordView = '/forgot-password-view';
+
+  static const homeView = '/home-view';
 
   static const achievementView = '/achievement-view';
 
@@ -420,7 +421,6 @@ extension NavigatorStateExtension on _i25.NavigationService {
         parameters: parameters,
         transition: transition);
   }
-
 
 
   Future<dynamic> navigateToAchievementView([
