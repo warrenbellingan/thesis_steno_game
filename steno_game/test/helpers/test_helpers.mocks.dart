@@ -790,6 +790,32 @@ class MockAuthenticationService extends _i1.Mock
       ) as _i6.Future<_i2.Either<_i9.GameException, _i10.User>>);
 
   @override
+  _i6.Future<_i2.Either<_i9.GameException, _i10.User>> getCurrentUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCurrentUser,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i9.GameException, _i10.User>>.value(
+            _FakeEither_0<_i9.GameException, _i10.User>(
+          this,
+          Invocation.method(
+            #getCurrentUser,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i2.Either<_i9.GameException, _i10.User>>.value(
+                _FakeEither_0<_i9.GameException, _i10.User>(
+          this,
+          Invocation.method(
+            #getCurrentUser,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i9.GameException, _i10.User>>);
+
+  @override
   _i6.Future<_i2.Either<_i9.GameException, _i2.None<dynamic>>> logout() =>
       (super.noSuchMethod(
         Invocation.method(

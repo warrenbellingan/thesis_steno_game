@@ -1,13 +1,23 @@
+import 'package:flutter/widgets.dart';
+
 import '../constants/game_color.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/game_png.dart';
 
 class PlayerProfile extends StatelessWidget {
-  const PlayerProfile({super.key, required this.name, required this.level});
+  const PlayerProfile(
+      {super.key, required this.name, required this.level, this.imagePath});
 
   final String name;
   final int level;
+  final String? imagePath;
+
+  ImageProvider getImage() {
+    if (imagePath == null) return const AssetImage(GamePng.gameAvatarPath);
+    return NetworkImage(imagePath!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +34,7 @@ class PlayerProfile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50)),
             child: CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage(GamePng.gameAvatarPath),
+              backgroundImage: getImage(),
               backgroundColor: GameColor.secondaryColor,
             ),
           ),

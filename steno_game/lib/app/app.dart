@@ -28,6 +28,7 @@ import 'package:steno_game/ui/views/text_exercise/text_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
 import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
+import 'package:steno_game/ui/bottom_sheets/input_validation/input_validation_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -68,7 +69,8 @@ import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
-    // @stacked-bottom-sheet
+    StackedBottomsheet(classType: InputValidationSheet),
+// @stacked-bottom-sheet
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),

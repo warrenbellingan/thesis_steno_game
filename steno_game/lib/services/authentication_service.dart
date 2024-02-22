@@ -15,6 +15,8 @@ abstract interface class AuthenticationService {
   Future<Either<GameException, User>> login(
       {required String email, required String password});
 
+  Future<Either<GameException, User>> getCurrentUser();
+
   Future<Either<GameException, None>> logout();
 
   Future<Either<GameException, None>> forgotPassword({required String email});

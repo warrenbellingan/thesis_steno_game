@@ -49,7 +49,7 @@ class HomeView extends StackedView<HomeViewModel> {
                         ),
                       ),
                       Text(
-                        "Score: $viewModel.user.score ",
+                        "Score: ${viewModel.user.score.toString()} ",
                         style: const TextStyle(
                           color: GameColor.primaryColor,
                           fontSize: 18,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -12,10 +11,10 @@ class TypingPlayView extends StackedView<TypingPlayViewModel> {
 
   @override
   Widget builder(
-      BuildContext context,
-      TypingPlayViewModel viewModel,
-      Widget? child,
-      ) {
+    BuildContext context,
+    TypingPlayViewModel viewModel,
+    Widget? child,
+  ) {
     return GameBody(
       body: Column(
         children: [
@@ -36,7 +35,7 @@ class TypingPlayView extends StackedView<TypingPlayViewModel> {
 
   @override
   TypingPlayViewModel viewModelBuilder(
-      BuildContext context,
-      ) =>
+    BuildContext context,
+  ) =>
       TypingPlayViewModel();
 }

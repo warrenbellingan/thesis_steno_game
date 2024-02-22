@@ -52,6 +52,8 @@ class Routes {
 
   static const forgotPasswordView = '/forgot-password-view';
 
+  static const homeView = '/home-view';
+
   static const achievementView = '/achievement-view';
 
   static const lessonsView = '/lessons-view';
@@ -421,7 +423,19 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition: transition);
   }
 
-
+  Future<dynamic> navigateToHomeView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.homeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
 
   Future<dynamic> navigateToAchievementView([
     int? routerId,
@@ -731,6 +745,19 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> replaceWithHomeView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.homeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
 
   Future<dynamic> replaceWithAchievementView([
     int? routerId,

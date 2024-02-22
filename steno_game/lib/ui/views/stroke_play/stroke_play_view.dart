@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/views/stroke_play/stroke_play_viewmodel.dart';
@@ -12,10 +11,10 @@ class StrokePlayView extends StackedView<StrokePlayViewModel> {
 
   @override
   Widget builder(
-      BuildContext context,
-      StrokePlayViewModel viewModel,
-      Widget? child,
-      ) {
+    BuildContext context,
+    StrokePlayViewModel viewModel,
+    Widget? child,
+  ) {
     return GameBody(
       body: Column(
         children: [
@@ -37,7 +36,7 @@ class StrokePlayView extends StackedView<StrokePlayViewModel> {
 
   @override
   StrokePlayViewModel viewModelBuilder(
-      BuildContext context,
-      ) =>
+    BuildContext context,
+  ) =>
       StrokePlayViewModel();
 }

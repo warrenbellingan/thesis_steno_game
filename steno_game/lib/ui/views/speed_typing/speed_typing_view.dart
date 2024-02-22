@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../constants/game_color.dart';
@@ -12,10 +11,10 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
 
   @override
   Widget builder(
-      BuildContext context,
-      SpeedTypingViewModel viewModel,
-      Widget? child,
-      ) {
+    BuildContext context,
+    SpeedTypingViewModel viewModel,
+    Widget? child,
+  ) {
     return GameBody(
       body: SingleChildScrollView(
         child: Column(
@@ -53,18 +52,18 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
               ),
               child: Text(
                 "jdha dahkjdajk djjakd dajh k jd"
-                    "jdahfj dajk d afjkda"
-                    "adkadjkdjakh jkadjkhda"
-                    "dajhhklahd adjkh ajkds fhda"
-                    "daghfakhakhgasdhjkfdsag a"
-                    "dfahf "
-                    "ads"
-                    ""
-                    " "
-                    "d "
-                    "sadf ahjdashjgfasd"
-                    "adsf adshj hjghasd"
-                    " ahjdgghjasdhjgghjdsaghjadsghj",
+                "jdahfj dajk d afjkda"
+                "adkadjkdjakh jkadjkhda"
+                "dajhhklahd adjkh ajkds fhda"
+                "daghfakhakhgasdhjkfdsag a"
+                "dfahf "
+                "ads"
+                ""
+                " "
+                "d "
+                "sadf ahjdashjgfasd"
+                "adsf adshj hjghasd"
+                " ahjdgghjasdhjgghjdsaghjadsghj",
                 style: TextStyle(
                   fontSize: 20,
                   wordSpacing: 2,
@@ -84,7 +83,7 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
 
   @override
   SpeedTypingViewModel viewModelBuilder(
-      BuildContext context,
-      ) =>
+    BuildContext context,
+  ) =>
       SpeedTypingViewModel();
 }

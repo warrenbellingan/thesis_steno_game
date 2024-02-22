@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../constants/game_color.dart';
@@ -13,10 +12,10 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
 
   @override
   Widget builder(
-      BuildContext context,
-      StrokesMultiplayerViewModel viewModel,
-      Widget? child,
-      ) {
+    BuildContext context,
+    StrokesMultiplayerViewModel viewModel,
+    Widget? child,
+  ) {
     return GameBody(
       body: SingleChildScrollView(
         child: Column(
@@ -55,7 +54,7 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
 
   @override
   StrokesMultiplayerViewModel viewModelBuilder(
-      BuildContext context,
-      ) =>
+    BuildContext context,
+  ) =>
       StrokesMultiplayerViewModel();
 }

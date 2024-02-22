@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:steno_game/app/app.locator.dart';
+import 'package:steno_game/services/shared_preference_service.dart';
 import '../exception/game_exception.dart';
 import '../model/user.dart';
 import 'authentication_service.dart';
@@ -8,6 +10,7 @@ import 'authentication_service.dart';
 class AuthenticationServiceImpl implements AuthenticationService {
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
+  final _sharedPref = locator<SharedPreferenceService>();
 
   @override
   Future<Either<GameException, None>> forgotPassword(
@@ -129,6 +132,20 @@ class AuthenticationServiceImpl implements AuthenticationService {
       });
     } catch (e) {
       return Left(GameException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<GameException, User>> getCurrentUser() async {
+    final currentUser = await _sharedPref.getCurrentUser();
+    if (currentUser == null) {
+      return Left(GameException("No Current User"));
+    } else {
+      final updateUserDoc =
+          await db.collection('users').doc(currentUser.id).get();
+      User user = User.fromJson(updateUserDoc.data()!);
+      await _sharedPref.saveUser(user);
+      return Right(User.fromJson(updateUserDoc.data()!));
     }
   }
 }
