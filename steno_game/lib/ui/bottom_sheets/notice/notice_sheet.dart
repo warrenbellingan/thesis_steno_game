@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:steno_game/ui/common/app_colors.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -41,7 +40,7 @@ class NoticeSheet extends StackedView<NoticeSheetModel> {
           verticalSpaceTiny,
           Text(
             request.description!,
-            style: const TextStyle(fontSize: 14, color: kcMediumGrey),
+            style: const TextStyle(fontSize: 14, color: Colors.grey),
             maxLines: 3,
             softWrap: true,
           ),

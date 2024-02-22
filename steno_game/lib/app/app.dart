@@ -19,7 +19,6 @@ import 'package:steno_game/ui/views/picture_topic/picture_topic_view.dart';
 import 'package:steno_game/ui/views/play/play_view.dart';
 import 'package:steno_game/ui/views/profile/profile_view.dart';
 import 'package:steno_game/ui/views/quiz_game_stroke/quiz_game_stroke_view.dart';
-import 'package:steno_game/ui/views/spees_typing/spees_typing_view.dart';
 import 'package:steno_game/ui/views/stroke_exercise/stroke_exercise_view.dart';
 import 'package:steno_game/ui/views/strokes_multiplayer/strokes_multiplayer_view.dart';
 import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart';
@@ -28,6 +27,7 @@ import 'package:steno_game/ui/views/text_topic/text_topic_view.dart';
 import 'package:steno_game/ui/views/text_exercise/text_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
+import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -46,7 +46,6 @@ import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
     MaterialRoute(page: PlayView),
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: QuizGameStrokeView),
-    MaterialRoute(page: SpeesTypingView),
     MaterialRoute(page: StrokeExerciseView),
     MaterialRoute(page: StrokesMultiplayerView),
     MaterialRoute(page: StrokePlayView),
@@ -55,6 +54,7 @@ import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
     MaterialRoute(page: TextExerciseView),
     MaterialRoute(page: TypingExerciseView),
     MaterialRoute(page: TypingPlayView),
+    MaterialRoute(page: SpeedTypingView),
 // @stacked-route
   ],
   dependencies: [

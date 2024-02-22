@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:steno_game/ui/custom_widgets/player_profile.dart';
 import '../common/ui_helpers.dart';
@@ -26,7 +25,10 @@ class PeopleCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          PlayerProfile(name: 'Sample', level: 1,),
+          PlayerProfile(
+            name: 'Sample',
+            level: 1,
+          ),
           AddFriend(),
         ],
       ),

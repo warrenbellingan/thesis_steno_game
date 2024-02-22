@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../custom_widgets/achievement_card.dart';
+import '../../custom_widgets/game_chip.dart';
 import 'achievement_viewmodel.dart';
 
 class AchievementView extends StackedView<AchievementViewModel> {
@@ -12,10 +14,33 @@ class AchievementView extends StackedView<AchievementViewModel> {
     AchievementViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GameChip(label: 'All'),
+              GameChip(label: 'Completed'),
+              GameChip(label: 'Incomplete'),
+            ],
+          ),
+          AchievementCard(
+            isComplete: true,
+            title: "Noob",
+            description: "Reach Level 5",
+          ),
+          AchievementCard(
+            isComplete: true,
+            title: "Pro",
+            description: "Reach Level 20",
+          ),
+          AchievementCard(
+            isComplete: false,
+            title: "Expert",
+            description: "Reach Level 50",
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import '../../constants/game_color.dart';
+import '../../custom_widgets/game_body.dart';
+import '../../custom_widgets/game_button.dart';
+import '../../custom_widgets/in_game_bar.dart';
+import '../../custom_widgets/painter.dart';
 import 'strokes_multiplayer_viewmodel.dart';
 
 class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
@@ -8,21 +13,49 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
 
   @override
   Widget builder(
-    BuildContext context,
-    StrokesMultiplayerViewModel viewModel,
-    Widget? child,
-  ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      BuildContext context,
+      StrokesMultiplayerViewModel viewModel,
+      Widget? child,
+      ) {
+    return GameBody(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            InGameBar(),
+            SizedBox(height: 24),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 2,
+                  style: BorderStyle.solid,
+                  color: GameColor.secondaryColor,
+                ),
+              ),
+              child: Text(
+                "SampleWord",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
+            Painter(),
+            SizedBox(height: 24),
+            GameButton(text: "Submit Stroke", onClick: () {}),
+          ],
+        ),
       ),
     );
   }
 
   @override
   StrokesMultiplayerViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
+      BuildContext context,
+      ) =>
       StrokesMultiplayerViewModel();
 }

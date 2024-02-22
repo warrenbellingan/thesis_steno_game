@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:steno_game/ui/custom_widgets/steno_key.dart';
 

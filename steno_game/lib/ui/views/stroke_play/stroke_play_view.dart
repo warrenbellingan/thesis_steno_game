@@ -1,28 +1,43 @@
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/views/stroke_play/stroke_play_viewmodel.dart';
 
-import 'stroke_play_viewmodel.dart';
+import '../../custom_widgets/game_bar.dart';
+import '../../custom_widgets/game_body.dart';
+import '../../custom_widgets/play_card.dart';
 
 class StrokePlayView extends StackedView<StrokePlayViewModel> {
   const StrokePlayView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
-    BuildContext context,
-    StrokePlayViewModel viewModel,
-    Widget? child,
-  ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      BuildContext context,
+      StrokePlayViewModel viewModel,
+      Widget? child,
+      ) {
+    return GameBody(
+      body: Column(
+        children: [
+          GameBar(),
+          GridView(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            children: [
+              PlayCard(label: "Multi Player"),
+              PlayCard(label: "Strokes Quiz"),
+            ],
+          ),
+        ],
       ),
     );
   }
 
   @override
   StrokePlayViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
+      BuildContext context,
+      ) =>
       StrokePlayViewModel();
 }

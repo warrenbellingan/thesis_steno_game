@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:steno_game/ui/custom_widgets/player_profile.dart';
 
@@ -20,7 +19,10 @@ class InGameBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          PlayerProfile(name: 'Sampple', level: 1,),
+          PlayerProfile(
+            name: 'Sampple',
+            level: 1,
+          ),
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.menu),

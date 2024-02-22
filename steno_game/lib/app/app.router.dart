@@ -25,21 +25,21 @@ import 'package:steno_game/ui/views/profile/profile_view.dart' as _i13;
 import 'package:steno_game/ui/views/quiz_game_stroke/quiz_game_stroke_view.dart'
     as _i14;
 import 'package:steno_game/ui/views/sign_up/sign_up_view.dart' as _i5;
-import 'package:steno_game/ui/views/spees_typing/spees_typing_view.dart'
-    as _i15;
+import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart'
+    as _i23;
 import 'package:steno_game/ui/views/startup/startup_view.dart' as _i3;
 import 'package:steno_game/ui/views/stroke_exercise/stroke_exercise_view.dart'
-    as _i16;
-import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart' as _i18;
+    as _i15;
+import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart' as _i17;
 import 'package:steno_game/ui/views/strokes_multiplayer/strokes_multiplayer_view.dart'
-    as _i17;
+    as _i16;
 import 'package:steno_game/ui/views/text_exercise/text_exercise_view.dart'
-    as _i21;
-import 'package:steno_game/ui/views/text_quiz/text_quiz_view.dart' as _i19;
-import 'package:steno_game/ui/views/text_topic/text_topic_view.dart' as _i20;
+    as _i20;
+import 'package:steno_game/ui/views/text_quiz/text_quiz_view.dart' as _i18;
+import 'package:steno_game/ui/views/text_topic/text_topic_view.dart' as _i19;
 import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart'
-    as _i22;
-import 'package:steno_game/ui/views/typing_play/typing_play_view.dart' as _i23;
+    as _i21;
+import 'package:steno_game/ui/views/typing_play/typing_play_view.dart' as _i22;
 
 class Routes {
   static const homeView = '/home-view';
@@ -68,8 +68,6 @@ class Routes {
 
   static const quizGameStrokeView = '/quiz-game-stroke-view';
 
-  static const speesTypingView = '/spees-typing-view';
-
   static const strokeExerciseView = '/stroke-exercise-view';
 
   static const strokesMultiplayerView = '/strokes-multiplayer-view';
@@ -86,6 +84,8 @@ class Routes {
 
   static const typingPlayView = '/typing-play-view';
 
+  static const speedTypingView = '/speed-typing-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -100,7 +100,6 @@ class Routes {
     playView,
     profileView,
     quizGameStrokeView,
-    speesTypingView,
     strokeExerciseView,
     strokesMultiplayerView,
     strokePlayView,
@@ -109,6 +108,7 @@ class Routes {
     textExerciseView,
     typingExerciseView,
     typingPlayView,
+    speedTypingView,
   };
 }
 
@@ -171,40 +171,40 @@ class StackedRouter extends _i1.RouterBase {
       page: _i14.QuizGameStrokeView,
     ),
     _i1.RouteDef(
-      Routes.speesTypingView,
-      page: _i15.SpeesTypingView,
-    ),
-    _i1.RouteDef(
       Routes.strokeExerciseView,
-      page: _i16.StrokeExerciseView,
+      page: _i15.StrokeExerciseView,
     ),
     _i1.RouteDef(
       Routes.strokesMultiplayerView,
-      page: _i17.StrokesMultiplayerView,
+      page: _i16.StrokesMultiplayerView,
     ),
     _i1.RouteDef(
       Routes.strokePlayView,
-      page: _i18.StrokePlayView,
+      page: _i17.StrokePlayView,
     ),
     _i1.RouteDef(
       Routes.textQuizView,
-      page: _i19.TextQuizView,
+      page: _i18.TextQuizView,
     ),
     _i1.RouteDef(
       Routes.textTopicView,
-      page: _i20.TextTopicView,
+      page: _i19.TextTopicView,
     ),
     _i1.RouteDef(
       Routes.textExerciseView,
-      page: _i21.TextExerciseView,
+      page: _i20.TextExerciseView,
     ),
     _i1.RouteDef(
       Routes.typingExerciseView,
-      page: _i22.TypingExerciseView,
+      page: _i21.TypingExerciseView,
     ),
     _i1.RouteDef(
       Routes.typingPlayView,
-      page: _i23.TypingPlayView,
+      page: _i22.TypingPlayView,
+    ),
+    _i1.RouteDef(
+      Routes.speedTypingView,
+      page: _i23.SpeedTypingView,
     ),
   ];
 
@@ -287,57 +287,57 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i15.SpeesTypingView: (data) {
+    _i15.StrokeExerciseView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i15.SpeesTypingView(),
+        builder: (context) => const _i15.StrokeExerciseView(),
         settings: data,
       );
     },
-    _i16.StrokeExerciseView: (data) {
+    _i16.StrokesMultiplayerView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i16.StrokeExerciseView(),
+        builder: (context) => const _i16.StrokesMultiplayerView(),
         settings: data,
       );
     },
-    _i17.StrokesMultiplayerView: (data) {
+    _i17.StrokePlayView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i17.StrokesMultiplayerView(),
+        builder: (context) => const _i17.StrokePlayView(),
         settings: data,
       );
     },
-    _i18.StrokePlayView: (data) {
+    _i18.TextQuizView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i18.StrokePlayView(),
+        builder: (context) => const _i18.TextQuizView(),
         settings: data,
       );
     },
-    _i19.TextQuizView: (data) {
+    _i19.TextTopicView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i19.TextQuizView(),
+        builder: (context) => const _i19.TextTopicView(),
         settings: data,
       );
     },
-    _i20.TextTopicView: (data) {
+    _i20.TextExerciseView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i20.TextTopicView(),
+        builder: (context) => const _i20.TextExerciseView(),
         settings: data,
       );
     },
-    _i21.TextExerciseView: (data) {
+    _i21.TypingExerciseView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i21.TextExerciseView(),
+        builder: (context) => const _i21.TypingExerciseView(),
         settings: data,
       );
     },
-    _i22.TypingExerciseView: (data) {
+    _i22.TypingPlayView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i22.TypingExerciseView(),
+        builder: (context) => const _i22.TypingPlayView(),
         settings: data,
       );
     },
-    _i23.TypingPlayView: (data) {
+    _i23.SpeedTypingView: (data) {
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i23.TypingPlayView(),
+        builder: (context) => const _i23.SpeedTypingView(),
         settings: data,
       );
     },
@@ -535,20 +535,6 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSpeesTypingView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.speesTypingView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
   Future<dynamic> navigateToStrokeExerciseView([
     int? routerId,
     bool preventDuplicates = true,
@@ -655,6 +641,20 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.typingPlayView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToSpeedTypingView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.speedTypingView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -844,20 +844,6 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSpeesTypingView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.speesTypingView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
   Future<dynamic> replaceWithStrokeExerciseView([
     int? routerId,
     bool preventDuplicates = true,
@@ -964,6 +950,20 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.typingPlayView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSpeedTypingView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.speedTypingView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

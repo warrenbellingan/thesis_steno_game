@@ -1,6 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../custom_widgets/game_bar.dart';
+import '../../custom_widgets/game_body.dart';
+import '../../custom_widgets/play_card.dart';
 import 'typing_play_viewmodel.dart';
 
 class TypingPlayView extends StackedView<TypingPlayViewModel> {
@@ -8,21 +12,31 @@ class TypingPlayView extends StackedView<TypingPlayViewModel> {
 
   @override
   Widget builder(
-    BuildContext context,
-    TypingPlayViewModel viewModel,
-    Widget? child,
-  ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      BuildContext context,
+      TypingPlayViewModel viewModel,
+      Widget? child,
+      ) {
+    return GameBody(
+      body: Column(
+        children: [
+          GameBar(),
+          GridView(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            children: [
+              PlayCard(label: "Speed Typing"),
+            ],
+          ),
+        ],
       ),
     );
   }
 
   @override
   TypingPlayViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
+      BuildContext context,
+      ) =>
       TypingPlayViewModel();
 }

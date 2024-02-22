@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import '../../custom_widgets/game_search_textfield.dart';
+import '../../custom_widgets/people_card.dart';
 import 'people_viewmodel.dart';
 
 class PeopleView extends StackedView<PeopleViewModel> {
@@ -12,10 +13,19 @@ class PeopleView extends StackedView<PeopleViewModel> {
     PeopleViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          GameSearchTextField(),
+          SizedBox(
+            height: 16,
+          ),
+          ListView.builder(
+            itemCount: 3,
+            shrinkWrap: true,
+            itemBuilder: (context, index) => PeopleCard(),
+          ),
+        ],
       ),
     );
   }

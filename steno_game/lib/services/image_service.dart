@@ -1,1 +1,1 @@
-class ImageService {}
+abstract interface class ImageService {}

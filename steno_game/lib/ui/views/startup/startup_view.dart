@@ -1,8 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
-import 'package:steno_game/ui/common/ui_helpers.dart';
-
+import '../../constants/game_png.dart';
+import '../../custom_widgets/game_image.dart';
 import 'startup_viewmodel.dart';
 
 class StartupView extends StackedView<StartupViewModel> {
@@ -10,33 +11,34 @@ class StartupView extends StackedView<StartupViewModel> {
 
   @override
   Widget builder(
-    BuildContext context,
-    StartupViewModel viewModel,
-    Widget? child,
-  ) {
-    return const Scaffold(
+      BuildContext context,
+      StartupViewModel viewModel,
+      Widget? child,
+      ) {
+    return Scaffold(
+      backgroundColor: Color(0xFFDCDCDC),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'STACKED',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+            GameImage(
+              path: GamePng.gameLogoPath,
+              width: 250,
+              height: 250,
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Loading ...', style: TextStyle(fontSize: 16)),
-                horizontalSpaceSmall,
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                    strokeWidth: 6,
-                  ),
-                )
-              ],
+            Text(
+              'STENO GAME',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 2,
+              ),
+            ),
+            SizedBox(height: 30,),
+            CircularProgressIndicator(
+              color: Colors.redAccent,
+              strokeWidth: 6,
             ),
           ],
         ),
@@ -46,8 +48,8 @@ class StartupView extends StackedView<StartupViewModel> {
 
   @override
   StartupViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
+      BuildContext context,
+      ) =>
       StartupViewModel();
 
   @override
