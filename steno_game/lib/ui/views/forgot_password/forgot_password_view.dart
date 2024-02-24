@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../constants/game_png.dart';
 import '../../constants/game_ui_text.dart';
 import '../../custom_widgets/game_bar.dart';
@@ -20,7 +21,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
     Widget? child,
   ) {
     return GameBody(
-      body: SingleChildScrollView(
+      body: viewModel.isBusy ? const GameLoading(label: "Sending Reset Link") : SingleChildScrollView(
         child: Column(
           children: [
             GameBar(),
@@ -35,7 +36,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
             ),
             GameButton(
               text: GameUIText.sentResetPassLinkText,
-              onClick: () {},
+              onClick: viewModel.forgotPassword,
             ),
           ],
         ),

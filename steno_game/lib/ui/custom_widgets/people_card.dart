@@ -5,7 +5,10 @@ import '../constants/game_color.dart';
 import 'add_friend.dart';
 
 class PeopleCard extends StatelessWidget {
-  const PeopleCard({super.key});
+  const PeopleCard({super.key, required this.name, required this.level});
+
+  final String name;
+  final int level;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +29,8 @@ class PeopleCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           PlayerProfile(
-            name: 'Sample',
-            level: 1,
+            name: name,
+            level: level,
           ),
           AddFriend(),
         ],

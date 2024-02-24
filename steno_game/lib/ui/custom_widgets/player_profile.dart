@@ -45,7 +45,7 @@ class PlayerProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Warren',
+                name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1,
@@ -54,7 +54,7 @@ class PlayerProfile extends StatelessWidget {
                 ),
               ),
               Text(
-                'Level 1',
+                'Level ${level.toString()}',
                 style: TextStyle(
                   color: GameColor.secondaryColor,
                   fontWeight: FontWeight.bold,

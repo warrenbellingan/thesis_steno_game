@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../custom_widgets/game_search_textfield.dart';
 import '../../custom_widgets/people_card.dart';
 import 'people_viewmodel.dart';
@@ -14,19 +15,29 @@ class PeopleView extends StackedView<PeopleViewModel> {
     Widget? child,
   ) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          GameSearchTextField(),
-          SizedBox(
-            height: 16,
-          ),
-          ListView.builder(
-            itemCount: 3,
-            shrinkWrap: true,
-            itemBuilder: (context, index) => PeopleCard(),
-          ),
-        ],
-      ),
+      child: viewModel.isBusy
+          ? GameLoading(
+              label: "Getting users",
+            )
+          : Column(
+              children: [
+                GameSearchTextField(),
+                SizedBox(
+                  height: 16,
+                ),
+                ListView.builder(
+                  itemCount: viewModel.users.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var user = viewModel.users[index];
+                    return PeopleCard(
+                      name: user.name,
+                      level: user.level,
+                    );
+                  },
+                ),
+              ],
+            ),
     );
   }
 
@@ -35,4 +46,9 @@ class PeopleView extends StackedView<PeopleViewModel> {
     BuildContext context,
   ) =>
       PeopleViewModel();
+
+  @override
+  void onViewModelReady(PeopleViewModel viewModel) {
+    viewModel.init();
+  }
 }
