@@ -5,12 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/user.dart';
 
 class SharedPreferenceService {
-
   Future<void> deleteCurrentUser() async {
     final sharedPref = await SharedPreferences.getInstance();
     sharedPref.remove("USER_KEY");
   }
-
 
   Future<User?> getCurrentUser() async {
     final sharedPref = await SharedPreferences.getInstance();
@@ -19,7 +17,6 @@ class SharedPreferenceService {
 
     return User.fromJson(json.decode(user));
   }
-
 
   Future<void> saveUser(User user) async {
     final sharedPref = await SharedPreferences.getInstance();

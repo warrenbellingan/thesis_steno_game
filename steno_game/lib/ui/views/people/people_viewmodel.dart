@@ -12,10 +12,9 @@ class PeopleViewModel extends BaseViewModel {
     setBusy(true);
     await loadUsers();
     setBusy(false);
+  }
 
-}
-
-  Future<void> loadUsers() async{
+  Future<void> loadUsers() async {
     users = await _userRep.getUsers();
   }
 }

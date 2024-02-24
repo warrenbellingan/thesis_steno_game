@@ -5,7 +5,8 @@ class UserRepository {
   final _db = FirebaseFirestore.instance;
 
   Future<List<User>> getUsers() async {
-    final results = await _db.collection('users').get().then((value) => value.docs.map((user) => User.fromJson(user.data())).toList());
+    final results = await _db.collection('users').get().then((value) =>
+        value.docs.map((user) => User.fromJson(user.data())).toList());
     return results;
   }
 }

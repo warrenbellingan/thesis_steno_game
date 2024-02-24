@@ -25,7 +25,7 @@ class SignUpViewModel extends BaseViewModel with InputValidation {
       if (passwordController.text.toString() !=
               confirmPasswordController.text.toString() ||
           passwordController.text.isEmpty) {
-       showBottomSheet("Password doesn't match!");
+        showBottomSheet("Password doesn't match!");
       } else {
         setBusy(true);
         final response = await _authenticationService.signUp(
@@ -35,18 +35,16 @@ class SignUpViewModel extends BaseViewModel with InputValidation {
             role: roleController.text.toString());
         setBusy(false);
 
-        response.fold(
-            (l) {
-              showBottomSheet(l.message);
-            }, (user) async {
+        response.fold((l) {
+          showBottomSheet(l.message);
+        }, (user) async {
           setBusy(true);
           final logInResponse = await _authenticationService.login(
               email: emailController.text, password: passwordController.text);
           setBusy(false);
-          logInResponse.fold(
-              (l) {
-                showBottomSheet("No user found in logging in");
-              }, (user) async {
+          logInResponse.fold((l) {
+            showBottomSheet("No user found in logging in");
+          }, (user) async {
             await _sharedPref.saveUser(user);
             _navigationService.replaceWithHomeView();
           });

@@ -18,40 +18,35 @@ class LoginViewModel extends BaseViewModel with InputValidation {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> logIn() async {
-    if(validateInput()) {
+    if (validateInput()) {
       setBusy(true);
       final response = await _authenticationService.login(
           email: emailController.text, password: passwordController.text);
       setBusy(false);
-      response.fold(
-              (l) {
-                showBottomSheet(l.message);
-              }, (user) async {
+      response.fold((l) {
+        showBottomSheet(l.message);
+      }, (user) async {
         await _sharedPref.saveUser(user);
         _navigationService.replaceWithHomeView();
       });
     }
-
   }
 
   bool validateInput() {
     String? emailValidation = isValidEmail(emailController.text);
     String? passwordValidation = isValidPassword(passwordController.text);
 
-    if(emailValidation == null) {
-      if(passwordValidation == null) {
+    if (emailValidation == null) {
+      if (passwordValidation == null) {
         return true;
-      }
-      else {
+      } else {
         showBottomSheet(passwordValidation);
         return false;
       }
-    }
-    else{
+    } else {
       showBottomSheet(emailValidation);
       return false;
     }
-
   }
 
   void goToForgotPassword() {

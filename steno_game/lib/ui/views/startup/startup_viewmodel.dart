@@ -14,10 +14,9 @@ class StartupViewModel extends BaseViewModel {
 
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic
-    if(_authService.isLoggedIn){
+    if (_authService.isLoggedIn) {
       _navigationService.navigateToHomeView();
-    }
-    else {
+    } else {
       _navigationService.replaceWithLoginView();
     }
   }

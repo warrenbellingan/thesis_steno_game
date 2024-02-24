@@ -29,6 +29,7 @@ import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
 import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
 import 'package:steno_game/ui/bottom_sheets/input_validation/input_validation_sheet.dart';
+import 'package:steno_game/ui/views/person/person_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -56,6 +57,7 @@ import 'package:steno_game/ui/bottom_sheets/input_validation/input_validation_sh
     MaterialRoute(page: TypingExerciseView),
     MaterialRoute(page: TypingPlayView),
     MaterialRoute(page: SpeedTypingView),
+    MaterialRoute(page: PersonView),
 // @stacked-route
   ],
   dependencies: [

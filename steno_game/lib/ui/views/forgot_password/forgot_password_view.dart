@@ -21,26 +21,28 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
     Widget? child,
   ) {
     return GameBody(
-      body: viewModel.isBusy ? const GameLoading(label: "Sending Reset Link") : SingleChildScrollView(
-        child: Column(
-          children: [
-            GameBar(),
-            GameTitleText(text: GameUIText.forgotPassText),
-            GameImage(path: GamePng.gameAuthForgotPath),
-            SizedBox(
-              height: 25,
+      body: viewModel.isBusy
+          ? const GameLoading(label: "Sending Reset Link")
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  GameBar(),
+                  GameTitleText(text: GameUIText.forgotPassText),
+                  GameImage(path: GamePng.gameAuthForgotPath),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  GameTextField(
+                    controller: viewModel.emailController,
+                    label: GameUIText.emailText,
+                  ),
+                  GameButton(
+                    text: GameUIText.sentResetPassLinkText,
+                    onClick: viewModel.forgotPassword,
+                  ),
+                ],
+              ),
             ),
-            GameTextField(
-              controller: viewModel.emailController,
-              label: GameUIText.emailText,
-            ),
-            GameButton(
-              text: GameUIText.sentResetPassLinkText,
-              onClick: viewModel.forgotPassword,
-            ),
-          ],
-        ),
-      ),
     );
   }
 

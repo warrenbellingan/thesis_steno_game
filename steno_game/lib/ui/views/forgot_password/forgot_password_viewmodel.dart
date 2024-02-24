@@ -14,18 +14,19 @@ class ForgotPasswordViewModel extends BaseViewModel with InputValidation {
   TextEditingController emailController = TextEditingController();
 
   Future<void> forgotPassword() async {
-    if(validateEmail()) {
+    if (validateEmail()) {
       setBusy(true);
-      final response = await _authServ.forgotPassword(email: emailController.text);
+      final response =
+          await _authServ.forgotPassword(email: emailController.text);
       setBusy(false);
       response.fold((l) {
         showBottomSheet(l.message);
       }, (r) {
-        showBottomSheet("The reset link is send to your email account. Check your email messages!");
+        showBottomSheet(
+            "The reset link is send to your email account. Check your email messages!");
         _navigationServ.back();
       });
     }
-
   }
 
   bool validateEmail() {
