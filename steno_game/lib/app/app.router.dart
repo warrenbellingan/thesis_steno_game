@@ -8,7 +8,8 @@
 import 'package:flutter/material.dart' as _i25;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i26;
+import 'package:stacked_services/stacked_services.dart' as _i27;
+import 'package:steno_game/model/user.dart' as _i26;
 import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
@@ -350,8 +351,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i24.PersonView: (data) {
+      final args = data.getArgs<PersonViewArguments>(nullOk: false);
       return _i25.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i24.PersonView(),
+        builder: (context) => _i24.PersonView(args.user, key: args.key),
         settings: data,
       );
     },
@@ -364,7 +366,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i26.NavigationService {
+class PersonViewArguments {
+  const PersonViewArguments({
+    required this.user,
+    this.key,
+  });
+
+  final _i26.User user;
+
+  final _i25.Key? key;
+
+  @override
+  String toString() {
+    return '{"user": "$user", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant PersonViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.user == user && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return user.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i27.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -675,14 +704,17 @@ extension NavigatorStateExtension on _i26.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToPersonView([
+  Future<dynamic> navigateToPersonView({
+    required _i26.User user,
+    _i25.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.personView,
+        arguments: PersonViewArguments(user: user, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -999,14 +1031,17 @@ extension NavigatorStateExtension on _i26.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithPersonView([
+  Future<dynamic> replaceWithPersonView({
+    required _i26.User user,
+    _i25.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.personView,
+        arguments: PersonViewArguments(user: user, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

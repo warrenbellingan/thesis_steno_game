@@ -15,17 +15,17 @@ class PeopleView extends StackedView<PeopleViewModel> {
     Widget? child,
   ) {
     return SingleChildScrollView(
-      child: viewModel.isBusy
-          ? GameLoading(
-              label: "Getting users",
-            )
-          : Column(
-              children: [
-                GameSearchTextField(),
-                SizedBox(
-                  height: 16,
-                ),
-                ListView.builder(
+      child: Column(
+        children: [
+          GameSearchTextField(),
+          SizedBox(
+            height: 16,
+          ),
+          viewModel.isBusy
+              ? GameLoading(
+                  label: "Getting users",
+                )
+              : ListView.builder(
                   itemCount: viewModel.users.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -33,11 +33,14 @@ class PeopleView extends StackedView<PeopleViewModel> {
                     return PeopleCard(
                       name: user.name,
                       level: user.level,
+                      onClick: () {
+                        viewModel.onClick(user);
+                      },
                     );
                   },
                 ),
-              ],
-            ),
+        ],
+      ),
     );
   }
 
