@@ -22,7 +22,7 @@ StenoTyping _$StenoTypingFromJson(Map<String, dynamic> json) {
 mixin _$StenoTyping {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
-  String get strokeImage => throw _privateConstructorUsedError;
+  String get typingKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $StenoTypingCopyWith<$Res> {
           StenoTyping value, $Res Function(StenoTyping) then) =
       _$StenoTypingCopyWithImpl<$Res, StenoTyping>;
   @useResult
-  $Res call({String id, String text, String strokeImage});
+  $Res call({String id, String text, String typingKey});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$StenoTypingCopyWithImpl<$Res, $Val extends StenoTyping>
   $Res call({
     Object? id = null,
     Object? text = null,
-    Object? strokeImage = null,
+    Object? typingKey = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,9 +65,9 @@ class _$StenoTypingCopyWithImpl<$Res, $Val extends StenoTyping>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      strokeImage: null == strokeImage
-          ? _value.strokeImage
-          : strokeImage // ignore: cast_nullable_to_non_nullable
+      typingKey: null == typingKey
+          ? _value.typingKey
+          : typingKey // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,7 +81,7 @@ abstract class _$$StenoTypingImplCopyWith<$Res>
       __$$StenoTypingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String strokeImage});
+  $Res call({String id, String text, String typingKey});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$StenoTypingImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? text = null,
-    Object? strokeImage = null,
+    Object? typingKey = null,
   }) {
     return _then(_$StenoTypingImpl(
       id: null == id
@@ -108,9 +108,9 @@ class __$$StenoTypingImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      strokeImage: null == strokeImage
-          ? _value.strokeImage
-          : strokeImage // ignore: cast_nullable_to_non_nullable
+      typingKey: null == typingKey
+          ? _value.typingKey
+          : typingKey // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -120,7 +120,7 @@ class __$$StenoTypingImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StenoTypingImpl implements _StenoTyping {
   const _$StenoTypingImpl(
-      {required this.id, required this.text, required this.strokeImage});
+      {required this.id, required this.text, required this.typingKey});
 
   factory _$StenoTypingImpl.fromJson(Map<String, dynamic> json) =>
       _$$StenoTypingImplFromJson(json);
@@ -130,11 +130,11 @@ class _$StenoTypingImpl implements _StenoTyping {
   @override
   final String text;
   @override
-  final String strokeImage;
+  final String typingKey;
 
   @override
   String toString() {
-    return 'StenoTyping(id: $id, text: $text, strokeImage: $strokeImage)';
+    return 'StenoTyping(id: $id, text: $text, typingKey: $typingKey)';
   }
 
   @override
@@ -144,13 +144,13 @@ class _$StenoTypingImpl implements _StenoTyping {
             other is _$StenoTypingImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.strokeImage, strokeImage) ||
-                other.strokeImage == strokeImage));
+            (identical(other.typingKey, typingKey) ||
+                other.typingKey == typingKey));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, strokeImage);
+  int get hashCode => Object.hash(runtimeType, id, text, typingKey);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +170,7 @@ abstract class _StenoTyping implements StenoTyping {
   const factory _StenoTyping(
       {required final String id,
       required final String text,
-      required final String strokeImage}) = _$StenoTypingImpl;
+      required final String typingKey}) = _$StenoTypingImpl;
 
   factory _StenoTyping.fromJson(Map<String, dynamic> json) =
       _$StenoTypingImpl.fromJson;
@@ -180,7 +180,7 @@ abstract class _StenoTyping implements StenoTyping {
   @override
   String get text;
   @override
-  String get strokeImage;
+  String get typingKey;
   @override
   @JsonKey(ignore: true)
   _$$StenoTypingImplCopyWith<_$StenoTypingImpl> get copyWith =>

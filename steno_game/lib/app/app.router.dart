@@ -422,7 +422,6 @@ extension NavigatorStateExtension on _i25.NavigationService {
   }
 
 
-
   Future<dynamic> navigateToAchievementView([
     int? routerId,
     bool preventDuplicates = true,
@@ -730,7 +729,6 @@ extension NavigatorStateExtension on _i25.NavigationService {
         parameters: parameters,
         transition: transition);
   }
-
 
 
   Future<dynamic> replaceWithAchievementView([

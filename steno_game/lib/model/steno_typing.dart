@@ -9,7 +9,7 @@ class StenoTyping with _$StenoTyping {
   const factory StenoTyping({
     required String id,
     required String text,
-    required String strokeImage,
+    required String typingKey,
   }) = _StenoTyping;
 
   factory StenoTyping.fromJson(Map<String, dynamic> json) =>

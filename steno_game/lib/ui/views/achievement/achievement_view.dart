@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
 import '../../custom_widgets/achievement_card.dart';
 import '../../custom_widgets/game_chip.dart';
 import 'achievement_viewmodel.dart';
