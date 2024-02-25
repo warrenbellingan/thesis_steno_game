@@ -24,6 +24,16 @@ class SharedPreferenceService {
     }
   }
 
+  Future<String?> getUserId() async{
+    final user = await getCurrentUser();
+    if(user != null) {
+      return user.id;
+    }
+    else {
+      return null;
+    }
+  }
+
   Future<User?> getCurrentUser() async {
     final sharedPref = await SharedPreferences.getInstance();
     final user = sharedPref.getString("USER_KEY");
