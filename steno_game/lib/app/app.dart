@@ -1,3 +1,4 @@
+import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:steno_game/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:steno_game/ui/views/home/home_view.dart';
@@ -10,7 +11,6 @@ import 'package:steno_game/services/image_service.dart';
 import 'package:steno_game/ui/views/login/login_view.dart';
 import 'package:steno_game/ui/views/sign_up/sign_up_view.dart';
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart';
-import 'package:steno_game/ui/views/home/home_view.dart';
 import 'package:steno_game/ui/views/achievement/achievement_view.dart';
 import 'package:steno_game/ui/views/lessons/lessons_view.dart';
 import 'package:steno_game/ui/views/people/people_view.dart';
@@ -31,6 +31,9 @@ import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
 import 'package:steno_game/ui/bottom_sheets/input_validation/input_validation_sheet.dart';
 import 'package:steno_game/ui/views/person/person_view.dart';
 import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_dialog.dart';
+import 'package:steno_game/ui/dialogs/update_name/update_name_dialog.dart';
+import 'package:steno_game/ui/dialogs/update_email/update_email_dialog.dart';
+import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -40,7 +43,6 @@ import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
-    MaterialRoute(page: HomeView),
     MaterialRoute(page: AchievementView),
     MaterialRoute(page: LessonsView),
     MaterialRoute(page: PeopleView),
@@ -68,6 +70,7 @@ import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: SharedPreferenceService),
     LazySingleton(classType: ImageService),
+    LazySingleton(classType: UserRepository),
 // @stacked-service
   ],
   bottomsheets: [
@@ -78,6 +81,9 @@ import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: UpdateProfileImageDialog),
+    StackedDialog(classType: UpdateNameDialog),
+    StackedDialog(classType: UpdateEmailDialog),
+    StackedDialog(classType: UpdatePasswordDialog),
 // @stacked-dialog
   ],
 )

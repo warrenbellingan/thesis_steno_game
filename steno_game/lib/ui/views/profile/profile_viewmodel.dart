@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
+import 'package:steno_game/app/app.dialogs.dart';
 import 'package:steno_game/app/app.router.dart';
 import 'package:steno_game/services/authentication_service.dart';
-
 import '../../../app/app.locator.dart';
 import '../../../model/user.dart';
 import '../../../services/shared_preference_service.dart';
@@ -16,6 +16,8 @@ class ProfileViewModel extends BaseViewModel {
   final _authService = locator<AuthenticationService>();
 
   final _bottomSheetServ = locator<BottomSheetService>();
+  final _dialogService = locator<DialogService>();
+
   late User user;
 
   void init() async {
@@ -27,6 +29,12 @@ class ProfileViewModel extends BaseViewModel {
   ImageProvider getImage() {
     if (user.image == null) return const AssetImage(GamePng.gameAvatarPath);
     return NetworkImage(user.image!);
+  }
+
+  void showUploadDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.updateProfileImage,
+    );
   }
 
   Future<void> logOut() async {

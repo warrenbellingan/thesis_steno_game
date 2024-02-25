@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/common/ui_helpers.dart';
+import 'package:steno_game/ui/custom_widgets/game_icon_button.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../constants/game_color.dart';
 import '../../constants/game_png.dart';
@@ -30,18 +33,25 @@ class ProfileView extends StackedView<ProfileViewModel> {
                     GameBar(),
                     Row(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black,
-                                style: BorderStyle.solid,
-                                width: 2,
+                        InkWell(
+                          borderRadius: BorderRadius.circular(50),
+                          onTap: viewModel.showUploadDialog,
+                          child: AbsorbPointer(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
                               ),
-                              borderRadius: BorderRadius.circular(100)),
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: viewModel.getImage(),
-                            backgroundColor: GameColor.secondaryColor,
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundImage: viewModel.getImage(),
+                                backgroundColor: GameColor.secondaryColor,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -50,11 +60,29 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              viewModel.user.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                            Container(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: 198,
+                                    child: Text(
+                                      "h",
+                                      overflow: TextOverflow.ellipsis,
+                                      //viewModel.user.name,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  GameIconButton(
+                                    onClick: () {},
+                                    icon:
+                                        Icons.drive_file_rename_outline_rounded,
+                                    size: 30,
+                                  ),
+                                ],
                               ),
                             ),
                             Text(

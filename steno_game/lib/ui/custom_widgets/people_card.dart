@@ -11,10 +11,12 @@ class PeopleCard extends StatelessWidget {
       {super.key,
       required this.name,
       required this.level,
-      required this.onClick});
+      required this.onClick,
+      this.image});
 
   final String name;
   final int level;
+  final String? image;
   final OnClick onClick;
 
   @override
@@ -40,6 +42,7 @@ class PeopleCard extends StatelessWidget {
             PlayerProfile(
               name: name,
               level: level,
+              imagePath: image,
             ),
             AddFriend(),
           ],

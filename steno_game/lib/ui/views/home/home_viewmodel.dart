@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -12,6 +14,9 @@ class HomeViewModel extends BaseViewModel {
 
   final PageController pageController = PageController(initialPage: 0);
   final _navigationService = locator<NavigationService>();
+
+  StreamSubscription<User?>? streamSubscription;
+
   int currentPageIndex = 0;
 
   late User user;
@@ -31,11 +36,15 @@ class HomeViewModel extends BaseViewModel {
 
   init() async {
     setBusy(true);
-    final getUser = await _sharedPref.getCurrentUser();
+    user = (await _sharedPref.getCurrentUser())!;
+    streamSubscription?.cancel();
+    streamSubscription = _sharedPref.userStream.listen((userData) {
+      if (userData != null) {
+        user = userData;
+        rebuildUi();
+      }
+    });
     setBusy(false);
-    if (getUser != null) {
-      user = getUser;
-    }
   }
 
   void onPageChanged(int index) {
@@ -58,5 +67,13 @@ class HomeViewModel extends BaseViewModel {
 
   void goToProfileView() {
     _navigationService.navigateToProfileView();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    streamSubscription?.cancel();
+    _sharedPref.dispose();
+    super.dispose();
   }
 }

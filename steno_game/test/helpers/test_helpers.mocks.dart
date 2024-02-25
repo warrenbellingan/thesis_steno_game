@@ -4,6 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
+import 'dart:io' as _i15;
 import 'dart:ui' as _i9;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
@@ -945,37 +946,6 @@ class MockAuthenticationService extends _i1.Mock
       ) as _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>);
 
   @override
-  _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>> updateName(
-          {required String? newName}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateName,
-          [],
-          {#newName: newName},
-        ),
-        returnValue:
-            _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>.value(
-                _FakeEither_2<_i11.GameException, _i4.None<dynamic>>(
-          this,
-          Invocation.method(
-            #updateName,
-            [],
-            {#newName: newName},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>.value(
-                _FakeEither_2<_i11.GameException, _i4.None<dynamic>>(
-          this,
-          Invocation.method(
-            #updateName,
-            [],
-            {#newName: newName},
-          ),
-        )),
-      ) as _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>);
-
-  @override
   _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>> updatePassword({
     required String? currentPassword,
     required String? newPassword,
@@ -1051,6 +1021,13 @@ class MockAuthenticationService extends _i1.Mock
 class MockSharedPreferenceService extends _i1.Mock
     implements _i13.SharedPreferenceService {
   @override
+  _i8.Stream<_i12.User?> get userStream => (super.noSuchMethod(
+        Invocation.getter(#userStream),
+        returnValue: _i8.Stream<_i12.User?>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i12.User?>.empty(),
+      ) as _i8.Stream<_i12.User?>);
+
+  @override
   _i8.Future<void> deleteCurrentUser() => (super.noSuchMethod(
         Invocation.method(
           #deleteCurrentUser,
@@ -1059,6 +1036,16 @@ class MockSharedPreferenceService extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<String?> getUserId() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserId,
+          [],
+        ),
+        returnValue: _i8.Future<String?>.value(),
+        returnValueForMissingStub: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
 
   @override
   _i8.Future<_i12.User?> getCurrentUser() => (super.noSuchMethod(
@@ -1079,9 +1066,56 @@ class MockSharedPreferenceService extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [ImageService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockImageService extends _i1.Mock implements _i14.ImageService {}
+class MockImageService extends _i1.Mock implements _i14.ImageService {
+  @override
+  _i8.Future<_i4.Either<_i11.GameException, String>> uploadImage(
+    _i15.File? image,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadImage,
+          [
+            image,
+            path,
+          ],
+        ),
+        returnValue: _i8.Future<_i4.Either<_i11.GameException, String>>.value(
+            _FakeEither_2<_i11.GameException, String>(
+          this,
+          Invocation.method(
+            #uploadImage,
+            [
+              image,
+              path,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i4.Either<_i11.GameException, String>>.value(
+                _FakeEither_2<_i11.GameException, String>(
+          this,
+          Invocation.method(
+            #uploadImage,
+            [
+              image,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i4.Either<_i11.GameException, String>>);
+}

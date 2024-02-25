@@ -46,6 +46,7 @@ class HomeView extends StackedView<HomeViewModel> {
                         child: PlayerProfile(
                           name: viewModel.user.name,
                           level: viewModel.user.level,
+                          imagePath: viewModel.user.image,
                         ),
                       ),
                       Text(

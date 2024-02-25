@@ -53,6 +53,7 @@ class AuthenticationService {
     try {
       await auth.signOut();
       await _sharedPref.deleteCurrentUser();
+      _sharedPref.dispose();
       return const Right(None());
     } catch (e) {
       return Left(GameException(e.toString()));
@@ -100,6 +101,7 @@ class AuthenticationService {
               .collection("users")
               .doc(r.id)
               .set({"email": newEmail}, SetOptions(merge: true));
+          await getCurrentUser();
           return const Right(None());
         } catch (e) {
           return Left(GameException(e.toString()));
@@ -108,11 +110,6 @@ class AuthenticationService {
     } catch (e) {
       return Left(GameException(e.toString()));
     }
-  }
-
-  Future<Either<GameException, None>> updateName({required String newName}) {
-    // TODO: implement updateName
-    throw UnimplementedError();
   }
 
   Future<Either<GameException, None>> updatePassword(
@@ -126,7 +123,7 @@ class AuthenticationService {
       return response.fold((l) => Left(GameException(l.message)), (r) async {
         try {
           await auth.currentUser!.updatePassword(newPassword);
-          return Right(None());
+          return const Right(None());
         } catch (e) {
           return Left(GameException(e.toString()));
         }

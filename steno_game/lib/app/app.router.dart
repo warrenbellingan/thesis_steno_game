@@ -791,7 +791,6 @@ extension NavigatorStateExtension on _i27.NavigationService {
   }
 
 
-
   Future<dynamic> replaceWithAchievementView([
     int? routerId,
     bool preventDuplicates = true,
