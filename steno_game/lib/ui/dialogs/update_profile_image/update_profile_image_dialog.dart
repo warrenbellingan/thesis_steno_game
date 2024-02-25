@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
+import 'package:steno_game/ui/custom_widgets/game_button.dart';
+import 'package:steno_game/ui/custom_widgets/game_loading.dart';
+import '../../constants/game_color.dart';
 import 'update_profile_image_dialog_model.dart';
-
-const double _graphicSize = 60;
 
 class UpdateProfileImageDialog
     extends StackedView<UpdateProfileImageDialogModel> {
@@ -27,83 +28,81 @@ class UpdateProfileImageDialog
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: viewModel.isBusy
+          ? GameLoading()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        request.title ?? 'Hello Stacked Dialog!!',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      if (request.description != null) ...[
-                        verticalSpaceTiny,
-                        Text(
-                          request.description!,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                          maxLines: 3,
-                          softWrap: true,
-                        ),
-                      ],
-                    ],
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: () => completer(DialogResponse(
+                      confirmed: true,
+                    )),
+                    iconSize: 35,
+                    color: GameColor.primaryColor,
+                    icon: Icon(Icons.backspace),
                   ),
                 ),
                 Container(
-                  width: _graphicSize,
-                  height: _graphicSize,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFF6E7B0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_graphicSize / 2),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      style: BorderStyle.solid,
+                      width: 2,
                     ),
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                  alignment: Alignment.center,
-                  child: const Text('⭐️', style: TextStyle(fontSize: 30)),
-                )
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: viewModel.getImage(),
+                    backgroundColor: GameColor.secondaryColor,
+                  ),
+                ),
+                verticalSpaceSmall,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        viewModel.pickImage(ImageSource.camera);
+                      },
+                      icon: Icon(
+                        Icons.camera_alt_rounded,
+                        color: GameColor.primaryColor,
+                        size: 40,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        viewModel.pickImage(ImageSource.gallery);
+                      },
+                      icon: Icon(
+                        Icons.image,
+                        color: GameColor.primaryColor,
+                        size: 40,
+                      ),
+                    ),
+                  ],
+                ),
+                verticalSpaceMedium,
+                GameButton(
+                  text: "Save",
+                  onClick: viewModel.uploadImage,
+                ),
+                verticalSpaceMedium,
               ],
             ),
-            verticalSpaceMedium,
-            GestureDetector(
-              onTap: () => completer(DialogResponse(confirmed: true)),
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  'Got it',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
   @override
   UpdateProfileImageDialogModel viewModelBuilder(BuildContext context) =>
       UpdateProfileImageDialogModel();
+
+  @override
+  void onViewModelReady(UpdateProfileImageDialogModel viewModel) {
+    viewModel.init();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../constants/game_color.dart';
 import '../../constants/game_png.dart';
@@ -32,16 +33,33 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black,
-                                style: BorderStyle.solid,
-                                width: 2,
+                            border: Border.all(
+                              color: Colors.black,
+                              style: BorderStyle.solid,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Stack(
+                            alignment: Alignment.bottomRight,
+                            children: [
+                              CircleAvatar(
+                                radius: 50,
+                                backgroundImage: viewModel.getImage(),
+                                backgroundColor: GameColor.secondaryColor,
                               ),
-                              borderRadius: BorderRadius.circular(100)),
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: viewModel.getImage(),
-                            backgroundColor: GameColor.secondaryColor,
+                              IconButton(
+                                visualDensity: VisualDensity.compact,
+                                alignment: Alignment.bottomCenter,
+                                onPressed: viewModel.showUploadDialog,
+                                icon: Icon(
+                                  Icons.edit_rounded,
+                                  color: GameColor.secondaryBackgroundColor,
+                                  size: 30,
+                                  shadows: [primaryShadow()],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(
