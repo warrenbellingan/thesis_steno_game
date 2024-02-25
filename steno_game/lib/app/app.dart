@@ -30,6 +30,7 @@ import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
 import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
 import 'package:steno_game/ui/bottom_sheets/input_validation/input_validation_sheet.dart';
 import 'package:steno_game/ui/views/person/person_view.dart';
+import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -76,7 +77,8 @@ import 'package:steno_game/ui/views/person/person_view.dart';
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
-    // @stacked-dialog
+    StackedDialog(classType: UpdateProfileImageDialog),
+// @stacked-dialog
   ],
 )
 class App {}

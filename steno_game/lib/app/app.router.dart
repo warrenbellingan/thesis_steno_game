@@ -465,7 +465,6 @@ extension NavigatorStateExtension on _i27.NavigationService {
   }
 
 
-
   Future<dynamic> navigateToAchievementView([
     int? routerId,
     bool preventDuplicates = true,

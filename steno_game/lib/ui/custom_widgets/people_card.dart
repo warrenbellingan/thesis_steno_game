@@ -7,7 +7,11 @@ import 'add_friend.dart';
 typedef OnClick = Function();
 
 class PeopleCard extends StatelessWidget {
-  const PeopleCard({super.key, required this.name, required this.level, required this.onClick});
+  const PeopleCard(
+      {super.key,
+      required this.name,
+      required this.level,
+      required this.onClick});
 
   final String name;
   final int level;

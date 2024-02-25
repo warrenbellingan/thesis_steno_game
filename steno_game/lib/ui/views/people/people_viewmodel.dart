@@ -7,7 +7,6 @@ import 'package:steno_game/repository/user_repository.dart';
 import '../../../model/user.dart';
 
 class PeopleViewModel extends BaseViewModel {
-
   final _navigationService = locator<NavigationService>();
 
   final _userRep = locator<UserRepository>();
