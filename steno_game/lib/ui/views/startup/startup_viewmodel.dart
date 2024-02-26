@@ -22,4 +22,9 @@ class StartupViewModel extends BaseViewModel {
       _navigationService.replaceWithLoginView();
     }
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

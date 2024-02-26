@@ -53,7 +53,6 @@ class AuthenticationService {
     try {
       await auth.signOut();
       await _sharedPref.deleteCurrentUser();
-      _sharedPref.dispose();
       return const Right(None());
     } catch (e) {
       return Left(GameException(e.toString()));
@@ -96,14 +95,17 @@ class AuthenticationService {
       var response = await login(email: currentEmail, password: password);
       return response.fold((l) => Left(GameException(l.message)), (r) async {
         try {
-          await auth.currentUser!.verifyBeforeUpdateEmail(newEmail);
+          await auth.currentUser!.updateEmail(newEmail);
+          print('Verify Email');
           await db
               .collection("users")
               .doc(r.id)
-              .set({"email": newEmail}, SetOptions(merge: true));
+              .update({"email": newEmail},);
+          print('Saved email');
           await getCurrentUser();
           return const Right(None());
         } catch (e) {
+          print(e.toString());
           return Left(GameException(e.toString()));
         }
       });

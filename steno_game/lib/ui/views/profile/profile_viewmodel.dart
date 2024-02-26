@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -18,11 +20,19 @@ class ProfileViewModel extends BaseViewModel {
   final _bottomSheetServ = locator<BottomSheetService>();
   final _dialogService = locator<DialogService>();
 
+  StreamSubscription<User?>? streamSubscription;
   late User user;
 
   void init() async {
     setBusy(true);
     user = (await _sharedPref.getCurrentUser())!;
+    streamSubscription?.cancel();
+    streamSubscription = _sharedPref.userStream.listen((userData) {
+      if(userData != null) {
+        user = userData;
+       rebuildUi();
+      }
+    });
     setBusy(false);
   }
 
@@ -31,9 +41,25 @@ class ProfileViewModel extends BaseViewModel {
     return NetworkImage(user.image!);
   }
 
-  void showUploadDialog() async {
+  void showUploadPictureDialog() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.updateProfileImage,
+    );
+  }
+  void showUpdateNameDialog() async{
+    await _dialogService.showCustomDialog(
+      variant: DialogType.updateName,
+    );
+  }
+  void showUpdateEmailDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.updateEmail,
+    );
+  }
+
+  void showUpdatePasswordDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.updatePassword,
     );
   }
 
@@ -57,4 +83,11 @@ class ProfileViewModel extends BaseViewModel {
       description: description,
     );
   }
+
+  @override
+  void dispose() {
+    streamSubscription?.cancel();
+    super.dispose();
+  }
+
 }

@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/ui/constants/game_color.dart';
+import 'package:steno_game/ui/custom_widgets/dialog_bar.dart';
+import 'package:steno_game/ui/custom_widgets/game_button.dart';
+import 'package:steno_game/ui/custom_widgets/game_loading.dart';
+import 'package:steno_game/ui/custom_widgets/game_textfield.dart';
 
 import 'update_name_dialog_model.dart';
-
-const double _graphicSize = 60;
 
 class UpdateNameDialog extends StackedView<UpdateNameDialogModel> {
   final DialogRequest request;
@@ -26,83 +30,40 @@ class UpdateNameDialog extends StackedView<UpdateNameDialogModel> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: viewModel.isBusy
+          ? GameLoading()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        request.title ?? 'Hello Stacked Dialog!!',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      if (request.description != null) ...[
-                        verticalSpaceTiny,
-                        Text(
-                          request.description!,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                          maxLines: 3,
-                          softWrap: true,
-                        ),
-                      ],
-                    ],
-                  ),
+                DialogBar(
+                  onClick: () => completer(DialogResponse(confirmed: true)),
+                  title: "Change Your Name",
                 ),
-                Container(
-                  width: _graphicSize,
-                  height: _graphicSize,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFF6E7B0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_graphicSize / 2),
+                verticalSpaceMedium,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: GameTextField(
+                    controller: viewModel.nameTextController,
+                    label: "Enter your new name",
+                    icon: const Icon(
+                      Icons.person,
+                      color: GameColor.primaryColor,
                     ),
                   ),
-                  alignment: Alignment.center,
-                  child: const Text('⭐️', style: TextStyle(fontSize: 30)),
-                )
+                ),
+                GameButton(text: "Save", onClick: viewModel.updateName),
+                verticalSpaceMedium,
               ],
             ),
-            verticalSpaceMedium,
-            GestureDetector(
-              onTap: () => completer(DialogResponse(confirmed: true)),
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  'Got it',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
   @override
   UpdateNameDialogModel viewModelBuilder(BuildContext context) =>
       UpdateNameDialogModel();
+
+  @override
+  void onViewModelReady(UpdateNameDialogModel viewModel) {
+    viewModel.init();
+  }
 }

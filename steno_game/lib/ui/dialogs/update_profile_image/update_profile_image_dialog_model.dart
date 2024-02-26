@@ -44,7 +44,7 @@ class UpdateProfileImageDialogModel extends BaseViewModel {
       final response = await _userRepo.uploadProfilePicture(image!);
       setBusy(false);
       response.fold((l) => showBottomSheet(l.message),
-          (r) => print("Saved successfully"));
+          (r) => showBottomSheet("Photo uploaded successfully"));
     }
   }
 
@@ -64,4 +64,7 @@ class UpdateProfileImageDialogModel extends BaseViewModel {
       return NetworkImage(user.image!);
     }
   }
+
+
+
 }

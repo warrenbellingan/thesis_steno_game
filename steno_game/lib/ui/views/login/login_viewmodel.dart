@@ -65,10 +65,5 @@ class LoginViewModel extends BaseViewModel with InputValidation {
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _sharedPref.dispose();
-    super.dispose();
-  }
+
 }

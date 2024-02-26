@@ -6,13 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/user.dart';
 
 class SharedPreferenceService {
-  final _userStreamController = StreamController<User?>.broadcast();
+  late StreamController<User?> _userStreamController;
+
+  SharedPreferenceService() {
+    _userStreamController = StreamController<User?>.broadcast();
+  }
   Stream<User?> get userStream => _userStreamController.stream;
 
   Future<void> deleteCurrentUser() async {
     final sharedPref = await SharedPreferences.getInstance();
     sharedPref.remove("USER_KEY");
-    _userStreamController.add(null);
   }
 
   Future<String?> getUserId() async {
@@ -20,16 +23,6 @@ class SharedPreferenceService {
     if (user != null) {
       return user.id;
     } else {
-      return null;
-    }
-  }
-
-  Future<String?> getUserId() async{
-    final user = await getCurrentUser();
-    if(user != null) {
-      return user.id;
-    }
-    else {
       return null;
     }
   }
@@ -42,15 +35,15 @@ class SharedPreferenceService {
   }
 
   Future<void> saveUser(User user) async {
-    final sharedPref = await SharedPreferences.getInstance();
-    sharedPref.setString("USER_KEY", jsonEncode(user.toJson()));
+    if(_userStreamController.isClosed) {
+      _userStreamController = StreamController<User?>.broadcast();
+    }
     _userStreamController.add(user);
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setString("USER_KEY", jsonEncode(user.toJson()));
   }
 
   void dispose() {
-    if (_userStreamController.isClosed) {
-      print("the stream is closed");
-    }
-    _userStreamController.close();
+      _userStreamController.close();
   }
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/custom_widgets/game_icon_button.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../constants/game_color.dart';
-import '../../constants/game_png.dart';
 import '../../custom_widgets/game_bar.dart';
 import '../../custom_widgets/game_body.dart';
 import '../../custom_widgets/game_button.dart';
-import '../../custom_widgets/game_edit_profile_button.dart';
 import '../../custom_widgets/profile_card.dart';
 import 'profile_viewmodel.dart';
 
@@ -35,7 +35,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       children: [
                         InkWell(
                           borderRadius: BorderRadius.circular(50),
-                          onTap: viewModel.showUploadDialog,
+                          onTap: viewModel.showUploadPictureDialog,
                           child: AbsorbPointer(
                             child: Container(
                               decoration: BoxDecoration(
@@ -61,23 +61,22 @@ class ProfileView extends StackedView<ProfileViewModel> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
+                              width: 160,
                               child: Row(
-                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    width: 198,
+                                  Expanded(
                                     child: Text(
-                                      "h",
-                                      overflow: TextOverflow.ellipsis,
-                                      //viewModel.user.name,
+                                      viewModel.user.name,
                                       style: TextStyle(
                                         fontSize: 20,
+                                        height: 1,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
                                   GameIconButton(
-                                    onClick: () {},
+                                    onClick: viewModel.showUpdateNameDialog,
                                     icon:
                                         Icons.drive_file_rename_outline_rounded,
                                     size: 30,
@@ -111,9 +110,9 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 4),
+                      margin: const EdgeInsets.symmetric(vertical: 4),
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8),
@@ -122,9 +121,16 @@ class ProfileView extends StackedView<ProfileViewModel> {
                           width: 1,
                         ),
                       ),
-                      child: Text(
-                        "Email: ${viewModel.user.email}",
-                        style: TextStyle(fontSize: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Email: ${viewModel.user.email}",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          GameIconButton(
+                              onClick: viewModel.showUpdateEmailDialog, icon: Icons.edit_rounded)
+                        ],
                       ),
                     ),
                     Container(
@@ -146,30 +152,54 @@ class ProfileView extends StackedView<ProfileViewModel> {
                             "Friends: ${viewModel.user.friends.length}",
                             style: TextStyle(fontSize: 16),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 6),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: Colors.grey),
-                            child: Text(
-                              "View Friends",
-                              style: TextStyle(
-                                fontSize: 16,
+                          InkWell(
+                            onTap: () {},
+                            child: AbsorbPointer(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 6),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: Colors.grey),
+                                child: Text(
+                                  "View Friends",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    GameEditProfileButton(
-                      title: "Edit Profile",
-                      onclick: () {},
+                    ElevatedButton(
+                      onPressed: viewModel.showUpdatePasswordDialog,
+                      style: ElevatedButton.styleFrom(
+                        shape:  RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side:  const BorderSide(
+                            color: Colors.black,
+                            style: BorderStyle.solid,
+                            width: 2,
+                          ),
+                        ),
+                        backgroundColor: Colors.white,
+                        shadowColor: Colors.grey,
+
+                      ),
+                      child: const Text(
+                        "Change Password",
+                        style: TextStyle(
+                          color: Colors.black,
+                          letterSpacing: 1,
+                          wordSpacing: 2,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    GameEditProfileButton(
-                      title: "Change Password",
-                      onclick: () {},
-                    ),
+                    verticalSpaceSmall,
                     Column(
                       children: [
                         Row(
@@ -199,6 +229,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         ),
                       ],
                     ),
+                    verticalSpaceMedium,
                     GameButton(text: 'Log out', onClick: viewModel.logOut),
                   ],
                 ),

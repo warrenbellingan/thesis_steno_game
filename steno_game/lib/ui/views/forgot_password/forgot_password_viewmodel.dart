@@ -9,7 +9,6 @@ import 'package:steno_game/ui/common/input_validation.dart';
 class ForgotPasswordViewModel extends BaseViewModel with InputValidation {
   final _authServ = locator<AuthenticationService>();
   final _bottomSheetServ = locator<BottomSheetService>();
-  final _navigationServ = locator<NavigationService>();
 
   TextEditingController emailController = TextEditingController();
 
@@ -24,7 +23,6 @@ class ForgotPasswordViewModel extends BaseViewModel with InputValidation {
       }, (r) {
         showBottomSheet(
             "The reset link is send to your email account. Check your email messages!");
-        _navigationServ.back();
       });
     }
   }

@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/ui/custom_widgets/dialog_bar.dart';
 import 'package:steno_game/ui/custom_widgets/game_button.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../constants/game_color.dart';
@@ -33,17 +34,9 @@ class UpdateProfileImageDialog
           : Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  width: double.infinity,
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () => completer(DialogResponse(
-                      confirmed: true,
-                    )),
-                    iconSize: 35,
-                    color: GameColor.primaryColor,
-                    icon: Icon(Icons.backspace),
-                  ),
+                DialogBar(
+                  onClick: () => completer(DialogResponse(confirmed: true)),
+                  title: "Upload Photo",
                 ),
                 Container(
                   decoration: BoxDecoration(

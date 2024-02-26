@@ -71,7 +71,6 @@ class HomeViewModel extends BaseViewModel {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     streamSubscription?.cancel();
     _sharedPref.dispose();
     super.dispose();
