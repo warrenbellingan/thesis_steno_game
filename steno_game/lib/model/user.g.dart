@@ -18,6 +18,8 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       achievements: json['achievements'] as List<dynamic>? ?? const [],
       score: json['score'] as int? ?? 0,
       friends: json['friends'] as List<dynamic>? ?? const [],
+      friendsRequest: json['friendsRequest'] as List<dynamic>? ?? const [],
+      addFriendRequest: json['addFriendRequest'] as List<dynamic>? ?? const [],
       level: json['level'] as int? ?? 1,
       levelProgress: json['levelProgress'] as int? ?? 0,
     );
@@ -35,6 +37,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'achievements': instance.achievements,
       'score': instance.score,
       'friends': instance.friends,
+      'friendsRequest': instance.friendsRequest,
+      'addFriendRequest': instance.addFriendRequest,
       'level': instance.level,
       'levelProgress': instance.levelProgress,
     };

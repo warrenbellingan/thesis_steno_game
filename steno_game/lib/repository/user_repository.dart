@@ -72,4 +72,48 @@ class UserRepository {
       return Left(GameException("No user found"));
     }
   }
+
+  Future<Either<GameException, None>> friendRequest(String friendId) async {
+    try {
+      await _db.collection("users").doc(userId).update({"addFriendRequest": FieldValue.arrayUnion([friendId])});
+      await _db.collection("users").doc(friendId).update({"friendRequest": FieldValue.arrayUnion([userId])});
+      return const Right(None());
+    }
+    catch(e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> removeFriendRequest(String friendId) async {
+    try{
+      await _db.collection("users").doc(friendId).update({"addFriendRequest": FieldValue.arrayRemove([userId])});
+      await _db.collection("users").doc(userId).update({"friendRequest": FieldValue.arrayRemove([friendId])});
+      return const Right(None());
+    }
+    catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> cancelFriendRequest(String friendId) async {
+    try{
+      await _db.collection("users").doc(userId).update({"addFriendRequest": FieldValue.arrayRemove([friendId])});
+      await _db.collection("users").doc(friendId).update({"friendRequest": FieldValue.arrayRemove([userId])});
+      return const Right(None());
+    }
+    catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> addFriend(String friendId) async {
+    try{
+      await _db.collection("users").doc(userId).update({"friends": FieldValue.arrayUnion([friendId])});
+      final response = await removeFriendRequest(friendId);
+      return response.fold((l) => Left(GameException(l.message)), (r) => const Right(None()));
+    }
+    catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
 }

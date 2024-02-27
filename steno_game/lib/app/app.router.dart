@@ -140,10 +140,6 @@ class StackedRouter extends _i1.RouterBase {
       page: _i6.ForgotPasswordView,
     ),
     _i1.RouteDef(
-      Routes.homeView,
-      page: _i2.HomeView,
-    ),
-    _i1.RouteDef(
       Routes.achievementView,
       page: _i7.AchievementView,
     ),
@@ -463,7 +459,6 @@ extension NavigatorStateExtension on _i27.NavigationService {
         parameters: parameters,
         transition: transition);
   }
-
 
   Future<dynamic> navigateToAchievementView([
     int? routerId,
@@ -789,7 +784,6 @@ extension NavigatorStateExtension on _i27.NavigationService {
         parameters: parameters,
         transition: transition);
   }
-
 
   Future<dynamic> replaceWithAchievementView([
     int? routerId,

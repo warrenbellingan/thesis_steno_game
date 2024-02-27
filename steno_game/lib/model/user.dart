@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
-
 part 'user.g.dart';
 
 @Freezed()
@@ -18,6 +17,8 @@ class User with _$User {
       @Default([]) List achievements,
       @Default(0) int score,
       @Default([]) List friends,
+      @Default([]) List friendsRequest,
+      @Default([]) List addFriendRequest,
       @Default(1) int level,
       @Default(0) int levelProgress}) = _User;
 
