@@ -14,7 +14,6 @@ class UpdatePasswordDialogModel extends BaseViewModel with InputValidation {
   TextEditingController currentPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
 
-
   Future<void> changePassword() async {
     String? currentPassValidation =
         isValidPassword(currentPasswordController.text);

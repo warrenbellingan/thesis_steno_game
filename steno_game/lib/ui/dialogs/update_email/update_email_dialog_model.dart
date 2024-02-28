@@ -49,8 +49,6 @@ class UpdateEmailDialogModel extends BaseViewModel with InputValidation {
     }
   }
 
-
-
   void showBottomSheet(String description) {
     _bottomSheetServ.showCustomSheet(
       variant: BottomSheetType.notice,
@@ -58,5 +56,4 @@ class UpdateEmailDialogModel extends BaseViewModel with InputValidation {
       description: description,
     );
   }
-
 }

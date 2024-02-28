@@ -28,9 +28,9 @@ class ProfileViewModel extends BaseViewModel {
     user = (await _sharedPref.getCurrentUser())!;
     streamSubscription?.cancel();
     streamSubscription = _sharedPref.userStream.listen((userData) {
-      if(userData != null) {
+      if (userData != null) {
         user = userData;
-       rebuildUi();
+        rebuildUi();
       }
     });
     setBusy(false);
@@ -46,11 +46,13 @@ class ProfileViewModel extends BaseViewModel {
       variant: DialogType.updateProfileImage,
     );
   }
-  void showUpdateNameDialog() async{
+
+  void showUpdateNameDialog() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.updateName,
     );
   }
+
   void showUpdateEmailDialog() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.updateEmail,
@@ -89,5 +91,4 @@ class ProfileViewModel extends BaseViewModel {
     streamSubscription?.cancel();
     super.dispose();
   }
-
 }

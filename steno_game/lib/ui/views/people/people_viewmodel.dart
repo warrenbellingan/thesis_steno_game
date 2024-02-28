@@ -39,10 +39,8 @@ class PeopleViewModel extends BaseViewModel {
   Future<void> loadUsers() async {
     users = await _userRep.getUsers();
   }
-  Future<void> loadFriends() async {
 
-  }
-
+  Future<void> loadFriends() async {}
 
   @override
   void dispose() {

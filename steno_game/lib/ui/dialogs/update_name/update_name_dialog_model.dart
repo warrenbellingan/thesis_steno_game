@@ -43,8 +43,4 @@ class UpdateNameDialogModel extends BaseViewModel with InputValidation {
       description: description,
     );
   }
-
-
-
-
 }

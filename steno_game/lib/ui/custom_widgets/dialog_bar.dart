@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/game_color.dart';
 
 typedef OnClick = Function();
+
 class DialogBar extends StatelessWidget {
   const DialogBar({super.key, required this.onClick, required this.title});
 
@@ -11,7 +12,7 @@ class DialogBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 8),
       child: Row(
@@ -20,12 +21,11 @@ class DialogBar extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              color: GameColor.secondaryBackgroundColor,
-              wordSpacing: 2,
-              letterSpacing: 1,
-              fontSize: 25,
-              fontWeight: FontWeight.bold
-            ),
+                color: GameColor.secondaryBackgroundColor,
+                wordSpacing: 2,
+                letterSpacing: 1,
+                fontSize: 25,
+                fontWeight: FontWeight.bold),
           ),
           IconButton(
             onPressed: onClick,

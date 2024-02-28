@@ -113,7 +113,8 @@ class ProfileView extends StackedView<ProfileViewModel> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 6),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8),
@@ -130,16 +131,17 @@ class ProfileView extends StackedView<ProfileViewModel> {
                             style: TextStyle(fontSize: 16),
                           ),
                           GameIconButton(
-                              onClick: viewModel.showUpdateEmailDialog, icon: Icons.edit_rounded)
+                              onClick: viewModel.showUpdateEmailDialog,
+                              icon: Icons.edit_rounded)
                         ],
                       ),
                     ),
                     ElevatedButton(
                       onPressed: viewModel.showUpdatePasswordDialog,
                       style: ElevatedButton.styleFrom(
-                        shape:  RoundedRectangleBorder(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
-                          side:  const BorderSide(
+                          side: const BorderSide(
                             color: Colors.black,
                             style: BorderStyle.solid,
                             width: 2,
@@ -147,7 +149,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         ),
                         backgroundColor: Colors.white,
                         shadowColor: Colors.grey,
-
                       ),
                       child: const Text(
                         "Change Password",

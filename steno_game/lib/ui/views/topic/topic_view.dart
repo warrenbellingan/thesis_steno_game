@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'picture_quiz_viewmodel.dart';
+import 'topic_viewmodel.dart';
 
-class PictureQuizView extends StackedView<PictureQuizViewModel> {
-  const PictureQuizView({Key? key}) : super(key: key);
+class TopicView extends StackedView<TopicViewModel> {
+  const TopicView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    PictureQuizViewModel viewModel,
+    TopicViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -21,8 +21,8 @@ class PictureQuizView extends StackedView<PictureQuizViewModel> {
   }
 
   @override
-  PictureQuizViewModel viewModelBuilder(
+  TopicViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      PictureQuizViewModel();
+      TopicViewModel();
 }

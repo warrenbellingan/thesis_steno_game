@@ -97,10 +97,9 @@ class AuthenticationService {
         try {
           await auth.currentUser!.updateEmail(newEmail);
           print('Verify Email');
-          await db
-              .collection("users")
-              .doc(r.id)
-              .update({"email": newEmail},);
+          await db.collection("users").doc(r.id).update(
+            {"email": newEmail},
+          );
           print('Saved email');
           await getCurrentUser();
           return const Right(None());

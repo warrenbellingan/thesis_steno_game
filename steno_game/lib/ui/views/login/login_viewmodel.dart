@@ -64,6 +64,4 @@ class LoginViewModel extends BaseViewModel with InputValidation {
       description: description,
     );
   }
-
-
 }

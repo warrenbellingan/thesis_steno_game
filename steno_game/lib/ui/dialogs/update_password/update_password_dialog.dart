@@ -29,34 +29,36 @@ class UpdatePasswordDialog extends StackedView<UpdatePasswordDialogModel> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
-      child: viewModel.isBusy ? GameLoading() : Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DialogBar(
-            onClick: () => completer(DialogResponse(confirmed: true)),
-            title: "Change Password",
-          ),
-          verticalSpaceMedium,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
+      child: viewModel.isBusy
+          ? GameLoading()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                GamePasswordTextField(
-                  controller: viewModel.currentPasswordController,
-                  label: "Current Password",
+                DialogBar(
+                  onClick: () => completer(DialogResponse(confirmed: true)),
+                  title: "Change Password",
                 ),
-                GamePasswordTextField(
-                  controller: viewModel.newPasswordController,
-                  label: "New Password",
+                verticalSpaceMedium,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    children: [
+                      GamePasswordTextField(
+                        controller: viewModel.currentPasswordController,
+                        label: "Current Password",
+                      ),
+                      GamePasswordTextField(
+                        controller: viewModel.newPasswordController,
+                        label: "New Password",
+                      ),
+                    ],
+                  ),
                 ),
+                verticalSpaceSmall,
+                GameButton(text: "Save", onClick: viewModel.changePassword),
+                verticalSpaceMedium,
               ],
             ),
-          ),
-          verticalSpaceSmall,
-          GameButton(text: "Save", onClick: viewModel.changePassword),
-          verticalSpaceMedium,
-        ],
-      ),
     );
   }
 

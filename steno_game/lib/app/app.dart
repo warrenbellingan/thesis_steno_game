@@ -16,7 +16,6 @@ import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:steno_game/ui/views/achievement/achievement_view.dart';
 import 'package:steno_game/ui/views/lessons/lessons_view.dart';
 import 'package:steno_game/ui/views/people/people_view.dart';
-import 'package:steno_game/ui/views/picture_quiz/picture_quiz_view.dart';
 import 'package:steno_game/ui/views/picture_topic/picture_topic_view.dart';
 import 'package:steno_game/ui/views/play/play_view.dart';
 import 'package:steno_game/ui/views/profile/profile_view.dart';
@@ -25,7 +24,6 @@ import 'package:steno_game/ui/views/stroke_exercise/stroke_exercise_view.dart';
 import 'package:steno_game/ui/views/strokes_multiplayer/strokes_multiplayer_view.dart';
 import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart';
 import 'package:steno_game/ui/views/text_quiz/text_quiz_view.dart';
-import 'package:steno_game/ui/views/text_topic/text_topic_view.dart';
 import 'package:steno_game/ui/views/text_exercise/text_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart';
 import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
@@ -36,6 +34,7 @@ import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_
 import 'package:steno_game/ui/dialogs/update_name/update_name_dialog.dart';
 import 'package:steno_game/ui/dialogs/update_email/update_email_dialog.dart';
 import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dart';
+import 'package:steno_game/ui/views/topic/topic_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -48,7 +47,6 @@ import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dar
     MaterialRoute(page: AchievementView),
     MaterialRoute(page: LessonsView),
     MaterialRoute(page: PeopleView),
-    MaterialRoute(page: PictureQuizView),
     MaterialRoute(page: PictureTopicView),
     MaterialRoute(page: PlayView),
     MaterialRoute(page: ProfileView),
@@ -57,12 +55,12 @@ import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dar
     MaterialRoute(page: StrokesMultiplayerView),
     MaterialRoute(page: StrokePlayView),
     MaterialRoute(page: TextQuizView),
-    MaterialRoute(page: TextTopicView),
     MaterialRoute(page: TextExerciseView),
     MaterialRoute(page: TypingExerciseView),
     MaterialRoute(page: TypingPlayView),
     MaterialRoute(page: SpeedTypingView),
     MaterialRoute(page: PersonView),
+    MaterialRoute(page: TopicView),
 // @stacked-route
   ],
   dependencies: [

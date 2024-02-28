@@ -26,8 +26,12 @@ class PeopleView extends StackedView<PeopleViewModel> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GameChip(label: "Your Friends",),
-              GameChip(label: "Friend Request",),
+              GameChip(
+                label: "Your Friends",
+              ),
+              GameChip(
+                label: "Friend Request",
+              ),
             ],
           ),
           verticalSpaceSmall,

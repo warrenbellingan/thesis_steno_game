@@ -35,7 +35,7 @@ class SharedPreferenceService {
   }
 
   Future<void> saveUser(User user) async {
-    if(_userStreamController.isClosed) {
+    if (_userStreamController.isClosed) {
       _userStreamController = StreamController<User?>.broadcast();
     }
     _userStreamController.add(user);
@@ -44,6 +44,6 @@ class SharedPreferenceService {
   }
 
   void dispose() {
-      _userStreamController.close();
+    _userStreamController.close();
   }
 }

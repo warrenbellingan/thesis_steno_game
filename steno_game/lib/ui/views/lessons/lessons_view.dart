@@ -29,7 +29,8 @@ class LessonsView extends StackedView<LessonsViewModel> {
                   child: GestureDetector(
                     onTap: () => viewModel.getLessons("strokes"),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 4),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -37,19 +38,21 @@ class LessonsView extends StackedView<LessonsViewModel> {
                           style: BorderStyle.solid,
                         ),
                       ),
-                      child:  Text(
+                      child: Text(
                         textAlign: TextAlign.center,
                         "STROKES",
-                        style: viewModel.selectedIndex == 1 ? const TextStyle(
-                          color: GameColor.secondaryBackgroundColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.3,
-                        ) : const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.3,
-                        ),
+                        style: viewModel.selectedIndex == 1
+                            ? const TextStyle(
+                                color: GameColor.secondaryBackgroundColor,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.3,
+                              )
+                            : const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.3,
+                              ),
                       ),
                     ),
                   ),
@@ -58,7 +61,8 @@ class LessonsView extends StackedView<LessonsViewModel> {
                   child: GestureDetector(
                     onTap: () => viewModel.getLessons("typing"),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 4),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -66,19 +70,21 @@ class LessonsView extends StackedView<LessonsViewModel> {
                           style: BorderStyle.solid,
                         ),
                       ),
-                      child:  Text(
+                      child: Text(
                         textAlign: TextAlign.center,
                         "TYPING",
-                        style: viewModel.selectedIndex == 2 ? const TextStyle(
-                          color: GameColor.secondaryBackgroundColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.3,
-                        ) : const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.3,
-                        ),
+                        style: viewModel.selectedIndex == 2
+                            ? const TextStyle(
+                                color: GameColor.secondaryBackgroundColor,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.3,
+                              )
+                            : const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.3,
+                              ),
                       ),
                     ),
                   ),
@@ -86,7 +92,6 @@ class LessonsView extends StackedView<LessonsViewModel> {
               ],
             ),
           ),
-
           viewModel.isBusy
               ? GameLoading(
                   label: "Getting lessons",
@@ -96,7 +101,9 @@ class LessonsView extends StackedView<LessonsViewModel> {
                   itemCount: viewModel.lessons.length,
                   itemBuilder: (context, index) {
                     var item = viewModel.lessons[index];
-                    return LessonMainCard(label: item.title);
+                    return LessonMainCard(label: item.title, onClick: (){
+                      viewModel.lessonClick(item);
+                    },);
                   },
                 ),
         ],

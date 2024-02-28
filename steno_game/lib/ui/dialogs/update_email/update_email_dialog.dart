@@ -29,31 +29,33 @@ class UpdateEmailDialog extends StackedView<UpdateEmailDialogModel> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
-      child: viewModel.isBusy ? GameLoading() : Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DialogBar(
-            onClick: () => completer(DialogResponse(confirmed: true)),
-            title: "Change Email",
-          ),
-          verticalSpaceMedium,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(
+      child: viewModel.isBusy
+          ? GameLoading()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                GameTextField(
-                    controller: viewModel.newEmailTextController, label: "New Email"),
-                GamePasswordTextField(
-                    controller: viewModel.passwordTextController,
-                    label: "Confirm Password"),
+                DialogBar(
+                  onClick: () => completer(DialogResponse(confirmed: true)),
+                  title: "Change Email",
+                ),
+                verticalSpaceMedium,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      GameTextField(
+                          controller: viewModel.newEmailTextController,
+                          label: "New Email"),
+                      GamePasswordTextField(
+                          controller: viewModel.passwordTextController,
+                          label: "Confirm Password"),
+                    ],
+                  ),
+                ),
+                GameButton(text: "Save", onClick: viewModel.changeEmail),
+                verticalSpaceMedium,
               ],
             ),
-          ),
-
-          GameButton(text: "Save", onClick: viewModel.changeEmail),
-          verticalSpaceMedium,
-        ],
-      ),
     );
   }
 
