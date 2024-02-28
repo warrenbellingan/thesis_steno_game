@@ -109,6 +109,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         )
                       ],
                     ),
+                    verticalSpaceMedium,
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       width: double.infinity,
@@ -130,46 +131,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
                           ),
                           GameIconButton(
                               onClick: viewModel.showUpdateEmailDialog, icon: Icons.edit_rounded)
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 4),
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: GameColor.secondaryColor,
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Friends: ${viewModel.user.friends.length}",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: AbsorbPointer(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 6),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: Colors.grey),
-                                child: Text(
-                                  "View Friends",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),

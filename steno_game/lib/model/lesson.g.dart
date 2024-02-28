@@ -9,14 +9,12 @@ part of 'lesson.dart';
 _$LessonImpl _$$LessonImplFromJson(Map<String, dynamic> json) => _$LessonImpl(
       id: json['id'] as String,
       title: json['title'] as String,
-      topics: json['topics'] as List<dynamic>,
-      quizzes: json['quizzes'] as List<dynamic>,
+      type: json['type'] as String,
     );
 
 Map<String, dynamic> _$$LessonImplToJson(_$LessonImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'topics': instance.topics,
-      'quizzes': instance.quizzes,
+      'type': instance.type,
     };

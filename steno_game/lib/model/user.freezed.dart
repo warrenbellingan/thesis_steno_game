@@ -30,9 +30,9 @@ mixin _$User {
   List<dynamic> get completedLevels => throw _privateConstructorUsedError;
   List<dynamic> get achievements => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
-  List<dynamic> get friends => throw _privateConstructorUsedError;
-  List<dynamic> get friendsRequest => throw _privateConstructorUsedError;
-  List<dynamic> get addFriendRequest => throw _privateConstructorUsedError;
+  List<String> get friends => throw _privateConstructorUsedError;
+  List<String> get friendsRequest => throw _privateConstructorUsedError;
+  List<String> get addFriendRequest => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   int get levelProgress => throw _privateConstructorUsedError;
 
@@ -57,9 +57,9 @@ abstract class $UserCopyWith<$Res> {
       List<dynamic> completedLevels,
       List<dynamic> achievements,
       int score,
-      List<dynamic> friends,
-      List<dynamic> friendsRequest,
-      List<dynamic> addFriendRequest,
+      List<String> friends,
+      List<String> friendsRequest,
+      List<String> addFriendRequest,
       int level,
       int levelProgress});
 }
@@ -137,15 +137,15 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       friends: null == friends
           ? _value.friends
           : friends // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       friendsRequest: null == friendsRequest
           ? _value.friendsRequest
           : friendsRequest // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       addFriendRequest: null == addFriendRequest
           ? _value.addFriendRequest
           : addFriendRequest // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -176,9 +176,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<dynamic> completedLevels,
       List<dynamic> achievements,
       int score,
-      List<dynamic> friends,
-      List<dynamic> friendsRequest,
-      List<dynamic> addFriendRequest,
+      List<String> friends,
+      List<String> friendsRequest,
+      List<String> addFriendRequest,
       int level,
       int levelProgress});
 }
@@ -253,15 +253,15 @@ class __$$UserImplCopyWithImpl<$Res>
       friends: null == friends
           ? _value._friends
           : friends // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       friendsRequest: null == friendsRequest
           ? _value._friendsRequest
           : friendsRequest // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       addFriendRequest: null == addFriendRequest
           ? _value._addFriendRequest
           : addFriendRequest // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -288,9 +288,9 @@ class _$UserImpl implements _User {
       final List<dynamic> completedLevels = const [],
       final List<dynamic> achievements = const [],
       this.score = 0,
-      final List<dynamic> friends = const [],
-      final List<dynamic> friendsRequest = const [],
-      final List<dynamic> addFriendRequest = const [],
+      final List<String> friends = const [],
+      final List<String> friendsRequest = const [],
+      final List<String> addFriendRequest = const [],
       this.level = 1,
       this.levelProgress = 0})
       : _completedLevels = completedLevels,
@@ -339,28 +339,28 @@ class _$UserImpl implements _User {
   @override
   @JsonKey()
   final int score;
-  final List<dynamic> _friends;
+  final List<String> _friends;
   @override
   @JsonKey()
-  List<dynamic> get friends {
+  List<String> get friends {
     if (_friends is EqualUnmodifiableListView) return _friends;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_friends);
   }
 
-  final List<dynamic> _friendsRequest;
+  final List<String> _friendsRequest;
   @override
   @JsonKey()
-  List<dynamic> get friendsRequest {
+  List<String> get friendsRequest {
     if (_friendsRequest is EqualUnmodifiableListView) return _friendsRequest;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_friendsRequest);
   }
 
-  final List<dynamic> _addFriendRequest;
+  final List<String> _addFriendRequest;
   @override
   @JsonKey()
-  List<dynamic> get addFriendRequest {
+  List<String> get addFriendRequest {
     if (_addFriendRequest is EqualUnmodifiableListView)
       return _addFriendRequest;
     // ignore: implicit_dynamic_type
@@ -454,9 +454,9 @@ abstract class _User implements User {
       final List<dynamic> completedLevels,
       final List<dynamic> achievements,
       final int score,
-      final List<dynamic> friends,
-      final List<dynamic> friendsRequest,
-      final List<dynamic> addFriendRequest,
+      final List<String> friends,
+      final List<String> friendsRequest,
+      final List<String> addFriendRequest,
       final int level,
       final int levelProgress}) = _$UserImpl;
 
@@ -483,11 +483,11 @@ abstract class _User implements User {
   @override
   int get score;
   @override
-  List<dynamic> get friends;
+  List<String> get friends;
   @override
-  List<dynamic> get friendsRequest;
+  List<String> get friendsRequest;
   @override
-  List<dynamic> get addFriendRequest;
+  List<String> get addFriendRequest;
   @override
   int get level;
   @override

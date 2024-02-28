@@ -17,9 +17,18 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       completedLevels: json['completedLevels'] as List<dynamic>? ?? const [],
       achievements: json['achievements'] as List<dynamic>? ?? const [],
       score: json['score'] as int? ?? 0,
-      friends: json['friends'] as List<dynamic>? ?? const [],
-      friendsRequest: json['friendsRequest'] as List<dynamic>? ?? const [],
-      addFriendRequest: json['addFriendRequest'] as List<dynamic>? ?? const [],
+      friends: (json['friends'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      friendsRequest: (json['friendsRequest'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      addFriendRequest: (json['addFriendRequest'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       level: json['level'] as int? ?? 1,
       levelProgress: json['levelProgress'] as int? ?? 0,
     );

@@ -30,6 +30,11 @@ class UserRepository {
     return results;
   }
 
+  Stream<User> getStreamUserFriends() {
+    final result = _db.collection("users").doc(userId).snapshots();
+    return result.map((user) => User.fromJson(user.data()!));
+  }
+
   Future<Either<GameException, None>> updateName(String name) async {
     try {
       await _db
@@ -116,4 +121,6 @@ class UserRepository {
       return Left(GameException(e.toString()));
     }
   }
+
+
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/common/ui_helpers.dart';
+import 'package:steno_game/ui/custom_widgets/game_chip.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import '../../custom_widgets/game_search_textfield.dart';
 import '../../custom_widgets/people_card.dart';
@@ -21,6 +23,14 @@ class PeopleView extends StackedView<PeopleViewModel> {
           SizedBox(
             height: 16,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GameChip(label: "Your Friends",),
+              GameChip(label: "Friend Request",),
+            ],
+          ),
+          verticalSpaceSmall,
           viewModel.isBusy
               ? GameLoading(
                   label: "Getting users",

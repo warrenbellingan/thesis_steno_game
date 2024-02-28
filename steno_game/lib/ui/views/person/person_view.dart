@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/custom_widgets/game_bar.dart';
 import 'package:steno_game/ui/custom_widgets/game_body.dart';
 import '../../../model/user.dart';
@@ -110,40 +111,7 @@ class PersonView extends StackedView<PersonViewModel> {
                 style: TextStyle(fontSize: 16),
               ),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 4),
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: GameColor.secondaryColor,
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Friends: ${viewModel.user.friends.length}",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.grey),
-                    child: Text(
-                      "View Friends",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            verticalSpaceMedium,
             Column(
               children: [
                 Row(

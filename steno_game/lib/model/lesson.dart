@@ -9,8 +9,7 @@ class Lesson with _$Lesson {
   const factory Lesson(
       {required String id,
       required String title,
-      required List topics,
-      required List quizzes}) = _Lesson;
+      required String type}) = _Lesson;
 
   factory Lesson.fromJson(Map<String, dynamic> json) => _$LessonFromJson(json);
 }

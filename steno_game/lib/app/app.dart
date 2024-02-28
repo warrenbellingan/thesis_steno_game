@@ -1,3 +1,5 @@
+import 'package:steno_game/repository/lesson_repository.dart';
+import 'package:steno_game/repository/topic_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:steno_game/ui/dialogs/info_alert/info_alert_dialog.dart';
@@ -71,6 +73,8 @@ import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dar
     LazySingleton(classType: SharedPreferenceService),
     LazySingleton(classType: ImageService),
     LazySingleton(classType: UserRepository),
+    LazySingleton(classType: LessonRepository),
+    LazySingleton(classType: TopicRepository),
 // @stacked-service
   ],
   bottomsheets: [

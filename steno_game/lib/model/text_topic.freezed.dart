@@ -22,8 +22,6 @@ TextTopic _$TextTopicFromJson(Map<String, dynamic> json) {
 mixin _$TextTopic {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +34,7 @@ abstract class $TextTopicCopyWith<$Res> {
   factory $TextTopicCopyWith(TextTopic value, $Res Function(TextTopic) then) =
       _$TextTopicCopyWithImpl<$Res, TextTopic>;
   @useResult
-  $Res call({String id, String text, String image, String description});
+  $Res call({String id, String text});
 }
 
 /// @nodoc
@@ -54,8 +52,6 @@ class _$TextTopicCopyWithImpl<$Res, $Val extends TextTopic>
   $Res call({
     Object? id = null,
     Object? text = null,
-    Object? image = null,
-    Object? description = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,14 +61,6 @@ class _$TextTopicCopyWithImpl<$Res, $Val extends TextTopic>
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -86,7 +74,7 @@ abstract class _$$TextTopicImplCopyWith<$Res>
       __$$TextTopicImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String image, String description});
+  $Res call({String id, String text});
 }
 
 /// @nodoc
@@ -102,8 +90,6 @@ class __$$TextTopicImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? text = null,
-    Object? image = null,
-    Object? description = null,
   }) {
     return _then(_$TextTopicImpl(
       id: null == id
@@ -114,14 +100,6 @@ class __$$TextTopicImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -129,11 +107,7 @@ class __$$TextTopicImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TextTopicImpl implements _TextTopic {
-  const _$TextTopicImpl(
-      {required this.id,
-      required this.text,
-      required this.image,
-      required this.description});
+  const _$TextTopicImpl({required this.id, required this.text});
 
   factory _$TextTopicImpl.fromJson(Map<String, dynamic> json) =>
       _$$TextTopicImplFromJson(json);
@@ -142,14 +116,10 @@ class _$TextTopicImpl implements _TextTopic {
   final String id;
   @override
   final String text;
-  @override
-  final String image;
-  @override
-  final String description;
 
   @override
   String toString() {
-    return 'TextTopic(id: $id, text: $text, image: $image, description: $description)';
+    return 'TextTopic(id: $id, text: $text)';
   }
 
   @override
@@ -158,15 +128,12 @@ class _$TextTopicImpl implements _TextTopic {
         (other.runtimeType == runtimeType &&
             other is _$TextTopicImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.description, description) ||
-                other.description == description));
+            (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, image, description);
+  int get hashCode => Object.hash(runtimeType, id, text);
 
   @JsonKey(ignore: true)
   @override
@@ -184,10 +151,7 @@ class _$TextTopicImpl implements _TextTopic {
 
 abstract class _TextTopic implements TextTopic {
   const factory _TextTopic(
-      {required final String id,
-      required final String text,
-      required final String image,
-      required final String description}) = _$TextTopicImpl;
+      {required final String id, required final String text}) = _$TextTopicImpl;
 
   factory _TextTopic.fromJson(Map<String, dynamic> json) =
       _$TextTopicImpl.fromJson;
@@ -196,10 +160,6 @@ abstract class _TextTopic implements TextTopic {
   String get id;
   @override
   String get text;
-  @override
-  String get image;
-  @override
-  String get description;
   @override
   @JsonKey(ignore: true)
   _$$TextTopicImplCopyWith<_$TextTopicImpl> get copyWith =>

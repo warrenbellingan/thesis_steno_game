@@ -22,8 +22,7 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) {
 mixin _$Lesson {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  List<dynamic> get topics => throw _privateConstructorUsedError;
-  List<dynamic> get quizzes => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,8 +34,7 @@ abstract class $LessonCopyWith<$Res> {
   factory $LessonCopyWith(Lesson value, $Res Function(Lesson) then) =
       _$LessonCopyWithImpl<$Res, Lesson>;
   @useResult
-  $Res call(
-      {String id, String title, List<dynamic> topics, List<dynamic> quizzes});
+  $Res call({String id, String title, String type});
 }
 
 /// @nodoc
@@ -54,8 +52,7 @@ class _$LessonCopyWithImpl<$Res, $Val extends Lesson>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? topics = null,
-    Object? quizzes = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -66,14 +63,10 @@ class _$LessonCopyWithImpl<$Res, $Val extends Lesson>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      topics: null == topics
-          ? _value.topics
-          : topics // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      quizzes: null == quizzes
-          ? _value.quizzes
-          : quizzes // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -85,8 +78,7 @@ abstract class _$$LessonImplCopyWith<$Res> implements $LessonCopyWith<$Res> {
       __$$LessonImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id, String title, List<dynamic> topics, List<dynamic> quizzes});
+  $Res call({String id, String title, String type});
 }
 
 /// @nodoc
@@ -102,8 +94,7 @@ class __$$LessonImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? topics = null,
-    Object? quizzes = null,
+    Object? type = null,
   }) {
     return _then(_$LessonImpl(
       id: null == id
@@ -114,14 +105,10 @@ class __$$LessonImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      topics: null == topics
-          ? _value._topics
-          : topics // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      quizzes: null == quizzes
-          ? _value._quizzes
-          : quizzes // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,12 +117,7 @@ class __$$LessonImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LessonImpl implements _Lesson {
   const _$LessonImpl(
-      {required this.id,
-      required this.title,
-      required final List<dynamic> topics,
-      required final List<dynamic> quizzes})
-      : _topics = topics,
-        _quizzes = quizzes;
+      {required this.id, required this.title, required this.type});
 
   factory _$LessonImpl.fromJson(Map<String, dynamic> json) =>
       _$$LessonImplFromJson(json);
@@ -144,25 +126,12 @@ class _$LessonImpl implements _Lesson {
   final String id;
   @override
   final String title;
-  final List<dynamic> _topics;
   @override
-  List<dynamic> get topics {
-    if (_topics is EqualUnmodifiableListView) return _topics;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_topics);
-  }
-
-  final List<dynamic> _quizzes;
-  @override
-  List<dynamic> get quizzes {
-    if (_quizzes is EqualUnmodifiableListView) return _quizzes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quizzes);
-  }
+  final String type;
 
   @override
   String toString() {
-    return 'Lesson(id: $id, title: $title, topics: $topics, quizzes: $quizzes)';
+    return 'Lesson(id: $id, title: $title, type: $type)';
   }
 
   @override
@@ -172,18 +141,12 @@ class _$LessonImpl implements _Lesson {
             other is _$LessonImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            const DeepCollectionEquality().equals(other._topics, _topics) &&
-            const DeepCollectionEquality().equals(other._quizzes, _quizzes));
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      const DeepCollectionEquality().hash(_topics),
-      const DeepCollectionEquality().hash(_quizzes));
+  int get hashCode => Object.hash(runtimeType, id, title, type);
 
   @JsonKey(ignore: true)
   @override
@@ -203,8 +166,7 @@ abstract class _Lesson implements Lesson {
   const factory _Lesson(
       {required final String id,
       required final String title,
-      required final List<dynamic> topics,
-      required final List<dynamic> quizzes}) = _$LessonImpl;
+      required final String type}) = _$LessonImpl;
 
   factory _Lesson.fromJson(Map<String, dynamic> json) = _$LessonImpl.fromJson;
 
@@ -213,9 +175,7 @@ abstract class _Lesson implements Lesson {
   @override
   String get title;
   @override
-  List<dynamic> get topics;
-  @override
-  List<dynamic> get quizzes;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$LessonImplCopyWith<_$LessonImpl> get copyWith =>

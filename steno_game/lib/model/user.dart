@@ -16,9 +16,9 @@ class User with _$User {
       @Default([]) List completedLevels,
       @Default([]) List achievements,
       @Default(0) int score,
-      @Default([]) List friends,
-      @Default([]) List friendsRequest,
-      @Default([]) List addFriendRequest,
+      @Default([]) List<String> friends,
+      @Default([]) List<String> friendsRequest,
+      @Default([]) List<String> addFriendRequest,
       @Default(1) int level,
       @Default(0) int levelProgress}) = _User;
 

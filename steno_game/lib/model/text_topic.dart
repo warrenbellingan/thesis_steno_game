@@ -8,9 +8,7 @@ part 'text_topic.g.dart';
 class TextTopic with _$TextTopic {
   const factory TextTopic(
       {required String id,
-      required String text,
-      required String image,
-      required String description}) = _TextTopic;
+      required String text,}) = _TextTopic;
 
   factory TextTopic.fromJson(Map<String, dynamic> json) =>
       _$TextTopicFromJson(json);
