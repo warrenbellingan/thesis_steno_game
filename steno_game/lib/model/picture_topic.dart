@@ -8,8 +8,7 @@ part 'picture_topic.g.dart';
 class PictureTopic with _$PictureTopic {
   const factory PictureTopic(
       {required String id,
-      required String text,
-      required String image,
+      required String stroke,
       required String description}) = _PictureTopic;
 
   factory PictureTopic.fromJson(Map<String, dynamic> json) =>

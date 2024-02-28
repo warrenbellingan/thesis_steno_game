@@ -1,4 +1,6 @@
 import 'package:steno_game/repository/lesson_repository.dart';
+import 'package:steno_game/repository/picture_quiz_repository.dart';
+import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/ui/bottom_sheets/notice/notice_sheet.dart';
@@ -73,6 +75,8 @@ import 'package:steno_game/ui/views/topic/topic_view.dart';
     LazySingleton(classType: UserRepository),
     LazySingleton(classType: LessonRepository),
     LazySingleton(classType: TopicRepository),
+    LazySingleton(classType: StrokeRepository),
+    LazySingleton(classType: PictureQuizRepository),
 // @stacked-service
   ],
   bottomsheets: [

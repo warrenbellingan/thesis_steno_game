@@ -10,8 +10,10 @@ import 'package:stacked_services/src/bottom_sheet/bottom_sheet_service.dart';
 import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
+import 'package:steno_game/repository/picture_quiz_repository.dart';
 
 import '../repository/lesson_repository.dart';
+import '../repository/stroke_repository.dart';
 import '../repository/topic_repository.dart';
 import '../repository/user_repository.dart';
 import '../services/authentication_service.dart';
@@ -38,4 +40,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => UserRepository());
   locator.registerLazySingleton(() => LessonRepository());
   locator.registerLazySingleton(() => TopicRepository());
+  locator.registerLazySingleton(() => StrokeRepository());
+  locator.registerLazySingleton(() => PictureQuizRepository());
 }

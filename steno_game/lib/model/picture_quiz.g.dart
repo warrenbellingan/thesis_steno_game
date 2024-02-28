@@ -9,15 +9,16 @@ part of 'picture_quiz.dart';
 _$PictureQuizImpl _$$PictureQuizImplFromJson(Map<String, dynamic> json) =>
     _$PictureQuizImpl(
       id: json['id'] as String,
-      text: json['text'] as String,
-      image: json['image'] as String,
-      description: json['description'] as String,
+      stroke: json['stroke'] as String,
+      choices:
+          (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
+      answer: json['answer'] as String,
     );
 
 Map<String, dynamic> _$$PictureQuizImplToJson(_$PictureQuizImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'text': instance.text,
-      'image': instance.image,
-      'description': instance.description,
+      'stroke': instance.stroke,
+      'choices': instance.choices,
+      'answer': instance.answer,
     };

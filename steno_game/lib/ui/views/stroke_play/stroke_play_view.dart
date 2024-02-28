@@ -25,8 +25,8 @@ class StrokePlayView extends StackedView<StrokePlayViewModel> {
               crossAxisCount: 2,
             ),
             children: [
-              PlayCard(label: "Multi Player"),
-              PlayCard(label: "Strokes Quiz"),
+              PlayCard(label: "Multi Player", onClick: () {  },),
+              PlayCard(label: "Strokes Quiz", onClick: viewModel.goToStrokeQuizView),
             ],
           ),
         ],

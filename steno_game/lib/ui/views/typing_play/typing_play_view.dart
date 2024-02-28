@@ -25,7 +25,7 @@ class TypingPlayView extends StackedView<TypingPlayViewModel> {
               crossAxisCount: 2,
             ),
             children: [
-              PlayCard(label: "Speed Typing"),
+              PlayCard(label: "Speed Typing", onClick: () {  },),
             ],
           ),
         ],

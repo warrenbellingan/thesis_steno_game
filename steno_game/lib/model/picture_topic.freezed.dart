@@ -21,8 +21,7 @@ PictureTopic _$PictureTopicFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PictureTopic {
   String get id => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String get stroke => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +36,7 @@ abstract class $PictureTopicCopyWith<$Res> {
           PictureTopic value, $Res Function(PictureTopic) then) =
       _$PictureTopicCopyWithImpl<$Res, PictureTopic>;
   @useResult
-  $Res call({String id, String text, String image, String description});
+  $Res call({String id, String stroke, String description});
 }
 
 /// @nodoc
@@ -54,8 +53,7 @@ class _$PictureTopicCopyWithImpl<$Res, $Val extends PictureTopic>
   @override
   $Res call({
     Object? id = null,
-    Object? text = null,
-    Object? image = null,
+    Object? stroke = null,
     Object? description = null,
   }) {
     return _then(_value.copyWith(
@@ -63,13 +61,9 @@ class _$PictureTopicCopyWithImpl<$Res, $Val extends PictureTopic>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
           ? _value.description
@@ -87,7 +81,7 @@ abstract class _$$PictureTopicImplCopyWith<$Res>
       __$$PictureTopicImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String image, String description});
+  $Res call({String id, String stroke, String description});
 }
 
 /// @nodoc
@@ -102,8 +96,7 @@ class __$$PictureTopicImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? text = null,
-    Object? image = null,
+    Object? stroke = null,
     Object? description = null,
   }) {
     return _then(_$PictureTopicImpl(
@@ -111,13 +104,9 @@ class __$$PictureTopicImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
           ? _value.description
@@ -131,10 +120,7 @@ class __$$PictureTopicImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PictureTopicImpl implements _PictureTopic {
   const _$PictureTopicImpl(
-      {required this.id,
-      required this.text,
-      required this.image,
-      required this.description});
+      {required this.id, required this.stroke, required this.description});
 
   factory _$PictureTopicImpl.fromJson(Map<String, dynamic> json) =>
       _$$PictureTopicImplFromJson(json);
@@ -142,15 +128,13 @@ class _$PictureTopicImpl implements _PictureTopic {
   @override
   final String id;
   @override
-  final String text;
-  @override
-  final String image;
+  final String stroke;
   @override
   final String description;
 
   @override
   String toString() {
-    return 'PictureTopic(id: $id, text: $text, image: $image, description: $description)';
+    return 'PictureTopic(id: $id, stroke: $stroke, description: $description)';
   }
 
   @override
@@ -159,15 +143,14 @@ class _$PictureTopicImpl implements _PictureTopic {
         (other.runtimeType == runtimeType &&
             other is _$PictureTopicImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.stroke, stroke) || other.stroke == stroke) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, image, description);
+  int get hashCode => Object.hash(runtimeType, id, stroke, description);
 
   @JsonKey(ignore: true)
   @override
@@ -186,8 +169,7 @@ class _$PictureTopicImpl implements _PictureTopic {
 abstract class _PictureTopic implements PictureTopic {
   const factory _PictureTopic(
       {required final String id,
-      required final String text,
-      required final String image,
+      required final String stroke,
       required final String description}) = _$PictureTopicImpl;
 
   factory _PictureTopic.fromJson(Map<String, dynamic> json) =
@@ -196,9 +178,7 @@ abstract class _PictureTopic implements PictureTopic {
   @override
   String get id;
   @override
-  String get text;
-  @override
-  String get image;
+  String get stroke;
   @override
   String get description;
   @override

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/custom_widgets/game_body.dart';
+import 'package:steno_game/ui/custom_widgets/game_loading.dart';
+import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
+import 'package:steno_game/ui/custom_widgets/in_game_bar.dart';
 
+import '../../custom_widgets/game_quiz_choice.dart';
 import 'quiz_game_stroke_viewmodel.dart';
 
 class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
@@ -12,12 +17,22 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
     QuizGameStrokeViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-      ),
-    );
+    return GameBody(
+        body: SingleChildScrollView(
+      child: viewModel.isBusy
+          ? GameLoading()
+          : Column(
+              children: [
+                InGameBar(),
+                GameNetworkImage(path: viewModel.stroke.strokeImage),
+                ListView.builder(
+                  itemCount: viewModel.quiz.choices.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => GameQuizChoice(),
+                ),
+              ],
+            ),
+    ));
   }
 
   @override
@@ -25,4 +40,9 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
     BuildContext context,
   ) =>
       QuizGameStrokeViewModel();
+
+  @override
+  void onViewModelReady(QuizGameStrokeViewModel viewModel) {
+    viewModel.init();
+  }
 }

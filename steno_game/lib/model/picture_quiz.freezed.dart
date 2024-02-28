@@ -21,9 +21,9 @@ PictureQuiz _$PictureQuizFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PictureQuiz {
   String get id => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String get stroke => throw _privateConstructorUsedError;
+  List<String> get choices => throw _privateConstructorUsedError;
+  String get answer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $PictureQuizCopyWith<$Res> {
           PictureQuiz value, $Res Function(PictureQuiz) then) =
       _$PictureQuizCopyWithImpl<$Res, PictureQuiz>;
   @useResult
-  $Res call({String id, String text, String image, String description});
+  $Res call({String id, String stroke, List<String> choices, String answer});
 }
 
 /// @nodoc
@@ -54,26 +54,26 @@ class _$PictureQuizCopyWithImpl<$Res, $Val extends PictureQuiz>
   @override
   $Res call({
     Object? id = null,
-    Object? text = null,
-    Object? image = null,
-    Object? description = null,
+    Object? stroke = null,
+    Object? choices = null,
+    Object? answer = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      choices: null == choices
+          ? _value.choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answer: null == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -87,7 +87,7 @@ abstract class _$$PictureQuizImplCopyWith<$Res>
       __$$PictureQuizImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String image, String description});
+  $Res call({String id, String stroke, List<String> choices, String answer});
 }
 
 /// @nodoc
@@ -102,26 +102,26 @@ class __$$PictureQuizImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? text = null,
-    Object? image = null,
-    Object? description = null,
+    Object? stroke = null,
+    Object? choices = null,
+    Object? answer = null,
   }) {
     return _then(_$PictureQuizImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      choices: null == choices
+          ? _value._choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answer: null == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -132,9 +132,10 @@ class __$$PictureQuizImplCopyWithImpl<$Res>
 class _$PictureQuizImpl implements _PictureQuiz {
   const _$PictureQuizImpl(
       {required this.id,
-      required this.text,
-      required this.image,
-      required this.description});
+      required this.stroke,
+      required final List<String> choices,
+      required this.answer})
+      : _choices = choices;
 
   factory _$PictureQuizImpl.fromJson(Map<String, dynamic> json) =>
       _$$PictureQuizImplFromJson(json);
@@ -142,15 +143,21 @@ class _$PictureQuizImpl implements _PictureQuiz {
   @override
   final String id;
   @override
-  final String text;
+  final String stroke;
+  final List<String> _choices;
   @override
-  final String image;
+  List<String> get choices {
+    if (_choices is EqualUnmodifiableListView) return _choices;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_choices);
+  }
+
   @override
-  final String description;
+  final String answer;
 
   @override
   String toString() {
-    return 'PictureQuiz(id: $id, text: $text, image: $image, description: $description)';
+    return 'PictureQuiz(id: $id, stroke: $stroke, choices: $choices, answer: $answer)';
   }
 
   @override
@@ -159,15 +166,15 @@ class _$PictureQuizImpl implements _PictureQuiz {
         (other.runtimeType == runtimeType &&
             other is _$PictureQuizImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.description, description) ||
-                other.description == description));
+            (identical(other.stroke, stroke) || other.stroke == stroke) &&
+            const DeepCollectionEquality().equals(other._choices, _choices) &&
+            (identical(other.answer, answer) || other.answer == answer));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, image, description);
+  int get hashCode => Object.hash(runtimeType, id, stroke,
+      const DeepCollectionEquality().hash(_choices), answer);
 
   @JsonKey(ignore: true)
   @override
@@ -186,9 +193,9 @@ class _$PictureQuizImpl implements _PictureQuiz {
 abstract class _PictureQuiz implements PictureQuiz {
   const factory _PictureQuiz(
       {required final String id,
-      required final String text,
-      required final String image,
-      required final String description}) = _$PictureQuizImpl;
+      required final String stroke,
+      required final List<String> choices,
+      required final String answer}) = _$PictureQuizImpl;
 
   factory _PictureQuiz.fromJson(Map<String, dynamic> json) =
       _$PictureQuizImpl.fromJson;
@@ -196,11 +203,11 @@ abstract class _PictureQuiz implements PictureQuiz {
   @override
   String get id;
   @override
-  String get text;
+  String get stroke;
   @override
-  String get image;
+  List<String> get choices;
   @override
-  String get description;
+  String get answer;
   @override
   @JsonKey(ignore: true)
   _$$PictureQuizImplCopyWith<_$PictureQuizImpl> get copyWith =>

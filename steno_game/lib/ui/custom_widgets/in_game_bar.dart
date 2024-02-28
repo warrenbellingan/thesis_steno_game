@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/app/app.locator.dart';
 import 'package:steno_game/ui/custom_widgets/player_profile.dart';
 
 import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 class InGameBar extends StatelessWidget {
-  const InGameBar({super.key});
+  InGameBar({super.key});
+
+  final navigationSer = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +24,13 @@ class InGameBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           PlayerProfile(
-            name: 'Sampple',
+            name: 'Sample',
             level: 1,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navigationSer.back();
+            },
             icon: Icon(Icons.menu),
           ),
         ],

@@ -8,9 +8,9 @@ part 'picture_quiz.g.dart';
 class PictureQuiz with _$PictureQuiz {
   const factory PictureQuiz(
       {required String id,
-      required String text,
-      required String image,
-      required String description}) = _PictureQuiz;
+      required String stroke,
+      required List<String> choices,
+      required String answer}) = _PictureQuiz;
 
   factory PictureQuiz.fromJson(Map<String, dynamic> json) =>
       _$PictureQuizFromJson(json);

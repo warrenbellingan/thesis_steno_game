@@ -9,15 +9,13 @@ part of 'picture_topic.dart';
 _$PictureTopicImpl _$$PictureTopicImplFromJson(Map<String, dynamic> json) =>
     _$PictureTopicImpl(
       id: json['id'] as String,
-      text: json['text'] as String,
-      image: json['image'] as String,
+      stroke: json['stroke'] as String,
       description: json['description'] as String,
     );
 
 Map<String, dynamic> _$$PictureTopicImplToJson(_$PictureTopicImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'text': instance.text,
-      'image': instance.image,
+      'stroke': instance.stroke,
       'description': instance.description,
     };

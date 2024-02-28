@@ -9,8 +9,8 @@ class GameImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width == null ? 150 : width,
-      height: height == null ? 150 : height,
+      width: width ?? 150,
+      height: height ?? 150,
       child: Image.asset(path),
     );
   }

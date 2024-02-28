@@ -37,7 +37,7 @@ class LessonsViewModel extends BaseViewModel {
   }
 
   void lessonClick(Lesson lesson) {
-    _navigationService.navigateToTopicView();
+    _navigationService.navigateToTopicView(lesson: lesson);
   }
 
   void showBottomSheet(String description) {

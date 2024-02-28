@@ -8,7 +8,8 @@
 import 'package:flutter/material.dart' as _i24;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i26;
+import 'package:stacked_services/stacked_services.dart' as _i27;
+import 'package:steno_game/model/lesson.dart' as _i26;
 import 'package:steno_game/model/user.dart' as _i25;
 import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart'
@@ -333,8 +334,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i23.TopicView: (data) {
+      final args = data.getArgs<TopicViewArguments>(nullOk: false);
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i23.TopicView(),
+        builder: (context) => _i23.TopicView(args.lesson, key: args.key),
         settings: data,
       );
     },
@@ -374,7 +376,34 @@ class PersonViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i26.NavigationService {
+class TopicViewArguments {
+  const TopicViewArguments({
+    required this.lesson,
+    this.key,
+  });
+
+  final _i26.Lesson lesson;
+
+  final _i24.Key? key;
+
+  @override
+  String toString() {
+    return '{"lesson": "$lesson", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant TopicViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.lesson == lesson && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return lesson.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i27.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -672,14 +701,17 @@ extension NavigatorStateExtension on _i26.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToTopicView([
+  Future<dynamic> navigateToTopicView({
+    required _i26.Lesson lesson,
+    _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.topicView,
+        arguments: TopicViewArguments(lesson: lesson, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -983,14 +1015,17 @@ extension NavigatorStateExtension on _i26.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithTopicView([
+  Future<dynamic> replaceWithTopicView({
+    required _i26.Lesson lesson,
+    _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.topicView,
+        arguments: TopicViewArguments(lesson: lesson, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
