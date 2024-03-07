@@ -32,7 +32,6 @@ mixin _$User {
   int get score => throw _privateConstructorUsedError;
   List<String> get friends => throw _privateConstructorUsedError;
   List<String> get friendsRequest => throw _privateConstructorUsedError;
-  List<String> get addFriendRequest => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   int get levelProgress => throw _privateConstructorUsedError;
 
@@ -59,7 +58,6 @@ abstract class $UserCopyWith<$Res> {
       int score,
       List<String> friends,
       List<String> friendsRequest,
-      List<String> addFriendRequest,
       int level,
       int levelProgress});
 }
@@ -89,7 +87,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? score = null,
     Object? friends = null,
     Object? friendsRequest = null,
-    Object? addFriendRequest = null,
     Object? level = null,
     Object? levelProgress = null,
   }) {
@@ -142,10 +139,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.friendsRequest
           : friendsRequest // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      addFriendRequest: null == addFriendRequest
-          ? _value.addFriendRequest
-          : addFriendRequest // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -178,7 +171,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       int score,
       List<String> friends,
       List<String> friendsRequest,
-      List<String> addFriendRequest,
       int level,
       int levelProgress});
 }
@@ -205,7 +197,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? score = null,
     Object? friends = null,
     Object? friendsRequest = null,
-    Object? addFriendRequest = null,
     Object? level = null,
     Object? levelProgress = null,
   }) {
@@ -258,10 +249,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._friendsRequest
           : friendsRequest // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      addFriendRequest: null == addFriendRequest
-          ? _value._addFriendRequest
-          : addFriendRequest // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -290,14 +277,12 @@ class _$UserImpl implements _User {
       this.score = 0,
       final List<String> friends = const [],
       final List<String> friendsRequest = const [],
-      final List<String> addFriendRequest = const [],
       this.level = 1,
       this.levelProgress = 0})
       : _completedLevels = completedLevels,
         _achievements = achievements,
         _friends = friends,
-        _friendsRequest = friendsRequest,
-        _addFriendRequest = addFriendRequest;
+        _friendsRequest = friendsRequest;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -357,16 +342,6 @@ class _$UserImpl implements _User {
     return EqualUnmodifiableListView(_friendsRequest);
   }
 
-  final List<String> _addFriendRequest;
-  @override
-  @JsonKey()
-  List<String> get addFriendRequest {
-    if (_addFriendRequest is EqualUnmodifiableListView)
-      return _addFriendRequest;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_addFriendRequest);
-  }
-
   @override
   @JsonKey()
   final int level;
@@ -376,7 +351,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, role: $role, image: $image, typingSpeed: $typingSpeed, typingAccuracy: $typingAccuracy, completedLevels: $completedLevels, achievements: $achievements, score: $score, friends: $friends, friendsRequest: $friendsRequest, addFriendRequest: $addFriendRequest, level: $level, levelProgress: $levelProgress)';
+    return 'User(id: $id, name: $name, email: $email, role: $role, image: $image, typingSpeed: $typingSpeed, typingAccuracy: $typingAccuracy, completedLevels: $completedLevels, achievements: $achievements, score: $score, friends: $friends, friendsRequest: $friendsRequest, level: $level, levelProgress: $levelProgress)';
   }
 
   @override
@@ -401,8 +376,6 @@ class _$UserImpl implements _User {
             const DeepCollectionEquality().equals(other._friends, _friends) &&
             const DeepCollectionEquality()
                 .equals(other._friendsRequest, _friendsRequest) &&
-            const DeepCollectionEquality()
-                .equals(other._addFriendRequest, _addFriendRequest) &&
             (identical(other.level, level) || other.level == level) &&
             (identical(other.levelProgress, levelProgress) ||
                 other.levelProgress == levelProgress));
@@ -424,7 +397,6 @@ class _$UserImpl implements _User {
       score,
       const DeepCollectionEquality().hash(_friends),
       const DeepCollectionEquality().hash(_friendsRequest),
-      const DeepCollectionEquality().hash(_addFriendRequest),
       level,
       levelProgress);
 
@@ -456,7 +428,6 @@ abstract class _User implements User {
       final int score,
       final List<String> friends,
       final List<String> friendsRequest,
-      final List<String> addFriendRequest,
       final int level,
       final int levelProgress}) = _$UserImpl;
 
@@ -486,8 +457,6 @@ abstract class _User implements User {
   List<String> get friends;
   @override
   List<String> get friendsRequest;
-  @override
-  List<String> get addFriendRequest;
   @override
   int get level;
   @override

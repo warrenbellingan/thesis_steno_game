@@ -37,4 +37,13 @@ class QuizGameStrokeViewModel extends BaseViewModel {
     });
     setBusy(false);
   }
+
+  void choiceClick(String choiceAnswer) {
+    if(choiceAnswer.trim() == quiz.answer.trim()) {
+      print("Correct");
+    }
+    else {
+      print("Wrong");
+    }
+  }
 }

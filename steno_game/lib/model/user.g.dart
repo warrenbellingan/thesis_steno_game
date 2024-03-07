@@ -25,10 +25,6 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      addFriendRequest: (json['addFriendRequest'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
       level: json['level'] as int? ?? 1,
       levelProgress: json['levelProgress'] as int? ?? 0,
     );
@@ -47,7 +43,6 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'score': instance.score,
       'friends': instance.friends,
       'friendsRequest': instance.friendsRequest,
-      'addFriendRequest': instance.addFriendRequest,
       'level': instance.level,
       'levelProgress': instance.levelProgress,
     };

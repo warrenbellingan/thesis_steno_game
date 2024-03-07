@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../constants/game_color.dart';
 
+typedef OnClick = Function();
 class GameChip extends StatelessWidget {
-  GameChip({super.key, required this.label});
+  GameChip({super.key, required this.label, required this.onClick});
 
   final String label;
+  final OnClick onClick;
   bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onClick,
       child: Chip(
         padding: EdgeInsets.all(8),
         backgroundColor: isSelected

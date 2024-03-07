@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../constants/game_color.dart';
 
+typedef OnClick = Function();
 class AddFriend extends StatelessWidget {
-  const AddFriend({super.key});
+  AddFriend({super.key, this.onClick, required this.text});
+
+  OnClick? onClick;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onClick,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         margin: EdgeInsets.symmetric(horizontal: 6),
@@ -22,8 +26,8 @@ class AddFriend extends StatelessWidget {
           ),
         ),
         child: Text(
-          'Add Friend',
-          style: TextStyle(
+          text,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),

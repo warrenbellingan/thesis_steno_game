@@ -18,7 +18,6 @@ class User with _$User {
       @Default(0) int score,
       @Default([]) List<String> friends,
       @Default([]) List<String> friendsRequest,
-      @Default([]) List<String> addFriendRequest,
       @Default(1) int level,
       @Default(0) int levelProgress}) = _User;
 

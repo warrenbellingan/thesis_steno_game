@@ -7,17 +7,30 @@ import 'add_friend.dart';
 typedef OnClick = Function();
 
 class PeopleCard extends StatelessWidget {
-  const PeopleCard(
-      {super.key,
-      required this.name,
-      required this.level,
-      required this.onClick,
-      this.image});
+  PeopleCard({
+    super.key,
+    required this.name,
+    required this.level,
+    required this.onClick,
+    this.image,
+    this.btnClick,
+    required this.btnText,
+    required this.isFriend,
+    required this.haveFriendRequest,
+    required this.isRequestedFriend, required this.cancelRejectClick,
+
+  });
 
   final String name;
   final int level;
   final String? image;
+  final OnClick? btnClick;
+  final OnClick cancelRejectClick;
+  final String btnText;
   final OnClick onClick;
+  final bool isFriend;
+  final bool haveFriendRequest;
+  final bool isRequestedFriend;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +57,25 @@ class PeopleCard extends StatelessWidget {
               level: level,
               imagePath: image,
             ),
-            AddFriend(),
+            isFriend
+                ? Container(
+                    padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                    margin: EdgeInsets.symmetric(horizontal: 6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: GameColor.primaryBackgroundColor,
+                    ),
+                    child: const Text(
+                      'Friends',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  )
+                : AddFriend(
+                    onClick: btnClick, text: btnText,
+                  ),
           ],
         ),
       ),

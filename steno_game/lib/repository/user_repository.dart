@@ -30,7 +30,7 @@ class UserRepository {
     return results;
   }
 
-  Stream<User> getStreamUserFriends() {
+  Stream<User> streamUserFriends() {
     final result = _db.collection("users").doc(userId).snapshots();
     return result.map((user) => User.fromJson(user.data()!));
   }
@@ -78,11 +78,23 @@ class UserRepository {
     }
   }
 
+  Future<Either<GameException, List<User>>> getFriendList(
+      List<String> friends) async {
+    try {
+      final results = await _db
+          .collection("users")
+          .where("id", whereIn: friends)
+          .get()
+          .then((value) =>
+              value.docs.map((e) => User.fromJson(e.data())).toList());
+      return Right(results);
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
   Future<Either<GameException, None>> friendRequest(String friendId) async {
     try {
-      await _db.collection("users").doc(userId).update({
-        "addFriendRequest": FieldValue.arrayUnion([friendId])
-      });
       await _db.collection("users").doc(friendId).update({
         "friendRequest": FieldValue.arrayUnion([userId])
       });
@@ -95,9 +107,6 @@ class UserRepository {
   Future<Either<GameException, None>> removeFriendRequest(
       String friendId) async {
     try {
-      await _db.collection("users").doc(friendId).update({
-        "addFriendRequest": FieldValue.arrayRemove([userId])
-      });
       await _db.collection("users").doc(userId).update({
         "friendRequest": FieldValue.arrayRemove([friendId])
       });
@@ -110,9 +119,6 @@ class UserRepository {
   Future<Either<GameException, None>> cancelFriendRequest(
       String friendId) async {
     try {
-      await _db.collection("users").doc(userId).update({
-        "addFriendRequest": FieldValue.arrayRemove([friendId])
-      });
       await _db.collection("users").doc(friendId).update({
         "friendRequest": FieldValue.arrayRemove([userId])
       });

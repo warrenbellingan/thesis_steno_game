@@ -7,9 +7,9 @@ class GameColor {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     colors: [
-      Color(0xFFFC7D53),
-      Color(0xFFFD4027),
-      Color(0xFFFD1010),
+      Color(0xFFA554FA),
+      Color(0xFF8D38E5),
+      Color(0xFF7907F1),
     ],
   );
 
@@ -17,16 +17,16 @@ class GameColor {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     colors: [
-      Color(0xFFF87B51),
-      Color(0xFFCC4736),
-      Color(0xFFD22727),
+      Color(0xFF8754C4),
+      Color(0xFF5F0AB7),
+      Color(0xFF5502AD),
     ],
   );
 
-  static const primaryColor = Color(0xFFD94720);
+  static const primaryColor = Color(0xFF8D38E5);
   static const secondaryColor = Color(0xFF505050);
-  static const tertiaryColor = Color(0xFFFA8269);
+  static const tertiaryColor = Color(0xFFA554FA);
 
   static const primaryBackgroundColor = Color(0xF0F1F0F0);
-  static const secondaryBackgroundColor = Color(0xF0BB0707);
+  static const secondaryBackgroundColor = Color(0xFF5502AD);
 }
