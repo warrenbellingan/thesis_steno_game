@@ -19,9 +19,9 @@ class AchievementView extends StackedView<AchievementViewModel> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GameChip(label: 'All', onClick: () {  },),
-              GameChip(label: 'Completed', onClick: () {  },),
-              GameChip(label: 'Incomplete', onClick: () {  },),
+              GameChip(label: 'All', onClick: () {  }, isSelected: true,),
+              GameChip(label: 'Completed', onClick: () {  }, isSelected: false,),
+              GameChip(label: 'Incomplete', onClick: () {  }, isSelected: true,),
             ],
           ),
           AchievementCard(

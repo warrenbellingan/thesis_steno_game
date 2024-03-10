@@ -8,9 +8,8 @@
 import 'package:flutter/material.dart' as _i24;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i27;
-import 'package:steno_game/model/lesson.dart' as _i26;
-import 'package:steno_game/model/user.dart' as _i25;
+import 'package:stacked_services/stacked_services.dart' as _i26;
+import 'package:steno_game/model/lesson.dart' as _i25;
 import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
@@ -329,7 +328,7 @@ class StackedRouter extends _i1.RouterBase {
     _i22.PersonView: (data) {
       final args = data.getArgs<PersonViewArguments>(nullOk: false);
       return _i24.MaterialPageRoute<dynamic>(
-        builder: (context) => _i22.PersonView(args.user, key: args.key),
+        builder: (context) => _i22.PersonView(args.userId, key: args.key),
         settings: data,
       );
     },
@@ -351,28 +350,28 @@ class StackedRouter extends _i1.RouterBase {
 
 class PersonViewArguments {
   const PersonViewArguments({
-    required this.user,
+    required this.userId,
     this.key,
   });
 
-  final _i25.User user;
+  final String userId;
 
   final _i24.Key? key;
 
   @override
   String toString() {
-    return '{"user": "$user", "key": "$key"}';
+    return '{"userId": "$userId", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant PersonViewArguments other) {
     if (identical(this, other)) return true;
-    return other.user == user && other.key == key;
+    return other.userId == userId && other.key == key;
   }
 
   @override
   int get hashCode {
-    return user.hashCode ^ key.hashCode;
+    return userId.hashCode ^ key.hashCode;
   }
 }
 
@@ -382,7 +381,7 @@ class TopicViewArguments {
     this.key,
   });
 
-  final _i26.Lesson lesson;
+  final _i25.Lesson lesson;
 
   final _i24.Key? key;
 
@@ -403,7 +402,7 @@ class TopicViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i27.NavigationService {
+extension NavigatorStateExtension on _i26.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -685,7 +684,7 @@ extension NavigatorStateExtension on _i27.NavigationService {
   }
 
   Future<dynamic> navigateToPersonView({
-    required _i25.User user,
+    required String userId,
     _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -694,7 +693,7 @@ extension NavigatorStateExtension on _i27.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.personView,
-        arguments: PersonViewArguments(user: user, key: key),
+        arguments: PersonViewArguments(userId: userId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -702,7 +701,7 @@ extension NavigatorStateExtension on _i27.NavigationService {
   }
 
   Future<dynamic> navigateToTopicView({
-    required _i26.Lesson lesson,
+    required _i25.Lesson lesson,
     _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -999,7 +998,7 @@ extension NavigatorStateExtension on _i27.NavigationService {
   }
 
   Future<dynamic> replaceWithPersonView({
-    required _i25.User user,
+    required String userId,
     _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1008,7 +1007,7 @@ extension NavigatorStateExtension on _i27.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.personView,
-        arguments: PersonViewArguments(user: user, key: key),
+        arguments: PersonViewArguments(userId: userId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1016,7 +1015,7 @@ extension NavigatorStateExtension on _i27.NavigationService {
   }
 
   Future<dynamic> replaceWithTopicView({
-    required _i26.Lesson lesson,
+    required _i25.Lesson lesson,
     _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,

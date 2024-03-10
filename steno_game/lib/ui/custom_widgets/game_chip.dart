@@ -3,28 +3,32 @@ import 'package:flutter/material.dart';
 import '../constants/game_color.dart';
 
 typedef OnClick = Function();
+
 class GameChip extends StatelessWidget {
-  GameChip({super.key, required this.label, required this.onClick});
+  const GameChip({super.key, required this.label, required this.onClick, required this.isSelected});
 
   final String label;
   final OnClick onClick;
-  bool isSelected = false;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onClick,
       child: Chip(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
         backgroundColor: isSelected
-            ? GameColor.secondaryBackgroundColor
-            : GameColor.primaryColor,
+            ? GameColor.primaryColor
+            : GameColor.primaryBackgroundColor,
         label: Text(
           label,
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 20,
-            color: Colors.white,
+            fontSize: 16,
+            color: isSelected ? Colors.white : Colors.black,
           ),
         ),
       ),

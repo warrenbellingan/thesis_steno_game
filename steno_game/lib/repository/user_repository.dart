@@ -14,32 +14,40 @@ class UserRepository {
   final _sharedPref = locator<SharedPreferenceService>();
   final _authServ = locator<AuthenticationService>();
 
-  late String? userId;
 
-  UserRepository() {
-    init();
+
+
+  Future<Either<GameException, List<User>>> getUsers() async {
+    try {
+      final results = await _db.collection('users').get().then((value) =>
+          value.docs.map((user) => User.fromJson(user.data())).toList());
+      return Right(results);
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
   }
 
-  void init() async {
-    userId = await _sharedPref.getUserId();
-  }
-
-  Future<List<User>> getUsers() async {
-    final results = await _db.collection('users').get().then((value) =>
-        value.docs.map((user) => User.fromJson(user.data())).toList());
-    return results;
+  Future<Either<GameException, User>> getUser(String id) async {
+    try {
+      final userDoc = await _db.collection('users').doc(id).get();
+      return Right(User.fromJson(userDoc.data()!));
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
   }
 
   Stream<User> streamUserFriends() {
-    final result = _db.collection("users").doc(userId).snapshots();
+
+    final result = _db.collection("users").doc(_sharedPref.userId).snapshots();
     return result.map((user) => User.fromJson(user.data()!));
   }
+
 
   Future<Either<GameException, None>> updateName(String name) async {
     try {
       await _db
           .collection("users")
-          .doc(userId)
+          .doc(_sharedPref.userId)
           .set({"name": name}, SetOptions(merge: true));
       _authServ.getCurrentUser();
       return const Right(None());
@@ -50,33 +58,29 @@ class UserRepository {
 
   Future<Either<GameException, None>> uploadProfilePicture(
       File imageFile) async {
-    if (userId != null) {
-      String path = "images/profiles/$userId";
+    String path = "images/profiles/${_sharedPref.userId}";
 
-      try {
-        final response = await _imageService.uploadImage(imageFile, path);
-        return response.fold(
-          (l) => Left(GameException(l.message)),
-          (imageUrl) async {
-            try {
-              await _db
-                  .collection("users")
-                  .doc(userId)
-                  .set({"image": imageUrl}, SetOptions(merge: true));
-              await _authServ.getCurrentUser();
-              return const Right(None());
-            } catch (e) {
-              return Left(GameException(e.toString()));
-            }
-          },
-        );
-      } catch (e) {
-        return Left(GameException(e.toString()));
-      }
-    } else {
-      return Left(GameException("No user found"));
+    try {
+      final response = await _imageService.uploadImage(imageFile, path);
+      return response.fold(
+        (l) => Left(GameException(l.message)),
+        (imageUrl) async {
+          try {
+            await _db
+                .collection("users")
+                .doc(_sharedPref.userId)
+                .set({"image": imageUrl}, SetOptions(merge: true));
+            await _authServ.getCurrentUser();
+            return const Right(None());
+          } catch (e) {
+            return Left(GameException(e.toString()));
+          }
+        },
+      );
+    } catch (e) {
+      return Left(GameException(e.toString()));
     }
-  }
+    }
 
   Future<Either<GameException, List<User>>> getFriendList(
       List<String> friends) async {
@@ -96,7 +100,7 @@ class UserRepository {
   Future<Either<GameException, None>> friendRequest(String friendId) async {
     try {
       await _db.collection("users").doc(friendId).update({
-        "friendRequest": FieldValue.arrayUnion([userId])
+        "friendsRequest": FieldValue.arrayUnion([_sharedPref.userId])
       });
       return const Right(None());
     } catch (e) {
@@ -107,8 +111,8 @@ class UserRepository {
   Future<Either<GameException, None>> removeFriendRequest(
       String friendId) async {
     try {
-      await _db.collection("users").doc(userId).update({
-        "friendRequest": FieldValue.arrayRemove([friendId])
+      await _db.collection("users").doc(_sharedPref.userId).update({
+        "friendsRequest": FieldValue.arrayRemove([friendId])
       });
       return const Right(None());
     } catch (e) {
@@ -120,7 +124,7 @@ class UserRepository {
       String friendId) async {
     try {
       await _db.collection("users").doc(friendId).update({
-        "friendRequest": FieldValue.arrayRemove([userId])
+        "friendsRequest": FieldValue.arrayRemove([_sharedPref.userId])
       });
       return const Right(None());
     } catch (e) {
@@ -130,12 +134,29 @@ class UserRepository {
 
   Future<Either<GameException, None>> addFriend(String friendId) async {
     try {
-      await _db.collection("users").doc(userId).update({
+      await _db.collection("users").doc(_sharedPref.userId).update({
         "friends": FieldValue.arrayUnion([friendId])
+      });
+      await _db.collection("users").doc(friendId).update({
+        "friends": FieldValue.arrayUnion([_sharedPref.userId])
       });
       final response = await removeFriendRequest(friendId);
       return response.fold(
           (l) => Left(GameException(l.message)), (r) => const Right(None()));
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> unfriend(String friendId) async {
+    try {
+      await _db.collection('users').doc(_sharedPref.userId).update({
+        "friends": FieldValue.arrayRemove([friendId])
+      });
+      await _db.collection("users").doc(friendId).update({
+        "friends": FieldValue.arrayRemove([_sharedPref.userId])
+      });
+      return const Right(None());
     } catch (e) {
       return Left(GameException(e.toString()));
     }
