@@ -1021,6 +1021,28 @@ class MockAuthenticationService extends _i1.Mock
 class MockSharedPreferenceService extends _i1.Mock
     implements _i13.SharedPreferenceService {
   @override
+  String get userId => (super.noSuchMethod(
+        Invocation.getter(#userId),
+        returnValue: _i6.dummyValue<String>(
+          this,
+          Invocation.getter(#userId),
+        ),
+        returnValueForMissingStub: _i6.dummyValue<String>(
+          this,
+          Invocation.getter(#userId),
+        ),
+      ) as String);
+
+  @override
+  set userId(String? _userId) => super.noSuchMethod(
+        Invocation.setter(
+          #userId,
+          _userId,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i8.Stream<_i12.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
         returnValue: _i8.Stream<_i12.User?>.empty(),
@@ -1036,16 +1058,6 @@ class MockSharedPreferenceService extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
-
-  @override
-  _i8.Future<String?> getUserId() => (super.noSuchMethod(
-        Invocation.method(
-          #getUserId,
-          [],
-        ),
-        returnValue: _i8.Future<String?>.value(),
-        returnValueForMissingStub: _i8.Future<String?>.value(),
-      ) as _i8.Future<String?>);
 
   @override
   _i8.Future<_i12.User?> getCurrentUser() => (super.noSuchMethod(

@@ -6,12 +6,18 @@ import 'package:steno_game/model/picture_topic.dart';
 class TopicRepository {
   final _db = FirebaseFirestore.instance;
 
-  Future<Either<GameException, List<PictureTopic>>> getTopics(String lessonId) async{
-    try{
-      final results = await _db.collection("lessons").doc(lessonId).collection("topics").get().then((value) => value.docs.map((e) => PictureTopic.fromJson(e.data())).toList());
+  Future<Either<GameException, List<PictureTopic>>> getTopics(
+      String lessonId) async {
+    try {
+      final results = await _db
+          .collection("lessons")
+          .doc(lessonId)
+          .collection("topics")
+          .get()
+          .then((value) =>
+              value.docs.map((e) => PictureTopic.fromJson(e.data())).toList());
       return Right(results);
-    }
-    catch(e) {
+    } catch (e) {
       return Left(GameException(e.toString()));
     }
   }

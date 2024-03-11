@@ -6,7 +6,10 @@ import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 
 class GamePictureTopic extends StatelessWidget {
   const GamePictureTopic(
-      {super.key, required this.image, required this.text, required this.description});
+      {super.key,
+      required this.image,
+      required this.text,
+      required this.description});
 
   final String image;
   final String text;
@@ -21,15 +24,18 @@ class GamePictureTopic extends StatelessWidget {
               boxShadow: [primaryShadow()],
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                  color: Colors.black, style: BorderStyle.solid, width: 2)
-          ),
+                  color: Colors.black, style: BorderStyle.solid, width: 2)),
           child: Column(
             children: [
               GameNetworkImage(path: image),
-              Text(text, style: const TextStyle(fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1,
-                  wordSpacing: 2),)
+              Text(
+                text,
+                style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1,
+                    wordSpacing: 2),
+              )
             ],
           ),
         ),
@@ -39,7 +45,11 @@ class GamePictureTopic extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(width: 2, style: BorderStyle.solid, color: Colors.black,),
+            border: Border.all(
+              width: 2,
+              style: BorderStyle.solid,
+              color: Colors.black,
+            ),
           ),
           child: Text(
             description,

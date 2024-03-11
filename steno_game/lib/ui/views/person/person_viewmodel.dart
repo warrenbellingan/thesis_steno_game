@@ -10,11 +10,9 @@ import '../../../services/authentication_service.dart';
 import '../../constants/game_png.dart';
 
 class PersonViewModel extends BaseViewModel {
-
   final _userRepo = locator<UserRepository>();
   final _bottomSheet = locator<BottomSheetService>();
   final _authServ = locator<AuthenticationService>();
-
 
   String viewedUserId;
   PersonViewModel(this.viewedUserId);
@@ -25,7 +23,7 @@ class PersonViewModel extends BaseViewModel {
   int relationship = 0;
   // 0 = not friends, 1 friends, 2 = requestedFriend,  3 = friendRequest
 
-  init() async{
+  init() async {
     setBusy(true);
     await getCurrentUser();
     await getViewedUser();
@@ -33,34 +31,32 @@ class PersonViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> getCurrentUser() async{
+  Future<void> getCurrentUser() async {
     final response = await _authServ.getCurrentUser();
     response.fold((l) => showBottomSheet(l.message), (userdata) {
       user = userdata;
     });
   }
 
-  Future<void> getViewedUser() async{
+  Future<void> getViewedUser() async {
     final response = await _userRepo.getUser(viewedUserId);
     response.fold((l) => showBottomSheet(l.message), (userData) {
       viewedUser = userData;
-      if(user.friends.contains(viewedUser.id)) {
+      if (user.friends.contains(viewedUser.id)) {
         relationship = 1;
-      }
-      else if(user.friendsRequest.contains(viewedUser.id)) {
+      } else if (user.friendsRequest.contains(viewedUser.id)) {
         relationship = 3;
-      }
-      else if(viewedUser.friendsRequest.contains(user.id)) {
+      } else if (viewedUser.friendsRequest.contains(user.id)) {
         relationship = 2;
-      }
-      else {
+      } else {
         relationship = 0;
       }
     });
   }
 
   ImageProvider getImage() {
-    if (viewedUser.image == null) return const AssetImage(GamePng.gameAvatarPath);
+    if (viewedUser.image == null)
+      return const AssetImage(GamePng.gameAvatarPath);
     return NetworkImage(viewedUser.image!);
   }
 
@@ -68,7 +64,6 @@ class PersonViewModel extends BaseViewModel {
     setBusy(true);
     final response = await _userRepo.addFriend(viewedUser.id);
     response.fold((l) => showBottomSheet(l.message), (r) => init());
-
   }
 
   Future<void> friendRequest() async {
@@ -81,15 +76,14 @@ class PersonViewModel extends BaseViewModel {
     setBusy(true);
     final response = await _userRepo.removeFriendRequest(viewedUser.id);
     response.fold((l) => showBottomSheet(l.message), (r) => init());
-
   }
 
   Future<void> cancelFriendRequest() async {
     setBusy(true);
     final response = await _userRepo.cancelFriendRequest(viewedUser.id);
     response.fold((l) => showBottomSheet(l.message), (r) => init());
-
   }
+
   Future<void> unfriend() async {
     setBusy(true);
     final response = await _userRepo.unfriend(viewedUser.id);
@@ -103,5 +97,4 @@ class PersonViewModel extends BaseViewModel {
       description: description,
     );
   }
-
 }

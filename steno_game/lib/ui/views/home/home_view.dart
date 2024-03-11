@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/views/menu/menu_view.dart';
 import '../../common/ui_helpers.dart';
 import '../../constants/game_color.dart';
 import '../../constants/game_ui_text.dart';
@@ -62,7 +63,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Expanded(
@@ -71,78 +72,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     physics: const AlwaysScrollableScrollPhysics(),
                     onPageChanged: viewModel.onPageChanged,
                     children: [
-                      SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            GameSearchTextField(),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 8),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 8),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                gradient: GameColor.primaryGradient,
-                                boxShadow: [primaryShadow()],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Practice Strokes',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w900,
-                                        letterSpacing: 1),
-                                  ),
-                                  Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                    size: 30,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 8),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 8),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                gradient: GameColor.primaryGradient,
-                                boxShadow: [primaryShadow()],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Practice Typing',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w900,
-                                        letterSpacing: 1),
-                                  ),
-                                  Icon(
-                                    Icons.keyboard,
-                                    color: Colors.white,
-                                    size: 30,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      MenuView(),
                       LessonsView(),
                       PlayView(),
                       AchievementView(),
@@ -175,10 +105,10 @@ class HomeView extends StackedView<HomeViewModel> {
                   child: NavigationBar(
                     backgroundColor: Colors.white,
                     height: 70,
-                    shadowColor: Color(0xFF948D8D),
+                    shadowColor: const Color(0xFF948D8D),
                     selectedIndex: viewModel.currentPageIndex,
                     onDestinationSelected: viewModel.onDestinationSelected,
-                    destinations: [
+                    destinations: const [
                       NavigationDestination(
                         icon: Icon(
                           Icons.home,

@@ -4,7 +4,7 @@ import 'package:steno_game/ui/constants/game_color.dart';
 
 class GameNetworkImage extends StatelessWidget {
   const GameNetworkImage(
-      {super.key, required this.path, this.width,  this.height});
+      {super.key, required this.path, this.width, this.height});
 
   final String path;
   final double? width;
@@ -23,7 +23,7 @@ class GameNetworkImage extends StatelessWidget {
           color: GameColor.primaryColor,
         ),
       ),
-      errorWidget: (context, url, error) =>  const Icon(
+      errorWidget: (context, url, error) => const Icon(
         Icons.error_outline_sharp,
         color: Colors.red,
       ),

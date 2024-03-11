@@ -21,7 +21,10 @@ class PeopleView extends StackedView<PeopleViewModel> {
   ) {
     return Column(
       children: [
-        const GameSearchTextField(),
+        GameSearchTextField(
+          controller: viewModel.searchController,
+          onClick: viewModel.searchUsers,
+        ),
         verticalSpaceSmall,
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -30,7 +33,7 @@ class PeopleView extends StackedView<PeopleViewModel> {
             children: [
               GameChip(
                 label: "All",
-                onClick: viewModel.loadUsers,
+                onClick: viewModel.loadAllUsers,
                 isSelected: viewModel.chipSelectedIndex == 0 ? true : false,
               ),
               horizontalSpaceSmall,
@@ -49,27 +52,28 @@ class PeopleView extends StackedView<PeopleViewModel> {
           ),
         ),
         verticalSpaceSmall,
-        SingleChildScrollView(
-          child: viewModel.isBusy
-              ? const GameLoading(
-                  label: "Getting users",
-                )
-              : viewModel.isEmptyUserList
-                  ? const GameEmpty()
-                  : ListView.builder(
-                      itemCount: viewModel.users.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var user = viewModel.users[index];
-                        return PeopleCard(
-                          name: user.name,
-                          level: user.level,
-                          image: user.image,
-                          onClick: () => viewModel.onClick(user.id),
-                        );
-                      },
-                    ),
-        ),
+        viewModel.isBusy
+            ? const GameLoading(
+                label: "Getting users",
+              )
+            : viewModel.isEmptyUserList
+                ? const GameEmpty()
+                : Expanded(
+                    child: ListView.builder(
+                        itemCount: viewModel.users.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var user = viewModel.users[index];
+                          return PeopleCard(
+                            name: user.name,
+                            level: user.level,
+                            image: user.image,
+                            onClick: () => user.id == viewModel.user.id
+                                ? viewModel.goToProfile()
+                                : viewModel.onClick(user.id),
+                          );
+                        }),
+                  ),
         verticalSpaceSmall,
       ],
     );

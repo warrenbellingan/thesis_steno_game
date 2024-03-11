@@ -14,8 +14,23 @@ class UserRepository {
   final _sharedPref = locator<SharedPreferenceService>();
   final _authServ = locator<AuthenticationService>();
 
-
-
+  Future<Either<GameException, List<User>>> searchUser(
+      String searchText) async {
+    try {
+      final results = await _db.collection('users').get().then((value) =>
+          value.docs.map((doc) => User.fromJson(doc.data())).toList());
+      if (searchText.isNotEmpty) {
+        return Right(results
+            .where((users) => users.name
+                .toLowerCase()
+                .contains(searchText.toString().toLowerCase()))
+            .toList());
+      }
+      return Right(results);
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
 
   Future<Either<GameException, List<User>>> getUsers() async {
     try {
@@ -37,11 +52,9 @@ class UserRepository {
   }
 
   Stream<User> streamUserFriends() {
-
     final result = _db.collection("users").doc(_sharedPref.userId).snapshots();
     return result.map((user) => User.fromJson(user.data()!));
   }
-
 
   Future<Either<GameException, None>> updateName(String name) async {
     try {
@@ -80,7 +93,7 @@ class UserRepository {
     } catch (e) {
       return Left(GameException(e.toString()));
     }
-    }
+  }
 
   Future<Either<GameException, List<User>>> getFriendList(
       List<String> friends) async {

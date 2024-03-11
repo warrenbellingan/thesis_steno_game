@@ -5,7 +5,11 @@ import '../constants/game_color.dart';
 typedef OnClick = Function();
 
 class GameChip extends StatelessWidget {
-  const GameChip({super.key, required this.label, required this.onClick, required this.isSelected});
+  const GameChip(
+      {super.key,
+      required this.label,
+      required this.onClick,
+      required this.isSelected});
 
   final String label;
   final OnClick onClick;

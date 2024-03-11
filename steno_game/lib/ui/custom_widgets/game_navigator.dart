@@ -4,8 +4,14 @@ import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 typedef OnClick = Function();
+
 class GameNavigator extends StatelessWidget {
-  const GameNavigator({super.key, required this.previousClick, required this.nextClick, required this.currentPage, required this.allPage});
+  const GameNavigator(
+      {super.key,
+      required this.previousClick,
+      required this.nextClick,
+      required this.currentPage,
+      required this.allPage});
 
   final OnClick previousClick;
   final OnClick nextClick;
@@ -14,7 +20,7 @@ class GameNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 3),
       margin: const EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
@@ -29,8 +35,8 @@ class GameNavigator extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               iconSize: 60,
               onPressed: previousClick,
-              icon: const Icon(
-                  color: GameColor.primaryColor, Icons.arrow_left)),
+              icon:
+                  const Icon(color: GameColor.primaryColor, Icons.arrow_left)),
           Text(
             "$currentPage/$allPage",
             style: TextStyle(
@@ -43,8 +49,8 @@ class GameNavigator extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               iconSize: 60,
               onPressed: nextClick,
-              icon: const Icon(
-                  color: GameColor.primaryColor, Icons.arrow_right)),
+              icon:
+                  const Icon(color: GameColor.primaryColor, Icons.arrow_right)),
         ],
       ),
     );

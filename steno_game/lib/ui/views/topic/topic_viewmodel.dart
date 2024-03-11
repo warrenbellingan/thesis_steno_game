@@ -36,7 +36,7 @@ class TopicViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> getStroke(String strokeId) async{
+  Future<void> getStroke(String strokeId) async {
     String strokeId = topics[currentIndex].stroke;
     setBusy(true);
     final response = await _strokeRepo.getStroke(strokeId);
@@ -45,7 +45,6 @@ class TopicViewModel extends BaseViewModel {
     });
     setBusy(false);
   }
-
 
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
@@ -56,10 +55,9 @@ class TopicViewModel extends BaseViewModel {
   }
 
   void changePage(int index) {
-    if(index < 0) {
+    if (index < 0) {
       return;
-    }
-    else if(index > topics.length - 1) {
+    } else if (index > topics.length - 1) {
       return;
     }
 

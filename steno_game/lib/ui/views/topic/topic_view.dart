@@ -44,13 +44,16 @@ class TopicView extends StackedView<TopicViewModel> {
                       child: GamePictureTopic(
                         image: viewModel.stroke.strokeImage,
                         text: viewModel.stroke.text,
-                        description: viewModel.topics[viewModel.currentIndex].description,
+                        description: viewModel
+                            .topics[viewModel.currentIndex].description,
                       ),
                     ),
                   ),
                   GameNavigator(
-                    previousClick:() => viewModel.changePage(viewModel.currentIndex - 1),
-                    nextClick: () => viewModel.changePage(viewModel.currentIndex + 1),
+                    previousClick: () =>
+                        viewModel.changePage(viewModel.currentIndex - 1),
+                    nextClick: () =>
+                        viewModel.changePage(viewModel.currentIndex + 1),
                     currentPage: viewModel.currentIndex + 1,
                     allPage: viewModel.topics.length,
                   )

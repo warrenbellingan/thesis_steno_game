@@ -14,9 +14,9 @@ class ProfileCard extends StatelessWidget {
     return Container(
       height: 90,
       width: 140,
-      margin: EdgeInsets.symmetric(horizontal: 3, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 3, vertical: 4),
       decoration: BoxDecoration(
-        gradient: GameColor.secondaryGradient,
+        color: GameColor.primaryColor,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [primaryShadow()],
       ),
@@ -26,8 +26,8 @@ class ProfileCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white60,
+            style: const TextStyle(
+              color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w700,
               letterSpacing: 2,
@@ -36,8 +36,8 @@ class ProfileCard extends StatelessWidget {
           Text(
             stats,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: GameColor.primaryBackgroundColor,
+            style: const TextStyle(
+              color: GameColor.secondaryColor,
               fontSize: 24,
               fontWeight: FontWeight.w600,
               letterSpacing: 1.5,

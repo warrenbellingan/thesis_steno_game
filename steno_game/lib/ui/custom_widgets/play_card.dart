@@ -4,6 +4,7 @@ import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 typedef OnClick = Function();
+
 class PlayCard extends StatelessWidget {
   const PlayCard({super.key, required this.label, required this.onClick});
 

@@ -37,6 +37,7 @@ import 'package:steno_game/ui/dialogs/update_name/update_name_dialog.dart';
 import 'package:steno_game/ui/dialogs/update_email/update_email_dialog.dart';
 import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dart';
 import 'package:steno_game/ui/views/topic/topic_view.dart';
+import 'package:steno_game/ui/views/menu/menu_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -63,6 +64,7 @@ import 'package:steno_game/ui/views/topic/topic_view.dart';
     MaterialRoute(page: SpeedTypingView),
     MaterialRoute(page: PersonView),
     MaterialRoute(page: TopicView),
+    MaterialRoute(page: MenuView),
 // @stacked-route
   ],
   dependencies: [

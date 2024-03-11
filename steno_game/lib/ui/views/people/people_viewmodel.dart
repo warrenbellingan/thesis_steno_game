@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
@@ -23,90 +24,95 @@ class PeopleViewModel extends BaseViewModel {
 
   bool isEmptyUserList = false;
   int chipSelectedIndex = 0;
-
+  TextEditingController searchController = TextEditingController();
 
   init() async {
     setBusy(true);
     final getUser = await _authServ.getCurrentUser();
-    getUser.fold((l) => showBottomSheet(l.message), (currentUser) async{
+    getUser.fold((l) => showBottomSheet(l.message), (currentUser) async {
       user = currentUser;
-      print("Get current user name :${user.name}");
       await streamSubscription?.cancel();
-      streamSubscription = _userRep.streamUserFriends().listen((userData) async{
+      streamSubscription =
+          _userRep.streamUserFriends().listen((userData) async {
         user = userData;
-        print("Get stream user name :${user.name}");
-        if(chipSelectedIndex == 1) {
+        if (chipSelectedIndex == 1) {
           await loadFriends();
-        }
-        else if(chipSelectedIndex == 2) {
+        } else if (chipSelectedIndex == 2) {
           await loadFriendsRequest();
         }
         rebuildUi();
       });
     });
-    await loadUsers();
+    await loadAllUsers();
     setBusy(false);
+  }
+
+  Future<void> loadAllUsers() async {
+    searchController.clear();
+    await searchUsers();
+    chipSelectedIndex = 0;
   }
 
   void onClick(String id) {
     _navigationService.navigateToPersonView(userId: id);
   }
 
-  Future<void> loadUsers() async {
+  void goToProfile() {
+    _navigationService.navigateToProfileView();
+  }
+
+  Future<void> searchUsers() async {
     setBusy(true);
-    final response = await _userRep.getUsers();
+    final response = await _userRep.searchUser(searchController.text);
     response.fold((l) => showBottomSheet(l.message), (usersData) {
       users = usersData;
+      users.shuffle();
     });
-    if(users.isEmpty) {
+    if (users.isEmpty) {
       isEmptyUserList = true;
-    }
-    else {
+    } else {
       isEmptyUserList = false;
     }
-    chipSelectedIndex = 0;
     setBusy(false);
+    chipSelectedIndex = 5;
     rebuildUi();
   }
-  
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: "Notice",
-      description: description
-    );
+        variant: BottomSheetType.notice,
+        title: "Notice",
+        description: description);
   }
 
   Future<void> loadFriends() async {
     setBusy(true);
     chipSelectedIndex = 1;
-    if(user.friends.isEmpty) {
+    if (user.friends.isEmpty) {
       isEmptyUserList = true;
       rebuildUi();
       setBusy(false);
       return;
-    }
-    else {
+    } else {
       isEmptyUserList = false;
     }
     final response = await _userRep.getFriendList(user.friends);
-
     response.fold((l) => showBottomSheet(l.message), (usersData) {
       users = usersData;
       rebuildUi();
     });
     setBusy(false);
   }
+
   Future<void> loadFriendsRequest() async {
     setBusy(true);
     chipSelectedIndex = 2;
-    if(user.friendsRequest.isEmpty) {
+    if (user.friendsRequest.isEmpty) {
       isEmptyUserList = true;
       rebuildUi();
       setBusy(false);
       return;
-    }
-    else {
+    } else {
       isEmptyUserList = false;
     }
     final response = await _userRep.getFriendList(user.friendsRequest);
@@ -120,7 +126,6 @@ class PeopleViewModel extends BaseViewModel {
   @override
   void dispose() {
     streamSubscription?.cancel();
-    print("Stream cancel");
     super.dispose();
   }
 }

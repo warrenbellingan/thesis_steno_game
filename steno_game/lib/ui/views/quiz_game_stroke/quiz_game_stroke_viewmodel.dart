@@ -20,17 +20,17 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   Future<void> getQuiz() async {
     setBusy(true);
     final response = await _picQuizRepo.getQuiz("5H4IYRZnMrU7yZu63n5b");
-    response.fold((l) => print(l.message), (data) async{
+    response.fold((l) => print(l.message), (data) async {
       quiz = data;
     });
     setBusy(false);
   }
 
-  Future<void> getStroke(String id) async{
+  Future<void> getStroke(String id) async {
     setBusy(true);
     final response = await _strokeRepo.getStroke(id);
     response.fold((l) => print(l.message), (data) {
-      if(data == null) {
+      if (data == null) {
         print("null");
       }
       stroke = data;
@@ -39,10 +39,9 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   }
 
   void choiceClick(String choiceAnswer) {
-    if(choiceAnswer.trim() == quiz.answer.trim()) {
+    if (choiceAnswer.trim() == quiz.answer.trim()) {
       print("Correct");
-    }
-    else {
+    } else {
       print("Wrong");
     }
   }

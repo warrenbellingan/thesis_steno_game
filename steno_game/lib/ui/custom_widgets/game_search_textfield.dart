@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../common/ui_helpers.dart';
 
+typedef OnClick = Function();
+
 class GameSearchTextField extends StatelessWidget {
   const GameSearchTextField({
     super.key,
+    required this.controller,
+    required this.onClick,
   });
+
+  final TextEditingController controller;
+  final OnClick onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +25,14 @@ class GameSearchTextField extends StatelessWidget {
       child: TextField(
         cursorColor: Colors.black,
         keyboardType: TextInputType.name,
+        controller: controller,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
           hintText: 'Search',
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               style: BorderStyle.solid,
               width: 2,
               color: Colors.black,
@@ -32,7 +40,7 @@ class GameSearchTextField extends StatelessWidget {
           ),
           suffixIcon: IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: onClick,
           ),
           suffixIconColor: Colors.black,
           border: OutlineInputBorder(

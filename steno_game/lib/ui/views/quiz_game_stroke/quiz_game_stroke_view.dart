@@ -27,22 +27,25 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
                 InGameBar(),
                 verticalSpaceMedium,
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2, style: BorderStyle.solid,)
-                  ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                      color: Colors.black,
+                      width: 2,
+                      style: BorderStyle.solid,
+                    )),
                     child:
                         GameNetworkImage(path: viewModel.stroke.strokeImage)),
                 verticalSpaceMedium,
                 ListView.builder(
-                  itemCount: viewModel.quiz.choices.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    String choiceText = viewModel.quiz.choices[index];
-                    return GameQuizChoice(
-                      choice: choiceText, onClick: () => viewModel.choiceClick(choiceText),
-                    );
-                }
-                ),
+                    itemCount: viewModel.quiz.choices.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      String choiceText = viewModel.quiz.choices[index];
+                      return GameQuizChoice(
+                        choice: choiceText,
+                        onClick: () => viewModel.choiceClick(choiceText),
+                      );
+                    }),
               ],
             ),
     ));

@@ -101,9 +101,12 @@ class LessonsView extends StackedView<LessonsViewModel> {
                   itemCount: viewModel.lessons.length,
                   itemBuilder: (context, index) {
                     var item = viewModel.lessons[index];
-                    return LessonMainCard(label: item.title, onClick: (){
-                      viewModel.lessonClick(item);
-                    },);
+                    return LessonMainCard(
+                      label: item.title,
+                      onClick: () {
+                        viewModel.lessonClick(item);
+                      },
+                    );
                   },
                 ),
         ],

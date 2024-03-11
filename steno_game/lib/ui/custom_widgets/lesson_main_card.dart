@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../common/ui_helpers.dart';
 
 typedef OnClick = Function();
+
 class LessonMainCard extends StatelessWidget {
   const LessonMainCard({super.key, required this.label, required this.onClick});
 
