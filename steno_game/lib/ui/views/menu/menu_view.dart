@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 
 import '../../common/ui_helpers.dart';
 import '../../constants/game_color.dart';
-import '../../custom_widgets/game_search_textfield.dart';
 import 'menu_viewmodel.dart';
 
 class MenuView extends StackedView<MenuViewModel> {
@@ -19,24 +18,94 @@ class MenuView extends StackedView<MenuViewModel> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-
-            const SizedBox(
-              height: 24,
+            verticalSpaceSmall,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  onTap: viewModel.goToSearchStrokes,
+                  child: AbsorbPointer(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: GameColor.secondaryBackgroundColor,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [primaryShadow()]
+                      ),
+                      child: const Row(
+                        children: [
+                          Text(
+                            "Strokes",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: GameColor.primaryBackgroundColor,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                          horizontalSpaceSmall,
+                          Icon(
+                            Icons.search,
+                            size: 35,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: viewModel.goToSearchTyping,
+                  child: AbsorbPointer(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: GameColor.secondaryBackgroundColor,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [primaryShadow()]
+                      ),
+                      child: const Row(
+                        children: [
+                          Text(
+                            "Typing",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: GameColor.primaryBackgroundColor,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                          horizontalSpaceSmall,
+                          Icon(
+                            Icons.search,
+                            size: 35,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            verticalSpaceMedium,
             Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: 8, horizontal: 8),
-              padding: EdgeInsets.symmetric(
-                  vertical: 8, horizontal: 8),
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 gradient: GameColor.primaryGradient,
                 boxShadow: [primaryShadow()],
               ),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Practice Strokes',
@@ -55,19 +124,16 @@ class MenuView extends StackedView<MenuViewModel> {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: 8, horizontal: 8),
-              padding: EdgeInsets.symmetric(
-                  vertical: 8, horizontal: 8),
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 gradient: GameColor.primaryGradient,
                 boxShadow: [primaryShadow()],
               ),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Practice Typing',

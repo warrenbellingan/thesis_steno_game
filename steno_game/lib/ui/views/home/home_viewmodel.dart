@@ -23,19 +23,6 @@ class HomeViewModel extends BaseViewModel {
   late User user;
 
 
-  // String keyText = '';
-  // FocusNode focusNode = FocusNode();
-  // void onKeyReceived(RawKeyEvent event) {
-  //   final keyLabel = event.character!;
-  //   if (keyLabel.isNotEmpty) {
-  //     keyText = keyLabel;
-  //     rebuildUi();
-  //   }
-  // }
-  // bntPressed(BuildContext context) {
-  //   FocusScope.of(context).requestFocus(focusNode);
-  // }
-
   init() async {
     setBusy(true);
     user = (await _sharedPref.getCurrentUser())!;
