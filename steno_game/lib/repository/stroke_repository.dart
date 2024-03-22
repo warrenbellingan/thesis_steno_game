@@ -1,16 +1,82 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
+import 'package:steno_game/app/app.locator.dart';
 import 'package:steno_game/exception/game_exception.dart';
 import 'package:steno_game/model/steno_stroke.dart';
+import 'package:steno_game/services/image_service.dart';
 
 class StrokeRepository {
   final _db = FirebaseFirestore.instance;
+  final _imageService = locator<ImageService>();
 
   Future<Either<GameException, StenoStroke>> getStroke(String strokeId) async {
     try {
       final stroke = await _db.collection('strokes').doc(strokeId).get();
       StenoStroke stenoStroke = StenoStroke.fromJson(stroke.data()!);
       return Right(stenoStroke);
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> addStroke(
+      GlobalKey painterKey, String text) async {
+    try {
+      RenderRepaintBoundary boundary = painterKey.currentContext!
+          .findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      final Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+      Directory tempDir = await Directory.systemTemp.createTemp();
+      String fileName = 'image_${DateTime.now().millisecondsSinceEpoch}.png';
+      String filePath = '${tempDir.path}/$fileName';
+
+      File imageFile = File(filePath);
+      await imageFile.writeAsBytes(pngBytes);
+
+      final response = await _uploadImage(imageFile, fileName);
+      return response.fold(
+        (l) => Left(GameException(l.message)),
+        (imageUrl) => _saveStroke(text, imageUrl),
+      );
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, String>> _uploadImage(
+      File imageFile, String fileName) async {
+    try {
+      final path = "images/strokes/$fileName";
+      final response = await _imageService.uploadImage(imageFile, path);
+      return response.fold(
+        (l) => Left(
+          GameException(l.message),
+        ),
+        (imageUrl) => Right(imageUrl),
+      );
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> _saveStroke(
+      String text, String imageUrl) async {
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch.toString();
+      StenoStroke stroke = StenoStroke(
+          id: id,
+          text: text,
+          strokeImage: imageUrl,
+          status: 0);
+      await _db.collection("strokes").doc(id).set(stroke.toJson());
+      return const Right(None());
     } catch (e) {
       return Left(GameException(e.toString()));
     }

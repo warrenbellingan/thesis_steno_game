@@ -5,11 +5,12 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/cupertino.dart' as _i28;
 import 'package:flutter/material.dart' as _i27;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i29;
-import 'package:steno_game/model/lesson.dart' as _i28;
+import 'package:stacked_services/stacked_services.dart' as _i30;
+import 'package:steno_game/model/lesson.dart' as _i29;
 import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
@@ -400,7 +401,7 @@ class PersonViewArguments {
 
   final String userId;
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   @override
   String toString() {
@@ -425,9 +426,9 @@ class TopicViewArguments {
     this.key,
   });
 
-  final _i28.Lesson lesson;
+  final _i29.Lesson lesson;
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   @override
   String toString() {
@@ -446,7 +447,7 @@ class TopicViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i29.NavigationService {
+extension NavigatorStateExtension on _i30.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -729,7 +730,7 @@ extension NavigatorStateExtension on _i29.NavigationService {
 
   Future<dynamic> navigateToPersonView({
     required String userId,
-    _i27.Key? key,
+    _i28.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -745,8 +746,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToTopicView({
-    required _i28.Lesson lesson,
-    _i27.Key? key,
+    required _i29.Lesson lesson,
+    _i28.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1085,7 +1086,7 @@ extension NavigatorStateExtension on _i29.NavigationService {
 
   Future<dynamic> replaceWithPersonView({
     required String userId,
-    _i27.Key? key,
+    _i28.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1101,8 +1102,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithTopicView({
-    required _i28.Lesson lesson,
-    _i27.Key? key,
+    required _i29.Lesson lesson,
+    _i28.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

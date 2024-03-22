@@ -19,6 +19,7 @@ class QuizGameStrokeViewModel extends BaseViewModel {
 
   Future<void> getQuiz() async {
     setBusy(true);
+    print("Get Quiz");
     final response = await _picQuizRepo.getQuiz("5H4IYRZnMrU7yZu63n5b");
     response.fold((l) => print(l.message), (data) async {
       quiz = data;
@@ -28,6 +29,8 @@ class QuizGameStrokeViewModel extends BaseViewModel {
 
   Future<void> getStroke(String id) async {
     setBusy(true);
+
+    print("Get Stroke");
     final response = await _strokeRepo.getStroke(id);
     response.fold((l) => print(l.message), (data) {
       if (data == null) {

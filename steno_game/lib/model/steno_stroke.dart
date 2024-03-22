@@ -10,6 +10,7 @@ class StenoStroke with _$StenoStroke {
     required String id,
     required String text,
     required String strokeImage,
+    required int status,
   }) = _StenoStroke;
 
   factory StenoStroke.fromJson(Map<String, dynamic> json) =>

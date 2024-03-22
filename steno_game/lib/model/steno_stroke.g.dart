@@ -11,6 +11,7 @@ _$StenoStrokeImpl _$$StenoStrokeImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       text: json['text'] as String,
       strokeImage: json['strokeImage'] as String,
+      status: json['status'] as int,
     );
 
 Map<String, dynamic> _$$StenoStrokeImplToJson(_$StenoStrokeImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$StenoStrokeImplToJson(_$StenoStrokeImpl instance) =>
       'id': instance.id,
       'text': instance.text,
       'strokeImage': instance.strokeImage,
+      'status': instance.status,
     };
