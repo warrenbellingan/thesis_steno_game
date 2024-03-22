@@ -24,7 +24,7 @@ class TopicViewModel extends BaseViewModel {
 
   void init() async {
     await getTopics();
-    await getStroke(topics[currentIndex].stroke);
+    await getStroke();
   }
 
   Future<void> getTopics() async {
@@ -36,7 +36,7 @@ class TopicViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> getStroke(String strokeId) async {
+  Future<void> getStroke() async {
     String strokeId = topics[currentIndex].stroke;
     setBusy(true);
     final response = await _strokeRepo.getStroke(strokeId);
@@ -54,14 +54,14 @@ class TopicViewModel extends BaseViewModel {
     );
   }
 
-  void changePage(int index) {
+  void changePage(int index) async {
     if (index < 0) {
       return;
     } else if (index > topics.length - 1) {
       return;
     }
-
     currentIndex = index;
+    await getStroke();
     rebuildUi();
   }
 }

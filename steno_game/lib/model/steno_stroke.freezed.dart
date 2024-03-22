@@ -23,6 +23,7 @@ mixin _$StenoStroke {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get strokeImage => throw _privateConstructorUsedError;
+  int get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $StenoStrokeCopyWith<$Res> {
           StenoStroke value, $Res Function(StenoStroke) then) =
       _$StenoStrokeCopyWithImpl<$Res, StenoStroke>;
   @useResult
-  $Res call({String id, String text, String strokeImage});
+  $Res call({String id, String text, String strokeImage, int status});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$StenoStrokeCopyWithImpl<$Res, $Val extends StenoStroke>
     Object? id = null,
     Object? text = null,
     Object? strokeImage = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,6 +71,10 @@ class _$StenoStrokeCopyWithImpl<$Res, $Val extends StenoStroke>
           ? _value.strokeImage
           : strokeImage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$StenoStrokeImplCopyWith<$Res>
       __$$StenoStrokeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String strokeImage});
+  $Res call({String id, String text, String strokeImage, int status});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$StenoStrokeImplCopyWithImpl<$Res>
     Object? id = null,
     Object? text = null,
     Object? strokeImage = null,
+    Object? status = null,
   }) {
     return _then(_$StenoStrokeImpl(
       id: null == id
@@ -112,6 +119,10 @@ class __$$StenoStrokeImplCopyWithImpl<$Res>
           ? _value.strokeImage
           : strokeImage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -120,7 +131,10 @@ class __$$StenoStrokeImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StenoStrokeImpl implements _StenoStroke {
   const _$StenoStrokeImpl(
-      {required this.id, required this.text, required this.strokeImage});
+      {required this.id,
+      required this.text,
+      required this.strokeImage,
+      required this.status});
 
   factory _$StenoStrokeImpl.fromJson(Map<String, dynamic> json) =>
       _$$StenoStrokeImplFromJson(json);
@@ -131,10 +145,12 @@ class _$StenoStrokeImpl implements _StenoStroke {
   final String text;
   @override
   final String strokeImage;
+  @override
+  final int status;
 
   @override
   String toString() {
-    return 'StenoStroke(id: $id, text: $text, strokeImage: $strokeImage)';
+    return 'StenoStroke(id: $id, text: $text, strokeImage: $strokeImage, status: $status)';
   }
 
   @override
@@ -145,12 +161,13 @@ class _$StenoStrokeImpl implements _StenoStroke {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.strokeImage, strokeImage) ||
-                other.strokeImage == strokeImage));
+                other.strokeImage == strokeImage) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, strokeImage);
+  int get hashCode => Object.hash(runtimeType, id, text, strokeImage, status);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +187,8 @@ abstract class _StenoStroke implements StenoStroke {
   const factory _StenoStroke(
       {required final String id,
       required final String text,
-      required final String strokeImage}) = _$StenoStrokeImpl;
+      required final String strokeImage,
+      required final int status}) = _$StenoStrokeImpl;
 
   factory _StenoStroke.fromJson(Map<String, dynamic> json) =
       _$StenoStrokeImpl.fromJson;
@@ -181,6 +199,8 @@ abstract class _StenoStroke implements StenoStroke {
   String get text;
   @override
   String get strokeImage;
+  @override
+  int get status;
   @override
   @JsonKey(ignore: true)
   _$$StenoStrokeImplCopyWith<_$StenoStrokeImpl> get copyWith =>

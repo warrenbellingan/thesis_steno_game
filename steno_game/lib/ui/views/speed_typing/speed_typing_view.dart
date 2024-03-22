@@ -56,7 +56,7 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
                         ),
                       ),
                       child: Text(
-                        viewModel.keyText,
+                        viewModel.words[viewModel.currentIndex],
                         style: const TextStyle(
                           fontSize: 20,
                           wordSpacing: 2,
@@ -74,7 +74,6 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
         ),
       ),
     );
-
   }
 
   @override
@@ -82,7 +81,4 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
     BuildContext context,
   ) =>
       SpeedTypingViewModel(context);
-
-
-
 }

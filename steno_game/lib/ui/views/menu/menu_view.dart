@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:steno_game/model/user.dart';
+import 'package:steno_game/ui/custom_widgets/menu_card.dart';
 import '../../common/ui_helpers.dart';
 import '../../constants/game_color.dart';
 import 'menu_viewmodel.dart';
 
 class MenuView extends StackedView<MenuViewModel> {
-  const MenuView({Key? key}) : super(key: key);
+  const MenuView(this.user, {Key? key}) : super(key: key);
+  final User user;
 
   @override
   Widget builder(
@@ -17,140 +19,55 @@ class MenuView extends StackedView<MenuViewModel> {
     return SingleChildScrollView(
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            verticalSpaceSmall,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: viewModel.goToSearchStrokes,
-                  child: AbsorbPointer(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
+            InkWell(
+              onTap: viewModel.goToSearchSteno,
+              child: AbsorbPointer(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  decoration: BoxDecoration(
+                      color: GameColor.secondaryBackgroundColor,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [primaryShadow()]),
+                  child: const Row(
+                    children: [
+                      Text(
+                        "Steno",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: GameColor.primaryBackgroundColor,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.5,
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        color: GameColor.secondaryBackgroundColor,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [primaryShadow()]
+                      horizontalSpaceSmall,
+                      Icon(
+                        Icons.search,
+                        size: 35,
+                        color: Colors.white,
                       ),
-                      child: const Row(
-                        children: [
-                          Text(
-                            "Strokes",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: GameColor.primaryBackgroundColor,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                          horizontalSpaceSmall,
-                          Icon(
-                            Icons.search,
-                            size: 35,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
+                    ],
                   ),
                 ),
-                InkWell(
-                  onTap: viewModel.goToSearchTyping,
-                  child: AbsorbPointer(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: GameColor.secondaryBackgroundColor,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [primaryShadow()]
-                      ),
-                      child: const Row(
-                        children: [
-                          Text(
-                            "Typing",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: GameColor.primaryBackgroundColor,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                          horizontalSpaceSmall,
-                          Icon(
-                            Icons.search,
-                            size: 35,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            verticalSpaceMedium,
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: GameColor.primaryGradient,
-                boxShadow: [primaryShadow()],
               ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            verticalSpaceTiny,
+            if (viewModel.isStudent())
+              Column(
                 children: [
-                  Text(
-                    'Practice Strokes',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1),
-                  ),
-                  Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                    size: 30,
-                  )
+                  MenuCard(text: "Practice Strokes", onClick: (){}, iconData: Icons.edit),
+                  MenuCard(text: "Practice Typing", onClick: (){}, iconData: Icons.keyboard),
                 ],
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: GameColor.primaryGradient,
-                boxShadow: [primaryShadow()],
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Practice Typing',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1),
-                  ),
-                  Icon(
-                    Icons.keyboard,
-                    color: Colors.white,
-                    size: 30,
-                  )
-                ],
-              ),
-            ),
+            if (!(viewModel.isStudent()))
+            MenuCard(text: "Host Stroke Game", onClick: (){}, iconData: Icons.play_circle),
+
           ],
         ),
       ),
@@ -161,5 +78,5 @@ class MenuView extends StackedView<MenuViewModel> {
   MenuViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      MenuViewModel();
+      MenuViewModel(user);
 }

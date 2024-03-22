@@ -22,7 +22,6 @@ class HomeViewModel extends BaseViewModel {
 
   late User user;
 
-
   init() async {
     setBusy(true);
     user = (await _sharedPref.getCurrentUser())!;
@@ -34,6 +33,10 @@ class HomeViewModel extends BaseViewModel {
       }
     });
     setBusy(false);
+  }
+
+  bool isStudent() {
+    return user.role == "Student";
   }
 
   void onPageChanged(int index) {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'search_stroke_viewmodel.dart';
+import 'search_steno_viewmodel.dart';
 
-class SearchStrokeView extends StackedView<SearchStrokeViewModel> {
-  const SearchStrokeView({Key? key}) : super(key: key);
+class SearchStenoView extends StackedView<SearchStenoViewModel> {
+  const SearchStenoView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    SearchStrokeViewModel viewModel,
+    SearchStenoViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -21,8 +21,8 @@ class SearchStrokeView extends StackedView<SearchStrokeViewModel> {
   }
 
   @override
-  SearchStrokeViewModel viewModelBuilder(
+  SearchStenoViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      SearchStrokeViewModel();
+      SearchStenoViewModel();
 }

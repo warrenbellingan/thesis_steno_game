@@ -71,8 +71,7 @@ class UserRepository {
 
   Future<Either<GameException, None>> uploadProfilePicture(
       File imageFile) async {
-    String path = "images/profiles/${_sharedPref.userId}";
-
+    String path = "images/strokes/${_sharedPref.userId}";
     try {
       final response = await _imageService.uploadImage(imageFile, path);
       return response.fold(

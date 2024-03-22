@@ -230,35 +230,36 @@ class PersonView extends StackedView<PersonViewModel> {
                                   ],
                                 ),
                   verticalSpaceMedium,
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ProfileCard(
-                              title: "Score",
-                              stats: viewModel.viewedUser.score.toString()),
-                          ProfileCard(
-                              title: "Typing Speed",
-                              stats:
-                                  "${viewModel.viewedUser.typingSpeed.toString()}wpm"),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ProfileCard(
-                              title: "Achievements",
-                              stats: viewModel.viewedUser.achievements.length
-                                  .toString()),
-                          ProfileCard(
-                              title: "Typing Accuracy",
-                              stats:
-                                  "${viewModel.viewedUser.typingAccuracy.toString()}%"),
-                        ],
-                      ),
-                    ],
-                  ),
+                  if (viewModel.isStudent())
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ProfileCard(
+                                title: "Score",
+                                stats: viewModel.viewedUser.score.toString()),
+                            ProfileCard(
+                                title: "Typing Speed",
+                                stats:
+                                    "${viewModel.viewedUser.typingSpeed.toString()}wpm"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ProfileCard(
+                                title: "Achievements",
+                                stats: viewModel.viewedUser.achievements.length
+                                    .toString()),
+                            ProfileCard(
+                                title: "Typing Accuracy",
+                                stats:
+                                    "${viewModel.viewedUser.typingAccuracy.toString()}%"),
+                          ],
+                        ),
+                      ],
+                    ),
                 ],
               ),
       ),

@@ -4,7 +4,7 @@ import 'package:steno_game/app/app.locator.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
-  group('SearchStenoTypingViewModel Tests -', () {
+  group('SearchStenoViewModel Tests -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
   });

@@ -6,7 +6,6 @@ import '../../constants/game_color.dart';
 import '../../constants/game_ui_text.dart';
 import '../../custom_widgets/game_body.dart';
 import '../../custom_widgets/game_loading.dart';
-import '../../custom_widgets/game_search_textfield.dart';
 import '../../custom_widgets/player_profile.dart';
 import '../achievement/achievement_view.dart';
 import '../lessons/lessons_view.dart';
@@ -25,13 +24,14 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     return GameBody(
       body: viewModel.isBusy
-          ? GameLoading(
+          ? const GameLoading(
               label: "Getting User",
             )
           : Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.white,
@@ -50,6 +50,7 @@ class HomeView extends StackedView<HomeViewModel> {
                           imagePath: viewModel.user.image,
                         ),
                       ),
+                      if(viewModel.isStudent())
                       Text(
                         "Score: ${viewModel.user.score.toString()} ",
                         style: const TextStyle(
@@ -72,11 +73,11 @@ class HomeView extends StackedView<HomeViewModel> {
                     physics: const AlwaysScrollableScrollPhysics(),
                     onPageChanged: viewModel.onPageChanged,
                     children: [
-                      MenuView(),
-                      LessonsView(),
-                      PlayView(),
-                      AchievementView(),
-                      PeopleView(),
+                      MenuView(viewModel.user),
+                      const LessonsView(),
+                      if (viewModel.isStudent()) const PlayView(),
+                      if (viewModel.isStudent()) const AchievementView(),
+                      const PeopleView(),
                     ],
                   ),
                 ),
@@ -108,8 +109,8 @@ class HomeView extends StackedView<HomeViewModel> {
                     shadowColor: const Color(0xFF948D8D),
                     selectedIndex: viewModel.currentPageIndex,
                     onDestinationSelected: viewModel.onDestinationSelected,
-                    destinations: const [
-                      NavigationDestination(
+                    destinations: [
+                      const NavigationDestination(
                         icon: Icon(
                           Icons.home,
                           size: 25,
@@ -121,7 +122,7 @@ class HomeView extends StackedView<HomeViewModel> {
                         ),
                         label: GameUIText.menuText,
                       ),
-                      NavigationDestination(
+                      const NavigationDestination(
                         icon: Icon(
                           Icons.play_lesson_rounded,
                           size: 25,
@@ -133,31 +134,33 @@ class HomeView extends StackedView<HomeViewModel> {
                         ),
                         label: GameUIText.lessonText,
                       ),
-                      NavigationDestination(
-                        icon: Icon(
-                          Icons.play_circle,
-                          size: 25,
+                      if (viewModel.isStudent())
+                        const NavigationDestination(
+                          icon: Icon(
+                            Icons.play_circle,
+                            size: 25,
+                          ),
+                          selectedIcon: Icon(
+                            Icons.play_circle,
+                            color: GameColor.primaryColor,
+                            size: 30,
+                          ),
+                          label: GameUIText.playText,
                         ),
-                        selectedIcon: Icon(
-                          Icons.play_circle,
-                          color: GameColor.primaryColor,
-                          size: 30,
+                      if (viewModel.isStudent())
+                        const NavigationDestination(
+                          icon: Icon(
+                            Icons.badge_rounded,
+                            size: 25,
+                          ),
+                          selectedIcon: Icon(
+                            Icons.badge_rounded,
+                            color: GameColor.primaryColor,
+                            size: 30,
+                          ),
+                          label: GameUIText.achievementText,
                         ),
-                        label: GameUIText.playText,
-                      ),
-                      NavigationDestination(
-                        icon: Icon(
-                          Icons.badge_rounded,
-                          size: 25,
-                        ),
-                        selectedIcon: Icon(
-                          Icons.badge_rounded,
-                          color: GameColor.primaryColor,
-                          size: 30,
-                        ),
-                        label: GameUIText.achievementText,
-                      ),
-                      NavigationDestination(
+                      const NavigationDestination(
                         icon: Icon(
                           Icons.people_alt_outlined,
                           size: 25,
@@ -175,24 +178,6 @@ class HomeView extends StackedView<HomeViewModel> {
               ],
             ),
     );
-    //   Scaffold(
-    //
-    //
-    //
-    //
-    //
-    //   // body: SafeArea(child: Center(child: RawKeyboardListener(
-    //   //   focusNode: viewModel.focusNode,
-    //   //   onKey: viewModel.onKeyReceived,
-    //   //   child: Column(
-    //   //     mainAxisAlignment: MainAxisAlignment.center,
-    //   //     children: [
-    //   //         Text(viewModel.keyText, style: TextStyle(fontSize: 50)),
-    //   //       ElevatedButton(onPressed: () => viewModel.bntPressed(context), child: Text("Hello"))
-    //   //     ],
-    //   //   ),
-    //   // ),)),
-    // );
   }
 
   @override

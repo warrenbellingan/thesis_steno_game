@@ -36,6 +36,10 @@ class ProfileViewModel extends BaseViewModel {
     setBusy(false);
   }
 
+  bool isStudent() {
+    return user.role == "Student";
+  }
+
   ImageProvider getImage() {
     if (user.image == null) return const AssetImage(GamePng.gameAvatarPath);
     return NetworkImage(user.image!);

@@ -31,6 +31,10 @@ class PersonViewModel extends BaseViewModel {
     setBusy(false);
   }
 
+  bool isStudent() {
+    return viewedUser.role == "Student";
+  }
+
   Future<void> getCurrentUser() async {
     final response = await _authServ.getCurrentUser();
     response.fold((l) => showBottomSheet(l.message), (userdata) {
