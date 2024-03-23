@@ -11,6 +11,5 @@ class SText with _$SText {
     required String text,
   }) = _SText;
 
-  factory SText.fromJson(Map<String, dynamic> json) =>
-      _$STextFromJson(json);
+  factory SText.fromJson(Map<String, dynamic> json) => _$STextFromJson(json);
 }

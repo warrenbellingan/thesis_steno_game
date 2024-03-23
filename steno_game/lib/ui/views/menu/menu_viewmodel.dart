@@ -14,6 +14,9 @@ class MenuViewModel extends BaseViewModel {
     return user.role == "Student";
   }
 
+  void goToCreateHost() {
+    _navigationServ.navigateToHostStrokeView();
+  }
   void goToSearchSteno() {
     _navigationServ.navigateToSearchStenoView();
   }

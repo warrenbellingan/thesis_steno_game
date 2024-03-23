@@ -4,13 +4,17 @@ import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 typedef OnClick = Function();
+
 class MenuCard extends StatelessWidget {
-  const MenuCard({super.key, required this.text, required this.onClick, required this.iconData});
+  const MenuCard(
+      {super.key,
+      required this.text,
+      required this.onClick,
+      required this.iconData});
 
   final String text;
   final OnClick onClick;
   final IconData iconData;
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +22,8 @@ class MenuCard extends StatelessWidget {
       onTap: onClick,
       child: AbsorbPointer(
         child: Container(
-          margin:
-          const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-          padding:
-          const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),

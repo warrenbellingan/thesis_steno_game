@@ -167,9 +167,9 @@ class _$MultiplayerStrokeImpl implements _MultiplayerStroke {
   const _$MultiplayerStrokeImpl(
       {required this.id,
       required this.gameMaster,
-      required this.text,
-      required this.stroke,
-      required this.type,
+      this.text = "",
+      this.stroke = "",
+      this.type = "",
       this.status = 0});
 
   factory _$MultiplayerStrokeImpl.fromJson(Map<String, dynamic> json) =>
@@ -180,10 +180,13 @@ class _$MultiplayerStrokeImpl implements _MultiplayerStroke {
   @override
   final String gameMaster;
   @override
+  @JsonKey()
   final String text;
   @override
+  @JsonKey()
   final String stroke;
   @override
+  @JsonKey()
   final String type;
   @override
   @JsonKey()
@@ -232,9 +235,9 @@ abstract class _MultiplayerStroke implements MultiplayerStroke {
   const factory _MultiplayerStroke(
       {required final String id,
       required final String gameMaster,
-      required final String text,
-      required final String stroke,
-      required final String type,
+      final String text,
+      final String stroke,
+      final String type,
       final int status}) = _$MultiplayerStrokeImpl;
 
   factory _MultiplayerStroke.fromJson(Map<String, dynamic> json) =

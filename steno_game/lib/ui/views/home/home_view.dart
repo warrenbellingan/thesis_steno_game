@@ -50,17 +50,17 @@ class HomeView extends StackedView<HomeViewModel> {
                           imagePath: viewModel.user.image,
                         ),
                       ),
-                      if(viewModel.isStudent())
-                      Text(
-                        "Score: ${viewModel.user.score.toString()} ",
-                        style: const TextStyle(
-                          color: GameColor.primaryColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          wordSpacing: 2,
-                          letterSpacing: 1,
+                      if (viewModel.isStudent())
+                        Text(
+                          "Score: ${viewModel.user.score.toString()} ",
+                          style: const TextStyle(
+                            color: GameColor.primaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            wordSpacing: 2,
+                            letterSpacing: 1,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

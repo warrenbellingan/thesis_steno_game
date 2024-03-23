@@ -1,4 +1,5 @@
 import 'package:steno_game/repository/lesson_repository.dart';
+import 'package:steno_game/repository/multiplayer_stroke_repository.dart';
 import 'package:steno_game/repository/picture_quiz_repository.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
@@ -39,6 +40,7 @@ import 'package:steno_game/ui/dialogs/update_password/update_password_dialog.dar
 import 'package:steno_game/ui/views/topic/topic_view.dart';
 import 'package:steno_game/ui/views/menu/menu_view.dart';
 import 'package:steno_game/ui/views/search_steno/search_steno_view.dart';
+import 'package:steno_game/ui/views/host_stroke/host_stroke_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -67,6 +69,7 @@ import 'package:steno_game/ui/views/search_steno/search_steno_view.dart';
     MaterialRoute(page: TopicView),
     MaterialRoute(page: MenuView),
     MaterialRoute(page: SearchStenoView),
+    MaterialRoute(page: HostStrokeView),
 // @stacked-route
   ],
   dependencies: [
@@ -81,6 +84,7 @@ import 'package:steno_game/ui/views/search_steno/search_steno_view.dart';
     LazySingleton(classType: TopicRepository),
     LazySingleton(classType: StrokeRepository),
     LazySingleton(classType: PictureQuizRepository),
+    LazySingleton(classType: MultiplayerStrokeRepository),
 // @stacked-service
   ],
   bottomsheets: [

@@ -21,7 +21,7 @@ class PlayerProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
         children: [
           Container(
@@ -38,7 +38,7 @@ class PlayerProfile extends StatelessWidget {
               backgroundColor: GameColor.secondaryColor,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 3,
           ),
           Column(
@@ -46,7 +46,7 @@ class PlayerProfile extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1,
                   fontSize: 14,
@@ -55,7 +55,7 @@ class PlayerProfile extends StatelessWidget {
               ),
               Text(
                 'Level ${level.toString()}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: GameColor.secondaryColor,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1,

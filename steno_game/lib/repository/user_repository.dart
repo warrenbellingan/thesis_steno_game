@@ -75,8 +75,8 @@ class UserRepository {
     try {
       final response = await _imageService.uploadImage(imageFile, path);
       return response.fold(
-            (l) => Left(GameException(l.message)),
-            (imageUrl) async {
+        (l) => Left(GameException(l.message)),
+        (imageUrl) async {
           try {
             await _db
                 .collection("users")

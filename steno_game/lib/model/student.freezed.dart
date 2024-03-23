@@ -22,6 +22,7 @@ Student _$StudentFromJson(Map<String, dynamic> json) {
 mixin _$Student {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +35,7 @@ abstract class $StudentCopyWith<$Res> {
   factory $StudentCopyWith(Student value, $Res Function(Student) then) =
       _$StudentCopyWithImpl<$Res, Student>;
   @useResult
-  $Res call({String id, String name, int score});
+  $Res call({String id, String name, String? image, int score});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? image = freezed,
     Object? score = null,
   }) {
     return _then(_value.copyWith(
@@ -63,6 +65,10 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -78,7 +84,7 @@ abstract class _$$StudentImplCopyWith<$Res> implements $StudentCopyWith<$Res> {
       __$$StudentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, int score});
+  $Res call({String id, String name, String? image, int score});
 }
 
 /// @nodoc
@@ -94,6 +100,7 @@ class __$$StudentImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? image = freezed,
     Object? score = null,
   }) {
     return _then(_$StudentImpl(
@@ -105,6 +112,10 @@ class __$$StudentImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -116,7 +127,8 @@ class __$$StudentImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StudentImpl implements _Student {
-  const _$StudentImpl({required this.id, required this.name, this.score = 0});
+  const _$StudentImpl(
+      {required this.id, required this.name, this.image, this.score = 0});
 
   factory _$StudentImpl.fromJson(Map<String, dynamic> json) =>
       _$$StudentImplFromJson(json);
@@ -126,12 +138,14 @@ class _$StudentImpl implements _Student {
   @override
   final String name;
   @override
+  final String? image;
+  @override
   @JsonKey()
   final int score;
 
   @override
   String toString() {
-    return 'Student(id: $id, name: $name, score: $score)';
+    return 'Student(id: $id, name: $name, image: $image, score: $score)';
   }
 
   @override
@@ -141,12 +155,13 @@ class _$StudentImpl implements _Student {
             other is _$StudentImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.score, score) || other.score == score));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, score);
+  int get hashCode => Object.hash(runtimeType, id, name, image, score);
 
   @JsonKey(ignore: true)
   @override
@@ -166,6 +181,7 @@ abstract class _Student implements Student {
   const factory _Student(
       {required final String id,
       required final String name,
+      final String? image,
       final int score}) = _$StudentImpl;
 
   factory _Student.fromJson(Map<String, dynamic> json) = _$StudentImpl.fromJson;
@@ -174,6 +190,8 @@ abstract class _Student implements Student {
   String get id;
   @override
   String get name;
+  @override
+  String? get image;
   @override
   int get score;
   @override

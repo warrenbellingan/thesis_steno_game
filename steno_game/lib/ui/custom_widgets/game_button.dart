@@ -28,14 +28,14 @@ class GameButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         ),
         child: Text(
           text,
           style: const TextStyle(
             letterSpacing: 1.5,
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.w900,
           ),
         ),

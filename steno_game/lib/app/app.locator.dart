@@ -12,6 +12,7 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
 import '../repository/lesson_repository.dart';
+import '../repository/multiplayer_stroke_repository.dart';
 import '../repository/picture_quiz_repository.dart';
 import '../repository/stroke_repository.dart';
 import '../repository/topic_repository.dart';
@@ -42,4 +43,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => TopicRepository());
   locator.registerLazySingleton(() => StrokeRepository());
   locator.registerLazySingleton(() => PictureQuizRepository());
+  locator.registerLazySingleton(() => MultiplayerStrokeRepository());
 }
