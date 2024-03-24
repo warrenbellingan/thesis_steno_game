@@ -10,7 +10,7 @@ class StrokePlayViewModel extends BaseViewModel {
     _navService.navigateToQuizGameStrokeView();
   }
 
-  void goToMultiplayerStrokeView() {
-    _navService.navigateToStrokesMultiplayerView();
+  void goToJoinMultiplayerStrokeView() {
+    _navService.navigateToJoinMultiplayerStrokeView();
   }
 }

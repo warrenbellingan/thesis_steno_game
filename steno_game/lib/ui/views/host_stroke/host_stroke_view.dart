@@ -1,8 +1,4 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
@@ -24,7 +20,9 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
   ) {
     return GameBody(
       body: viewModel.isBusy
-          ? const GameLoading()
+          ? const GameLoading(
+              label: "Creating Game",
+            )
           : Column(
               children: [
                 GameBar(),
@@ -58,7 +56,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                   ],
                 ),
                 verticalSpaceSmall,
-                GameButton(text: "START GAME", onClick: () {}),
+                GameButton(text: "START GAME", onClick: viewModel.startGame),
                 verticalSpaceSmall,
                 Expanded(
                   child: Container(
@@ -72,9 +70,9 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                             color: GameColor.secondaryColor, width: 2)),
                     child: Column(
                       children: [
-                        const Text(
-                          "Players:",
-                          style: TextStyle(
+                        Text(
+                          "Players: ${viewModel.students.length}",
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -122,7 +120,6 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
 
   @override
   void onViewModelReady(HostStrokeViewModel viewModel) {
-    // TODO: implement onViewModelReady
     viewModel.init();
   }
 }

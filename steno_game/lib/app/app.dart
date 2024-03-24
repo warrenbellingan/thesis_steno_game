@@ -41,6 +41,8 @@ import 'package:steno_game/ui/views/topic/topic_view.dart';
 import 'package:steno_game/ui/views/menu/menu_view.dart';
 import 'package:steno_game/ui/views/search_steno/search_steno_view.dart';
 import 'package:steno_game/ui/views/host_stroke/host_stroke_view.dart';
+import 'package:steno_game/ui/views/join_multiplayer_stroke/join_multiplayer_stroke_view.dart';
+import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_stroke_waiting_room_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -70,6 +72,8 @@ import 'package:steno_game/ui/views/host_stroke/host_stroke_view.dart';
     MaterialRoute(page: MenuView),
     MaterialRoute(page: SearchStenoView),
     MaterialRoute(page: HostStrokeView),
+    MaterialRoute(page: JoinMultiplayerStrokeView),
+    MaterialRoute(page: MultiplayerStrokeWaitingRoomView),
 // @stacked-route
   ],
   dependencies: [

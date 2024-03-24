@@ -27,7 +27,7 @@ class StrokePlayView extends StackedView<StrokePlayViewModel> {
             children: [
               PlayCard(
                 label: "Multi Player",
-                onClick: viewModel.goToMultiplayerStrokeView,
+                onClick: viewModel.goToJoinMultiplayerStrokeView,
               ),
               PlayCard(
                   label: "Strokes Quiz", onClick: viewModel.goToStrokeQuizView),

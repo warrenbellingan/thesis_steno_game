@@ -17,6 +17,7 @@ class MenuViewModel extends BaseViewModel {
   void goToCreateHost() {
     _navigationServ.navigateToHostStrokeView();
   }
+
   void goToSearchSteno() {
     _navigationServ.navigateToSearchStenoView();
   }
