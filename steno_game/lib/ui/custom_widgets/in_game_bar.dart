@@ -7,14 +7,18 @@ import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 class InGameBar extends StatelessWidget {
-  InGameBar({super.key});
+  InGameBar({super.key, required this.name, required this.level, this.image, this.isStudent});
 
   final navigationSer = locator<NavigationService>();
+  final String name;
+  final int level;
+  final String? image;
+  final bool? isStudent;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         boxShadow: [primaryShadow()],
         color: GameColor.primaryBackgroundColor,
@@ -24,14 +28,16 @@ class InGameBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           PlayerProfile(
-            name: 'Sample',
-            level: 1,
+            name: name,
+            level: level,
+            imagePath: image,
+            isStudent: isStudent,
           ),
           IconButton(
             onPressed: () {
               navigationSer.back();
             },
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
           ),
         ],
       ),

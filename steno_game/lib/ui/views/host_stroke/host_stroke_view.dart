@@ -94,6 +94,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                     return GamePlayer(
                                       name: student.name,
                                       imagePath: student.image,
+                                      withTail: false,
                                     );
                                   })
                               : const Text(

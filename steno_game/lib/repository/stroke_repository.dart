@@ -24,8 +24,8 @@ class StrokeRepository {
     }
   }
 
-  Future<Either<GameException, None>> addStroke(
-      GlobalKey painterKey, String text) async {
+  Future<Either<GameException, StenoStroke>> addStroke(
+      GlobalKey painterKey, String text, int status) async {
     try {
       RenderRepaintBoundary boundary = painterKey.currentContext!
           .findRenderObject() as RenderRepaintBoundary;
@@ -43,7 +43,10 @@ class StrokeRepository {
       final response = await _uploadImage(imageFile, fileName);
       return response.fold(
         (l) => Left(GameException(l.message)),
-        (imageUrl) => _saveStroke(text, imageUrl),
+        (imageUrl) async{
+          final getImage = await _saveStroke(text, imageUrl, status);
+          return getImage.fold((l) => Left(GameException(l.message)), (stroke) => Right(stroke));
+        },
       );
     } catch (e) {
       return Left(GameException(e.toString()));
@@ -66,14 +69,14 @@ class StrokeRepository {
     }
   }
 
-  Future<Either<GameException, None>> _saveStroke(
-      String text, String imageUrl) async {
+  Future<Either<GameException, StenoStroke>> _saveStroke(
+      String text, String imageUrl, int status) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch.toString();
       StenoStroke stroke =
-          StenoStroke(id: id, text: text, strokeImage: imageUrl, status: 0);
+          StenoStroke(id: id, text: text, strokeImage: imageUrl, status: status);
       await _db.collection("strokes").doc(id).set(stroke.toJson());
-      return const Right(None());
+      return Right(stroke);
     } catch (e) {
       return Left(GameException(e.toString()));
     }

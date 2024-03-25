@@ -27,6 +27,58 @@ class MultiplayerStrokeRepository {
     return result.map((doc) => MultiplayerStroke.fromJson(doc.data()!));
   }
 
+  Future<Either<GameException, None>> addHostStroke(
+      String gameId, String strokeImageUrl) async {
+    try {
+     await _db
+          .collection("strokeGameEnvironment")
+          .doc(gameId)
+          .set({"stroke": strokeImageUrl}, SetOptions(merge: true));
+      return const Right(None());
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+  Future<Either<GameException, None>> setGameType(
+      String gameId, String type) async {
+    try {
+      await _db
+          .collection("strokeGameEnvironment")
+          .doc(gameId)
+          .set({"type": type}, SetOptions(merge: true));
+      return const Right(None());
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+  Future<Either<GameException, None>> addHostText(
+      String gameId, String text) async {
+    try {
+      await _db
+          .collection("strokeGameEnvironment")
+          .doc(gameId)
+          .set({"text": text}, SetOptions(merge: true));
+      return const Right(None());
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+  Future<Either<GameException, List<Student>>> getStudents(
+      String gameId) async {
+    try {
+      final results = await _db
+          .collection("strokeGameEnvironment")
+          .doc(gameId)
+          .collection('students')
+          .get()
+          .then((value) =>
+              value.docs.map((doc) => Student.fromJson(doc.data())).toList());
+      return Right(results);
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
   Future<Either<GameException, None>> startGame(String gameId) async {
     try {
       await _db
@@ -83,6 +135,14 @@ class MultiplayerStrokeRepository {
           MultiplayerStroke(id: id, gameMaster: gameMasterId);
       await _db.collection("strokeGameEnvironment").doc(id).set(game.toJson());
       return Right(id);
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+  Future<Either<GameException, MultiplayerStroke>> getGame(String gameMasterId) async {
+    try {
+      final result = await _db.collection("strokeGameEnvironment").doc(gameMasterId).get();
+      return Right(MultiplayerStroke.fromJson(result.data()!));
     } catch (e) {
       return Left(GameException(e.toString()));
     }

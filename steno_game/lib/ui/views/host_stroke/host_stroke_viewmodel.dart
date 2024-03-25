@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
 import 'package:steno_game/app/app.locator.dart';
+import 'package:steno_game/app/app.router.dart';
 import 'package:steno_game/model/student.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 import '../../../repository/multiplayer_stroke_repository.dart';
@@ -39,11 +40,15 @@ class HostStrokeViewModel extends BaseViewModel {
   Future<void> startGame() async {
     setBusy(true);
     final response = await _multiStrokeRepo.startGame(gameId);
-    response.fold((l) => showBottomSheet(l.message), (r){
-      print("GameStarted");
+    response.fold((l) => showBottomSheet(l.message), (r) async{
+      final getGame = await _multiStrokeRepo.getGame(gameId);
+      getGame.fold((l) => showBottomSheet(l.message), (game){
+        _navigationServ.replaceWithMultiplayerStrokeHostView(game: game);
+      });
     });
     setBusy(false);
   }
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,

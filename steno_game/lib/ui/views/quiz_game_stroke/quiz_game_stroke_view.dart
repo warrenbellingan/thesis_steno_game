@@ -24,7 +24,7 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
           ? GameLoading()
           : Column(
               children: [
-                InGameBar(),
+                InGameBar(name: "Warren", level: 2),
                 verticalSpaceMedium,
                 Container(
                     decoration: BoxDecoration(

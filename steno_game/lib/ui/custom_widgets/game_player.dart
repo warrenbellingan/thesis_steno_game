@@ -1,12 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constants/game_color.dart';
 import '../constants/game_png.dart';
 
 class GamePlayer extends StatelessWidget {
-  const GamePlayer({super.key, required this.name, this.imagePath});
+  const GamePlayer(
+      {super.key,
+      required this.name,
+      this.imagePath,
+      required this.withTail,
+      this.tailText});
 
   final String name;
   final String? imagePath;
+  final String? tailText;
+  final bool withTail;
 
   ImageProvider getImage() {
     if (imagePath == null) return const AssetImage(GamePng.gameAvatarPath);
@@ -50,6 +58,19 @@ class GamePlayer extends StatelessWidget {
               wordSpacing: 3,
             ),
           ),
+          if (withTail)
+            Expanded(
+              child: Text(
+                textAlign: TextAlign.right,
+                tailText!,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.5,
+                  fontSize: 12,
+                  wordSpacing: 3,
+                ),
+              ),
+            ),
         ],
       ),
     );

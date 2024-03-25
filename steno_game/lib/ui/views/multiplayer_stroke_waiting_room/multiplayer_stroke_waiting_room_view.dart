@@ -31,8 +31,8 @@ class MultiplayerStrokeWaitingRoomView
           : Column(
               children: [
                 GameBar(),
-                 const Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
                       height: 20,
@@ -97,6 +97,7 @@ class MultiplayerStrokeWaitingRoomView
                       GamePlayer(
                         name: viewModel.instructor.name,
                         imagePath: viewModel.instructor.image,
+                        withTail: false,
                       ),
                     ],
                   ),
@@ -138,6 +139,7 @@ class MultiplayerStrokeWaitingRoomView
                                     return GamePlayer(
                                       name: student.name,
                                       imagePath: student.image,
+                                      withTail: false,
                                     );
                                   })
                               : const Text(

@@ -44,7 +44,8 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
     });
     gameStream =
         _multiStrokeRepo.streamMultiplayerStroke(game.id).listen((gameData) {
-      if (gameData.status == 1) {
+      game = gameData;
+      if (game.status == 1) {
         startGame();
       }
     });
@@ -59,7 +60,7 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
   }
 
   void startGame() {
-    _navigationService.replaceWithStrokesMultiplayerView();
+    _navigationService.replaceWithStrokesMultiplayerView(game: game);
   }
 
   void showBottomSheet(String description) {

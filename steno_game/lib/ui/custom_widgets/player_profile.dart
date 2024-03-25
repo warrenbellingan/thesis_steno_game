@@ -7,11 +7,12 @@ import '../constants/game_png.dart';
 
 class PlayerProfile extends StatelessWidget {
   const PlayerProfile(
-      {super.key, required this.name, required this.level, this.imagePath});
+      {super.key, required this.name, required this.level, this.imagePath, this.isStudent});
 
   final String name;
   final int level;
   final String? imagePath;
+  final bool? isStudent;
 
   ImageProvider getImage() {
     if (imagePath == null) return const AssetImage(GamePng.gameAvatarPath);
@@ -53,6 +54,7 @@ class PlayerProfile extends StatelessWidget {
                   wordSpacing: 3,
                 ),
               ),
+              if(isStudent == null)
               Text(
                 'Level ${level.toString()}',
                 style: const TextStyle(
