@@ -45,12 +45,11 @@ class MultiplayerStrokeHostView
                             border: Border.all(
                               color: Colors.black,
                               width: 2,
-                            )),
-                        child: const GameNetworkImage(
+                            ),),
+                        child: GameNetworkImage(
                           width: 150,
                           height: 150,
-                          path:
-                          "https://firebasestorage.googleapis.com/v0/b/steno-game.appspot.com/o/images%2Fstrokes%2FSample%20Steno%20Image.png?alt=media&token=16fc22b9-2bc7-4721-bcc4-e87b181e14ec",
+                          path: viewModel.game.stroke,
                         ),
                       ),
                     verticalSpaceSmall,
@@ -63,9 +62,9 @@ class MultiplayerStrokeHostView
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: const Text(
-                          "Sample Word",
-                          style: TextStyle(
+                        child:  Text(
+                          viewModel.game.text,
+                          style: const  TextStyle(
                             color: GameColor.primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
@@ -118,9 +117,9 @@ class MultiplayerStrokeHostView
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: const Text(
-                                    "Sample Word",
-                                    style: TextStyle(
+                                  child:  Text(
+                                    item.text,
+                                    style: const TextStyle(
                                       color: GameColor.primaryColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 24,

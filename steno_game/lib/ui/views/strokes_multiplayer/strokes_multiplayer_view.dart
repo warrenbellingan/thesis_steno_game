@@ -138,8 +138,8 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                           ),
                         ),
                         GameButton(
-                          text: "Submit Answer",
-                          onClick: () {},
+                          text: "Submit Text",
+                          onClick: viewModel.submitText,
                         ),
                       ],
                     ),

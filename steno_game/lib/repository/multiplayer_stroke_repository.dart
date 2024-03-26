@@ -13,6 +13,7 @@ class MultiplayerStrokeRepository {
   final _db = FirebaseFirestore.instance;
   final _sharedPref = locator<SharedPreferenceService>();
 
+
   Stream<List<Student>> streamStudents(String gameHostId) {
     final results = _db
         .collection("strokeGameEnvironment")
@@ -47,6 +48,35 @@ class MultiplayerStrokeRepository {
     final result =
         _db.collection("strokeGameEnvironment").doc(gameHostId).snapshots();
     return result.map((doc) => MultiplayerStroke.fromJson(doc.data()!));
+  }
+
+  Future<Either<GameException, None>> addSText(
+      String gameId, String text) async {
+    try {
+      final user = await _sharedPref.getCurrentUser();
+      SText sText = SText(id: user!.id, text: text);
+      await _db
+          .collection("strokeGameEnvironment")
+          .doc(gameId).collection('sText').doc(user.id).set(sText.toJson());
+
+      return const Right(None());
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> addSStroke(
+      String gameId, String imageUrl) async {
+    try {
+      final user = await _sharedPref.getCurrentUser();
+      SStroke sStroke = SStroke(id: user!.id, imageUrl: imageUrl);
+      await _db
+          .collection("strokeGameEnvironment")
+          .doc(gameId).collection('sStroke').doc(user.id).set(sStroke.toJson());
+      return const Right(None());
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
   }
 
   Future<Either<GameException, None>> addHostStroke(
