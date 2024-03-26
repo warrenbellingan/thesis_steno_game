@@ -8,7 +8,7 @@ part 's_stroke.g.dart';
 class SStroke with _$SStroke {
   const factory SStroke({
     required String id,
-    required String text,
+    required String imageUrl,
   }) = _SStroke;
 
   factory SStroke.fromJson(Map<String, dynamic> json) =>
