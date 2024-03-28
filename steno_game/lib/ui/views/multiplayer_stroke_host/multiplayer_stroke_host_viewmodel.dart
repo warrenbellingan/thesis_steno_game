@@ -16,12 +16,10 @@ import '../../../repository/multiplayer_stroke_repository.dart';
 import '../../../services/shared_preference_service.dart';
 
 class MultiplayerStrokeHostViewModel extends BaseViewModel {
-
   final _multiStrokeRepo = locator<MultiplayerStrokeRepository>();
   final _strokeRepo = locator<StrokeRepository>();
   final _sharedPref = locator<SharedPreferenceService>();
   final _bottomSheet = locator<BottomSheetService>();
-
 
   StreamSubscription<List<Student>>? studentsStream;
   StreamSubscription<List<SStroke>>? sStrokeStream;
@@ -37,7 +35,6 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
 
   MultiplayerStroke game;
 
-
   TextEditingController textController = TextEditingController();
   TextEditingController strokeController = TextEditingController();
   int gameStatus = 0;
@@ -50,14 +47,16 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     user = (await _sharedPref.getCurrentUser())!;
     studentsStream =
         _multiStrokeRepo.streamStudents(game.id).listen((studentsData) {
-          students = studentsData;
-          rebuildUi();
-        });
-    gameStream = _multiStrokeRepo.streamMultiplayerStroke(game.id).listen((gameData) {
+      students = studentsData;
+      rebuildUi();
+    });
+    gameStream =
+        _multiStrokeRepo.streamMultiplayerStroke(game.id).listen((gameData) {
       game = gameData;
       rebuildUi();
     });
-    sStrokeStream = _multiStrokeRepo.streamSStroke(game.id).listen((sStrokeData) {
+    sStrokeStream =
+        _multiStrokeRepo.streamSStroke(game.id).listen((sStrokeData) {
       sStroke = sStrokeData;
       rebuildUi();
     });
@@ -69,18 +68,20 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
   }
 
   String? getStudentName(String id) {
-    for(Student student in students) {
-      if(student.id == id) return student.name;
+    for (Student student in students) {
+      if (student.id == id) return student.name;
     }
     return null;
   }
 
   Future<void> submitStrokeClick() async {
     setBusy(true);
-    final uploadStroke = await _strokeRepo.addStroke(painterKey, strokeController.text, 1);
-    uploadStroke.fold((l) => showBottomSheet(l.message), (stroke) async{
-      final response = await _multiStrokeRepo.addHostStroke(game.id, stroke.strokeImage);
-      response.fold((l) => showBottomSheet(l.message), (r) async{
+    final uploadStroke =
+        await _strokeRepo.addStroke(painterKey, strokeController.text, 1);
+    uploadStroke.fold((l) => showBottomSheet(l.message), (stroke) async {
+      final response =
+          await _multiStrokeRepo.addHostStroke(game.id, stroke.strokeImage);
+      response.fold((l) => showBottomSheet(l.message), (r) async {
         strokeController.clear();
         final setType = await _multiStrokeRepo.setGameType(game.id, "stroke");
         setType.fold((l) => showBottomSheet(l.message), (r) async {
@@ -101,8 +102,9 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
 
   Future<void> submitTextClick() async {
     setBusy(true);
-    final response = await _multiStrokeRepo.addHostText(game.id, textController.text);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    final response =
+        await _multiStrokeRepo.addHostText(game.id, textController.text);
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       final setType = await _multiStrokeRepo.setGameType(game.id, "stroke");
       setType.fold((l) => showBottomSheet(l.message), (r) async {
         showBottomSheet("Submitted Successfully");
@@ -118,6 +120,7 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     });
     setBusy(false);
   }
+
   void selectionClick(int status) {
     gameStatus = status;
     rebuildUi();
@@ -144,5 +147,4 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     sStrokeStream?.cancel();
     super.dispose();
   }
-
 }

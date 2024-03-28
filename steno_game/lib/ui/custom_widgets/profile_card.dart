@@ -37,7 +37,7 @@ class ProfileCard extends StatelessWidget {
             stats,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: GameColor.secondaryColor,
+              color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.w600,
               letterSpacing: 1.5,

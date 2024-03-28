@@ -5,9 +5,13 @@ class GameBody extends StatelessWidget {
   const GameBody({
     super.key,
     required this.body,
+    this.bottomBar,
+    this.floatingAction,
   });
 
   final Widget body;
+  final Widget? bottomBar;
+  final Widget? floatingAction;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +22,8 @@ class GameBody extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: body,
         ),
+        bottomNavigationBar: bottomBar,
+        floatingActionButton: floatingAction,
       ),
     );
   }

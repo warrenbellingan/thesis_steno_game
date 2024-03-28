@@ -7,7 +7,12 @@ import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 class InGameBar extends StatelessWidget {
-  InGameBar({super.key, required this.name, required this.level, this.image, this.isStudent});
+  InGameBar(
+      {super.key,
+      required this.name,
+      required this.level,
+      this.image,
+      this.isStudent});
 
   final navigationSer = locator<NavigationService>();
   final String name;

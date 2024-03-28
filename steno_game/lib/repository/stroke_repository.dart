@@ -43,9 +43,10 @@ class StrokeRepository {
       final response = await _uploadImage(imageFile, fileName);
       return response.fold(
         (l) => Left(GameException(l.message)),
-        (imageUrl) async{
+        (imageUrl) async {
           final getImage = await _saveStroke(text, imageUrl, status);
-          return getImage.fold((l) => Left(GameException(l.message)), (stroke) => Right(stroke));
+          return getImage.fold(
+              (l) => Left(GameException(l.message)), (stroke) => Right(stroke));
         },
       );
     } catch (e) {
@@ -73,8 +74,8 @@ class StrokeRepository {
       String text, String imageUrl, int status) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch.toString();
-      StenoStroke stroke =
-          StenoStroke(id: id, text: text, strokeImage: imageUrl, status: status);
+      StenoStroke stroke = StenoStroke(
+          id: id, text: text, strokeImage: imageUrl, status: status);
       await _db.collection("strokes").doc(id).set(stroke.toJson());
       return Right(stroke);
     } catch (e) {

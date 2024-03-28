@@ -60,13 +60,14 @@ class PersonView extends StackedView<PersonViewModel> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text(
-                            "Level ${viewModel.viewedUser.level.toString()}",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                          if (viewModel.viewedUser.role == "Student")
+                            Text(
+                              "Level ${viewModel.viewedUser.level.toString()}",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
                         ],
                       )
                     ],

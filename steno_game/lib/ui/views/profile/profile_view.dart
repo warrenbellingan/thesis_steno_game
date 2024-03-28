@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/custom_widgets/game_icon_button.dart';
@@ -24,7 +21,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
   ) {
     return GameBody(
         body: viewModel.isBusy
-            ? GameLoading(
+            ? const GameLoading(
                 label: "Loading Profile",
               )
             : SingleChildScrollView(
@@ -54,7 +51,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Column(
@@ -86,25 +83,30 @@ class ProfileView extends StackedView<ProfileViewModel> {
                             ),
                             Text(
                               viewModel.user.role,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
-                              "Level ${viewModel.user.level.toString()}",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                            if (viewModel.isStudent())
+                              Column(
+                                children: [
+                                  Text(
+                                    "Level ${viewModel.user.level.toString()}",
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 10,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: GameColor.primaryColor),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Container(
-                              height: 10,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: GameColor.primaryColor),
-                            ),
                           ],
                         )
                       ],

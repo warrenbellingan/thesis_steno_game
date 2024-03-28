@@ -73,7 +73,8 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
 
   Future<void> submitText() async {
     setBusy(true);
-    final response = await _multiStrokeRepo.addSText(game.id,textController.text);
+    final response =
+        await _multiStrokeRepo.addSText(game.id, textController.text);
     response.fold((l) => showBottomSheet(l.message), (r) {
       textController.clear();
       rebuildUi();
@@ -87,10 +88,10 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     final response = await _strokeRepo.addStroke(painterKey, game.text, 0);
     response.fold((l) {
       showBottomSheet(l.message);
-    }, (strokeImage) async{
-      final sendImage = await _multiStrokeRepo.addSStroke(game.id, strokeImage.strokeImage);
+    }, (strokeImage) async {
+      final sendImage =
+          await _multiStrokeRepo.addSStroke(game.id, strokeImage.strokeImage);
       sendImage.fold((l) => showBottomSheet(l.message), (r) {
-
         showBottomSheet("Submitted Successfully");
       });
     });

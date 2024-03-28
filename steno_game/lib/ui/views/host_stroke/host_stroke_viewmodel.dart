@@ -40,9 +40,9 @@ class HostStrokeViewModel extends BaseViewModel {
   Future<void> startGame() async {
     setBusy(true);
     final response = await _multiStrokeRepo.startGame(gameId);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       final getGame = await _multiStrokeRepo.getGame(gameId);
-      getGame.fold((l) => showBottomSheet(l.message), (game){
+      getGame.fold((l) => showBottomSheet(l.message), (game) {
         _navigationServ.replaceWithMultiplayerStrokeHostView(game: game);
       });
     });

@@ -3,6 +3,7 @@ import 'package:steno_game/repository/multiplayer_stroke_repository.dart';
 import 'package:steno_game/repository/picture_quiz_repository.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
+import 'package:steno_game/repository/typing_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:steno_game/ui/dialogs/info_alert/info_alert_dialog.dart';
@@ -44,6 +45,7 @@ import 'package:steno_game/ui/views/host_stroke/host_stroke_view.dart';
 import 'package:steno_game/ui/views/join_multiplayer_stroke/join_multiplayer_stroke_view.dart';
 import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_stroke_waiting_room_view.dart';
 import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_host_view.dart';
+import 'package:steno_game/ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -91,6 +93,7 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_h
     LazySingleton(classType: StrokeRepository),
     LazySingleton(classType: PictureQuizRepository),
     LazySingleton(classType: MultiplayerStrokeRepository),
+    LazySingleton(classType: TypingRepository),
 // @stacked-service
   ],
   bottomsheets: [
@@ -104,6 +107,7 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_h
     StackedDialog(classType: UpdateNameDialog),
     StackedDialog(classType: UpdateEmailDialog),
     StackedDialog(classType: UpdatePasswordDialog),
+    StackedDialog(classType: EditStrokeDialog),
 // @stacked-dialog
   ],
 )

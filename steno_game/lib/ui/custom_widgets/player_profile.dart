@@ -7,7 +7,11 @@ import '../constants/game_png.dart';
 
 class PlayerProfile extends StatelessWidget {
   const PlayerProfile(
-      {super.key, required this.name, required this.level, this.imagePath, this.isStudent});
+      {super.key,
+      required this.name,
+      required this.level,
+      this.imagePath,
+      this.isStudent});
 
   final String name;
   final int level;
@@ -54,17 +58,17 @@ class PlayerProfile extends StatelessWidget {
                   wordSpacing: 3,
                 ),
               ),
-              if(isStudent == null)
-              Text(
-                'Level ${level.toString()}',
-                style: const TextStyle(
-                  color: GameColor.secondaryColor,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  fontSize: 14,
-                  wordSpacing: 3,
+              if (isStudent == null)
+                Text(
+                  'Level ${level.toString()}',
+                  style: const TextStyle(
+                    color: GameColor.secondaryColor,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    fontSize: 14,
+                    wordSpacing: 3,
+                  ),
                 ),
-              ),
             ],
           ),
         ],

@@ -68,6 +68,7 @@ class PeopleView extends StackedView<PeopleViewModel> {
                             name: user.name,
                             level: user.level,
                             image: user.image,
+                            isStudent: user.role == "Student" ? null : true,
                             onClick: () => user.id == viewModel.user.id
                                 ? viewModel.goToProfile()
                                 : viewModel.onClick(user.id),

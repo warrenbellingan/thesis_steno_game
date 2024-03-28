@@ -1,3 +1,88 @@
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/app/app.dialogs.dart';
+import 'package:steno_game/app/app.locator.dart';
+import 'package:steno_game/model/steno_stroke.dart';
+import 'package:steno_game/model/typing.dart';
+import 'package:steno_game/model/user.dart';
+import 'package:steno_game/repository/stroke_repository.dart';
+import 'package:steno_game/repository/typing_repository.dart';
+import 'package:steno_game/services/shared_preference_service.dart';
 
-class SearchStenoViewModel extends BaseViewModel {}
+import '../../../app/app.bottomsheets.dart';
+
+class SearchStenoViewModel extends BaseViewModel {
+  final _strokeRepo = locator<StrokeRepository>();
+  final _typingRepo = locator<TypingRepository>();
+  final _bottomSheet = locator<BottomSheetService>();
+  final _navServ = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
+  final _sharedPref = locator<SharedPreferenceService>();
+  late User user;
+
+  TextEditingController searchTextController = TextEditingController();
+
+  List<Typing> typingList = [];
+  List<StenoStroke> strokeList = [];
+
+  int searchType = 0;
+
+  init() async {
+    setBusy(true);
+    user = (await _sharedPref.getCurrentUser())!;
+    setBusy(false);
+    await search();
+  }
+
+  Future<void> _searchStroke() async {
+    setBusy(true);
+    final response = await _strokeRepo.searchStrokes(searchTextController.text);
+    response.fold((l) => showBottomSheet(l.message), (list) {
+      strokeList = list;
+      rebuildUi();
+    });
+    setBusy(false);
+  }
+
+  Future<void> _searchTyping() async {
+    setBusy(true);
+    final response = await _typingRepo.searchTyping(searchTextController.text);
+    response.fold((l) => showBottomSheet(l.message), (list) {
+      typingList = list;
+      rebuildUi();
+    });
+    setBusy(false);
+  }
+
+  Future<void> search() async {
+    if (searchType == 0) {
+      await _searchStroke();
+    } else {
+      await _searchTyping();
+    }
+  }
+
+  void editStrokeDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.editStroke,
+    );
+  }
+
+  void setSearchType(int type) {
+    searchType = type;
+    search();
+  }
+
+  void showBottomSheet(String description) {
+    _bottomSheet.showCustomSheet(
+      variant: BottomSheetType.notice,
+      title: "Notice",
+      description: description,
+    );
+  }
+
+  void back() {
+    _navServ.back();
+  }
+}

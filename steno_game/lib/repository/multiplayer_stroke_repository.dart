@@ -13,7 +13,6 @@ class MultiplayerStrokeRepository {
   final _db = FirebaseFirestore.instance;
   final _sharedPref = locator<SharedPreferenceService>();
 
-
   Stream<List<Student>> streamStudents(String gameHostId) {
     final results = _db
         .collection("strokeGameEnvironment")
@@ -57,7 +56,10 @@ class MultiplayerStrokeRepository {
       SText sText = SText(id: user!.id, text: text);
       await _db
           .collection("strokeGameEnvironment")
-          .doc(gameId).collection('sText').doc(user.id).set(sText.toJson());
+          .doc(gameId)
+          .collection('sText')
+          .doc(user.id)
+          .set(sText.toJson());
 
       return const Right(None());
     } catch (e) {
@@ -72,7 +74,10 @@ class MultiplayerStrokeRepository {
       SStroke sStroke = SStroke(id: user!.id, imageUrl: imageUrl);
       await _db
           .collection("strokeGameEnvironment")
-          .doc(gameId).collection('sStroke').doc(user.id).set(sStroke.toJson());
+          .doc(gameId)
+          .collection('sStroke')
+          .doc(user.id)
+          .set(sStroke.toJson());
       return const Right(None());
     } catch (e) {
       return Left(GameException(e.toString()));
