@@ -77,7 +77,7 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
   Future<void> submitStrokeClick() async {
     setBusy(true);
     final uploadStroke =
-        await _strokeRepo.addStroke(painterKey, strokeController.text, 1);
+        await _strokeRepo.addStroke(painterKey, strokeController.text, 1, null);
     uploadStroke.fold((l) => showBottomSheet(l.message), (stroke) async {
       final response =
           await _multiStrokeRepo.addHostStroke(game.id, stroke.strokeImage);

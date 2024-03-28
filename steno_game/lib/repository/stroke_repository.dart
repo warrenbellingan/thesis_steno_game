@@ -24,8 +24,51 @@ class StrokeRepository {
     }
   }
 
+  Future<Either<GameException, None>> updateStroke(StenoStroke stroke) async {
+    try {
+      await _db.collection("strokes").doc(stroke.id).set(stroke.toJson());
+      return const Right(None());
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
+  Future<Either<GameException, None>> editStroke(
+      GlobalKey painterKey, String id, String text, String path) async {
+    try {
+      RenderRepaintBoundary boundary = painterKey.currentContext!
+          .findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      final Uint8List pngBytes = byteData!.buffer.asUint8List();
+      Directory tempDir = await Directory.systemTemp.createTemp();
+      String fileName = 'image_${DateTime.now().millisecondsSinceEpoch}.png';
+      String filePath = '${tempDir.path}/$fileName';
+
+      File imageFile = File(filePath);
+      await imageFile.writeAsBytes(pngBytes);
+      final response = await _uploadImage(imageFile, fileName, path);
+      return response.fold(
+        (l) => Left(GameException(l.message)),
+        (imageUrl) async {
+          StenoStroke stroke = StenoStroke(
+              id: id,
+              text: text,
+              strokeImage: imageUrl,
+              filePath: path,
+              status: 1);
+          final update = await updateStroke(stroke);
+          return update.fold((l) => Left(GameException(l.message)),
+              (r) => const Right(None()));
+        },
+      );
+    } catch (e) {
+      return Left(GameException(e.toString()));
+    }
+  }
+
   Future<Either<GameException, StenoStroke>> addStroke(
-      GlobalKey painterKey, String text, int status) async {
+      GlobalKey painterKey, String text, int status, String? path) async {
     try {
       RenderRepaintBoundary boundary = painterKey.currentContext!
           .findRenderObject() as RenderRepaintBoundary;
@@ -39,12 +82,12 @@ class StrokeRepository {
 
       File imageFile = File(filePath);
       await imageFile.writeAsBytes(pngBytes);
-
-      final response = await _uploadImage(imageFile, fileName);
+      path ??= "images/strokes/$fileName";
+      final response = await _uploadImage(imageFile, fileName, path);
       return response.fold(
         (l) => Left(GameException(l.message)),
         (imageUrl) async {
-          final getImage = await _saveStroke(text, imageUrl, status);
+          final getImage = await _saveStroke(text, imageUrl, status, path!);
           return getImage.fold(
               (l) => Left(GameException(l.message)), (stroke) => Right(stroke));
         },
@@ -55,9 +98,8 @@ class StrokeRepository {
   }
 
   Future<Either<GameException, String>> _uploadImage(
-      File imageFile, String fileName) async {
+      File imageFile, String fileName, String path) async {
     try {
-      final path = "images/strokes/$fileName";
       final response = await _imageService.uploadImage(imageFile, path);
       return response.fold(
         (l) => Left(
@@ -71,11 +113,15 @@ class StrokeRepository {
   }
 
   Future<Either<GameException, StenoStroke>> _saveStroke(
-      String text, String imageUrl, int status) async {
+      String text, String imageUrl, int status, String path) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch.toString();
       StenoStroke stroke = StenoStroke(
-          id: id, text: text, strokeImage: imageUrl, status: status);
+          id: id,
+          text: text,
+          strokeImage: imageUrl,
+          status: status,
+          filePath: path);
       await _db.collection("strokes").doc(id).set(stroke.toJson());
       return Right(stroke);
     } catch (e) {
@@ -90,8 +136,9 @@ class StrokeRepository {
           value.docs.map((doc) => StenoStroke.fromJson(doc.data())).toList());
       if (searchText.isNotEmpty) {
         return Right(results
-            .where((stroke) =>
-                stroke.text.toLowerCase().contains(searchText.toString()))
+            .where((stroke) => stroke.text
+                .toLowerCase()
+                .contains(searchText.toString().toLowerCase()))
             .toList());
       }
       return Right(results);

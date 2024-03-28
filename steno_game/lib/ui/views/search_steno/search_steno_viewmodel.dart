@@ -9,6 +9,7 @@ import 'package:steno_game/model/user.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/typing_repository.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
+import 'package:steno_game/ui/common/temp.dart';
 
 import '../../../app/app.bottomsheets.dart';
 
@@ -63,9 +64,36 @@ class SearchStenoViewModel extends BaseViewModel {
     }
   }
 
-  void editStrokeDialog() async {
+  void editStrokeDialog(StenoStroke stroke) async {
+    Temporary.stroke = stroke;
     await _dialogService.showCustomDialog(
       variant: DialogType.editStroke,
+    );
+  }
+  void editTypingDialog(Typing typing) async {
+    Temporary.typing = typing;
+    await _dialogService.showCustomDialog(
+      variant: DialogType.editTyping,
+    );
+  }
+
+  void addSteno() async {
+    if (searchType == 0) {
+      addStrokeDialog();
+    } else {
+      addTypingDialog();
+    }
+  }
+
+  void addStrokeDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.addStroke,
+    );
+  }
+
+  void addTypingDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.addTyping,
     );
   }
 

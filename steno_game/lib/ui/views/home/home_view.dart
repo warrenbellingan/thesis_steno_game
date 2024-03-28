@@ -22,8 +22,10 @@ class HomeView extends StackedView<HomeViewModel> {
     HomeViewModel viewModel,
     Widget? child,
   ) {
-    return viewModel.isBusy ? const GameLoading() : GameBody(
-      body: Column(
+    return viewModel.isBusy
+        ? const GameLoading()
+        : GameBody(
+            body: Column(
               children: [
                 Container(
                   padding:
@@ -81,100 +83,100 @@ class HomeView extends StackedView<HomeViewModel> {
                 ),
               ],
             ),
-      bottomBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-          indicatorColor: Colors.white,
-          labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
-                return const TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: GameColor.primaryColor,
-                );
-              } else {
-                return const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                );
-              }
-            },
-          ),
-        ),
-        child: NavigationBar(
-          backgroundColor: Colors.white,
-          height: 70,
-          shadowColor: const Color(0xFF948D8D),
-          selectedIndex: viewModel.currentPageIndex,
-          onDestinationSelected: viewModel.onDestinationSelected,
-          destinations: [
-            const NavigationDestination(
-              icon: Icon(
-                Icons.home,
-                size: 25,
+            bottomBar: NavigationBarTheme(
+              data: NavigationBarThemeData(
+                indicatorColor: Colors.white,
+                labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.selected)) {
+                      return const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: GameColor.primaryColor,
+                      );
+                    } else {
+                      return const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      );
+                    }
+                  },
+                ),
               ),
-              selectedIcon: Icon(
-                Icons.home,
-                color: GameColor.primaryColor,
-                size: 30,
+              child: NavigationBar(
+                backgroundColor: Colors.white,
+                height: 70,
+                shadowColor: const Color(0xFF948D8D),
+                selectedIndex: viewModel.currentPageIndex,
+                onDestinationSelected: viewModel.onDestinationSelected,
+                destinations: [
+                  const NavigationDestination(
+                    icon: Icon(
+                      Icons.home,
+                      size: 25,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.home,
+                      color: GameColor.primaryColor,
+                      size: 30,
+                    ),
+                    label: GameUIText.menuText,
+                  ),
+                  const NavigationDestination(
+                    icon: Icon(
+                      Icons.play_lesson_rounded,
+                      size: 25,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.play_lesson_rounded,
+                      color: GameColor.primaryColor,
+                      size: 30,
+                    ),
+                    label: GameUIText.lessonText,
+                  ),
+                  if (viewModel.isStudent())
+                    const NavigationDestination(
+                      icon: Icon(
+                        Icons.play_circle,
+                        size: 25,
+                      ),
+                      selectedIcon: Icon(
+                        Icons.play_circle,
+                        color: GameColor.primaryColor,
+                        size: 30,
+                      ),
+                      label: GameUIText.playText,
+                    ),
+                  if (viewModel.isStudent())
+                    const NavigationDestination(
+                      icon: Icon(
+                        Icons.badge_rounded,
+                        size: 25,
+                      ),
+                      selectedIcon: Icon(
+                        Icons.badge_rounded,
+                        color: GameColor.primaryColor,
+                        size: 30,
+                      ),
+                      label: GameUIText.achievementText,
+                    ),
+                  const NavigationDestination(
+                    icon: Icon(
+                      Icons.people_alt_outlined,
+                      size: 25,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.people_alt_outlined,
+                      color: GameColor.primaryColor,
+                      size: 30,
+                    ),
+                    label: GameUIText.peopleText,
+                  ),
+                ],
               ),
-              label: GameUIText.menuText,
             ),
-            const NavigationDestination(
-              icon: Icon(
-                Icons.play_lesson_rounded,
-                size: 25,
-              ),
-              selectedIcon: Icon(
-                Icons.play_lesson_rounded,
-                color: GameColor.primaryColor,
-                size: 30,
-              ),
-              label: GameUIText.lessonText,
-            ),
-            if (viewModel.isStudent())
-              const NavigationDestination(
-                icon: Icon(
-                  Icons.play_circle,
-                  size: 25,
-                ),
-                selectedIcon: Icon(
-                  Icons.play_circle,
-                  color: GameColor.primaryColor,
-                  size: 30,
-                ),
-                label: GameUIText.playText,
-              ),
-            if (viewModel.isStudent())
-              const NavigationDestination(
-                icon: Icon(
-                  Icons.badge_rounded,
-                  size: 25,
-                ),
-                selectedIcon: Icon(
-                  Icons.badge_rounded,
-                  color: GameColor.primaryColor,
-                  size: 30,
-                ),
-                label: GameUIText.achievementText,
-              ),
-            const NavigationDestination(
-              icon: Icon(
-                Icons.people_alt_outlined,
-                size: 25,
-              ),
-              selectedIcon: Icon(
-                Icons.people_alt_outlined,
-                color: GameColor.primaryColor,
-                size: 30,
-              ),
-              label: GameUIText.peopleText,
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   @override

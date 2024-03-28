@@ -46,6 +46,9 @@ import 'package:steno_game/ui/views/join_multiplayer_stroke/join_multiplayer_str
 import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_stroke_waiting_room_view.dart';
 import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_host_view.dart';
 import 'package:steno_game/ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
+import 'package:steno_game/ui/dialogs/add_stroke/add_stroke_dialog.dart';
+import 'package:steno_game/ui/dialogs/add_typing/add_typing_dialog.dart';
+import 'package:steno_game/ui/dialogs/edit_typing/edit_typing_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -108,6 +111,9 @@ import 'package:steno_game/ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
     StackedDialog(classType: UpdateEmailDialog),
     StackedDialog(classType: UpdatePasswordDialog),
     StackedDialog(classType: EditStrokeDialog),
+    StackedDialog(classType: AddStrokeDialog),
+    StackedDialog(classType: AddTypingDialog),
+    StackedDialog(classType: EditTypingDialog),
 // @stacked-dialog
   ],
 )

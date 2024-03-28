@@ -7,7 +7,10 @@
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
+import '../ui/dialogs/add_stroke/add_stroke_dialog.dart';
+import '../ui/dialogs/add_typing/add_typing_dialog.dart';
 import '../ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
+import '../ui/dialogs/edit_typing/edit_typing_dialog.dart';
 import '../ui/dialogs/info_alert/info_alert_dialog.dart';
 import '../ui/dialogs/update_email/update_email_dialog.dart';
 import '../ui/dialogs/update_name/update_name_dialog.dart';
@@ -21,6 +24,9 @@ enum DialogType {
   updateEmail,
   updatePassword,
   editStroke,
+  addStroke,
+  addTyping,
+  editTyping,
 }
 
 void setupDialogUi() {
@@ -39,6 +45,12 @@ void setupDialogUi() {
         UpdatePasswordDialog(request: request, completer: completer),
     DialogType.editStroke: (context, request, completer) =>
         EditStrokeDialog(request: request, completer: completer),
+    DialogType.addStroke: (context, request, completer) =>
+        AddStrokeDialog(request: request, completer: completer),
+    DialogType.addTyping: (context, request, completer) =>
+        AddTypingDialog(request: request, completer: completer),
+    DialogType.editTyping: (context, request, completer) =>
+        EditTypingDialog(request: request, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);

@@ -85,7 +85,8 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
 
   Future<void> submitImage() async {
     setBusy(true);
-    final response = await _strokeRepo.addStroke(painterKey, game.text, 0);
+    final response =
+        await _strokeRepo.addStroke(painterKey, game.text, 0, null);
     response.fold((l) {
       showBottomSheet(l.message);
     }, (strokeImage) async {

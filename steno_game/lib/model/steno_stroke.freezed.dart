@@ -23,6 +23,7 @@ mixin _$StenoStroke {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get strokeImage => throw _privateConstructorUsedError;
+  String get filePath => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +38,12 @@ abstract class $StenoStrokeCopyWith<$Res> {
           StenoStroke value, $Res Function(StenoStroke) then) =
       _$StenoStrokeCopyWithImpl<$Res, StenoStroke>;
   @useResult
-  $Res call({String id, String text, String strokeImage, int status});
+  $Res call(
+      {String id,
+      String text,
+      String strokeImage,
+      String filePath,
+      int status});
 }
 
 /// @nodoc
@@ -56,6 +62,7 @@ class _$StenoStrokeCopyWithImpl<$Res, $Val extends StenoStroke>
     Object? id = null,
     Object? text = null,
     Object? strokeImage = null,
+    Object? filePath = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +77,10 @@ class _$StenoStrokeCopyWithImpl<$Res, $Val extends StenoStroke>
       strokeImage: null == strokeImage
           ? _value.strokeImage
           : strokeImage // ignore: cast_nullable_to_non_nullable
+              as String,
+      filePath: null == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -87,7 +98,12 @@ abstract class _$$StenoStrokeImplCopyWith<$Res>
       __$$StenoStrokeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String strokeImage, int status});
+  $Res call(
+      {String id,
+      String text,
+      String strokeImage,
+      String filePath,
+      int status});
 }
 
 /// @nodoc
@@ -104,6 +120,7 @@ class __$$StenoStrokeImplCopyWithImpl<$Res>
     Object? id = null,
     Object? text = null,
     Object? strokeImage = null,
+    Object? filePath = null,
     Object? status = null,
   }) {
     return _then(_$StenoStrokeImpl(
@@ -118,6 +135,10 @@ class __$$StenoStrokeImplCopyWithImpl<$Res>
       strokeImage: null == strokeImage
           ? _value.strokeImage
           : strokeImage // ignore: cast_nullable_to_non_nullable
+              as String,
+      filePath: null == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -134,6 +155,7 @@ class _$StenoStrokeImpl implements _StenoStroke {
       {required this.id,
       required this.text,
       required this.strokeImage,
+      required this.filePath,
       required this.status});
 
   factory _$StenoStrokeImpl.fromJson(Map<String, dynamic> json) =>
@@ -146,11 +168,13 @@ class _$StenoStrokeImpl implements _StenoStroke {
   @override
   final String strokeImage;
   @override
+  final String filePath;
+  @override
   final int status;
 
   @override
   String toString() {
-    return 'StenoStroke(id: $id, text: $text, strokeImage: $strokeImage, status: $status)';
+    return 'StenoStroke(id: $id, text: $text, strokeImage: $strokeImage, filePath: $filePath, status: $status)';
   }
 
   @override
@@ -162,12 +186,15 @@ class _$StenoStrokeImpl implements _StenoStroke {
             (identical(other.text, text) || other.text == text) &&
             (identical(other.strokeImage, strokeImage) ||
                 other.strokeImage == strokeImage) &&
+            (identical(other.filePath, filePath) ||
+                other.filePath == filePath) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, strokeImage, status);
+  int get hashCode =>
+      Object.hash(runtimeType, id, text, strokeImage, filePath, status);
 
   @JsonKey(ignore: true)
   @override
@@ -188,6 +215,7 @@ abstract class _StenoStroke implements StenoStroke {
       {required final String id,
       required final String text,
       required final String strokeImage,
+      required final String filePath,
       required final int status}) = _$StenoStrokeImpl;
 
   factory _StenoStroke.fromJson(Map<String, dynamic> json) =
@@ -199,6 +227,8 @@ abstract class _StenoStroke implements StenoStroke {
   String get text;
   @override
   String get strokeImage;
+  @override
+  String get filePath;
   @override
   int get status;
   @override

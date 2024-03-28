@@ -111,7 +111,9 @@ class SearchStenoView extends StackedView<SearchStenoViewModel> {
                                             borderRadius:
                                                 BorderRadius.circular(50)),
                                         child: IconButton(
-                                          onPressed: viewModel.editStrokeDialog,
+                                          onPressed: () {
+                                            viewModel.editStrokeDialog(item);
+                                          },
                                           icon: const Icon(
                                             Icons.edit,
                                             size: 30,
@@ -129,44 +131,69 @@ class SearchStenoView extends StackedView<SearchStenoViewModel> {
                               primary: false,
                               itemBuilder: (context, index) {
                                 var item = viewModel.typingList[index];
-                                return Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
-                                  padding: const EdgeInsets.all(2),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: Colors.white,
-                                    border: Border.all(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        item.text,
-                                        style: const TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color: Colors.black54,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 1,
-                                          wordSpacing: 3,
+                                return Stack(
+                                  alignment: Alignment.topRight,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      padding: const EdgeInsets.all(2),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
                                         ),
                                       ),
-                                      Text(
-                                        item.typingKeys.toUpperCase(),
-                                        style: const TextStyle(
-                                          color: GameColor.primaryColor,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 1,
-                                          wordSpacing: 3,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            item.text,
+                                            style: const TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: Colors.black54,
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1,
+                                              wordSpacing: 3,
+                                            ),
+                                          ),
+                                          Text(
+                                            item.typingKeys.toUpperCase(),
+                                            style: const TextStyle(
+                                              color: GameColor.primaryColor,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1,
+                                              wordSpacing: 3,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    if (viewModel.user.role == "Instructor")
+                                      Container(
+                                        margin: const EdgeInsets.only(
+                                            top: 12, right: 24),
+                                        decoration: BoxDecoration(
+                                            color: Colors.black12,
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            viewModel.editTypingDialog(item);
+                                          },
+                                          icon: const Icon(
+                                            Icons.edit,
+                                            size: 20,
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      )
-                                    ],
-                                  ),
+                                      ),
+                                  ],
                                 );
                               },
                             ),
@@ -175,22 +202,24 @@ class SearchStenoView extends StackedView<SearchStenoViewModel> {
           ],
         ),
       ),
-      floatingAction: viewModel.user.role == "Instructor"
-          ? Container(
-              margin: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                  color: GameColor.primaryColor,
-                  borderRadius: BorderRadius.circular(50)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-            )
-          : null,
+      floatingAction: viewModel.isBusy
+          ? null
+          : viewModel.user.role == "Instructor"
+              ? Container(
+                  margin: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                      color: GameColor.primaryColor,
+                      borderRadius: BorderRadius.circular(50)),
+                  child: IconButton(
+                    onPressed: viewModel.addSteno,
+                    icon: const Icon(
+                      Icons.add,
+                      size: 50,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : null,
     );
   }
 
