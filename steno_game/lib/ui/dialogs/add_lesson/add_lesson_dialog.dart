@@ -8,7 +8,6 @@ import '../../custom_widgets/game_button.dart';
 import '../../custom_widgets/game_loading.dart';
 import 'add_lesson_dialog_model.dart';
 
-
 class AddLessonDialog extends StackedView<AddLessonDialogModel> {
   final DialogRequest request;
   final Function(DialogResponse) completer;
@@ -31,22 +30,21 @@ class AddLessonDialog extends StackedView<AddLessonDialogModel> {
       child: viewModel.isBusy
           ? const GameLoading()
           : SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DialogBar(
-              onClick: () => completer(DialogResponse(confirmed: true)),
-              title: "Add Lesson",
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  DialogBar(
+                    onClick: () => completer(DialogResponse(confirmed: true)),
+                    title: "Add Lesson",
+                  ),
+                  verticalSpaceMedium,
+                  GameButton(text: "Stroke", onClick: viewModel.goToAddStrokeLesson,),
+                  verticalSpaceMedium,
+                  GameButton(text: "Typing", onClick: viewModel.goToAddTypingLesson),
+                  verticalSpaceMedium,
+                ],
+              ),
             ),
-            verticalSpaceMedium,
-
-            GameButton(text: "Stroke", onClick:(){}),
-            verticalSpaceMedium,
-            GameButton(text: "Typing", onClick:(){}),
-            verticalSpaceMedium,
-          ],
-        ),
-      ),
     );
   }
 

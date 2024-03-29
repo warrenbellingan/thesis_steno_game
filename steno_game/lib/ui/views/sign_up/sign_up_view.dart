@@ -25,51 +25,51 @@ class SignUpView extends StackedView<SignUpViewModel> {
   ) {
     return GameBody(
         body: viewModel.isBusy
-            ? GameLoading(
+            ? const GameLoading(
                 label: "Creating Account",
               )
             : SingleChildScrollView(
                 child: Column(
                   children: [
                     GameBar(),
-                    GameTitleText(text: GameUIText.createAccText),
-                    GameImage(path: GamePng.gameAuthCreatePath),
-                    SizedBox(
+                    const GameTitleText(text: GameUIText.createAccText),
+                    const GameImage(path: GamePng.gameAuthCreatePath),
+                    const SizedBox(
                       height: 25,
                     ),
                     DropdownMenu(
                       controller: viewModel.roleController,
                       hintText: GameUIText.roleText,
-                      menuStyle: MenuStyle(
+                      menuStyle: const MenuStyle(
                         alignment: Alignment.centerLeft,
                       ),
-                      leadingIcon: Icon(
+                      leadingIcon: const Icon(
                         Icons.people_alt,
                         color: GameColor.primaryColor,
                       ),
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 15,
                         color: GameColor.secondaryColor,
                         fontWeight: FontWeight.w500,
                       ),
                       dropdownMenuEntries: [
-                        DropdownMenuEntry(
+                        const DropdownMenuEntry(
                           value: 1,
                           label: GameUIText.studentText,
                         ),
-                        DropdownMenuEntry(
+                        const DropdownMenuEntry(
                           value: 2,
                           label: GameUIText.instructorText,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     GameTextField(
                       controller: viewModel.nameController,
                       label: GameUIText.nameText,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.person,
                         color: GameColor.primaryColor,
                       ),

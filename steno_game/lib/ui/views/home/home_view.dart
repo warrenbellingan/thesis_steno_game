@@ -176,6 +176,25 @@ class HomeView extends StackedView<HomeViewModel> {
                 ],
               ),
             ),
+            floatingAction: viewModel.isBusy
+                ? null
+                : viewModel.user.role == "Instructor" &&
+                        viewModel.currentPageIndex == 1
+                    ? Container(
+                        margin: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                            color: GameColor.primaryColor,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: IconButton(
+                          onPressed: viewModel.addLesson,
+                          icon: const Icon(
+                            Icons.add,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : null,
           );
   }
 

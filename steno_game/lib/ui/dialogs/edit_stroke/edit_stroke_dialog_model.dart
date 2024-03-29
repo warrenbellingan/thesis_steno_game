@@ -64,6 +64,7 @@ class EditStrokeDialogModel extends BaseViewModel {
       description: description,
     );
   }
+
   @override
   void dispose() {
     Temporary.stroke == null;

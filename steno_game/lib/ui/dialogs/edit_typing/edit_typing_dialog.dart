@@ -34,42 +34,42 @@ class EditTypingDialog extends StackedView<EditTypingDialogModel> {
       child: viewModel.isBusy
           ? const GameLoading()
           : SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DialogBar(
-              onClick: () => completer(DialogResponse(confirmed: true)),
-              title: "Add",
-            ),
-            verticalSpaceMedium,
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12),
-              child: GameTextField(
-                controller: viewModel.textController,
-                label: "Text",
-                icon: const Icon(
-                  Icons.input,
-                  color: GameColor.primaryColor,
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  DialogBar(
+                    onClick: () => completer(DialogResponse(confirmed: true)),
+                    title: "Add",
+                  ),
+                  verticalSpaceMedium,
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    child: GameTextField(
+                      controller: viewModel.textController,
+                      label: "Text",
+                      icon: const Icon(
+                        Icons.input,
+                        color: GameColor.primaryColor,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    child: GameTextField(
+                      controller: viewModel.typingKeysController,
+                      label: "Typing Keys",
+                      icon: const Icon(
+                        Icons.keyboard,
+                        color: GameColor.primaryColor,
+                      ),
+                    ),
+                  ),
+                  verticalSpaceMedium,
+                  GameButton(text: "Save", onClick: viewModel.editClick),
+                  verticalSpaceMedium,
+                ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12),
-              child: GameTextField(
-                controller: viewModel.typingKeysController,
-                label: "Typing Keys",
-                icon: const Icon(
-                  Icons.keyboard,
-                  color: GameColor.primaryColor,
-                ),
-              ),
-            ),
-            verticalSpaceMedium,
-            GameButton(text: "Save", onClick: viewModel.editClick),
-            verticalSpaceMedium,
-          ],
-        ),
-      ),
     );
   }
 

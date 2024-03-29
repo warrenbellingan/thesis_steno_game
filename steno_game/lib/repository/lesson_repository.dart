@@ -6,6 +6,17 @@ import 'package:steno_game/model/lesson.dart';
 class LessonRepository {
   final _db = FirebaseFirestore.instance;
 
+  Future<Either<GameException, Lesson>> addLesson(String title, String type) async {
+    try{
+      final id = DateTime.now().millisecondsSinceEpoch.toString();
+      Lesson lesson = Lesson(id: id, title: title, type: type);
+      await _db.collection('lessons').doc(id).set(lesson.toJson());
+      return Right(lesson);
+    }
+    catch(e) {
+      return Left(GameException(e.toString()));
+    }
+  }
   Future<Either<GameException, List<Lesson>>> getLessons(String type) async {
     try {
       final results = await _db

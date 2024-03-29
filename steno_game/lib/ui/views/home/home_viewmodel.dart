@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.router.dart';
 
+import '../../../app/app.dialogs.dart';
 import '../../../app/app.locator.dart';
 import '../../../model/user.dart';
 import '../../../services/shared_preference_service.dart';
@@ -15,6 +16,7 @@ class HomeViewModel extends BaseViewModel {
 
   final PageController pageController = PageController(initialPage: 0);
   final _navigationService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
 
   StreamSubscription<User?>? streamSubscription;
 
@@ -59,6 +61,12 @@ class HomeViewModel extends BaseViewModel {
 
   void goToProfileView() {
     _navigationService.navigateToProfileView();
+  }
+
+  void addLesson() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.addLesson,
+    );
   }
 
   @override
