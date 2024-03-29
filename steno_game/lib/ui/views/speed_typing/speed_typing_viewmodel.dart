@@ -64,29 +64,8 @@ class SpeedTypingViewModel extends BaseViewModel {
 
   void onKeyReceived(KeyEvent event) {
     if (event is KeyDownEvent) {
-      print("keypress");
-      // final keyLabel = event.character;
-      // if(keyLabel != null && keyLabel.isNotEmpty) {
-      //   final stenoKey = getSteno[keyLabel];
-      //   if(stenoKey != null) {
-      //     if(!(keyPressed.contains(stenoKey))) {
-      //       keyPressed.add(stenoKey);
-      //       if(keyPressed.length == 1){
-      //
-      //       }
-      //       else {
-      //         if(event.timeStamp.inMicroseconds - currentTimeStamp > 40) {
-      //           bool result = checkSteno();
-      //           nextWord();
-      //         }
-      //       }
-      //     }
-      //   }
-      // }
-    } else if (event is KeyUpEvent) {
-      print('Keydown');
-      currentTimeStamp = event.timeStamp.inMicroseconds;
-    }
+      print(event.character);
+    } else if (event is KeyUpEvent) {}
   }
 
   requestScope(BuildContext context) {

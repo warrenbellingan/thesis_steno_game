@@ -29,12 +29,16 @@ class EditTypingDialogModel extends BaseViewModel {
     rebuildUi();
     setBusy(false);
   }
+
   void editClick() async {
     setBusy(true);
-    typing = Typing(id: typing!.id, text: textController.text, typingKeys: typingKeysController.text);
+    typing = Typing(
+        id: typing!.id,
+        text: textController.text,
+        typingKeys: typingKeysController.text);
     final response = await _typingRepo.editTyping(typing!);
     response.fold((l) => showBottomSheet(l.message),
-            (r) => showBottomSheet("Saved Successfully"));
+        (r) => showBottomSheet("Saved Successfully"));
     setBusy(false);
   }
 
@@ -45,6 +49,7 @@ class EditTypingDialogModel extends BaseViewModel {
       description: description,
     );
   }
+
   @override
   void dispose() {
     Temporary.typing == null;

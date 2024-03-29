@@ -7,6 +7,7 @@
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
+import '../ui/dialogs/add_lesson/add_lesson_dialog.dart';
 import '../ui/dialogs/add_stroke/add_stroke_dialog.dart';
 import '../ui/dialogs/add_typing/add_typing_dialog.dart';
 import '../ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
@@ -27,6 +28,7 @@ enum DialogType {
   addStroke,
   addTyping,
   editTyping,
+  addLesson,
 }
 
 void setupDialogUi() {
@@ -51,6 +53,8 @@ void setupDialogUi() {
         AddTypingDialog(request: request, completer: completer),
     DialogType.editTyping: (context, request, completer) =>
         EditTypingDialog(request: request, completer: completer),
+    DialogType.addLesson: (context, request, completer) =>
+        AddLessonDialog(request: request, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);

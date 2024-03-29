@@ -49,6 +49,9 @@ import 'package:steno_game/ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
 import 'package:steno_game/ui/dialogs/add_stroke/add_stroke_dialog.dart';
 import 'package:steno_game/ui/dialogs/add_typing/add_typing_dialog.dart';
 import 'package:steno_game/ui/dialogs/edit_typing/edit_typing_dialog.dart';
+import 'package:steno_game/ui/dialogs/add_lesson/add_lesson_dialog.dart';
+import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart';
+import 'package:steno_game/ui/views/add_typing_lesson/add_typing_lesson_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -81,6 +84,8 @@ import 'package:steno_game/ui/dialogs/edit_typing/edit_typing_dialog.dart';
     MaterialRoute(page: JoinMultiplayerStrokeView),
     MaterialRoute(page: MultiplayerStrokeWaitingRoomView),
     MaterialRoute(page: MultiplayerStrokeHostView),
+    MaterialRoute(page: AddStrokeLessonView),
+    MaterialRoute(page: AddTypingLessonView),
 // @stacked-route
   ],
   dependencies: [
@@ -114,6 +119,7 @@ import 'package:steno_game/ui/dialogs/edit_typing/edit_typing_dialog.dart';
     StackedDialog(classType: AddStrokeDialog),
     StackedDialog(classType: AddTypingDialog),
     StackedDialog(classType: EditTypingDialog),
+    StackedDialog(classType: AddLessonDialog),
 // @stacked-dialog
   ],
 )

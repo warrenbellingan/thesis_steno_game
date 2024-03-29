@@ -26,6 +26,7 @@ class GameColor {
   static const primaryColor = Color(0xFF8D38E5);
   static const secondaryColor = Color(0xFF505050);
   static const tertiaryColor = Color(0xFFA554FA);
+  static const fortyColor = Color(0xFFCDA7FC);
 
   static const primaryBackgroundColor = Color(0xF0F1F0F0);
   static const secondaryBackgroundColor = Color(0xFF5502AD);

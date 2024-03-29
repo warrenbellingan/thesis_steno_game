@@ -33,7 +33,7 @@ class StrokeRepository {
     }
   }
 
-  Future<Either<GameException, None>> editStroke(
+  Future<Either<GameException, StenoStroke>> editStroke(
       GlobalKey painterKey, String id, String text, String path) async {
     try {
       RenderRepaintBoundary boundary = painterKey.currentContext!
@@ -59,7 +59,9 @@ class StrokeRepository {
               status: 1);
           final update = await updateStroke(stroke);
           return update.fold((l) => Left(GameException(l.message)),
-              (r) => const Right(None()));
+              (r) async{
+            return Right(stroke);
+          });
         },
       );
     } catch (e) {

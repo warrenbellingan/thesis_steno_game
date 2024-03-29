@@ -29,16 +29,16 @@ class MenuView extends StackedView<MenuViewModel> {
                     horizontal: 8,
                     vertical: 4,
                   ),
-                  width: 120,
                   margin: const EdgeInsets.symmetric(horizontal: 18),
                   decoration: BoxDecoration(
                       color: GameColor.secondaryBackgroundColor,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [primaryShadow()]),
                   child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "Steno",
+                        "Search Steno",
                         style: TextStyle(
                           fontSize: 18,
                           color: GameColor.primaryBackgroundColor,

@@ -37,6 +37,4 @@ class AddStrokeDialogModel extends BaseViewModel {
       description: description,
     );
   }
-
-
 }

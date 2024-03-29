@@ -40,7 +40,10 @@ class EditStrokeDialogModel extends BaseViewModel {
       final response = await _strokeRepo.editStroke(
           painterKey, stroke!.id, textController.text, stroke!.filePath);
       response.fold((l) => showBottomSheet(l.message),
-          (r) => showBottomSheet("Updated Successfully"));
+          (r) {
+        stroke = r;
+        showBottomSheet("Updated Successfully");
+          });
     } else {
       StenoStroke newStroke = StenoStroke(
           id: stroke!.id,
@@ -50,8 +53,10 @@ class EditStrokeDialogModel extends BaseViewModel {
           status: 1);
       final response = await _strokeRepo.updateStroke(newStroke);
       response.fold((l) => showBottomSheet(l.message),
-          (r) => showBottomSheet("Updated Successfully"));
-      textController.clear();
+          (r) {
+        stroke = newStroke;
+        showBottomSheet("Updated Successfully");
+          });
     }
     rebuildUi();
     setBusy(false);
@@ -64,6 +69,7 @@ class EditStrokeDialogModel extends BaseViewModel {
       description: description,
     );
   }
+
   @override
   void dispose() {
     Temporary.stroke == null;

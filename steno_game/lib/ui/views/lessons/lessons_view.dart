@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
-
-import '../../custom_widgets/game_chip.dart';
 import '../../custom_widgets/lesson_main_card.dart';
 import 'lessons_viewmodel.dart';
 
@@ -20,8 +18,8 @@ class LessonsView extends StackedView<LessonsViewModel> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(color: Colors.white),
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            decoration: const BoxDecoration(color: Colors.white),
             width: double.infinity,
             child: Row(
               children: [
@@ -46,12 +44,12 @@ class LessonsView extends StackedView<LessonsViewModel> {
                                 color: GameColor.secondaryBackgroundColor,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                letterSpacing: 1.3,
+                                letterSpacing: 1.5,
                               )
                             : const TextStyle(
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                letterSpacing: 1.3,
+                                letterSpacing: 1,
                               ),
                       ),
                     ),
@@ -78,12 +76,12 @@ class LessonsView extends StackedView<LessonsViewModel> {
                                 color: GameColor.secondaryBackgroundColor,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                letterSpacing: 1.3,
+                                letterSpacing: 1.5,
                               )
                             : const TextStyle(
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                letterSpacing: 1.3,
+                                letterSpacing: 1,
                               ),
                       ),
                     ),
@@ -93,19 +91,21 @@ class LessonsView extends StackedView<LessonsViewModel> {
             ),
           ),
           viewModel.isBusy
-              ? GameLoading(
-                  label: "Getting lessons",
-                )
+              ? const GameLoading()
               : ListView.builder(
                   shrinkWrap: true,
+                  primary: false,
                   itemCount: viewModel.lessons.length,
                   itemBuilder: (context, index) {
                     var item = viewModel.lessons[index];
                     return LessonMainCard(
                       label: item.title,
-                      onClick: () {
+                      onLessonClick: () {
                         viewModel.lessonClick(item);
                       },
+                      onEditClick: () => viewModel.lessonEditClick(item),
+                      onDeleteClick: () => viewModel.lessonDeleteClick(item),
+                      isInstructor: viewModel.user.role == "Instructor",
                     );
                   },
                 ),

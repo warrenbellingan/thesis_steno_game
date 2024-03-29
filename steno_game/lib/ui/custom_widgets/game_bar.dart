@@ -19,13 +19,12 @@ class GameBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(bottom: 16),
       child: IconButton(
         alignment: Alignment.centerLeft,
         onPressed: backPressed,
         color: GameColor.primaryColor,
         iconSize: 40,
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_back,
         ),
       ),

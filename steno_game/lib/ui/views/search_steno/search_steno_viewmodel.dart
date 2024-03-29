@@ -70,6 +70,7 @@ class SearchStenoViewModel extends BaseViewModel {
       variant: DialogType.editStroke,
     );
   }
+
   void editTypingDialog(Typing typing) async {
     Temporary.typing = typing;
     await _dialogService.showCustomDialog(

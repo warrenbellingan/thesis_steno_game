@@ -1,3 +1,5 @@
+import 'package:steno_game/ui/custom_widgets/game_icon_button.dart';
+
 import '../constants/game_color.dart';
 import 'package:flutter/material.dart';
 
@@ -6,64 +8,76 @@ import '../common/ui_helpers.dart';
 typedef OnClick = Function();
 
 class LessonMainCard extends StatelessWidget {
-  const LessonMainCard({super.key, required this.label, required this.onClick});
+  const LessonMainCard({
+    super.key,
+    required this.label,
+    required this.onLessonClick,
+    required this.onEditClick,
+    required this.onDeleteClick,
+    required this.isInstructor,
+  });
 
   final String label;
-  final OnClick onClick;
+  final OnClick onLessonClick;
+  final OnClick onEditClick;
+  final OnClick onDeleteClick;
+  final bool isInstructor;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onClick,
-      child: AbsorbPointer(
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          width: double.infinity,
-          height: 100,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-              boxShadow: [
-                primaryShadow(),
-              ]),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
+    return Stack(
+      children: [
+        InkWell(
+          onTap: onLessonClick,
+          child: AbsorbPointer(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+              padding:
+                  const EdgeInsets.only(top: 25, right: 8, left: 16, bottom: 4),
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: GameColor.fortyColor,
+                  boxShadow: [
+                    primaryShadow(),
+                  ]),
+              child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   label,
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: GameColor.secondaryColor,
-                      fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                    wordSpacing: 3,
+                  ),
                 ),
               ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: GameColor.primaryColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  Text(
-                    '100%',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.7,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+        if (isInstructor)
+          Container(
+            margin: const EdgeInsets.only(right: 10, top: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GameIconButton(
+                  onClick: onEditClick,
+                  icon: Icons.edit_rounded,
+                  size: 30,
+                ),
+                GameIconButton(
+                  onClick: onDeleteClick,
+                  icon: Icons.delete_rounded,
+                  size: 30,
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }

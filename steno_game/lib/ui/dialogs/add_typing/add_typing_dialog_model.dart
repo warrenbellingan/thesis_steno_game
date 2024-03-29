@@ -34,6 +34,4 @@ class AddTypingDialogModel extends BaseViewModel {
       description: description,
     );
   }
-
-
 }

@@ -17,19 +17,19 @@ class TopicViewModel extends BaseViewModel {
   Lesson lesson;
 
   List<PictureTopic> topics = [];
-  late StenoStroke stroke;
+  StenoStroke? stroke;
   int currentIndex = 0;
 
   TopicViewModel(this.lesson);
 
   void init() async {
-    await getTopics();
+    await getPictureTopics();
     await getStroke();
   }
 
-  Future<void> getTopics() async {
+  Future<void> getPictureTopics() async {
     setBusy(true);
-    final response = await _topicRepo.getTopics(lesson.id);
+    final response = await _topicRepo.getPictureTopics(lesson.id);
     response.fold((l) => showBottomSheet(l.message), (topicsData) {
       topics = topicsData;
     });
