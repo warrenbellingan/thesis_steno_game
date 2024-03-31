@@ -98,7 +98,9 @@ class AddTypingLessonView extends StackedView<AddTypingLessonViewModel> {
                               ),
                               verticalSpaceMedium,
                               viewModel.currentIndex == viewModel.topics.length
-                                  ? GameButton(text: "Add", onClick: viewModel.addTopicClick)
+                                  ? GameButton(
+                                      text: "Add",
+                                      onClick: viewModel.addTopicClick)
                                   : GameButton(
                                       text: "Save",
                                       onClick: viewModel.updateTopicClick,

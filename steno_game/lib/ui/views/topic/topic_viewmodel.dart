@@ -16,15 +16,28 @@ class TopicViewModel extends BaseViewModel {
 
   Lesson lesson;
 
-  List<PictureTopic> topics = [];
+  List topics = [];
   StenoStroke? stroke;
   int currentIndex = 0;
 
   TopicViewModel(this.lesson);
 
   void init() async {
-    await getPictureTopics();
-    await getStroke();
+    if (lesson.type == "strokes") {
+      await getPictureTopics();
+      await getStroke();
+    } else {
+      await getTextTopics();
+    }
+  }
+
+  Future<void> getTextTopics() async {
+    setBusy(true);
+    final response = await _topicRepo.getTextTopic(lesson.id);
+    response.fold((l) => showBottomSheet(l.message), (topicsData) {
+      topics = topicsData;
+    });
+    setBusy(false);
   }
 
   Future<void> getPictureTopics() async {
@@ -61,7 +74,7 @@ class TopicViewModel extends BaseViewModel {
       return;
     }
     currentIndex = index;
-    await getStroke();
+    if (lesson.type == "strokes") await getStroke();
     rebuildUi();
   }
 }

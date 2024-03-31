@@ -5,6 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/services/authentication_service.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 import 'package:steno_game/services/image_service.dart';
+import 'package:steno_game/services/internet_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -16,6 +17,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<AuthenticationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<SharedPreferenceService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ImageService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<InternetService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -25,6 +27,7 @@ void registerServices() {
   getAndRegisterAuthenticationService();
   getAndRegisterSharedPreferenceService();
   getAndRegisterImageService();
+  getAndRegisterInternetService();
 // @stacked-mock-register
 }
 
@@ -96,6 +99,13 @@ MockImageService getAndRegisterImageService() {
   _removeRegistrationIfExists<ImageService>();
   final service = MockImageService();
   locator.registerSingleton<ImageService>(service);
+  return service;
+}
+
+MockInternetService getAndRegisterInternetService() {
+  _removeRegistrationIfExists<InternetService>();
+  final service = MockInternetService();
+  locator.registerSingleton<InternetService>(service);
   return service;
 }
 // @stacked-mock-create

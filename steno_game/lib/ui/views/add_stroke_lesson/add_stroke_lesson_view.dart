@@ -41,15 +41,15 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                 color: GameColor.primaryColor,
                               ),
                             ),
-
-                            viewModel.lesson != null ?
-                            GameButton(
-                              text:"Save Lesson",
-                              onClick: viewModel.saveLessonClick,
-                            ) : GameButton(
-                              text: "Add Lesson",
-                              onClick: viewModel.addLesson,
-                            ),
+                            viewModel.lesson != null
+                                ? GameButton(
+                                    text: "Save Lesson",
+                                    onClick: viewModel.saveLessonClick,
+                                  )
+                                : GameButton(
+                                    text: "Add Lesson",
+                                    onClick: viewModel.addLesson,
+                                  ),
                           ],
                         ),
                       )
@@ -72,8 +72,8 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                               viewModel.currentIndex == viewModel.topics.length
                                   ? Painter(globalKey: viewModel.painterKey)
                                   : Column(
-                                    children: [
-                                      Container(
+                                      children: [
+                                        Container(
                                           decoration: BoxDecoration(
                                               boxShadow: [primaryShadow()],
                                               borderRadius:
@@ -98,25 +98,27 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                             ],
                                           ),
                                         ),
-                                      ElevatedButton(
-                                        onPressed: viewModel.editStroke,
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(12),
-                                                side: const BorderSide(
-                                                    color: Colors.black, width: 2))),
-                                        child: const Text(
-                                          "Edit Stroke",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
+                                        ElevatedButton(
+                                          onPressed: viewModel.editStroke,
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  side: const BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2))),
+                                          child: const Text(
+                                            "Edit Stroke",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
                               verticalSpaceMedium,
                               if (viewModel.currentIndex ==
                                   viewModel.topics.length)
@@ -134,7 +136,8 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                   maxLines: 15,
                                   textAlign: TextAlign.justify,
                                   keyboardType: TextInputType.multiline,
-                                  controller: viewModel.strokeDescriptionController,
+                                  controller:
+                                      viewModel.strokeDescriptionController,
                                   decoration: InputDecoration(
                                     fillColor: GameColor.primaryBackgroundColor,
                                     filled: true,
@@ -165,8 +168,10 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                       ),
                 if (!viewModel.isAddLesson)
                   GameNavigator(
-                      previousClick: () => viewModel.changePage(viewModel.currentIndex - 1),
-                      nextClick: () => viewModel.changePage(viewModel.currentIndex + 1),
+                      previousClick: () =>
+                          viewModel.changePage(viewModel.currentIndex - 1),
+                      nextClick: () =>
+                          viewModel.changePage(viewModel.currentIndex + 1),
                       currentPage: viewModel.currentIndex + 1,
                       allPage: viewModel.topics.length + 1),
               ],

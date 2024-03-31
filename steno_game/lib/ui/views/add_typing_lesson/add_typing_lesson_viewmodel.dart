@@ -29,7 +29,7 @@ class AddTypingLessonViewModel extends BaseViewModel {
   AddTypingLessonViewModel(this.lesson);
 
   init() {
-    if(lesson != null) {
+    if (lesson != null) {
       lessonTitleController.text = lesson!.title;
     }
   }
@@ -41,10 +41,9 @@ class AddTypingLessonViewModel extends BaseViewModel {
       return;
     }
     currentIndex = index;
-    if(currentIndex < topics.length) {
+    if (currentIndex < topics.length) {
       textController.text = topics[currentIndex].text;
-    }
-    else {
+    } else {
       textController.clear();
     }
     rebuildUi();
@@ -56,8 +55,8 @@ class AddTypingLessonViewModel extends BaseViewModel {
       showBottomSheet("Lesson Title is Required");
     } else {
       final response =
-      await _lessonRepo.addLesson(lessonTitleController.text, 'typing');
-      response.fold((l) => showBottomSheet(l.message), (lessonData) async{
+          await _lessonRepo.addLesson(lessonTitleController.text, 'typing');
+      response.fold((l) => showBottomSheet(l.message), (lessonData) async {
         showBottomSheet("Added Successfully");
         lesson = lessonData;
         await getTextTopics();
@@ -67,19 +66,20 @@ class AddTypingLessonViewModel extends BaseViewModel {
     }
     setBusy(false);
   }
-  saveLessonClick() async{
+
+  saveLessonClick() async {
     setBusy(true);
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
-      final response =
-      await _lessonRepo.editLesson(lesson!.id,lessonTitleController.text, 'typing');
-      response.fold((l) => showBottomSheet(l.message), (lessonData) async{
+      final response = await _lessonRepo.editLesson(
+          lesson!.id, lessonTitleController.text, 'typing');
+      response.fold((l) => showBottomSheet(l.message), (lessonData) async {
         showBottomSheet("Saved Successfully");
         lesson = lessonData;
         await getTextTopics();
         isAddLesson = false;
-        if(currentIndex < topics.length) {
+        if (currentIndex < topics.length) {
           textController.text = topics[currentIndex].text;
         }
         rebuildUi();
@@ -87,6 +87,7 @@ class AddTypingLessonViewModel extends BaseViewModel {
     }
     setBusy(false);
   }
+
   Future<void> getTextTopics() async {
     setBusy(true);
     final response = await _topicRepo.getTextTopic(lesson!.id);
@@ -96,24 +97,29 @@ class AddTypingLessonViewModel extends BaseViewModel {
     });
     setBusy(false);
   }
-  void addTopicClick() async{
+
+  void addTopicClick() async {
     setBusy(true);
-    final response = await _topicRepo.addTextTopic(lesson!.id, textController.text);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    final response =
+        await _topicRepo.addTextTopic(lesson!.id, textController.text);
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       showBottomSheet('Topic Added Successfully');
       await getTextTopics();
     });
     setBusy(false);
   }
+
   void updateTopicClick() async {
     setBusy(true);
-    final response = await _topicRepo.updateTextTopic(lesson!.id, topics[currentIndex]);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    final response =
+        await _topicRepo.updateTextTopic(lesson!.id, topics[currentIndex]);
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       showBottomSheet('Topic Saved Successfully');
       await getTextTopics();
     });
     setBusy(false);
   }
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,

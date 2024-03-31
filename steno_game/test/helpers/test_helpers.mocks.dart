@@ -18,6 +18,7 @@ import 'package:steno_game/exception/game_exception.dart' as _i11;
 import 'package:steno_game/model/user.dart' as _i12;
 import 'package:steno_game/services/authentication_service.dart' as _i10;
 import 'package:steno_game/services/image_service.dart' as _i14;
+import 'package:steno_game/services/internet_service.dart' as _i16;
 import 'package:steno_game/services/shared_preference_service.dart' as _i13;
 
 // ignore_for_file: type=lint
@@ -1131,3 +1132,8 @@ class MockImageService extends _i1.Mock implements _i14.ImageService {
         )),
       ) as _i8.Future<_i4.Either<_i11.GameException, String>>);
 }
+
+/// A class which mocks [InternetService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockInternetService extends _i1.Mock implements _i16.InternetService {}

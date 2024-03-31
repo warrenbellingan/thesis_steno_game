@@ -52,6 +52,7 @@ import 'package:steno_game/ui/dialogs/edit_typing/edit_typing_dialog.dart';
 import 'package:steno_game/ui/dialogs/add_lesson/add_lesson_dialog.dart';
 import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart';
 import 'package:steno_game/ui/views/add_typing_lesson/add_typing_lesson_view.dart';
+import 'package:steno_game/services/internet_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -102,6 +103,7 @@ import 'package:steno_game/ui/views/add_typing_lesson/add_typing_lesson_view.dar
     LazySingleton(classType: PictureQuizRepository),
     LazySingleton(classType: MultiplayerStrokeRepository),
     LazySingleton(classType: TypingRepository),
+    LazySingleton(classType: InternetService),
 // @stacked-service
   ],
   bottomsheets: [

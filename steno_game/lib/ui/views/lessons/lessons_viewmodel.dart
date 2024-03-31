@@ -23,7 +23,6 @@ class LessonsViewModel extends BaseViewModel {
   init() async {
     user = (await _sharedPref.getCurrentUser())!;
     getLessons("strokes");
-
   }
 
   Future<void> getLessons(String type) async {
@@ -47,14 +46,13 @@ class LessonsViewModel extends BaseViewModel {
     _navigationService.navigateToTopicView(lesson: lesson);
   }
 
-  void lessonDeleteClick(Lesson lesson) async{
+  void lessonDeleteClick(Lesson lesson) async {
     setBusy(true);
     final response = await _lessonRepo.deleteLesson(lesson.id);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
-      if(selectedIndex == 1) {
+    response.fold((l) => showBottomSheet(l.message), (r) async {
+      if (selectedIndex == 1) {
         await getLessons("strokes");
-      }
-      else {
+      } else {
         await getLessons("typing");
       }
 
@@ -64,12 +62,10 @@ class LessonsViewModel extends BaseViewModel {
   }
 
   void lessonEditClick(Lesson lesson) {
-    if(lesson.type == "stroke"){
+    if (lesson.type == "stroke") {
       _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
-    }
-    else {
+    } else {
       _navigationService.navigateToAddTypingLessonView(lesson: lesson);
-
     }
   }
 

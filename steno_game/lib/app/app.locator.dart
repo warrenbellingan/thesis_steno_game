@@ -20,6 +20,7 @@ import '../repository/typing_repository.dart';
 import '../repository/user_repository.dart';
 import '../services/authentication_service.dart';
 import '../services/image_service.dart';
+import '../services/internet_service.dart';
 import '../services/shared_preference_service.dart';
 
 final locator = StackedLocator.instance;
@@ -46,4 +47,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => PictureQuizRepository());
   locator.registerLazySingleton(() => MultiplayerStrokeRepository());
   locator.registerLazySingleton(() => TypingRepository());
+  locator.registerLazySingleton(() => InternetService());
 }

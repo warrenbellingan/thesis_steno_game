@@ -24,8 +24,6 @@ class AddStrokeLessonViewModel extends BaseViewModel {
   TextEditingController lessonTitleController = TextEditingController();
   bool isAddLesson = true;
 
-
-
   List<PictureTopic> topics = [];
   StenoStroke? stroke;
   Lesson? lesson;
@@ -40,10 +38,9 @@ class AddStrokeLessonViewModel extends BaseViewModel {
   AddStrokeLessonViewModel(this.lesson);
 
   init() {
-    if(lesson != null) {
+    if (lesson != null) {
       lessonTitleController.text = lesson!.title;
     }
-
   }
 
   Future<void> addLesson() async {
@@ -53,7 +50,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     } else {
       final response =
           await _lessonRepo.addLesson(lessonTitleController.text, 'strokes');
-      response.fold((l) => showBottomSheet(l.message), (lessonData) async{
+      response.fold((l) => showBottomSheet(l.message), (lessonData) async {
         showBottomSheet("Added Successfully");
         lesson = lessonData;
         await getPictureTopics();
@@ -63,14 +60,15 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     }
     setBusy(false);
   }
-  saveLessonClick() async{
+
+  saveLessonClick() async {
     setBusy(true);
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
-      final response =
-          await _lessonRepo.editLesson(lesson!.id,lessonTitleController.text, 'strokes');
-      response.fold((l) => showBottomSheet(l.message), (lessonData) async{
+      final response = await _lessonRepo.editLesson(
+          lesson!.id, lessonTitleController.text, 'strokes');
+      response.fold((l) => showBottomSheet(l.message), (lessonData) async {
         showBottomSheet("Saved Successfully");
         lesson = lessonData;
         await getPictureTopics();
@@ -89,6 +87,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     });
     setBusy(false);
   }
+
   Future<void> getStroke() async {
     String strokeId = topics[currentIndex].stroke;
     setBusy(true);
@@ -99,7 +98,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void editStroke() async{
+  void editStroke() async {
     Temporary.stroke = stroke;
     await _dialogServ.showCustomDialog(
       variant: DialogType.editStroke,
@@ -109,9 +108,13 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     setBusy(false);
     rebuildUi();
   }
-  void saveClick() async{
+
+  void saveClick() async {
     setBusy(true);
-    PictureTopic topic = PictureTopic(id: topics[currentIndex].id, stroke: stroke!.id, description: topics[currentIndex].description);
+    PictureTopic topic = PictureTopic(
+        id: topics[currentIndex].id,
+        stroke: stroke!.id,
+        description: topics[currentIndex].description);
     final response = await _topicRepo.updatePictureTopic(topic, lesson!.id);
     response.fold((l) => showBottomSheet(l.message), (r) {
       showBottomSheet("Saved Successfully");
@@ -126,21 +129,24 @@ class AddStrokeLessonViewModel extends BaseViewModel {
       return;
     }
     currentIndex = index;
-    if(currentIndex < topics.length) {
+    if (currentIndex < topics.length) {
       await getStroke();
       strokeDescriptionController.text = topics[currentIndex].description;
-    }
-    else {
+    } else {
       strokeDescriptionController.clear();
       strokeTextController.clear();
     }
     rebuildUi();
   }
 
-  void addTopicClick() async{
+  void addTopicClick() async {
     setBusy(true);
-    final response = await _topicRepo.addPictureTopic(lesson!.id, strokeDescriptionController.text, strokeTextController.text, painterKey);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    final response = await _topicRepo.addPictureTopic(
+        lesson!.id,
+        strokeDescriptionController.text,
+        strokeTextController.text,
+        painterKey);
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       await getPictureTopics();
       await getStroke();
     });
@@ -154,6 +160,4 @@ class AddStrokeLessonViewModel extends BaseViewModel {
       description: description,
     );
   }
-
-
 }

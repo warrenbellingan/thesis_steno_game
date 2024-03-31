@@ -29,42 +29,66 @@ class TopicView extends StackedView<TopicViewModel> {
           : Column(
               children: [
                 GameBar(),
-               Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Text(
-                                lesson.title,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    color: GameColor.secondaryBackgroundColor,
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2,
-                                    wordSpacing: 2),
-                              ),
-                              verticalSpaceSmall,
-                              viewModel.topics.isEmpty
-                                  ? const GameEmpty()
-                                  :  GamePictureTopic(
-                                image: viewModel.stroke!.strokeImage,
-                                text: viewModel.stroke!.text,
-                                description: viewModel
-                                    .topics[viewModel.currentIndex].description,
-                              ),
-                            ],
-                          ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          lesson.title,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: GameColor.secondaryBackgroundColor,
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2,
+                              wordSpacing: 2),
                         ),
-                      ),
-                if(viewModel.topics.isNotEmpty)
-                GameNavigator(
-                  previousClick: () =>
-                      viewModel.changePage(viewModel.currentIndex - 1),
-                  nextClick: () =>
-                      viewModel.changePage(viewModel.currentIndex + 1),
-                  currentPage: viewModel.currentIndex + 1,
-                  allPage: viewModel.topics.length,
+                        verticalSpaceSmall,
+                        viewModel.topics.isEmpty
+                            ? const GameEmpty()
+                            : lesson.type == "strokes"
+                                ? GamePictureTopic(
+                                    image: viewModel.stroke!.strokeImage,
+                                    text: viewModel.stroke!.text,
+                                    description: viewModel
+                                        .topics[viewModel.currentIndex]
+                                        .description,
+                                  )
+                                : Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 2, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        width: 2,
+                                        style: BorderStyle.solid,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      viewModel
+                                          .topics[viewModel.currentIndex].text,
+                                      textAlign: TextAlign.justify,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        letterSpacing: 2,
+                                      ),
+                                    ),
+                                  ),
+                      ],
+                    ),
+                  ),
                 ),
+                if (viewModel.topics.isNotEmpty)
+                  GameNavigator(
+                    previousClick: () =>
+                        viewModel.changePage(viewModel.currentIndex - 1),
+                    nextClick: () =>
+                        viewModel.changePage(viewModel.currentIndex + 1),
+                    currentPage: viewModel.currentIndex + 1,
+                    allPage: viewModel.topics.length,
+                  ),
               ],
             ),
     );

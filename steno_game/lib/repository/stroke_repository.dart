@@ -58,8 +58,7 @@ class StrokeRepository {
               filePath: path,
               status: 1);
           final update = await updateStroke(stroke);
-          return update.fold((l) => Left(GameException(l.message)),
-              (r) async{
+          return update.fold((l) => Left(GameException(l.message)), (r) async {
             return Right(stroke);
           });
         },

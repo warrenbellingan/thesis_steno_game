@@ -8,10 +8,9 @@ class AddLessonDialogModel extends BaseViewModel {
 
   void goToAddStrokeLesson() {
     _navSer.navigateToAddStrokeLessonView(lesson: null);
-
   }
+
   void goToAddTypingLesson() {
     _navSer.navigateToAddTypingLessonView(lesson: null);
-
   }
 }

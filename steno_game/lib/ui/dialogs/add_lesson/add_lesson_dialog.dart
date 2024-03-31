@@ -38,9 +38,13 @@ class AddLessonDialog extends StackedView<AddLessonDialogModel> {
                     title: "Add Lesson",
                   ),
                   verticalSpaceMedium,
-                  GameButton(text: "Stroke", onClick: viewModel.goToAddStrokeLesson,),
+                  GameButton(
+                    text: "Stroke",
+                    onClick: viewModel.goToAddStrokeLesson,
+                  ),
                   verticalSpaceMedium,
-                  GameButton(text: "Typing", onClick: viewModel.goToAddTypingLesson),
+                  GameButton(
+                      text: "Typing", onClick: viewModel.goToAddTypingLesson),
                   verticalSpaceMedium,
                 ],
               ),
@@ -51,5 +55,4 @@ class AddLessonDialog extends StackedView<AddLessonDialogModel> {
   @override
   AddLessonDialogModel viewModelBuilder(BuildContext context) =>
       AddLessonDialogModel();
-
 }
