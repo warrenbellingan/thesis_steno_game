@@ -467,8 +467,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i31.AddTypingLessonView: (data) {
+      final args = data.getArgs<AddTypingLessonViewArguments>(nullOk: false);
       return _i32.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i31.AddTypingLessonView(),
+        builder: (context) =>
+            _i31.AddTypingLessonView(args.lesson, key: args.key),
         settings: data,
       );
     },
@@ -660,6 +662,33 @@ class AddStrokeLessonViewArguments {
 
   @override
   bool operator ==(covariant AddStrokeLessonViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.lesson == lesson && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return lesson.hashCode ^ key.hashCode;
+  }
+}
+
+class AddTypingLessonViewArguments {
+  const AddTypingLessonViewArguments({
+    required this.lesson,
+    this.key,
+  });
+
+  final _i35.Lesson? lesson;
+
+  final _i34.Key? key;
+
+  @override
+  String toString() {
+    return '{"lesson": "$lesson", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant AddTypingLessonViewArguments other) {
     if (identical(this, other)) return true;
     return other.lesson == lesson && other.key == key;
   }
@@ -1099,14 +1128,17 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddTypingLessonView([
+  Future<dynamic> navigateToAddTypingLessonView({
+    required _i35.Lesson? lesson,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.addTypingLessonView,
+        arguments: AddTypingLessonViewArguments(lesson: lesson, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1541,14 +1573,17 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAddTypingLessonView([
+  Future<dynamic> replaceWithAddTypingLessonView({
+    required _i35.Lesson? lesson,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.addTypingLessonView,
+        arguments: AddTypingLessonViewArguments(lesson: lesson, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

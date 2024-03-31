@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,8 +16,27 @@ Future<void> main() async {
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
+  final Connectivity connectivity = Connectivity();
+  List<ConnectivityResult> connectionStatus = await (connectivity.checkConnectivity());
+  checkConnection(connectionStatus);
+  StreamSubscription<List<ConnectivityResult>> subscription = Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    checkConnection(result);
+  });
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
+}
+
+void checkConnection(List<ConnectivityResult> connectionStatus ) {
+  if(connectionStatus.contains(ConnectivityResult.mobile)) {
+    print("Mobile internet");
+  }
+  else if(connectionStatus.contains(ConnectivityResult.wifi)) {
+    print("Wifi internet");
+  }
+  else if(connectionStatus.contains(ConnectivityResult.none)){
+    print("No internet");
+  }
 }
 
 class MainApp extends StatelessWidget {

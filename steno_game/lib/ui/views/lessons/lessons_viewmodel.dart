@@ -50,12 +50,12 @@ class LessonsViewModel extends BaseViewModel {
   void lessonDeleteClick(Lesson lesson) async{
     setBusy(true);
     final response = await _lessonRepo.deleteLesson(lesson.id);
-    response.fold((l) => showBottomSheet(l.message), (r) {
+    response.fold((l) => showBottomSheet(l.message), (r) async{
       if(selectedIndex == 1) {
-        getLessons("strokes");
+        await getLessons("strokes");
       }
       else {
-        getLessons("typing");
+        await getLessons("typing");
       }
 
       showBottomSheet("Deleted Successfully");
@@ -63,8 +63,14 @@ class LessonsViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void lessonEditClick(lesson) {
-    _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
+  void lessonEditClick(Lesson lesson) {
+    if(lesson.type == "stroke"){
+      _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
+    }
+    else {
+      _navigationService.navigateToAddTypingLessonView(lesson: lesson);
+
+    }
   }
 
   void showBottomSheet(String description) {

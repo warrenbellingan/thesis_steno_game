@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
+import '../../../model/lesson.dart';
 import '../../custom_widgets/lesson_main_card.dart';
 import 'lessons_viewmodel.dart';
 

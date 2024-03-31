@@ -51,4 +51,5 @@ class AddLessonDialog extends StackedView<AddLessonDialogModel> {
   @override
   AddLessonDialogModel viewModelBuilder(BuildContext context) =>
       AddLessonDialogModel();
+
 }

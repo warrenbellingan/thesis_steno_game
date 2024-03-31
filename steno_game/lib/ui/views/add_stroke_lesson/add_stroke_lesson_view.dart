@@ -124,10 +124,33 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                   controller: viewModel.strokeTextController,
                                   label: "Stroke Text",
                                 ),
-                              GameTextField(
-                                  controller:
-                                      viewModel.strokeDescriptionController,
-                                  label: "Description"),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      primaryShadow(),
+                                    ]),
+                                child: TextField(
+                                  maxLines: 15,
+                                  textAlign: TextAlign.justify,
+                                  keyboardType: TextInputType.multiline,
+                                  controller: viewModel.strokeDescriptionController,
+                                  decoration: InputDecoration(
+                                    fillColor: GameColor.primaryBackgroundColor,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    labelText: "Description",
+                                    labelStyle: const TextStyle(
+                                      color: Color(0xFF78746D),
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              verticalSpaceMedium,
                               viewModel.currentIndex == viewModel.topics.length
                                   ? GameButton(
                                       text: "Add",
