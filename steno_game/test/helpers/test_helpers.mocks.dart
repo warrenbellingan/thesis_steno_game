@@ -1136,4 +1136,14 @@ class MockImageService extends _i1.Mock implements _i14.ImageService {
 /// A class which mocks [InternetService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockInternetService extends _i1.Mock implements _i16.InternetService {}
+class MockInternetService extends _i1.Mock implements _i16.InternetService {
+  @override
+  _i8.Future<bool> hasInternetConnection() => (super.noSuchMethod(
+        Invocation.method(
+          #hasInternetConnection,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+}

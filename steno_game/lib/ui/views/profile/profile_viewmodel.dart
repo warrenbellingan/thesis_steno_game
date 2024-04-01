@@ -38,6 +38,9 @@ class ProfileViewModel extends BaseViewModel {
   bool isStudent() {
     return user.role == "Student";
   }
+  void connectAccount() {
+    _navigationService.navigateToSignUpView(user: user);
+  }
 
   ImageProvider getImage() {
     if (user.image == null) return const AssetImage(GamePng.gameAvatarPath);
@@ -94,4 +97,6 @@ class ProfileViewModel extends BaseViewModel {
     streamSubscription?.cancel();
     super.dispose();
   }
+
+
 }

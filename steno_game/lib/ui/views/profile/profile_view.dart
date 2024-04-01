@@ -57,7 +57,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
                               width: 160,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                                   Expanded(
                                     child: Text(
                                       viewModel.user.name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         height: 1,
                                         fontWeight: FontWeight.w600,
@@ -112,58 +112,94 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       ],
                     ),
                     verticalSpaceMedium,
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 4),
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: GameColor.secondaryColor,
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Email: ${viewModel.user.email}",
-                            style: TextStyle(fontSize: 16),
+                    viewModel.user.email != "" ?
+                    Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4),
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: GameColor.secondaryColor,
+                              width: 1,
+                            ),
                           ),
-                          GameIconButton(
-                              onClick: viewModel.showUpdateEmailDialog,
-                              icon: Icons.edit_rounded)
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: viewModel.showUpdatePasswordDialog,
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(
-                            color: Colors.black,
-                            style: BorderStyle.solid,
-                            width: 2,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Email: ${viewModel.user.email}",
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              GameIconButton(
+                                  onClick: viewModel.showUpdateEmailDialog,
+                                  icon: Icons.edit_rounded)
+                            ],
                           ),
                         ),
-                        backgroundColor: Colors.white,
-                        shadowColor: Colors.grey,
-                      ),
-                      child: const Text(
-                        "Change Password",
-                        style: TextStyle(
-                          color: Colors.black,
-                          letterSpacing: 1,
-                          wordSpacing: 2,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        ElevatedButton(
+                          onPressed: viewModel.showUpdatePasswordDialog,
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(
+                                color: Colors.black,
+                                style: BorderStyle.solid,
+                                width: 2,
+                              ),
+                            ),
+                            backgroundColor: Colors.white,
+                            shadowColor: Colors.grey,
+                          ),
+                          child: const Text(
+                            "Change Password",
+                            style: TextStyle(
+                              color: Colors.black,
+                              letterSpacing: 1,
+                              wordSpacing: 2,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                      ),
+                        verticalSpaceSmall,
+                      ],
+                    ) : Column(
+                      children: [
+                        const Text("Your account is not connected! \n It is recommended to connect it in the game"),
+                        ElevatedButton(
+                          onPressed: viewModel.connectAccount,
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(
+                                color: Colors.black,
+                                style: BorderStyle.solid,
+                                width: 2,
+                              ),
+                            ),
+                            backgroundColor: Colors.white,
+                            shadowColor: Colors.grey,
+                          ),
+                          child: const Text(
+                            "Connect Account",
+                            style: TextStyle(
+                              color: Colors.black,
+                              letterSpacing: 1,
+                              wordSpacing: 2,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        verticalSpaceSmall,
+                      ],
                     ),
-                    verticalSpaceSmall,
+
                     if (viewModel.isStudent())
                       Column(
                         children: [

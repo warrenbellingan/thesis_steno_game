@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/views/sign_up/sign_up_viewmodel.dart';
 
+import '../../../model/user.dart';
 import '../../constants/game_color.dart';
 import '../../constants/game_png.dart';
 import '../../constants/game_ui_text.dart';
@@ -15,7 +16,9 @@ import '../../custom_widgets/game_textfield.dart';
 import '../../custom_widgets/game_title_text.dart';
 
 class SignUpView extends StackedView<SignUpViewModel> {
-  const SignUpView({Key? key}) : super(key: key);
+  const SignUpView(this.user, {Key? key}) : super(key: key);
+
+  final User? user;
 
   @override
   Widget builder(
@@ -32,7 +35,7 @@ class SignUpView extends StackedView<SignUpViewModel> {
                 child: Column(
                   children: [
                     GameBar(),
-                    const GameTitleText(text: GameUIText.createAccText),
+                    GameTitleText(text: user == null ? GameUIText.createAccText : "Connect Account"),
                     const GameImage(path: GamePng.gameAuthCreatePath),
                     const SizedBox(
                       height: 25,
@@ -86,7 +89,7 @@ class SignUpView extends StackedView<SignUpViewModel> {
                       label: GameUIText.confirmPassText,
                     ),
                     GameButton(
-                        text: GameUIText.createText, onClick: viewModel.signUp)
+                        text: user == null ? GameUIText.createText : "Connect", onClick: viewModel.signUp)
                   ],
                 ),
               ));
@@ -96,5 +99,10 @@ class SignUpView extends StackedView<SignUpViewModel> {
   SignUpViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      SignUpViewModel();
+      SignUpViewModel(user);
+
+  @override
+  void onViewModelReady(SignUpViewModel viewModel) {
+    viewModel.init();
+  }
 }

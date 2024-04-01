@@ -20,6 +20,16 @@ class SharedPreferenceService {
     sharedPref.remove("USER_KEY");
   }
 
+  Future<void> setIsPreviousOnline(bool status) async {
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setBool("USER_STATUS", status);
+  }
+  Future<bool?> getIsPreviousOnline()  async {
+    final sharedPref = await SharedPreferences.getInstance();
+    final status = sharedPref.getBool("USER_STATUS");
+    return status;
+  }
+
   Future<User?> getCurrentUser() async {
     final sharedPref = await SharedPreferences.getInstance();
     final user = sharedPref.getString("USER_KEY");
@@ -36,6 +46,8 @@ class SharedPreferenceService {
     userId = user.id;
     await sharedPref.setString("USER_KEY", jsonEncode(user.toJson()));
   }
+
+
 
   void dispose() {
     _userStreamController.close();

@@ -54,7 +54,7 @@ class LoginViewModel extends BaseViewModel with InputValidation {
   }
 
   void goToSignUp() {
-    _navigationService.navigateToSignUpView();
+    _navigationService.navigateToSignUpView(user: null);
   }
 
   void showBottomSheet(String description) {

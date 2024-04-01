@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/services/internet_service.dart';
 import 'package:steno_game/ui/views/menu/menu_view.dart';
+import '../../../app/app.locator.dart';
 import '../../common/ui_helpers.dart';
 import '../../constants/game_color.dart';
 import '../../constants/game_ui_text.dart';
@@ -13,7 +15,7 @@ import '../people/people_view.dart';
 import '../play/play_view.dart';
 import 'home_viewmodel.dart';
 
-class HomeView extends StackedView<HomeViewModel> {
+class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver{
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class HomeView extends StackedView<HomeViewModel> {
     Widget? child,
   ) {
     return viewModel.isBusy
-        ? const GameLoading()
+        ?const GameBody(body: GameLoading())
         : GameBody(
             body: Column(
               children: [
@@ -209,4 +211,15 @@ class HomeView extends StackedView<HomeViewModel> {
   void onViewModelReady(HomeViewModel viewModel) {
     viewModel.init();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state == AppLifecycleState.detached) {
+      final internet = locator<InternetService>();
+      internet.dispose();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+
 }

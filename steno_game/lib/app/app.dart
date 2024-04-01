@@ -104,6 +104,7 @@ import 'package:steno_game/services/internet_service.dart';
     LazySingleton(classType: MultiplayerStrokeRepository),
     LazySingleton(classType: TypingRepository),
     LazySingleton(classType: InternetService),
+    LazySingleton(classType: SnackbarService),
 // @stacked-service
   ],
   bottomsheets: [

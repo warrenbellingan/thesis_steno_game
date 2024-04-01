@@ -8,46 +8,101 @@ import 'package:steno_game/services/authentication_service.dart';
 import 'package:steno_game/services/image_service.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 
+import '../services/internet_service.dart';
+
 class UserRepository {
   final _db = FirebaseFirestore.instance;
   final _imageService = locator<ImageService>();
   final _sharedPref = locator<SharedPreferenceService>();
   final _authServ = locator<AuthenticationService>();
+  final _internetService = locator<InternetService>();
+
+  Future<Either<GameException, None>> updateScore(int gainScore) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    User? user = await _sharedPref.getCurrentUser();
+
+    if (hasInternet) {
+      try {
+        await _db
+            .collection("users")
+            .doc(_sharedPref.userId)
+            .set({"score": user!.score + gainScore}, SetOptions(merge: true));
+        _authServ.getCurrentUser();
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      User updatedUser = User(
+        id: user!.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        image: user.image,
+        achievements: user.achievements,
+        completedLevels: user.completedLevels,
+        friends: user.friends,
+        friendsRequest: user.friendsRequest,
+        level: user.level,
+        levelProgress: user.levelProgress,
+        score: user.score + gainScore,
+        typingAccuracy: user.typingAccuracy,
+        typingSpeed: user.typingSpeed,
+      );
+      await _sharedPref.saveUser(updatedUser);
+      return const Right(None());
+    }
+  }
 
   Future<Either<GameException, List<User>>> searchUser(
       String searchText) async {
-    try {
-      final results = await _db.collection('users').get().then((value) =>
-          value.docs.map((doc) => User.fromJson(doc.data())).toList());
-      if (searchText.isNotEmpty) {
-        return Right(results
-            .where((users) => users.name
-                .toLowerCase()
-                .contains(searchText.toString().toLowerCase()))
-            .toList());
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        final results = await _db.collection('users').get().then((value) =>
+            value.docs.map((doc) => User.fromJson(doc.data())).toList());
+        if (searchText.isNotEmpty) {
+          return Right(results
+              .where((users) => users.name
+                  .toLowerCase()
+                  .contains(searchText.toString().toLowerCase()))
+              .toList());
+        }
+        return Right(results);
+      } catch (e) {
+        return Left(GameException(e.toString()));
       }
-      return Right(results);
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, List<User>>> getUsers() async {
-    try {
-      final results = await _db.collection('users').get().then((value) =>
-          value.docs.map((user) => User.fromJson(user.data())).toList());
-      return Right(results);
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        final results = await _db.collection('users').get().then((value) =>
+            value.docs.map((user) => User.fromJson(user.data())).toList());
+        return Right(results);
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, User>> getUser(String id) async {
-    try {
-      final userDoc = await _db.collection('users').doc(id).get();
-      return Right(User.fromJson(userDoc.data()!));
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        final userDoc = await _db.collection('users').doc(id).get();
+        return Right(User.fromJson(userDoc.data()!));
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
@@ -57,120 +112,160 @@ class UserRepository {
   }
 
   Future<Either<GameException, None>> updateName(String name) async {
-    try {
-      await _db
-          .collection("users")
-          .doc(_sharedPref.userId)
-          .set({"name": name}, SetOptions(merge: true));
-      _authServ.getCurrentUser();
-      return const Right(None());
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db
+            .collection("users")
+            .doc(_sharedPref.userId)
+            .set({"name": name}, SetOptions(merge: true));
+        _authServ.getCurrentUser();
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, None>> uploadProfilePicture(
       File imageFile) async {
-    String path = "images/strokes/${_sharedPref.userId}";
-    try {
-      final response = await _imageService.uploadImage(imageFile, path);
-      return response.fold(
-        (l) => Left(GameException(l.message)),
-        (imageUrl) async {
-          try {
-            await _db
-                .collection("users")
-                .doc(_sharedPref.userId)
-                .set({"image": imageUrl}, SetOptions(merge: true));
-            await _authServ.getCurrentUser();
-            return const Right(None());
-          } catch (e) {
-            return Left(GameException(e.toString()));
-          }
-        },
-      );
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      String path = "images/strokes/${_sharedPref.userId}";
+      try {
+        final response = await _imageService.uploadImage(imageFile, path);
+        return response.fold(
+          (l) => Left(GameException(l.message)),
+          (imageUrl) async {
+            try {
+              await _db
+                  .collection("users")
+                  .doc(_sharedPref.userId)
+                  .set({"image": imageUrl}, SetOptions(merge: true));
+              await _authServ.getCurrentUser();
+              return const Right(None());
+            } catch (e) {
+              return Left(GameException(e.toString()));
+            }
+          },
+        );
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, List<User>>> getFriendList(
       List<String> friends) async {
-    try {
-      final results = await _db
-          .collection("users")
-          .where("id", whereIn: friends)
-          .get()
-          .then((value) =>
-              value.docs.map((e) => User.fromJson(e.data())).toList());
-      return Right(results);
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        final results = await _db
+            .collection("users")
+            .where("id", whereIn: friends)
+            .get()
+            .then((value) =>
+                value.docs.map((e) => User.fromJson(e.data())).toList());
+        return Right(results);
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, None>> friendRequest(String friendId) async {
-    try {
-      await _db.collection("users").doc(friendId).update({
-        "friendsRequest": FieldValue.arrayUnion([_sharedPref.userId])
-      });
-      return const Right(None());
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db.collection("users").doc(friendId).update({
+          "friendsRequest": FieldValue.arrayUnion([_sharedPref.userId])
+        });
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, None>> removeFriendRequest(
       String friendId) async {
-    try {
-      await _db.collection("users").doc(_sharedPref.userId).update({
-        "friendsRequest": FieldValue.arrayRemove([friendId])
-      });
-      return const Right(None());
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db.collection("users").doc(_sharedPref.userId).update({
+          "friendsRequest": FieldValue.arrayRemove([friendId])
+        });
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, None>> cancelFriendRequest(
       String friendId) async {
-    try {
-      await _db.collection("users").doc(friendId).update({
-        "friendsRequest": FieldValue.arrayRemove([_sharedPref.userId])
-      });
-      return const Right(None());
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db.collection("users").doc(friendId).update({
+          "friendsRequest": FieldValue.arrayRemove([_sharedPref.userId])
+        });
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, None>> addFriend(String friendId) async {
-    try {
-      await _db.collection("users").doc(_sharedPref.userId).update({
-        "friends": FieldValue.arrayUnion([friendId])
-      });
-      await _db.collection("users").doc(friendId).update({
-        "friends": FieldValue.arrayUnion([_sharedPref.userId])
-      });
-      final response = await removeFriendRequest(friendId);
-      return response.fold(
-          (l) => Left(GameException(l.message)), (r) => const Right(None()));
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db.collection("users").doc(_sharedPref.userId).update({
+          "friends": FieldValue.arrayUnion([friendId])
+        });
+        await _db.collection("users").doc(friendId).update({
+          "friends": FieldValue.arrayUnion([_sharedPref.userId])
+        });
+        final response = await removeFriendRequest(friendId);
+        return response.fold(
+            (l) => Left(GameException(l.message)), (r) => const Right(None()));
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 
   Future<Either<GameException, None>> unfriend(String friendId) async {
-    try {
-      await _db.collection('users').doc(_sharedPref.userId).update({
-        "friends": FieldValue.arrayRemove([friendId])
-      });
-      await _db.collection("users").doc(friendId).update({
-        "friends": FieldValue.arrayRemove([_sharedPref.userId])
-      });
-      return const Right(None());
-    } catch (e) {
-      return Left(GameException(e.toString()));
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db.collection('users').doc(_sharedPref.userId).update({
+          "friends": FieldValue.arrayRemove([friendId])
+        });
+        await _db.collection("users").doc(friendId).update({
+          "friends": FieldValue.arrayRemove([_sharedPref.userId])
+        });
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
     }
   }
 }

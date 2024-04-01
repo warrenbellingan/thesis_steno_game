@@ -5,6 +5,7 @@ import 'package:steno_game/app/app.router.dart';
 import 'package:steno_game/ui/common/input_validation.dart';
 import '../../../app/app.bottomsheets.dart';
 import '../../../app/app.locator.dart';
+import '../../../model/user.dart';
 import '../../../services/authentication_service.dart';
 import '../../../services/shared_preference_service.dart';
 
@@ -20,6 +21,17 @@ class SignUpViewModel extends BaseViewModel with InputValidation {
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController roleController = TextEditingController();
 
+  User? user;
+
+  SignUpViewModel(this.user);
+
+  init() async {
+    if(user != null) {
+      nameController.text = user!.name;
+      roleController.text = "Student";
+      rebuildUi();
+    }
+  }
   Future<void> signUp() async {
     if (validateInput()) {
       if (passwordController.text.toString() !=

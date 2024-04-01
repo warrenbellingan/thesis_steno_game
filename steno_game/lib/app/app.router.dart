@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as _i32;
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i37;
-import 'package:steno_game/model/lesson.dart' as _i35;
-import 'package:steno_game/model/multiplayer_stroke.dart' as _i33;
-import 'package:steno_game/model/user.dart' as _i36;
+import 'package:steno_game/model/lesson.dart' as _i36;
+import 'package:steno_game/model/multiplayer_stroke.dart' as _i35;
+import 'package:steno_game/model/user.dart' as _i33;
 import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
 import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart'
     as _i30;
@@ -298,8 +298,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i5.SignUpView: (data) {
+      final args = data.getArgs<SignUpViewArguments>(nullOk: false);
       return _i32.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i5.SignUpView(),
+        builder: (context) => _i5.SignUpView(args.user, key: args.key),
         settings: data,
       );
     },
@@ -483,13 +484,40 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
+class SignUpViewArguments {
+  const SignUpViewArguments({
+    required this.user,
+    this.key,
+  });
+
+  final _i33.User? user;
+
+  final _i34.Key? key;
+
+  @override
+  String toString() {
+    return '{"user": "$user", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant SignUpViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.user == user && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return user.hashCode ^ key.hashCode;
+  }
+}
+
 class StrokesMultiplayerViewArguments {
   const StrokesMultiplayerViewArguments({
     required this.game,
     this.key,
   });
 
-  final _i33.MultiplayerStroke game;
+  final _i35.MultiplayerStroke game;
 
   final _i34.Key? key;
 
@@ -543,7 +571,7 @@ class TopicViewArguments {
     this.key,
   });
 
-  final _i35.Lesson lesson;
+  final _i36.Lesson lesson;
 
   final _i34.Key? key;
 
@@ -570,7 +598,7 @@ class MenuViewArguments {
     this.key,
   });
 
-  final _i36.User user;
+  final _i33.User user;
 
   final _i34.Key? key;
 
@@ -597,7 +625,7 @@ class MultiplayerStrokeWaitingRoomViewArguments {
     this.key,
   });
 
-  final _i33.MultiplayerStroke game;
+  final _i35.MultiplayerStroke game;
 
   final _i34.Key? key;
 
@@ -624,7 +652,7 @@ class MultiplayerStrokeHostViewArguments {
     this.key,
   });
 
-  final _i33.MultiplayerStroke game;
+  final _i35.MultiplayerStroke game;
 
   final _i34.Key? key;
 
@@ -651,7 +679,7 @@ class AddStrokeLessonViewArguments {
     this.key,
   });
 
-  final _i35.Lesson? lesson;
+  final _i36.Lesson? lesson;
 
   final _i34.Key? key;
 
@@ -678,7 +706,7 @@ class AddTypingLessonViewArguments {
     this.key,
   });
 
-  final _i35.Lesson? lesson;
+  final _i36.Lesson? lesson;
 
   final _i34.Key? key;
 
@@ -742,14 +770,17 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSignUpView([
+  Future<dynamic> navigateToSignUpView({
+    required _i33.User? user,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.signUpView,
+        arguments: SignUpViewArguments(user: user, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -883,7 +914,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToStrokesMultiplayerView({
-    required _i33.MultiplayerStroke game,
+    required _i35.MultiplayerStroke game,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1001,7 +1032,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToTopicView({
-    required _i35.Lesson lesson,
+    required _i36.Lesson lesson,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1018,7 +1049,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToMenuView({
-    required _i36.User user,
+    required _i33.User user,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1077,7 +1108,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToMultiplayerStrokeWaitingRoomView({
-    required _i33.MultiplayerStroke game,
+    required _i35.MultiplayerStroke game,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1095,7 +1126,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToMultiplayerStrokeHostView({
-    required _i33.MultiplayerStroke game,
+    required _i35.MultiplayerStroke game,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1112,7 +1143,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAddStrokeLessonView({
-    required _i35.Lesson? lesson,
+    required _i36.Lesson? lesson,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1129,7 +1160,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAddTypingLessonView({
-    required _i35.Lesson? lesson,
+    required _i36.Lesson? lesson,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1187,14 +1218,17 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSignUpView([
+  Future<dynamic> replaceWithSignUpView({
+    required _i33.User? user,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.signUpView,
+        arguments: SignUpViewArguments(user: user, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1328,7 +1362,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithStrokesMultiplayerView({
-    required _i33.MultiplayerStroke game,
+    required _i35.MultiplayerStroke game,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1446,7 +1480,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithTopicView({
-    required _i35.Lesson lesson,
+    required _i36.Lesson lesson,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1463,7 +1497,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithMenuView({
-    required _i36.User user,
+    required _i33.User user,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1522,7 +1556,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithMultiplayerStrokeWaitingRoomView({
-    required _i33.MultiplayerStroke game,
+    required _i35.MultiplayerStroke game,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1540,7 +1574,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithMultiplayerStrokeHostView({
-    required _i33.MultiplayerStroke game,
+    required _i35.MultiplayerStroke game,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1557,7 +1591,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithAddStrokeLessonView({
-    required _i35.Lesson? lesson,
+    required _i36.Lesson? lesson,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1574,7 +1608,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithAddTypingLessonView({
-    required _i35.Lesson? lesson,
+    required _i36.Lesson? lesson,
     _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
