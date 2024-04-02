@@ -8,22 +8,22 @@ class InternetService {
 
   final _snackBar = locator<SnackbarService>();
 
-  StreamSubscription<List<ConnectivityResult>>? subscription;
-
-  void streamInternet() {
-
-    print("Stream called");
-     subscription = Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async{
-       bool hasInternet = await hasInternetConnection();
-       print("Stream listened");
-       if(hasInternet) {
-         _snackBar.showSnackbar(message: "Internet Connected!", duration: const Duration(seconds: 3));
-       }
-       else {
-         _snackBar.showSnackbar(message: "No Internet Connection!", duration: const Duration(seconds: 3));
-       }
-    });
-  }
+  // StreamSubscription<List<ConnectivityResult>>? subscription;
+  //
+  // void streamInternet() {
+  //
+  //   print("Stream called");
+  //    subscription = Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async{
+  //      bool hasInternet = await hasInternetConnection();
+  //      print("Stream listened");
+  //      if(hasInternet) {
+  //        _snackBar.showSnackbar(message: "Internet Connected!", duration: const Duration(seconds: 3));
+  //      }
+  //      else {
+  //        _snackBar.showSnackbar(message: "No Internet Connection!", duration: const Duration(seconds: 3));
+  //      }
+  //   });
+  // }
   Future<bool> hasInternetConnection() async {
     final List<ConnectivityResult> connectivityResult =
         await (Connectivity().checkConnectivity());
@@ -40,10 +40,11 @@ class InternetService {
     } else {
       return false;
     }
-  }
+   }
 
-  void dispose() {
-    print("Stream Closed");
-    subscription?.cancel();
-  }
+  //
+  // void dispose() {
+  //   print("Stream Closed");
+  //   subscription?.cancel();
+  // }
 }

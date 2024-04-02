@@ -430,8 +430,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i26.HostStrokeView: (data) {
+      final args = data.getArgs<HostStrokeViewArguments>(nullOk: false);
       return _i32.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i26.HostStrokeView(),
+        builder: (context) => _i26.HostStrokeView(args.game, key: args.key),
         settings: data,
       );
     },
@@ -616,6 +617,33 @@ class MenuViewArguments {
   @override
   int get hashCode {
     return user.hashCode ^ key.hashCode;
+  }
+}
+
+class HostStrokeViewArguments {
+  const HostStrokeViewArguments({
+    required this.game,
+    this.key,
+  });
+
+  final _i35.MultiplayerStroke game;
+
+  final _i34.Key? key;
+
+  @override
+  String toString() {
+    return '{"game": "$game", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant HostStrokeViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.game == game && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return game.hashCode ^ key.hashCode;
   }
 }
 
@@ -1079,14 +1107,17 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToHostStrokeView([
+  Future<dynamic> navigateToHostStrokeView({
+    required _i35.MultiplayerStroke game,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.hostStrokeView,
+        arguments: HostStrokeViewArguments(game: game, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1527,14 +1558,17 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithHostStrokeView([
+  Future<dynamic> replaceWithHostStrokeView({
+    required _i35.MultiplayerStroke game,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.hostStrokeView,
+        arguments: HostStrokeViewArguments(game: game, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

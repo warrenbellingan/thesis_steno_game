@@ -1,7 +1,7 @@
-class GamePng {
-  GamePng._();
+class GameUiPng {
+  GameUiPng._();
 
-  static const pngPath = "assets/png/";
+  static const pngPath = "assets/png/ui/";
 
   static const gameLogoPath = "${pngPath}logo.png";
   static const gameAuthLoginPath = "${pngPath}auth_login.png";

@@ -9,6 +9,7 @@ class SStroke with _$SStroke {
   const factory SStroke({
     required String id,
     required String imageUrl,
+    required String stroke,
   }) = _SStroke;
 
   factory SStroke.fromJson(Map<String, dynamic> json) =>

@@ -1,16 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/model/multiplayer_stroke.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_bar.dart';
 import 'package:steno_game/ui/custom_widgets/game_button.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import 'package:steno_game/ui/custom_widgets/game_player.dart';
+import 'package:steno_game/ui/custom_widgets/game_textfield.dart';
+import 'package:steno_game/ui/custom_widgets/painter.dart';
 import '../../custom_widgets/game_body.dart';
 import 'host_stroke_viewmodel.dart';
 
 class HostStrokeView extends StackedView<HostStrokeViewModel> {
-  const HostStrokeView({Key? key}) : super(key: key);
+  const HostStrokeView(this.game, {Key? key}) : super(key: key);
+
+  final MultiplayerStroke game;
 
   @override
   Widget builder(
@@ -20,94 +27,130 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
   ) {
     return GameBody(
       body: viewModel.isBusy
-          ? const GameLoading(
-              label: "Creating Game",
-            )
+          ? const GameLoading()
           : Column(
               children: [
                 GameBar(),
-                Column(
-                  children: [
-                    const Text(
-                      "Share this code to your students",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        wordSpacing: 2,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black, width: 1.5)),
-                      child: Text(
-                        viewModel.gameId,
-                        style: const TextStyle(
-                          color: GameColor.primaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ],
+                const Text(
+                  "Add Questions",
+                  style: TextStyle(
+                    color: GameColor.primaryColor,
+                    fontSize: 26,
+                    letterSpacing: 1.5,
+                    wordSpacing: 3,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 verticalSpaceSmall,
-                GameButton(text: "START GAME", onClick: viewModel.startGame),
-                verticalSpaceSmall,
                 Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                        color: GameColor.tertiaryColor,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                            color: GameColor.secondaryColor, width: 2)),
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Text(
-                          "Players: ${viewModel.students.length}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.8,
+                        viewModel.isEditingMode ?
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 8,
                           ),
-                        ),
-                        const Divider(
-                          color: Colors.white,
-                          thickness: 2,
-                        ),
-                        verticalSpaceSmall,
-                        Expanded(
-                          child: viewModel.students.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount: viewModel.students.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    var student = viewModel.students[index];
-                                    return GamePlayer(
-                                      name: student.name,
-                                      imagePath: student.image,
-                                      withTail: false,
-                                    );
-                                  })
-                              : const Text(
-                                  "Waiting for students to join",
-                                  style: TextStyle(
-                                    color: Colors.white,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.grey, width: 1.5),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                    color: GameColor.primaryColor,
+                                    width: 3,
                                   ),
                                 ),
+                                child: const Text(
+                                  "1",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              verticalSpaceSmall,
+                              viewModel.editingType == 1 ?
+                              GameTextField(
+                                controller: viewModel.textController,
+                                label: "Stroke Text",
+                                icon: const Icon(
+                                  Icons.edit_rounded,
+                                  color: GameColor.secondaryBackgroundColor,
+                                ),
+                              ) : Painter(globalKey: GlobalKey()),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: GameButton(
+                                      text: "Add",
+                                      onClick: () {},
+                                    ),
+                                  ),Expanded(
+                                    child: GameButton(
+                                      text: "Cancel",
+                                      onClick: () {},
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ) :
+                        GestureDetector(
+                          onTap: viewModel.setShowQuizType,
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(color: Colors.grey, width: 1.5)),
+                            child: viewModel.showQuizType
+                                ? Row(
+                              children: [
+                                Expanded(
+                                  child: GameButton(
+                                    text: "Stroke",
+                                    onClick:() => viewModel.editMode(0),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: GameButton(
+                                    text: "Typing",
+                                    onClick:() => viewModel.editMode(1),
+                                  ),
+                                ),
+                              ],
+                            )
+                                : const Text(
+                              "Add Quiz",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
                         ),
+                        verticalSpaceSmall,
                       ],
                     ),
                   ),
                 ),
+               
+                GameButton(text: "Create Game", onClick: () {}),
               ],
             ),
     );
@@ -117,7 +160,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
   HostStrokeViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      HostStrokeViewModel();
+      HostStrokeViewModel(game);
 
   @override
   void onViewModelReady(HostStrokeViewModel viewModel) {

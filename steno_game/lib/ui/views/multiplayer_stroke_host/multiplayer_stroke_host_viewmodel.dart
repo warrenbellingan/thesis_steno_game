@@ -32,6 +32,8 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
   List<Student> students = [];
   List<SStroke> sStroke = [];
   List<SText> sText = [];
+  Set<String> correctAnswers = {};
+  Set<String> wrongAnswers = {};
 
   MultiplayerStroke game;
 
@@ -65,6 +67,29 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
       rebuildUi();
     });
     setBusy(false);
+  }
+
+  void checkAnswer(int status, String id) {
+    if(status == 1) {
+      correctAnswers.add(id);
+    }
+    else if(status == 0) {
+      if(correctAnswers.contains(id)) {
+        correctAnswers.remove(id);
+      }
+    }
+    rebuildUi();
+  }
+
+  void addCorrectAnswers() async{
+    setBusy(true);
+    final response = await _multiStrokeRepo.addCorrectAnswers(game.id, correctAnswers);
+    response.fold((l) => showBottomSheet(l.message), (r) {
+      gameStatus = 0;
+      rebuildUi();
+    });
+    setBusy(false);
+
   }
 
   String? getStudentName(String id) {
@@ -147,4 +172,8 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     sStrokeStream?.cancel();
     super.dispose();
   }
+
+
+
+
 }

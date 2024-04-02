@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import '../../constants/game_png.dart';
+import '../../constants/game_ui_png.dart';
 import '../../constants/game_ui_text.dart';
 import '../../custom_widgets/game_body.dart';
 import '../../custom_widgets/game_button.dart';
@@ -33,7 +33,7 @@ class LoginView extends StackedView<LoginViewModel> {
                   SizedBox(
                     height: 10,
                   ),
-                  GameImage(path: GamePng.gameAuthLoginPath),
+                  GameImage(path: GameUiPng.gameAuthLoginPath),
                   SizedBox(
                     height: 25,
                   ),

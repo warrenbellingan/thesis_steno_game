@@ -7,7 +7,7 @@ import 'package:steno_game/repository/user_repository.dart';
 
 import '../../../model/user.dart';
 import '../../../services/authentication_service.dart';
-import '../../constants/game_png.dart';
+import '../../constants/game_ui_png.dart';
 
 class PersonViewModel extends BaseViewModel {
   final _userRepo = locator<UserRepository>();
@@ -60,7 +60,7 @@ class PersonViewModel extends BaseViewModel {
 
   ImageProvider getImage() {
     if (viewedUser.image == null)
-      return const AssetImage(GamePng.gameAvatarPath);
+      return const AssetImage(GameUiPng.gameAvatarPath);
     return NetworkImage(viewedUser.image!);
   }
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/views/sign_up/sign_up_viewmodel.dart';
-
 import '../../../model/user.dart';
 import '../../constants/game_color.dart';
-import '../../constants/game_png.dart';
+import '../../constants/game_ui_png.dart';
 import '../../constants/game_ui_text.dart';
 import '../../custom_widgets/game_bar.dart';
 import '../../custom_widgets/game_body.dart';
@@ -36,7 +35,7 @@ class SignUpView extends StackedView<SignUpViewModel> {
                   children: [
                     GameBar(),
                     GameTitleText(text: user == null ? GameUIText.createAccText : "Connect Account"),
-                    const GameImage(path: GamePng.gameAuthCreatePath),
+                    const GameImage(path: GameUiPng.gameAuthCreatePath),
                     const SizedBox(
                       height: 25,
                     ),

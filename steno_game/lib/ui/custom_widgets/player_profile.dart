@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 import '../constants/game_color.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/game_png.dart';
+import '../constants/game_ui_png.dart';
+
 
 class PlayerProfile extends StatelessWidget {
   const PlayerProfile(
@@ -19,7 +20,7 @@ class PlayerProfile extends StatelessWidget {
   final bool? isStudent;
 
   ImageProvider getImage() {
-    if (imagePath == null) return const AssetImage(GamePng.gameAvatarPath);
+    if (imagePath == null) return const AssetImage(GameUiPng.gameAvatarPath);
     return NetworkImage(imagePath!);
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constants/game_color.dart';
-import '../constants/game_png.dart';
+import '../constants/game_ui_png.dart';
 
 class GamePlayer extends StatelessWidget {
   const GamePlayer(
@@ -17,7 +17,7 @@ class GamePlayer extends StatelessWidget {
   final bool withTail;
 
   ImageProvider getImage() {
-    if (imagePath == null) return const AssetImage(GamePng.gameAvatarPath);
+    if (imagePath == null) return const AssetImage(GameUiPng.gameAvatarPath);
     return NetworkImage(imagePath!);
   }
 
