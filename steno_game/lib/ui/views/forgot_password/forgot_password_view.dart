@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
-import '../../constants/game_png.dart';
+import '../../constants/game_ui_png.dart';
 import '../../constants/game_ui_text.dart';
 import '../../custom_widgets/game_bar.dart';
 import '../../custom_widgets/game_body.dart';
@@ -28,7 +28,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                 children: [
                   GameBar(),
                   GameTitleText(text: GameUIText.forgotPassText),
-                  GameImage(path: GamePng.gameAuthForgotPath),
+                  GameImage(path: GameUiPng.gameAuthForgotPath),
                   SizedBox(
                     height: 25,
                   ),

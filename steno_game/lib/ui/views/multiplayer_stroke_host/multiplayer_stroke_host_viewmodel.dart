@@ -32,6 +32,8 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
   List<Student> students = [];
   List<SStroke> sStroke = [];
   List<SText> sText = [];
+  Set<String> correctAnswers = {};
+  Set<String> wrongAnswers = {};
 
   MultiplayerStroke game;
 
@@ -55,96 +57,5 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
       game = gameData;
       rebuildUi();
     });
-    sStrokeStream =
-        _multiStrokeRepo.streamSStroke(game.id).listen((sStrokeData) {
-      sStroke = sStrokeData;
-      rebuildUi();
-    });
-    sTextStream = _multiStrokeRepo.streamSText(game.id).listen((sTextData) {
-      sText = sTextData;
-      rebuildUi();
-    });
-    setBusy(false);
-  }
-
-  String? getStudentName(String id) {
-    for (Student student in students) {
-      if (student.id == id) return student.name;
-    }
-    return null;
-  }
-
-  Future<void> submitStrokeClick() async {
-    setBusy(true);
-    final uploadStroke =
-        await _strokeRepo.addStroke(painterKey, strokeController.text, 1, null);
-    uploadStroke.fold((l) => showBottomSheet(l.message), (stroke) async {
-      final response =
-          await _multiStrokeRepo.addHostStroke(game.id, stroke.strokeImage);
-      response.fold((l) => showBottomSheet(l.message), (r) async {
-        strokeController.clear();
-        final setType = await _multiStrokeRepo.setGameType(game.id, "stroke");
-        setType.fold((l) => showBottomSheet(l.message), (r) async {
-          showBottomSheet("Submitted Successfully");
-          final getGame = await _multiStrokeRepo.getGame(game.id);
-          getGame.fold((l) => showBottomSheet(l.message), (gameData) {
-            game = gameData;
-            gameStatus = 3;
-            gameType = 0;
-            rebuildUi();
-          });
-        });
-      });
-    });
-    rebuildUi();
-    setBusy(false);
-  }
-
-  Future<void> submitTextClick() async {
-    setBusy(true);
-    final response =
-        await _multiStrokeRepo.addHostText(game.id, textController.text);
-    response.fold((l) => showBottomSheet(l.message), (r) async {
-      final setType = await _multiStrokeRepo.setGameType(game.id, "stroke");
-      setType.fold((l) => showBottomSheet(l.message), (r) async {
-        showBottomSheet("Submitted Successfully");
-        final getGame = await _multiStrokeRepo.getGame(game.id);
-        getGame.fold((l) => showBottomSheet(l.message), (gameData) {
-          game = gameData;
-          gameStatus = 3;
-          gameType = 1;
-          rebuildUi();
-        });
-      });
-      showBottomSheet("Submitted Successfully");
-    });
-    setBusy(false);
-  }
-
-  void selectionClick(int status) {
-    gameStatus = status;
-    rebuildUi();
-  }
-
-  void returnToSelection() {
-    gameStatus = 0;
-    rebuildUi();
-  }
-
-  void showBottomSheet(String description) {
-    _bottomSheet.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: "Notice",
-      description: description,
-    );
-  }
-
-  @override
-  void dispose() {
-    studentsStream?.cancel();
-    gameStream?.cancel();
-    sTextStream?.cancel();
-    sStrokeStream?.cancel();
-    super.dispose();
   }
 }

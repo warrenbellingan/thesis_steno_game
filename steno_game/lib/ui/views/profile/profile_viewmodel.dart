@@ -9,7 +9,7 @@ import 'package:steno_game/services/authentication_service.dart';
 import '../../../app/app.locator.dart';
 import '../../../model/user.dart';
 import '../../../services/shared_preference_service.dart';
-import '../../constants/game_png.dart';
+import '../../constants/game_ui_png.dart';
 
 class ProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -43,7 +43,7 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   ImageProvider getImage() {
-    if (user.image == null) return const AssetImage(GamePng.gameAvatarPath);
+    if (user.image == null) return const AssetImage(GameUiPng.gameAvatarPath);
     return NetworkImage(user.image!);
   }
 

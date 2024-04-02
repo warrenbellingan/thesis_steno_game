@@ -20,13 +20,12 @@ class UserRepository {
   Future<Either<GameException, None>> updateScore(int gainScore) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     User? user = await _sharedPref.getCurrentUser();
-
     if (hasInternet) {
       try {
         await _db
             .collection("users")
-            .doc(_sharedPref.userId)
-            .set({"score": user!.score + gainScore}, SetOptions(merge: true));
+            .doc(user!.id)
+            .set({"score": user.score + gainScore}, SetOptions(merge: true));
         _authServ.getCurrentUser();
         return const Right(None());
       } catch (e) {
@@ -115,9 +114,11 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
+
+        User? user = await _sharedPref.getCurrentUser();
         await _db
             .collection("users")
-            .doc(_sharedPref.userId)
+            .doc(user!.id)
             .set({"name": name}, SetOptions(merge: true));
         _authServ.getCurrentUser();
         return const Right(None());
@@ -133,7 +134,8 @@ class UserRepository {
       File imageFile) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
-      String path = "images/strokes/${_sharedPref.userId}";
+      User? user = await _sharedPref.getCurrentUser();
+      String path = "images/profiles/${user!.id}";
       try {
         final response = await _imageService.uploadImage(imageFile, path);
         return response.fold(
@@ -142,7 +144,7 @@ class UserRepository {
             try {
               await _db
                   .collection("users")
-                  .doc(_sharedPref.userId)
+                  .doc(user.id)
                   .set({"image": imageUrl}, SetOptions(merge: true));
               await _authServ.getCurrentUser();
               return const Right(None());
@@ -183,8 +185,9 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
+        User? user = await _sharedPref.getCurrentUser();
         await _db.collection("users").doc(friendId).update({
-          "friendsRequest": FieldValue.arrayUnion([_sharedPref.userId])
+          "friendsRequest": FieldValue.arrayUnion([user!.id])
         });
         return const Right(None());
       } catch (e) {
@@ -199,8 +202,10 @@ class UserRepository {
       String friendId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
+
+      User? user = await _sharedPref.getCurrentUser();
       try {
-        await _db.collection("users").doc(_sharedPref.userId).update({
+        await _db.collection("users").doc(user!.id).update({
           "friendsRequest": FieldValue.arrayRemove([friendId])
         });
         return const Right(None());
@@ -217,8 +222,10 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
+
+        User? user = await _sharedPref.getCurrentUser();
         await _db.collection("users").doc(friendId).update({
-          "friendsRequest": FieldValue.arrayRemove([_sharedPref.userId])
+          "friendsRequest": FieldValue.arrayRemove([user!.id])
         });
         return const Right(None());
       } catch (e) {
@@ -233,11 +240,13 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        await _db.collection("users").doc(_sharedPref.userId).update({
+
+        User? user = await _sharedPref.getCurrentUser();
+        await _db.collection("users").doc(user!.id).update({
           "friends": FieldValue.arrayUnion([friendId])
         });
         await _db.collection("users").doc(friendId).update({
-          "friends": FieldValue.arrayUnion([_sharedPref.userId])
+          "friends": FieldValue.arrayUnion([user.id])
         });
         final response = await removeFriendRequest(friendId);
         return response.fold(
@@ -254,11 +263,13 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        await _db.collection('users').doc(_sharedPref.userId).update({
+
+        User? user = await _sharedPref.getCurrentUser();
+        await _db.collection('users').doc(user!.id).update({
           "friends": FieldValue.arrayRemove([friendId])
         });
         await _db.collection("users").doc(friendId).update({
-          "friends": FieldValue.arrayRemove([_sharedPref.userId])
+          "friends": FieldValue.arrayRemove([user.id])
         });
         return const Right(None());
       } catch (e) {

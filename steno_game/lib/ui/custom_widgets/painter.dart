@@ -143,11 +143,11 @@ class DrawingPainter extends CustomPainter {
         ..strokeCap = StrokeCap.round;
 
       for (var i = 0; i < drawingPoint.offsets.length; i++) {
-        print("haha");
         final currentOffset = drawingPoint.offsets[i];
         if (!(drawingPoint.offsets[i] > const Offset(2, 2) &&
-            drawingPoint.offsets[i] < Offset(imageSize - 2, imageSize - 2)))
+            drawingPoint.offsets[i] < Offset(imageSize - 2, imageSize - 2))) {
           continue;
+        }
         var notLastOffset = i != drawingPoint.offsets.length - 1;
         if (notLastOffset) {
           final next = drawingPoint.offsets[i + 1];

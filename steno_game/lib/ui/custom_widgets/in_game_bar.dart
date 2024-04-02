@@ -23,7 +23,7 @@ class InGameBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
         boxShadow: [primaryShadow()],
         color: GameColor.primaryBackgroundColor,
@@ -38,11 +38,20 @@ class InGameBar extends StatelessWidget {
             imagePath: image,
             isStudent: isStudent,
           ),
-          IconButton(
-            onPressed: () {
-              navigationSer.back();
-            },
-            icon: const Icon(Icons.menu),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadiusDirectional.circular(50),
+              color: Colors.white
+            ),
+            child: IconButton(
+              iconSize: 30,
+              onPressed: () {
+                navigationSer.back();
+              },
+              visualDensity: VisualDensity.compact,
+              color: Colors.black,
+              icon: const Icon(Icons.home_filled),
+            ),
           ),
         ],
       ),

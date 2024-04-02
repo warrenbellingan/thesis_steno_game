@@ -989,6 +989,34 @@ class MockAuthenticationService extends _i1.Mock
       ) as _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>);
 
   @override
+  _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>> setCurrentUser(
+          _i12.User? user) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setCurrentUser,
+          [user],
+        ),
+        returnValue:
+            _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>.value(
+                _FakeEither_2<_i11.GameException, _i4.None<dynamic>>(
+          this,
+          Invocation.method(
+            #setCurrentUser,
+            [user],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>.value(
+                _FakeEither_2<_i11.GameException, _i4.None<dynamic>>(
+          this,
+          Invocation.method(
+            #setCurrentUser,
+            [user],
+          ),
+        )),
+      ) as _i8.Future<_i4.Either<_i11.GameException, _i4.None<dynamic>>>);
+
+  @override
   _i8.Future<_i4.Either<_i11.GameException, _i12.User>> getCurrentUser() =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1059,6 +1087,26 @@ class MockSharedPreferenceService extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setIsPreviousOnline(bool? status) => (super.noSuchMethod(
+        Invocation.method(
+          #setIsPreviousOnline,
+          [status],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<bool?> getIsPreviousOnline() => (super.noSuchMethod(
+        Invocation.method(
+          #getIsPreviousOnline,
+          [],
+        ),
+        returnValue: _i8.Future<bool?>.value(),
+        returnValueForMissingStub: _i8.Future<bool?>.value(),
+      ) as _i8.Future<bool?>);
 
   @override
   _i8.Future<_i12.User?> getCurrentUser() => (super.noSuchMethod(

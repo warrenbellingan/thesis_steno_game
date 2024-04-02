@@ -8,6 +8,7 @@ part 's_text.g.dart';
 class SText with _$SText {
   const factory SText({
     required String id,
+    required String questionId,
     required String text,
   }) = _SText;
 

@@ -7,9 +7,9 @@ class GameColor {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     colors: [
-      Color(0xFFA554FA),
-      Color(0xFF8D38E5),
-      Color(0xFF7907F1),
+      Color(0xFFC188FC),
+      Color(0xFFA54EFF),
+      Color(0xFF6A04D5),
     ],
   );
 

@@ -9,11 +9,15 @@ part of 's_stroke.dart';
 _$SStrokeImpl _$$SStrokeImplFromJson(Map<String, dynamic> json) =>
     _$SStrokeImpl(
       id: json['id'] as String,
+      questionId: json['questionId'] as String,
       imageUrl: json['imageUrl'] as String,
+      stroke: json['stroke'] as String,
     );
 
 Map<String, dynamic> _$$SStrokeImplToJson(_$SStrokeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'questionId': instance.questionId,
       'imageUrl': instance.imageUrl,
+      'stroke': instance.stroke,
     };

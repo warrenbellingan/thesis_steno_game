@@ -15,7 +15,7 @@ class StartupViewModel extends BaseViewModel {
   final _snackBar = locator<SnackbarService>();
 
   Future runStartupLogic() async {
-    _internetServ.streamInternet();
+    //_internetServ.streamInternet();
     await Future.delayed(const Duration(seconds: 3));
     bool hasInternet = await _internetServ.hasInternetConnection();
     if (await _sharedPref.getCurrentUser() != null) {

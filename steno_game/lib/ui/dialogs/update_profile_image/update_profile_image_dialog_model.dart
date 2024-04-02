@@ -8,9 +8,9 @@ import 'package:steno_game/app/app.bottomsheets.dart';
 import 'package:steno_game/model/user.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
-import 'package:steno_game/ui/constants/game_png.dart';
 
 import '../../../app/app.locator.dart';
+import '../../constants/game_ui_png.dart';
 
 class UpdateProfileImageDialogModel extends BaseViewModel {
   final _sharedPref = locator<SharedPreferenceService>();
@@ -60,7 +60,7 @@ class UpdateProfileImageDialogModel extends BaseViewModel {
     if (image != null) {
       return FileImage(image!);
     } else {
-      if (user.image == null) return const AssetImage(GamePng.gameAvatarPath);
+      if (user.image == null) return const AssetImage(GameUiPng.gameAvatarPath);
       return NetworkImage(user.image!);
     }
   }

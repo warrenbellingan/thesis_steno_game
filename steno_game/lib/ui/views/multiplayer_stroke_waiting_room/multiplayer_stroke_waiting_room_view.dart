@@ -9,6 +9,7 @@ import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 
 import '../../common/ui_helpers.dart';
 import '../../constants/game_color.dart';
+import '../../custom_widgets/game_button.dart';
 import '../../custom_widgets/game_player.dart';
 import 'multiplayer_stroke_waiting_room_viewmodel.dart';
 
@@ -31,43 +32,58 @@ class MultiplayerStrokeWaitingRoomView
           : Column(
               children: [
                 GameBar(),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(),
-                    ),
-                    Text(
-                      "... Waiting to start the game ...",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.5,
-                        wordSpacing: 3,
+                if (viewModel.isStudent())
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(),
-                    ),
-                  ],
-                ),
+                      Text(
+                        "... Waiting to start the game ...",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.5,
+                          wordSpacing: 3,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
+                  ),
                 verticalSpaceSmall,
+                if (!viewModel.isStudent())
+                  const Text(
+                    "Share this code to your students to join this game",
+                    style: TextStyle(
+                      color: GameColor.primaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.5,
+                      wordSpacing: 3,
+                    ),
+                  ),
                 Container(
-                  padding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [primaryShadow()],
+                    border: Border.all(color: GameColor.primaryColor, width: 2),
+                  ),
                   child: Text(
                     viewModel.game.id,
                     style: const TextStyle(
                       color: GameColor.primaryColor,
-                      fontSize: 20,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 2,
+                      letterSpacing: 3,
                     ),
                   ),
                 ),
@@ -153,6 +169,12 @@ class MultiplayerStrokeWaitingRoomView
                     ),
                   ),
                 ),
+                verticalSpaceSmall,
+                if (!viewModel.isStudent())
+                  GameButton(
+                    text: "Start Game",
+                    onClick: viewModel.startGame,
+                  ),
               ],
             ),
     );

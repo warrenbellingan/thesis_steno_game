@@ -21,6 +21,7 @@ SText _$STextFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SText {
   String get id => throw _privateConstructorUsedError;
+  String get questionId => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +34,7 @@ abstract class $STextCopyWith<$Res> {
   factory $STextCopyWith(SText value, $Res Function(SText) then) =
       _$STextCopyWithImpl<$Res, SText>;
   @useResult
-  $Res call({String id, String text});
+  $Res call({String id, String questionId, String text});
 }
 
 /// @nodoc
@@ -50,12 +51,17 @@ class _$STextCopyWithImpl<$Res, $Val extends SText>
   @override
   $Res call({
     Object? id = null,
+    Object? questionId = null,
     Object? text = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
               as String,
       text: null == text
           ? _value.text
@@ -72,7 +78,7 @@ abstract class _$$STextImplCopyWith<$Res> implements $STextCopyWith<$Res> {
       __$$STextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text});
+  $Res call({String id, String questionId, String text});
 }
 
 /// @nodoc
@@ -87,12 +93,17 @@ class __$$STextImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? questionId = null,
     Object? text = null,
   }) {
     return _then(_$STextImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
               as String,
       text: null == text
           ? _value.text
@@ -105,7 +116,8 @@ class __$$STextImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$STextImpl implements _SText {
-  const _$STextImpl({required this.id, required this.text});
+  const _$STextImpl(
+      {required this.id, required this.questionId, required this.text});
 
   factory _$STextImpl.fromJson(Map<String, dynamic> json) =>
       _$$STextImplFromJson(json);
@@ -113,11 +125,13 @@ class _$STextImpl implements _SText {
   @override
   final String id;
   @override
+  final String questionId;
+  @override
   final String text;
 
   @override
   String toString() {
-    return 'SText(id: $id, text: $text)';
+    return 'SText(id: $id, questionId: $questionId, text: $text)';
   }
 
   @override
@@ -126,12 +140,14 @@ class _$STextImpl implements _SText {
         (other.runtimeType == runtimeType &&
             other is _$STextImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.questionId, questionId) ||
+                other.questionId == questionId) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text);
+  int get hashCode => Object.hash(runtimeType, id, questionId, text);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +164,17 @@ class _$STextImpl implements _SText {
 }
 
 abstract class _SText implements SText {
-  const factory _SText({required final String id, required final String text}) =
-      _$STextImpl;
+  const factory _SText(
+      {required final String id,
+      required final String questionId,
+      required final String text}) = _$STextImpl;
 
   factory _SText.fromJson(Map<String, dynamic> json) = _$STextImpl.fromJson;
 
   @override
   String get id;
+  @override
+  String get questionId;
   @override
   String get text;
   @override

@@ -45,13 +45,17 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
     gameStream =
         _multiStrokeRepo.streamMultiplayerStroke(game.id).listen((gameData) {
       game = gameData;
-      if (game.status == 1) {
-        startGame();
+      if (game.status == 2) {
+        goToPlayEnvironment();
       }
     });
-    joinGame();
+    if(isStudent()) await joinGame();
     rebuildUi();
     setBusy(false);
+  }
+
+  bool isStudent() {
+    return user.id != game.gameMaster;
   }
 
   Future<void> joinGame() async {
@@ -59,9 +63,24 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
     response.fold((l) => showBottomSheet(l.message), (r) {});
   }
 
-  void startGame() {
-    _navigationService.replaceWithStrokesMultiplayerView(game: game);
+  void startGame() async {
+    setBusy(true);
+    final response = await _multiStrokeRepo.setGameStatus(game.id, 2);
+    response.fold((l) => showBottomSheet(l.message), (r) {
+
+    });
+    setBusy(false);
   }
+
+  void goToPlayEnvironment() {
+    if(isStudent()) {
+      _navigationService.replaceWithStrokesMultiplayerView(game: game);
+    }
+    else {
+      _navigationService.replaceWithMultiplayerStrokeHostView(game: game);
+    }
+  }
+
 
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(

@@ -31,6 +31,19 @@ class StrokeRepository {
       return Left(GameException("Please check your internet connection!"));
     }
   }
+  Future<Either<GameException, None>> setStatus(String strokeId, int status) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db.collection("strokes").doc(strokeId).set({"status" : status}, SetOptions(merge: true));
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
 
   Future<Either<GameException, None>> updateStroke(StenoStroke stroke) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
@@ -96,6 +109,7 @@ class StrokeRepository {
             .findRenderObject() as RenderRepaintBoundary;
         ui.Image image = await boundary.toImage(pixelRatio: 3.0);
         final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
         final Uint8List pngBytes = byteData!.buffer.asUint8List();
 
         Directory tempDir = await Directory.systemTemp.createTemp();
@@ -105,6 +119,7 @@ class StrokeRepository {
         File imageFile = File(filePath);
         await imageFile.writeAsBytes(pngBytes);
         path ??= "images/strokes/$fileName";
+        print(path);
         final response = await _uploadImage(imageFile, fileName, path);
         return response.fold(
           (l) => Left(GameException(l.message)),

@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
+import 'package:steno_game/model/question_stroke.dart';
 import 'package:steno_game/model/user.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 import '../../../app/app.locator.dart';
@@ -14,103 +16,86 @@ import '../../../repository/multiplayer_stroke_repository.dart';
 import '../../../repository/stroke_repository.dart';
 
 class StrokesMultiplayerViewModel extends BaseViewModel {
-  final GlobalKey painterKey = GlobalKey();
-
-  final _multiStrokeRepo = locator<MultiplayerStrokeRepository>();
-  final _strokeRepo = locator<StrokeRepository>();
-  final _showBottomSheetServ = locator<BottomSheetService>();
+  final _multiStroke = locator<MultiplayerStrokeRepository>();
+  final _bottomSheet = locator<BottomSheetService>();
   final _sharedPref = locator<SharedPreferenceService>();
+  final _stroke = locator<StrokeRepository>();
 
-  StreamSubscription<List<Student>>? studentsStream;
-  StreamSubscription<MultiplayerStroke>? gameStream;
+  MultiplayerStroke game;
+
+  TextEditingController answerController = TextEditingController();
+
+  GlobalKey painterKey = GlobalKey();
+  StrokesMultiplayerViewModel(this.game);
+  List<QuestionStroke> questions = [];
+
+  StreamSubscription<List<Student>>? streamSubscription;
 
   List<Student> students = [];
 
+  int currentIndex = 0;
   late User user;
-
-  int gameStatus = 0;
-
-  String waitingText = "The game master is preparing. Please wait";
-
-  MultiplayerStroke game;
-  TextEditingController textController = TextEditingController();
-
-  StrokesMultiplayerViewModel(this.game);
-
   init() async {
     setBusy(true);
     user = (await _sharedPref.getCurrentUser())!;
-    final getStudents = await _multiStrokeRepo.getStudents(game.id);
-    getStudents.fold((l) => showBottomSheet(l.message),
-        (studentsData) => students = studentsData);
-    studentsStream =
-        _multiStrokeRepo.streamStudents(game.id).listen((studentsData) {
+    final getQuestions = await _multiStroke.getQuestion(game.id);
+    getQuestions.fold((l) => showBottomSheet(l.message), (questionsData){
+      questions = questionsData;
+      rebuildUi();
+    });
+    setBusy(false);
+  }
+
+  Future<void> getStudents() async{
+    setBusy(true);
+    final results = await _multiStroke.getStudents(game.id);
+    results.fold((l) => showBottomSheet(l.message), (studentsData){
       students = studentsData;
       rebuildUi();
+      streamSubscription = _multiStroke.streamStudents(game.id).listen((studentsData) {
+        students = studentsData;
+        rebuildUi();
+      });
     });
-    gameStream =
-        _multiStrokeRepo.streamMultiplayerStroke(game.id).listen((gameData) {
-      game = gameData;
-      if (gameStatus == 0 && game.type != "") {
-        waitingText = "Done, Please click the next button";
-      }
-      rebuildUi();
-    });
-    rebuildUi();
     setBusy(false);
-  }
-
-  void nextClick() {
-    if (game.type == "stroke") {
-      gameStatus = 1;
-    } else if (game.type == "text") {
-      gameStatus = 2;
-    } else {
-      showBottomSheet("Something went wrong. Please try again");
-    }
-    rebuildUi();
-  }
-
-  Future<void> submitText() async {
+}
+  void addTextAnswer() async{
     setBusy(true);
-    final response =
-        await _multiStrokeRepo.addSText(game.id, textController.text);
-    response.fold((l) => showBottomSheet(l.message), (r) {
-      textController.clear();
-      rebuildUi();
-      showBottomSheet("Text submitted successfully");
+    final response = await _multiStroke.addSText(game.id, answerController.text, questions[currentIndex].id,);
+    response.fold((l) => showBottomSheet(l.message), (answer) async{
+      await next();
     });
     setBusy(false);
   }
-
-  Future<void> submitImage() async {
+  void addStrokeAnswer() async{
     setBusy(true);
-    final response =
-        await _strokeRepo.addStroke(painterKey, game.text, 0, null);
-    response.fold((l) {
-      showBottomSheet(l.message);
-    }, (strokeImage) async {
-      final sendImage =
-          await _multiStrokeRepo.addSStroke(game.id, strokeImage.strokeImage);
-      sendImage.fold((l) => showBottomSheet(l.message), (r) {
-        showBottomSheet("Submitted Successfully");
+    final uploadPicResponse = await _stroke.addStroke(painterKey, questions[currentIndex].data, 0, null);
+    uploadPicResponse.fold((l) => showBottomSheet(l.message), (stroke) async{
+      final response = await _multiStroke.addSStroke(game.id, stroke.strokeImage, stroke.id, questions[currentIndex].id);
+      response.fold((l) => showBottomSheet(l.message), (answer) async{
+        await next();
       });
     });
     setBusy(false);
   }
-
   void showBottomSheet(String description) {
-    _showBottomSheetServ.showCustomSheet(
+    _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,
       title: "Notice",
       description: description,
     );
   }
 
+  Future<void> next() async{
+    currentIndex++;
+    if(currentIndex == questions.length) await getStudents();
+    answerController.clear();
+    rebuildUi();
+  }
+
   @override
   void dispose() {
-    studentsStream?.cancel();
-    gameStream?.cancel();
+    streamSubscription?.cancel();
     super.dispose();
   }
 }

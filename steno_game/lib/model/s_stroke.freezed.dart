@@ -21,7 +21,9 @@ SStroke _$SStrokeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SStroke {
   String get id => throw _privateConstructorUsedError;
+  String get questionId => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
+  String get stroke => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +35,7 @@ abstract class $SStrokeCopyWith<$Res> {
   factory $SStrokeCopyWith(SStroke value, $Res Function(SStroke) then) =
       _$SStrokeCopyWithImpl<$Res, SStroke>;
   @useResult
-  $Res call({String id, String imageUrl});
+  $Res call({String id, String questionId, String imageUrl, String stroke});
 }
 
 /// @nodoc
@@ -50,16 +52,26 @@ class _$SStrokeCopyWithImpl<$Res, $Val extends SStroke>
   @override
   $Res call({
     Object? id = null,
+    Object? questionId = null,
     Object? imageUrl = null,
+    Object? stroke = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -72,7 +84,7 @@ abstract class _$$SStrokeImplCopyWith<$Res> implements $SStrokeCopyWith<$Res> {
       __$$SStrokeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String imageUrl});
+  $Res call({String id, String questionId, String imageUrl, String stroke});
 }
 
 /// @nodoc
@@ -87,16 +99,26 @@ class __$$SStrokeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? questionId = null,
     Object? imageUrl = null,
+    Object? stroke = null,
   }) {
     return _then(_$SStrokeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -105,7 +127,11 @@ class __$$SStrokeImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SStrokeImpl implements _SStroke {
-  const _$SStrokeImpl({required this.id, required this.imageUrl});
+  const _$SStrokeImpl(
+      {required this.id,
+      required this.questionId,
+      required this.imageUrl,
+      required this.stroke});
 
   factory _$SStrokeImpl.fromJson(Map<String, dynamic> json) =>
       _$$SStrokeImplFromJson(json);
@@ -113,11 +139,15 @@ class _$SStrokeImpl implements _SStroke {
   @override
   final String id;
   @override
+  final String questionId;
+  @override
   final String imageUrl;
+  @override
+  final String stroke;
 
   @override
   String toString() {
-    return 'SStroke(id: $id, imageUrl: $imageUrl)';
+    return 'SStroke(id: $id, questionId: $questionId, imageUrl: $imageUrl, stroke: $stroke)';
   }
 
   @override
@@ -126,13 +156,17 @@ class _$SStrokeImpl implements _SStroke {
         (other.runtimeType == runtimeType &&
             other is _$SStrokeImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.questionId, questionId) ||
+                other.questionId == questionId) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            (identical(other.stroke, stroke) || other.stroke == stroke));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, imageUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, questionId, imageUrl, stroke);
 
   @JsonKey(ignore: true)
   @override
@@ -151,14 +185,20 @@ class _$SStrokeImpl implements _SStroke {
 abstract class _SStroke implements SStroke {
   const factory _SStroke(
       {required final String id,
-      required final String imageUrl}) = _$SStrokeImpl;
+      required final String questionId,
+      required final String imageUrl,
+      required final String stroke}) = _$SStrokeImpl;
 
   factory _SStroke.fromJson(Map<String, dynamic> json) = _$SStrokeImpl.fromJson;
 
   @override
   String get id;
   @override
+  String get questionId;
+  @override
   String get imageUrl;
+  @override
+  String get stroke;
   @override
   @JsonKey(ignore: true)
   _$$SStrokeImplCopyWith<_$SStrokeImpl> get copyWith =>

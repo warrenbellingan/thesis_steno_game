@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
-import '../../constants/game_png.dart';
+import 'package:steno_game/ui/constants/game_color.dart';
+import '../../constants/game_ui_png.dart';
 import '../../custom_widgets/game_image.dart';
 import 'startup_viewmodel.dart';
 
@@ -14,22 +15,22 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Color(0xFFDCDCDC),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             GameImage(
-              path: GamePng.gameLogoPath,
+              path: GameUiPng.gameLogoPath,
               width: 250,
               height: 250,
             ),
             Text(
               'STENO GAME',
               style: TextStyle(
-                color: Colors.red,
-                fontSize: 40,
+                color: GameColor.primaryColor,
+                fontSize: 35,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 2,
               ),
@@ -38,7 +39,7 @@ class StartupView extends StackedView<StartupViewModel> {
               height: 30,
             ),
             CircularProgressIndicator(
-              color: Colors.redAccent,
+              color: GameColor.primaryColor,
               strokeWidth: 6,
             ),
           ],

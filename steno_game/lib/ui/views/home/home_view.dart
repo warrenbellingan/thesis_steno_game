@@ -212,14 +212,14 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver{
     viewModel.init();
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.detached) {
-      final internet = locator<InternetService>();
-      internet.dispose();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if(state == AppLifecycleState.detached) {
+  //     final internet = locator<InternetService>();
+  //     internet.dispose();
+  //   }
+  //   super.didChangeAppLifecycleState(state);
+  // }
 
 
 }
