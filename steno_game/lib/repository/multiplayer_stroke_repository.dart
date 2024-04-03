@@ -20,7 +20,7 @@ class MultiplayerStrokeRepository {
     final results = _db
         .collection("strokeGameEnvironment")
         .doc(gameHostId)
-        .collection("students")
+        .collection("students").orderBy("score", descending: true)
         .snapshots();
     return results.map((snapshots) =>
         snapshots.docs.map((doc) => Student.fromJson(doc.data())).toList());
@@ -90,7 +90,7 @@ class MultiplayerStrokeRepository {
         final results = await _db
             .collection("strokeGameEnvironment")
             .doc(gameId)
-            .collection('students')
+            .collection('students').orderBy("score", descending: true)
             .get()
             .then((value) =>
                 value.docs.map((doc) => Student.fromJson(doc.data())).toList());

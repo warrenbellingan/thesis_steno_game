@@ -37,6 +37,11 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
     final getInstructor = await _userRepo.getUser(game.gameMaster);
     getInstructor.fold(
         (l) => showBottomSheet(l.message), (user) => instructor = user);
+    final getStudents = await _multiStrokeRepo.getStudents(game.id);
+    getStudents.fold((l) => showBottomSheet(l.message), (studentsData) {
+      students = studentsData;
+      rebuildUi();
+    });
     studentsStream =
         _multiStrokeRepo.streamStudents(game.id).listen((studentsData) {
       students = studentsData;
