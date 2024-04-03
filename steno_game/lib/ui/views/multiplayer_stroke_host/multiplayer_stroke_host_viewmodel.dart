@@ -4,10 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/model/answer_stroke.dart';
 import 'package:steno_game/model/multiplayer_stroke.dart';
-import 'package:steno_game/model/s_stroke.dart';
-import 'package:steno_game/model/s_text.dart';
-import 'package:steno_game/model/user.dart';
+import 'package:steno_game/model/question_stroke.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import '../../../app/app.bottomsheets.dart';
 import '../../../app/app.locator.dart';
@@ -16,46 +15,44 @@ import '../../../repository/multiplayer_stroke_repository.dart';
 import '../../../services/shared_preference_service.dart';
 
 class MultiplayerStrokeHostViewModel extends BaseViewModel {
-  final _multiStrokeRepo = locator<MultiplayerStrokeRepository>();
-  final _strokeRepo = locator<StrokeRepository>();
-  final _sharedPref = locator<SharedPreferenceService>();
+
+  final _multiStroke = locator<MultiplayerStrokeRepository>();
   final _bottomSheet = locator<BottomSheetService>();
 
-  StreamSubscription<List<Student>>? studentsStream;
-  StreamSubscription<List<SStroke>>? sStrokeStream;
-  StreamSubscription<List<SText>>? sTextStream;
-  StreamSubscription<MultiplayerStroke>? gameStream;
-
-  GlobalKey painterKey = GlobalKey();
-  late User user;
-
-  List<Student> students = [];
-  List<SStroke> sStroke = [];
-  List<SText> sText = [];
-  Set<String> correctAnswers = {};
-  Set<String> wrongAnswers = {};
 
   MultiplayerStroke game;
-
-  TextEditingController textController = TextEditingController();
-  TextEditingController strokeController = TextEditingController();
-  int gameStatus = 0;
-  int gameType = 0;
-
   MultiplayerStrokeHostViewModel(this.game);
+
+  List<QuestionStroke> questions = [];
+  List<AnswerStroke> answers = [];
+  StreamSubscription<List<AnswerStroke>>? streamSubscription;
 
   init() async {
     setBusy(true);
-    user = (await _sharedPref.getCurrentUser())!;
-    studentsStream =
-        _multiStrokeRepo.streamStudents(game.id).listen((studentsData) {
-      students = studentsData;
+    final getQuestions = await _multiStroke.getQuestion(game.id);
+    getQuestions.fold((l) => showBottomSheet(l.message), (questionsData){
+      questions = questionsData;
+    });
+    streamSubscription = _multiStroke.streamAnswers(game.id).listen((answersData) {
+      answers = answersData;
       rebuildUi();
     });
-    gameStream =
-        _multiStrokeRepo.streamMultiplayerStroke(game.id).listen((gameData) {
-      game = gameData;
-      rebuildUi();
-    });
+    setBusy(false);
   }
+
+  void showBottomSheet(String description) {
+    _bottomSheet.showCustomSheet(
+      variant: BottomSheetType.notice,
+      title: "Notice",
+      description: description,
+    );
+  }
+
+  @override
+  void dispose() {
+    streamSubscription?.cancel();
+    super.dispose();
+  }
+
+
 }

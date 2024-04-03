@@ -10,13 +10,11 @@ class InGameBar extends StatelessWidget {
   InGameBar(
       {super.key,
       required this.name,
-      required this.level,
       this.image,
       this.isStudent});
 
   final navigationSer = locator<NavigationService>();
   final String name;
-  final int level;
   final String? image;
   final bool? isStudent;
 
@@ -34,9 +32,7 @@ class InGameBar extends StatelessWidget {
         children: [
           PlayerProfile(
             name: name,
-            level: level,
             imagePath: image,
-            isStudent: isStudent,
           ),
           Container(
             decoration: BoxDecoration(

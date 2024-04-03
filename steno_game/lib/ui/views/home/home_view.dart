@@ -46,10 +46,7 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver{
                         onTap: viewModel.goToProfileView,
                         child: PlayerProfile(
                           name: viewModel.user.name,
-                          level: viewModel.user.level,
                           imagePath: viewModel.user.image,
-                          isStudent:
-                              viewModel.user.role == "Student" ? null : true,
                         ),
                       ),
                       if (viewModel.isStudent())

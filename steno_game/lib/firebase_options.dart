@@ -53,10 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBoV57OlFzceoGBE-Nbnw5o8_6FlqarmPE',
-    appId: '1:181073997803:android:dbe52e264d5d17d215f3ae',
-    messagingSenderId: '181073997803',
-    projectId: 'steno-game',
-    storageBucket: 'steno-game.appspot.com',
+    apiKey: 'AIzaSyBCOCS9YY7Ely9RATQaB55tZU05FOioN40',
+    appId: '1:171432238143:android:5b5810e4e4dfd6b1b62c8a',
+    messagingSenderId: '171432238143',
+    projectId: 'steno-game-24d5c',
+    storageBucket: 'steno-game-24d5c.appspot.com',
   );
 }

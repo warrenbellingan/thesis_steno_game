@@ -1,20 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 's_text.dart';
+part of 'answer_stroke.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$STextImpl _$$STextImplFromJson(Map<String, dynamic> json) => _$STextImpl(
+_$AnswerStrokeImpl _$$AnswerStrokeImplFromJson(Map<String, dynamic> json) =>
+    _$AnswerStrokeImpl(
       id: json['id'] as String,
       questionId: json['questionId'] as String,
-      text: json['text'] as String,
+      data: json['data'] as String,
+      stroke: json['stroke'] as String?,
     );
 
-Map<String, dynamic> _$$STextImplToJson(_$STextImpl instance) =>
+Map<String, dynamic> _$$AnswerStrokeImplToJson(_$AnswerStrokeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'questionId': instance.questionId,
-      'text': instance.text,
+      'data': instance.data,
+      'stroke': instance.stroke,
     };

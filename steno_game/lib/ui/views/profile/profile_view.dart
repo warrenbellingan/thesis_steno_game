@@ -88,25 +88,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            if (viewModel.isStudent())
-                              Column(
-                                children: [
-                                  Text(
-                                    "Level ${viewModel.user.level.toString()}",
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 10,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: GameColor.primaryColor),
-                                  ),
-                                ],
-                              ),
+
                           ],
                         )
                       ],

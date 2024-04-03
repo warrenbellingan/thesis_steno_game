@@ -22,7 +22,7 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
         onKeyEvent: viewModel.onKeyReceived,
         child: Column(
           children: [
-            InGameBar(name: "Warren", level: 2),
+            InGameBar(name: "Warren"),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

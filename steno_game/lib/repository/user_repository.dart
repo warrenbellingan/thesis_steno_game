@@ -42,8 +42,6 @@ class UserRepository {
         completedLevels: user.completedLevels,
         friends: user.friends,
         friendsRequest: user.friendsRequest,
-        level: user.level,
-        levelProgress: user.levelProgress,
         score: user.score + gainScore,
         typingAccuracy: user.typingAccuracy,
         typingSpeed: user.typingSpeed,

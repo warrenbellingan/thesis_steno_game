@@ -32,8 +32,6 @@ mixin _$User {
   int get score => throw _privateConstructorUsedError;
   List<String> get friends => throw _privateConstructorUsedError;
   List<String> get friendsRequest => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError;
-  int get levelProgress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,9 +55,7 @@ abstract class $UserCopyWith<$Res> {
       List<dynamic> achievements,
       int score,
       List<String> friends,
-      List<String> friendsRequest,
-      int level,
-      int levelProgress});
+      List<String> friendsRequest});
 }
 
 /// @nodoc
@@ -87,8 +83,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? score = null,
     Object? friends = null,
     Object? friendsRequest = null,
-    Object? level = null,
-    Object? levelProgress = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -139,14 +133,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.friendsRequest
           : friendsRequest // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as int,
-      levelProgress: null == levelProgress
-          ? _value.levelProgress
-          : levelProgress // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
@@ -170,9 +156,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<dynamic> achievements,
       int score,
       List<String> friends,
-      List<String> friendsRequest,
-      int level,
-      int levelProgress});
+      List<String> friendsRequest});
 }
 
 /// @nodoc
@@ -197,8 +181,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? score = null,
     Object? friends = null,
     Object? friendsRequest = null,
-    Object? level = null,
-    Object? levelProgress = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -249,14 +231,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._friendsRequest
           : friendsRequest // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as int,
-      levelProgress: null == levelProgress
-          ? _value.levelProgress
-          : levelProgress // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -276,9 +250,7 @@ class _$UserImpl implements _User {
       final List<dynamic> achievements = const [],
       this.score = 0,
       final List<String> friends = const [],
-      final List<String> friendsRequest = const [],
-      this.level = 1,
-      this.levelProgress = 0})
+      final List<String> friendsRequest = const []})
       : _completedLevels = completedLevels,
         _achievements = achievements,
         _friends = friends,
@@ -343,15 +315,8 @@ class _$UserImpl implements _User {
   }
 
   @override
-  @JsonKey()
-  final int level;
-  @override
-  @JsonKey()
-  final int levelProgress;
-
-  @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, role: $role, image: $image, typingSpeed: $typingSpeed, typingAccuracy: $typingAccuracy, completedLevels: $completedLevels, achievements: $achievements, score: $score, friends: $friends, friendsRequest: $friendsRequest, level: $level, levelProgress: $levelProgress)';
+    return 'User(id: $id, name: $name, email: $email, role: $role, image: $image, typingSpeed: $typingSpeed, typingAccuracy: $typingAccuracy, completedLevels: $completedLevels, achievements: $achievements, score: $score, friends: $friends, friendsRequest: $friendsRequest)';
   }
 
   @override
@@ -375,10 +340,7 @@ class _$UserImpl implements _User {
             (identical(other.score, score) || other.score == score) &&
             const DeepCollectionEquality().equals(other._friends, _friends) &&
             const DeepCollectionEquality()
-                .equals(other._friendsRequest, _friendsRequest) &&
-            (identical(other.level, level) || other.level == level) &&
-            (identical(other.levelProgress, levelProgress) ||
-                other.levelProgress == levelProgress));
+                .equals(other._friendsRequest, _friendsRequest));
   }
 
   @JsonKey(ignore: true)
@@ -396,9 +358,7 @@ class _$UserImpl implements _User {
       const DeepCollectionEquality().hash(_achievements),
       score,
       const DeepCollectionEquality().hash(_friends),
-      const DeepCollectionEquality().hash(_friendsRequest),
-      level,
-      levelProgress);
+      const DeepCollectionEquality().hash(_friendsRequest));
 
   @JsonKey(ignore: true)
   @override
@@ -427,9 +387,7 @@ abstract class _User implements User {
       final List<dynamic> achievements,
       final int score,
       final List<String> friends,
-      final List<String> friendsRequest,
-      final int level,
-      final int levelProgress}) = _$UserImpl;
+      final List<String> friendsRequest}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -457,10 +415,6 @@ abstract class _User implements User {
   List<String> get friends;
   @override
   List<String> get friendsRequest;
-  @override
-  int get level;
-  @override
-  int get levelProgress;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

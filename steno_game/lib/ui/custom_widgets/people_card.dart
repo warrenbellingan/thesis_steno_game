@@ -9,17 +9,13 @@ class PeopleCard extends StatelessWidget {
   const PeopleCard({
     super.key,
     required this.name,
-    required this.level,
     required this.onClick,
     this.image,
-    this.isStudent,
   });
 
   final String name;
-  final int level;
   final String? image;
   final OnClick onClick;
-  final bool? isStudent;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +37,7 @@ class PeopleCard extends StatelessWidget {
         children: [
           PlayerProfile(
             name: name,
-            level: level,
             imagePath: image,
-            isStudent: isStudent,
           ),
           InkWell(
             onTap: onClick,

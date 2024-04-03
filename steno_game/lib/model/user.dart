@@ -17,9 +17,7 @@ class User with _$User {
       @Default([]) List achievements,
       @Default(0) int score,
       @Default([]) List<String> friends,
-      @Default([]) List<String> friendsRequest,
-      @Default(1) int level,
-      @Default(0) int levelProgress}) = _User;
+      @Default([]) List<String> friendsRequest,}) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

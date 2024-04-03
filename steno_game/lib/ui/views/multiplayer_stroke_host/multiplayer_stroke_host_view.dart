@@ -30,7 +30,8 @@ class MultiplayerStrokeHostView
       child: viewModel.isBusy
           ? const GameLoading()
           : Column(
-
+        children: [
+        ],
             ),
     ));
   }

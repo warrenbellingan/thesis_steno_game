@@ -37,7 +37,7 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
             child: Column(
                 children: [
                   InGameBar(
-                      name: viewModel.user.name, level: viewModel.user.level),
+                      name: viewModel.user.name),
                   verticalSpaceMedium,
                   viewModel.questions.isEmpty
                       ? const GameEmpty()

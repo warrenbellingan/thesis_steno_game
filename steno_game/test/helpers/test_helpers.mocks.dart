@@ -8,7 +8,6 @@ import 'dart:io' as _i15;
 import 'dart:ui' as _i9;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
-import 'package:connectivity_plus/connectivity_plus.dart' as _i17;
 import 'package:dartz/dartz.dart' as _i4;
 import 'package:firebase_auth/firebase_auth.dart' as _i2;
 import 'package:flutter/material.dart' as _i7;
@@ -1187,27 +1186,6 @@ class MockImageService extends _i1.Mock implements _i14.ImageService {
 /// See the documentation for Mockito's code generation for more information.
 class MockInternetService extends _i1.Mock implements _i16.InternetService {
   @override
-  set subscription(
-          _i8.StreamSubscription<List<_i17.ConnectivityResult>>?
-              _subscription) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #subscription,
-          _subscription,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void streamInternet() => super.noSuchMethod(
-        Invocation.method(
-          #streamInternet,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   _i8.Future<bool> hasInternetConnection() => (super.noSuchMethod(
         Invocation.method(
           #hasInternetConnection,
@@ -1216,13 +1194,4 @@ class MockInternetService extends _i1.Mock implements _i16.InternetService {
         returnValue: _i8.Future<bool>.value(false),
         returnValueForMissingStub: _i8.Future<bool>.value(false),
       ) as _i8.Future<bool>);
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
