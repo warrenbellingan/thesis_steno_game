@@ -25,6 +25,7 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
 
   List<QuestionStroke> questions = [];
   List<AnswerStroke> answers = [];
+  List<Student> students = [];
   StreamSubscription<List<AnswerStroke>>? streamSubscription;
 
   init() async {
@@ -33,11 +34,24 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     getQuestions.fold((l) => showBottomSheet(l.message), (questionsData){
       questions = questionsData;
     });
+    final getStudents = await _multiStroke.getStudents(game.id);
+    getStudents.fold((l) => showBottomSheet(l.message), (r) {
+      students = r;
+    });
     streamSubscription = _multiStroke.streamAnswers(game.id).listen((answersData) {
       answers = answersData;
       rebuildUi();
     });
+    rebuildUi();
     setBusy(false);
+  }
+
+  Student getPlayer(String id) {
+    return students.where((student) => student.id == id).first;
+  }
+
+  List<AnswerStroke> findQuestionAnswer(String questionId) {
+    return answers.where((answers) => answers.questionId == questionId).toList();
   }
 
   void showBottomSheet(String description) {

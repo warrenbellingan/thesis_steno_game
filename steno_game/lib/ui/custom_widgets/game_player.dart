@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../constants/game_color.dart';
 import '../constants/game_ui_png.dart';
 
@@ -49,13 +50,17 @@ class GamePlayer extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            name,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.5,
-              fontSize: 12,
-              wordSpacing: 3,
+          Expanded(
+            child: Container(
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.5,
+                  fontSize: 12,
+                  wordSpacing: 3,
+                ),
+              ),
             ),
           ),
           if (withTail)

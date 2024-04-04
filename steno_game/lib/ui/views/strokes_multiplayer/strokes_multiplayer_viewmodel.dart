@@ -61,7 +61,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
 }
   void addTextAnswer() async{
     setBusy(true);
-    final response = await _multiStroke.addAnswer(game.id, answerController.text, null, questions[currentIndex].id);
+    final response = await _multiStroke.addAnswer(game.id, answerController.text, null, questions[currentIndex].id, user.id);
     response.fold((l) => showBottomSheet(l.message), (answer) async{
       await next();
     });
@@ -71,7 +71,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     setBusy(true);
     final uploadPicResponse = await _stroke.addStroke(painterKey, questions[currentIndex].data, 0, null);
     uploadPicResponse.fold((l) => showBottomSheet(l.message), (stroke) async{
-      final response = await _multiStroke.addAnswer(game.id, stroke.strokeImage, stroke.id, questions[currentIndex].id);
+      final response = await _multiStroke.addAnswer(game.id, stroke.strokeImage, stroke.id, questions[currentIndex].id, user.id);
       response.fold((l) => showBottomSheet(l.message), (answer) async{
         await next();
       });

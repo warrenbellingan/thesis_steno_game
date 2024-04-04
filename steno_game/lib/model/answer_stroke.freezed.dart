@@ -22,6 +22,7 @@ AnswerStroke _$AnswerStrokeFromJson(Map<String, dynamic> json) {
 mixin _$AnswerStroke {
   String get id => throw _privateConstructorUsedError;
   String get questionId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
   String? get stroke => throw _privateConstructorUsedError;
 
@@ -37,7 +38,12 @@ abstract class $AnswerStrokeCopyWith<$Res> {
           AnswerStroke value, $Res Function(AnswerStroke) then) =
       _$AnswerStrokeCopyWithImpl<$Res, AnswerStroke>;
   @useResult
-  $Res call({String id, String questionId, String data, String? stroke});
+  $Res call(
+      {String id,
+      String questionId,
+      String userId,
+      String data,
+      String? stroke});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$AnswerStrokeCopyWithImpl<$Res, $Val extends AnswerStroke>
   $Res call({
     Object? id = null,
     Object? questionId = null,
+    Object? userId = null,
     Object? data = null,
     Object? stroke = freezed,
   }) {
@@ -66,6 +73,10 @@ class _$AnswerStrokeCopyWithImpl<$Res, $Val extends AnswerStroke>
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       data: null == data
           ? _value.data
@@ -87,7 +98,12 @@ abstract class _$$AnswerStrokeImplCopyWith<$Res>
       __$$AnswerStrokeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String questionId, String data, String? stroke});
+  $Res call(
+      {String id,
+      String questionId,
+      String userId,
+      String data,
+      String? stroke});
 }
 
 /// @nodoc
@@ -103,6 +119,7 @@ class __$$AnswerStrokeImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? questionId = null,
+    Object? userId = null,
     Object? data = null,
     Object? stroke = freezed,
   }) {
@@ -114,6 +131,10 @@ class __$$AnswerStrokeImplCopyWithImpl<$Res>
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       data: null == data
           ? _value.data
@@ -133,6 +154,7 @@ class _$AnswerStrokeImpl implements _AnswerStroke {
   const _$AnswerStrokeImpl(
       {required this.id,
       required this.questionId,
+      required this.userId,
       required this.data,
       required this.stroke});
 
@@ -144,13 +166,15 @@ class _$AnswerStrokeImpl implements _AnswerStroke {
   @override
   final String questionId;
   @override
+  final String userId;
+  @override
   final String data;
   @override
   final String? stroke;
 
   @override
   String toString() {
-    return 'AnswerStroke(id: $id, questionId: $questionId, data: $data, stroke: $stroke)';
+    return 'AnswerStroke(id: $id, questionId: $questionId, userId: $userId, data: $data, stroke: $stroke)';
   }
 
   @override
@@ -161,13 +185,15 @@ class _$AnswerStrokeImpl implements _AnswerStroke {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.stroke, stroke) || other.stroke == stroke));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, questionId, data, stroke);
+  int get hashCode =>
+      Object.hash(runtimeType, id, questionId, userId, data, stroke);
 
   @JsonKey(ignore: true)
   @override
@@ -187,6 +213,7 @@ abstract class _AnswerStroke implements AnswerStroke {
   const factory _AnswerStroke(
       {required final String id,
       required final String questionId,
+      required final String userId,
       required final String data,
       required final String? stroke}) = _$AnswerStrokeImpl;
 
@@ -197,6 +224,8 @@ abstract class _AnswerStroke implements AnswerStroke {
   String get id;
   @override
   String get questionId;
+  @override
+  String get userId;
   @override
   String get data;
   @override

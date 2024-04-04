@@ -41,13 +41,13 @@ class MultiplayerStrokeRepository {
   }
 
   Future<Either<GameException, None>> addAnswer(
-      String gameId, String data, String? strokeId , String questionId) async {
+      String gameId, String data, String? strokeId , String questionId, String userId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final user = await _sharedPref.getCurrentUser();
         final id = DateTime.now().millisecondsSinceEpoch.toString() + user!.id;
-        AnswerStroke answer = AnswerStroke(id: id, questionId: questionId, data: data, stroke: strokeId);
+        AnswerStroke answer = AnswerStroke(id: id, questionId: questionId, data: data, stroke: strokeId, userId: userId);
         await _db
             .collection("strokeGameEnvironment")
             .doc(gameId)
