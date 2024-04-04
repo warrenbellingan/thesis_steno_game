@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 typedef OnClick = Function();
 
 class GameButton extends StatelessWidget {
-  const GameButton({super.key, required this.text, required this.onClick, required this.isLoading});
+  const GameButton(
+      {super.key,
+      required this.text,
+      required this.onClick,
+      required this.isLoading});
 
   final String text;
   final OnClick onClick;
@@ -31,15 +35,17 @@ class GameButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         ),
-        child: isLoading ? const CircularProgressIndicator():Text(
-          text,
-          style: const TextStyle(
-            letterSpacing: 1.5,
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
+        child: isLoading
+            ? const CircularProgressIndicator(color: Colors.white,)
+            : Text(
+                text,
+                style: const TextStyle(
+                  letterSpacing: 1.5,
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
       ),
     );
   }
