@@ -5,7 +5,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.locator.dart';
 
 class InternetService {
-
   final _snackBar = locator<SnackbarService>();
 
   // StreamSubscription<List<ConnectivityResult>>? subscription;
@@ -40,7 +39,7 @@ class InternetService {
     } else {
       return false;
     }
-   }
+  }
 
   //
   // void dispose() {

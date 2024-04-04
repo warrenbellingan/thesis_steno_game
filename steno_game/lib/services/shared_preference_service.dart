@@ -24,7 +24,8 @@ class SharedPreferenceService {
     final sharedPref = await SharedPreferences.getInstance();
     await sharedPref.setBool("USER_STATUS", status);
   }
-  Future<bool?> getIsPreviousOnline()  async {
+
+  Future<bool?> getIsPreviousOnline() async {
     final sharedPref = await SharedPreferences.getInstance();
     final status = sharedPref.getBool("USER_STATUS");
     return status;
@@ -46,8 +47,6 @@ class SharedPreferenceService {
     userId = user.id;
     await sharedPref.setString("USER_KEY", jsonEncode(user.toJson()));
   }
-
-
 
   void dispose() {
     _userStreamController.close();

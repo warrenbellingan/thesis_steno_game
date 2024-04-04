@@ -15,7 +15,7 @@ import '../people/people_view.dart';
 import '../play/play_view.dart';
 import 'home_viewmodel.dart';
 
-class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver{
+class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver {
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver{
     Widget? child,
   ) {
     return viewModel.isBusy
-        ?const GameBody(body: GameLoading())
+        ? const GameBody(body: GameLoading())
         : GameBody(
             body: Column(
               children: [
@@ -217,6 +217,4 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver{
   //   }
   //   super.didChangeAppLifecycleState(state);
   // }
-
-
 }

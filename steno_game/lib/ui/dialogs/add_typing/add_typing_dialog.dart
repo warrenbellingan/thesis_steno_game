@@ -65,7 +65,7 @@ class AddTypingDialog extends StackedView<AddTypingDialogModel> {
                     ),
                   ),
                   verticalSpaceMedium,
-                  GameButton(text: "Add", onClick: viewModel.addClick),
+                  GameButton(text: "Add", onClick: viewModel.addClick, isLoading: viewModel.busy("add"),),
                   verticalSpaceMedium,
                 ],
               ),

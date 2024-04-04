@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 import '../constants/game_ui_png.dart';
 
-
 class PlayerProfile extends StatelessWidget {
-  const PlayerProfile(
-      {super.key,
-      required this.name,
-      this.imagePath,});
+  const PlayerProfile({
+    super.key,
+    required this.name,
+    this.imagePath,
+  });
 
   final String name;
   final String? imagePath;
@@ -55,7 +55,6 @@ class PlayerProfile extends StatelessWidget {
                   wordSpacing: 3,
                 ),
               ),
-
             ],
           ),
         ],

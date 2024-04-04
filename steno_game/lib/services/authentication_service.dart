@@ -65,7 +65,7 @@ class AuthenticationService {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        if(isLoggedIn) await auth.signOut();
+        if (isLoggedIn) await auth.signOut();
         await _sharedPref.deleteCurrentUser();
         return const Right(None());
       } catch (e) {
@@ -171,8 +171,8 @@ class AuthenticationService {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-          await db.collection('users').doc(user.id).set(user.toJson());
-          await _sharedPref.saveUser(user);
+        await db.collection('users').doc(user.id).set(user.toJson());
+        await _sharedPref.saveUser(user);
         return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));

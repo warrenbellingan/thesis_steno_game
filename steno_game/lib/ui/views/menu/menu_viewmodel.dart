@@ -12,7 +12,6 @@ class MenuViewModel extends BaseViewModel {
   final _multiGameStroke = locator<MultiplayerStrokeRepository>();
   final _bottomSheet = locator<BottomSheetService>();
 
-
   User user;
   MenuViewModel(this.user);
 
@@ -20,7 +19,7 @@ class MenuViewModel extends BaseViewModel {
     return user.role == "Student";
   }
 
-  void goToCreateHost() async{
+  void goToCreateHost() async {
     setBusy(true);
     final response = await _multiGameStroke.createGame(user.id);
     setBusy(false);

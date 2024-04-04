@@ -31,7 +31,7 @@ class EditTypingDialogModel extends BaseViewModel {
   }
 
   void editClick() async {
-    setBusy(true);
+    setBusyForObject("edit", true);
     typing = Typing(
         id: typing!.id,
         text: textController.text,
@@ -39,7 +39,8 @@ class EditTypingDialogModel extends BaseViewModel {
     final response = await _typingRepo.editTyping(typing!);
     response.fold((l) => showBottomSheet(l.message),
         (r) => showBottomSheet("Saved Successfully"));
-    setBusy(false);
+    setBusyForObject("edit", false);
+    rebuildUi();
   }
 
   void showBottomSheet(String description) {

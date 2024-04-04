@@ -44,7 +44,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
   }
 
   Future<void> addLesson() async {
-    setBusy(true);
+    setBusyForObject("addLesson", true);
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
@@ -58,11 +58,12 @@ class AddStrokeLessonViewModel extends BaseViewModel {
         rebuildUi();
       });
     }
-    setBusy(false);
+    setBusyForObject("addLesson", false);
+    rebuildUi();
   }
 
   saveLessonClick() async {
-    setBusy(true);
+    setBusyForObject("saveLesson", true);
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
@@ -76,7 +77,8 @@ class AddStrokeLessonViewModel extends BaseViewModel {
         rebuildUi();
       });
     }
-    setBusy(false);
+    setBusyForObject("saveLesson", false);
+    rebuildUi();
   }
 
   Future<void> getPictureTopics() async {
@@ -110,7 +112,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
   }
 
   void saveClick() async {
-    setBusy(true);
+    setBusyForObject("save", true);
     PictureTopic topic = PictureTopic(
         id: topics[currentIndex].id,
         stroke: stroke!.id,
@@ -119,7 +121,8 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     response.fold((l) => showBottomSheet(l.message), (r) {
       showBottomSheet("Saved Successfully");
     });
-    setBusy(false);
+    setBusyForObject("save", false);
+    rebuildUi();
   }
 
   void changePage(int index) async {
@@ -140,7 +143,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
   }
 
   void addTopicClick() async {
-    setBusy(true);
+    setBusyForObject("addTopic", true);
     final response = await _topicRepo.addPictureTopic(
         lesson!.id,
         strokeDescriptionController.text,
@@ -150,7 +153,8 @@ class AddStrokeLessonViewModel extends BaseViewModel {
       await getPictureTopics();
       await getStroke();
     });
-    setBusy(false);
+    setBusyForObject("addTopic", false);
+    rebuildUi();
   }
 
   void showBottomSheet(String description) {

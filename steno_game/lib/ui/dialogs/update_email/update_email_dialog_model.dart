@@ -30,7 +30,7 @@ class UpdateEmailDialogModel extends BaseViewModel with InputValidation {
     String? passwordValidation = isValidPassword(passwordTextController.text);
     if (emailValidation == null) {
       if (passwordValidation == null) {
-        setBusy(true);
+        setBusyForObject("changeEmail", true);
         final response = await _authServ.updateEmail(
           currentEmail: user.email,
           newEmail: newEmailTextController.text,
@@ -40,7 +40,8 @@ class UpdateEmailDialogModel extends BaseViewModel with InputValidation {
           (l) => showBottomSheet(l.message),
           (r) => showBottomSheet("Email changed successfully"),
         );
-        setBusy(false);
+        setBusyForObject("changeEmail", false);
+        rebuildUi();
       } else {
         showBottomSheet(passwordValidation);
       }

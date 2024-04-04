@@ -65,7 +65,7 @@ class EditTypingDialog extends StackedView<EditTypingDialogModel> {
                     ),
                   ),
                   verticalSpaceMedium,
-                  GameButton(text: "Save", onClick: viewModel.editClick),
+                  GameButton(text: "Save", onClick: viewModel.editClick, isLoading: viewModel.busy("edit"),),
                   verticalSpaceMedium,
                 ],
               ),

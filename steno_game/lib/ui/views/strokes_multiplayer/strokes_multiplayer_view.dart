@@ -34,10 +34,9 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
       body: viewModel.isBusy
           ? const GameLoading()
           : SingleChildScrollView(
-            child: Column(
+              child: Column(
                 children: [
-                  InGameBar(
-                      name: viewModel.user.name),
+                  InGameBar(name: viewModel.user.name),
                   verticalSpaceMedium,
                   viewModel.questions.isEmpty
                       ? const GameEmpty()
@@ -57,13 +56,14 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                 verticalSpaceSmall,
                                 Container(
                                   width: double.infinity,
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                       color: GameColor.tertiaryColor,
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
-                                          color: GameColor.secondaryColor, width: 2)),
+                                          color: GameColor.secondaryColor,
+                                          width: 2)),
                                   child: Column(
                                     children: [
                                       const Text(
@@ -82,28 +82,31 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                       verticalSpaceSmall,
                                       viewModel.students.isNotEmpty
                                           ? ListView.builder(
-                                          itemCount: viewModel.students.length,
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, index) {
-                                            var student = viewModel.students[index];
-                                            return GamePlayer(
-                                              name: student.name,
-                                              imagePath: student.image,
-                                              withTail: true,
-                                              tailText: "Scores: ${viewModel.students[0].score}",
-                                            );
-                                          })
+                                              itemCount:
+                                                  viewModel.students.length,
+                                              shrinkWrap: true,
+                                              itemBuilder: (context, index) {
+                                                var student =
+                                                    viewModel.students[index];
+                                                return GamePlayer(
+                                                  name: student.name,
+                                                  imagePath: student.image,
+                                                  withTail: true,
+                                                  tailText:
+                                                      "Scores: ${viewModel.students[0].score}",
+                                                );
+                                              })
                                           : const Text(
-                                        "No Students found",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
+                                              "No Students found",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                     ],
                                   ),
                                 ),
                                 verticalSpaceSmall,
-                                GameButton(text: "Exit", onClick: (){})
+                                GameButton(text: "Exit", onClick: () {}, isLoading: false,)
                               ],
                             )
                           : viewModel.questions[viewModel.currentIndex].type ==
@@ -148,7 +151,7 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                         label: "Answer"),
                                     GameButton(
                                         text: "Next",
-                                        onClick: viewModel.addTextAnswer),
+                                        onClick: viewModel.addTextAnswer, isLoading: viewModel.busy("addText"),),
                                   ],
                                 )
                               : Column(
@@ -212,12 +215,12 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                     verticalSpaceSmall,
                                     GameButton(
                                         text: "Next",
-                                        onClick: viewModel.addStrokeAnswer),
+                                        onClick: viewModel.addStrokeAnswer, isLoading: viewModel.busy("addStroke"),),
                                   ],
                                 ),
                 ],
               ),
-          ),
+            ),
     );
   }
 

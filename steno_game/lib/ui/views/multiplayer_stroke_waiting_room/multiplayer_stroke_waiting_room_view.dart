@@ -173,7 +173,7 @@ class MultiplayerStrokeWaitingRoomView
                 if (!viewModel.isStudent())
                   GameButton(
                     text: "Start Game",
-                    onClick: viewModel.startGame,
+                    onClick: viewModel.startGame, isLoading: viewModel.busy("startGame"),
                   ),
               ],
             ),

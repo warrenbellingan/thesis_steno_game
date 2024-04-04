@@ -20,7 +20,7 @@ class UpdatePasswordDialogModel extends BaseViewModel with InputValidation {
     String? newPassValidation = isValidPassword(newPasswordController.text);
     if (currentPassValidation == null) {
       if (newPassValidation == null) {
-        setBusy(true);
+        setBusyForObject("changePassword", true);
         final response = await _authServ.updatePassword(
           currentPassword: currentPasswordController.text,
           newPassword: newPasswordController.text,
@@ -29,7 +29,8 @@ class UpdatePasswordDialogModel extends BaseViewModel with InputValidation {
           (l) => showBottomSheet(l.message),
           (r) => showBottomSheet("Password changed successfully"),
         );
-        setBusy(false);
+        setBusyForObject("changePassword", false);
+        rebuildUi();
       } else {
         showBottomSheet(newPassValidation);
       }

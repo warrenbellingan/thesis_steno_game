@@ -38,6 +38,7 @@ class ProfileViewModel extends BaseViewModel {
   bool isStudent() {
     return user.role == "Student";
   }
+
   void connectAccount() {
     _navigationService.navigateToSignUpView(user: user);
   }
@@ -72,10 +73,10 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   Future<void> logOut() async {
-    setBusy(true);
+    setBusyForObject("logout", true);
     final response = await _authService.logout();
-    setBusy(false);
-
+    setBusyForObject("logout", false);
+    rebuildUi();
     response.fold((l) {
       showBottomSheet(l.message);
     }, (r) {
@@ -97,6 +98,4 @@ class ProfileViewModel extends BaseViewModel {
     streamSubscription?.cancel();
     super.dispose();
   }
-
-
 }

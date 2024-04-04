@@ -51,7 +51,7 @@ class UpdateNameDialog extends StackedView<UpdateNameDialogModel> {
                     ),
                   ),
                 ),
-                GameButton(text: "Save", onClick: viewModel.updateName),
+                GameButton(text: "Save", onClick: viewModel.updateName, isLoading: viewModel.busy("update"),),
                 verticalSpaceMedium,
               ],
             ),

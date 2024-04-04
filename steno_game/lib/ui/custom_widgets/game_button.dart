@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 typedef OnClick = Function();
 
 class GameButton extends StatelessWidget {
-  const GameButton({super.key, required this.text, required this.onClick});
+  const GameButton({super.key, required this.text, required this.onClick, required this.isLoading});
 
   final String text;
   final OnClick onClick;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class GameButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         ),
-        child: Text(
+        child: isLoading ? const CircularProgressIndicator():Text(
           text,
           style: const TextStyle(
             letterSpacing: 1.5,

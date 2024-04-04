@@ -54,7 +54,7 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
         goToPlayEnvironment();
       }
     });
-    if(isStudent()) await joinGame();
+    if (isStudent()) await joinGame();
     rebuildUi();
     setBusy(false);
   }
@@ -69,23 +69,20 @@ class MultiplayerStrokeWaitingRoomViewModel extends BaseViewModel {
   }
 
   void startGame() async {
-    setBusy(true);
+    setBusyForObject("startGame", true);
     final response = await _multiStrokeRepo.setGameStatus(game.id, 2);
-    response.fold((l) => showBottomSheet(l.message), (r) {
-
-    });
-    setBusy(false);
+    response.fold((l) => showBottomSheet(l.message), (r) {});
+    setBusyForObject("startGame", false);
+    rebuildUi();
   }
 
   void goToPlayEnvironment() {
-    if(isStudent()) {
+    if (isStudent()) {
       _navigationService.replaceWithStrokesMultiplayerView(game: game);
-    }
-    else {
+    } else {
       _navigationService.replaceWithMultiplayerStrokeHostView(game: game);
     }
   }
-
 
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(

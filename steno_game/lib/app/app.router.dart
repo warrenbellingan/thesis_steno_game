@@ -5,14 +5,14 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/cupertino.dart' as _i34;
+import 'package:flutter/cupertino.dart' as _i35;
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as _i32;
+import 'package:flutter/material.dart' as _i33;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i37;
-import 'package:steno_game/model/lesson.dart' as _i36;
-import 'package:steno_game/model/multiplayer_stroke.dart' as _i35;
-import 'package:steno_game/model/user.dart' as _i33;
+import 'package:stacked_services/stacked_services.dart' as _i38;
+import 'package:steno_game/model/lesson.dart' as _i37;
+import 'package:steno_game/model/multiplayer_stroke.dart' as _i36;
+import 'package:steno_game/model/user.dart' as _i34;
 import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
 import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart'
     as _i30;
@@ -29,6 +29,8 @@ import 'package:steno_game/ui/views/login/login_view.dart' as _i4;
 import 'package:steno_game/ui/views/menu/menu_view.dart' as _i24;
 import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_host_view.dart'
     as _i29;
+import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart'
+    as _i32;
 import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_stroke_waiting_room_view.dart'
     as _i28;
 import 'package:steno_game/ui/views/people/people_view.dart' as _i9;
@@ -120,6 +122,9 @@ class Routes {
 
   static const addTypingLessonView = '/add-typing-lesson-view';
 
+  static const multiplayerStrokeHostResultsView =
+      '/multiplayer-stroke-host-results-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -151,6 +156,7 @@ class Routes {
     multiplayerStrokeHostView,
     addStrokeLessonView,
     addTypingLessonView,
+    multiplayerStrokeHostResultsView,
   };
 }
 
@@ -276,168 +282,172 @@ class StackedRouter extends _i1.RouterBase {
       Routes.addTypingLessonView,
       page: _i31.AddTypingLessonView,
     ),
+    _i1.RouteDef(
+      Routes.multiplayerStrokeHostResultsView,
+      page: _i32.MultiplayerStrokeHostResultsView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.SignUpView: (data) {
       final args = data.getArgs<SignUpViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => _i5.SignUpView(args.user, key: args.key),
         settings: data,
       );
     },
     _i6.ForgotPasswordView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotPasswordView(),
         settings: data,
       );
     },
     _i7.AchievementView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.AchievementView(),
         settings: data,
       );
     },
     _i8.LessonsView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.LessonsView(),
         settings: data,
       );
     },
     _i9.PeopleView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.PeopleView(),
         settings: data,
       );
     },
     _i10.PictureTopicView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.PictureTopicView(),
         settings: data,
       );
     },
     _i11.PlayView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.PlayView(),
         settings: data,
       );
     },
     _i12.ProfileView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.ProfileView(),
         settings: data,
       );
     },
     _i13.QuizGameStrokeView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.QuizGameStrokeView(),
         settings: data,
       );
     },
     _i14.StrokeExerciseView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.StrokeExerciseView(),
         settings: data,
       );
     },
     _i15.StrokesMultiplayerView: (data) {
       final args = data.getArgs<StrokesMultiplayerViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i15.StrokesMultiplayerView(args.game, key: args.key),
         settings: data,
       );
     },
     _i16.StrokePlayView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.StrokePlayView(),
         settings: data,
       );
     },
     _i17.TextQuizView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.TextQuizView(),
         settings: data,
       );
     },
     _i18.TextExerciseView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.TextExerciseView(),
         settings: data,
       );
     },
     _i19.TypingExerciseView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.TypingExerciseView(),
         settings: data,
       );
     },
     _i20.TypingPlayView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.TypingPlayView(),
         settings: data,
       );
     },
     _i21.SpeedTypingView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i21.SpeedTypingView(),
         settings: data,
       );
     },
     _i22.PersonView: (data) {
       final args = data.getArgs<PersonViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => _i22.PersonView(args.userId, key: args.key),
         settings: data,
       );
     },
     _i23.TopicView: (data) {
       final args = data.getArgs<TopicViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => _i23.TopicView(args.lesson, key: args.key),
         settings: data,
       );
     },
     _i24.MenuView: (data) {
       final args = data.getArgs<MenuViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => _i24.MenuView(args.user, key: args.key),
         settings: data,
       );
     },
     _i25.SearchStenoView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i25.SearchStenoView(),
         settings: data,
       );
     },
     _i26.HostStrokeView: (data) {
       final args = data.getArgs<HostStrokeViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => _i26.HostStrokeView(args.game, key: args.key),
         settings: data,
       );
     },
     _i27.JoinMultiplayerStrokeView: (data) {
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) => const _i27.JoinMultiplayerStrokeView(),
         settings: data,
       );
@@ -445,7 +455,7 @@ class StackedRouter extends _i1.RouterBase {
     _i28.MultiplayerStrokeWaitingRoomView: (data) {
       final args = data.getArgs<MultiplayerStrokeWaitingRoomViewArguments>(
           nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i28.MultiplayerStrokeWaitingRoomView(args.game, key: args.key),
         settings: data,
@@ -454,7 +464,7 @@ class StackedRouter extends _i1.RouterBase {
     _i29.MultiplayerStrokeHostView: (data) {
       final args =
           data.getArgs<MultiplayerStrokeHostViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i29.MultiplayerStrokeHostView(args.game, key: args.key),
         settings: data,
@@ -462,7 +472,7 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i30.AddStrokeLessonView: (data) {
       final args = data.getArgs<AddStrokeLessonViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i30.AddStrokeLessonView(args.lesson, key: args.key),
         settings: data,
@@ -470,9 +480,18 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i31.AddTypingLessonView: (data) {
       final args = data.getArgs<AddTypingLessonViewArguments>(nullOk: false);
-      return _i32.MaterialPageRoute<dynamic>(
+      return _i33.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i31.AddTypingLessonView(args.lesson, key: args.key),
+        settings: data,
+      );
+    },
+    _i32.MultiplayerStrokeHostResultsView: (data) {
+      final args = data.getArgs<MultiplayerStrokeHostResultsViewArguments>(
+          nullOk: false);
+      return _i33.MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            _i32.MultiplayerStrokeHostResultsView(args.game, key: args.key),
         settings: data,
       );
     },
@@ -491,9 +510,9 @@ class SignUpViewArguments {
     this.key,
   });
 
-  final _i33.User? user;
+  final _i34.User? user;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -518,9 +537,9 @@ class StrokesMultiplayerViewArguments {
     this.key,
   });
 
-  final _i35.MultiplayerStroke game;
+  final _i36.MultiplayerStroke game;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -547,7 +566,7 @@ class PersonViewArguments {
 
   final String userId;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -572,9 +591,9 @@ class TopicViewArguments {
     this.key,
   });
 
-  final _i36.Lesson lesson;
+  final _i37.Lesson lesson;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -599,9 +618,9 @@ class MenuViewArguments {
     this.key,
   });
 
-  final _i33.User user;
+  final _i34.User user;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -626,9 +645,9 @@ class HostStrokeViewArguments {
     this.key,
   });
 
-  final _i35.MultiplayerStroke game;
+  final _i36.MultiplayerStroke game;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -653,9 +672,9 @@ class MultiplayerStrokeWaitingRoomViewArguments {
     this.key,
   });
 
-  final _i35.MultiplayerStroke game;
+  final _i36.MultiplayerStroke game;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -680,9 +699,9 @@ class MultiplayerStrokeHostViewArguments {
     this.key,
   });
 
-  final _i35.MultiplayerStroke game;
+  final _i36.MultiplayerStroke game;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -707,9 +726,9 @@ class AddStrokeLessonViewArguments {
     this.key,
   });
 
-  final _i36.Lesson? lesson;
+  final _i37.Lesson? lesson;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -734,9 +753,9 @@ class AddTypingLessonViewArguments {
     this.key,
   });
 
-  final _i36.Lesson? lesson;
+  final _i37.Lesson? lesson;
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -755,7 +774,34 @@ class AddTypingLessonViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i37.NavigationService {
+class MultiplayerStrokeHostResultsViewArguments {
+  const MultiplayerStrokeHostResultsViewArguments({
+    required this.game,
+    this.key,
+  });
+
+  final _i36.MultiplayerStroke game;
+
+  final _i35.Key? key;
+
+  @override
+  String toString() {
+    return '{"game": "$game", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant MultiplayerStrokeHostResultsViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.game == game && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return game.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i38.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -799,8 +845,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToSignUpView({
-    required _i33.User? user,
-    _i34.Key? key,
+    required _i34.User? user,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -942,8 +988,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToStrokesMultiplayerView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1044,7 +1090,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
 
   Future<dynamic> navigateToPersonView({
     required String userId,
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1060,8 +1106,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToTopicView({
-    required _i36.Lesson lesson,
-    _i34.Key? key,
+    required _i37.Lesson lesson,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1077,8 +1123,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToMenuView({
-    required _i33.User user,
-    _i34.Key? key,
+    required _i34.User user,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1108,8 +1154,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToHostStrokeView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1139,8 +1185,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToMultiplayerStrokeWaitingRoomView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1157,8 +1203,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToMultiplayerStrokeHostView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1174,8 +1220,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAddStrokeLessonView({
-    required _i36.Lesson? lesson,
-    _i34.Key? key,
+    required _i37.Lesson? lesson,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1191,8 +1237,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAddTypingLessonView({
-    required _i36.Lesson? lesson,
-    _i34.Key? key,
+    required _i37.Lesson? lesson,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1201,6 +1247,24 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.addTypingLessonView,
         arguments: AddTypingLessonViewArguments(lesson: lesson, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToMultiplayerStrokeHostResultsView({
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.multiplayerStrokeHostResultsView,
+        arguments:
+            MultiplayerStrokeHostResultsViewArguments(game: game, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1250,8 +1314,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithSignUpView({
-    required _i33.User? user,
-    _i34.Key? key,
+    required _i34.User? user,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1393,8 +1457,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithStrokesMultiplayerView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1495,7 +1559,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
 
   Future<dynamic> replaceWithPersonView({
     required String userId,
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1511,8 +1575,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithTopicView({
-    required _i36.Lesson lesson,
-    _i34.Key? key,
+    required _i37.Lesson lesson,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1528,8 +1592,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithMenuView({
-    required _i33.User user,
-    _i34.Key? key,
+    required _i34.User user,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1559,8 +1623,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithHostStrokeView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1590,8 +1654,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithMultiplayerStrokeWaitingRoomView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1608,8 +1672,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithMultiplayerStrokeHostView({
-    required _i35.MultiplayerStroke game,
-    _i34.Key? key,
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1625,8 +1689,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithAddStrokeLessonView({
-    required _i36.Lesson? lesson,
-    _i34.Key? key,
+    required _i37.Lesson? lesson,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1642,8 +1706,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> replaceWithAddTypingLessonView({
-    required _i36.Lesson? lesson,
-    _i34.Key? key,
+    required _i37.Lesson? lesson,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1652,6 +1716,24 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.addTypingLessonView,
         arguments: AddTypingLessonViewArguments(lesson: lesson, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithMultiplayerStrokeHostResultsView({
+    required _i36.MultiplayerStroke game,
+    _i35.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.multiplayerStrokeHostResultsView,
+        arguments:
+            MultiplayerStrokeHostResultsViewArguments(game: game, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

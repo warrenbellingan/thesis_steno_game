@@ -19,19 +19,22 @@ class MultiplayerStrokeRepository {
     final results = _db
         .collection("strokeGameEnvironment")
         .doc(gameHostId)
-        .collection("students").orderBy("score", descending: true)
+        .collection("students")
+        .orderBy("score", descending: true)
         .snapshots();
     return results.map((snapshots) =>
         snapshots.docs.map((doc) => Student.fromJson(doc.data())).toList());
   }
+
   Stream<List<AnswerStroke>> streamAnswers(String gameHostId) {
     final results = _db
         .collection("strokeGameEnvironment")
         .doc(gameHostId)
         .collection("answers")
         .snapshots();
-    return results.map((snapshots) =>
-        snapshots.docs.map((doc) => AnswerStroke.fromJson(doc.data())).toList());
+    return results.map((snapshots) => snapshots.docs
+        .map((doc) => AnswerStroke.fromJson(doc.data()))
+        .toList());
   }
 
   Stream<MultiplayerStroke> streamMultiplayerStroke(String gameHostId) {
@@ -40,14 +43,37 @@ class MultiplayerStrokeRepository {
     return result.map((doc) => MultiplayerStroke.fromJson(doc.data()!));
   }
 
-  Future<Either<GameException, None>> addAnswer(
-      String gameId, String data, String? strokeId , String questionId) async {
+  Future<Either<GameException, None>> addCorrectAnswers(
+      String gameId, List<String> correctAnswers) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db
+            .collection("strokeGameEnvironment")
+            .doc(gameId)
+            .set({"correctAnswers": correctAnswers}, SetOptions(merge: true));
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
+
+  Future<Either<GameException, None>> addAnswer(String gameId, String data,
+      String? strokeId, String questionId, String userId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final user = await _sharedPref.getCurrentUser();
         final id = DateTime.now().millisecondsSinceEpoch.toString() + user!.id;
-        AnswerStroke answer = AnswerStroke(id: id, questionId: questionId, data: data, stroke: strokeId);
+        AnswerStroke answer = AnswerStroke(
+            id: id,
+            questionId: questionId,
+            data: data,
+            stroke: strokeId,
+            userId: userId);
         await _db
             .collection("strokeGameEnvironment")
             .doc(gameId)
@@ -63,7 +89,6 @@ class MultiplayerStrokeRepository {
     }
   }
 
-
   Future<Either<GameException, List<Student>>> getStudents(
       String gameId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
@@ -72,7 +97,8 @@ class MultiplayerStrokeRepository {
         final results = await _db
             .collection("strokeGameEnvironment")
             .doc(gameId)
-            .collection('students').orderBy("score", descending: true)
+            .collection('students')
+            .orderBy("score", descending: true)
             .get()
             .then((value) =>
                 value.docs.map((doc) => Student.fromJson(doc.data())).toList());
@@ -154,7 +180,6 @@ class MultiplayerStrokeRepository {
     }
   }
 
-
   Future<Either<GameException, List<AnswerStroke>>> getAnswers(
       String gameId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
@@ -166,8 +191,8 @@ class MultiplayerStrokeRepository {
             .collection("answers")
             .get()
             .then((value) => value.docs
-            .map((doc) => AnswerStroke.fromJson(doc.data()))
-            .toList());
+                .map((doc) => AnswerStroke.fromJson(doc.data()))
+                .toList());
         return Right(results);
       } catch (e) {
         return Left(GameException(e.toString()));

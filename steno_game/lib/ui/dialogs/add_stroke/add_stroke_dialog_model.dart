@@ -16,7 +16,7 @@ class AddStrokeDialogModel extends BaseViewModel {
   GlobalKey painterKey = GlobalKey();
 
   void addClick() async {
-    setBusy(true);
+    setBusyForObject("add", true);
     final response =
         await _strokeRepo.addStroke(painterKey, textController.text, 1, null);
     response.fold(
@@ -26,8 +26,9 @@ class AddStrokeDialogModel extends BaseViewModel {
         showBottomSheet("Added Successfully");
       },
     );
+    setBusyForObject("add", false);
     rebuildUi();
-    setBusy(false);
+
   }
 
   void showBottomSheet(String description) {

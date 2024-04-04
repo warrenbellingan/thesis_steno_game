@@ -50,7 +50,7 @@ class AddTypingLessonViewModel extends BaseViewModel {
   }
 
   Future<void> addLesson() async {
-    setBusy(true);
+    setBusyForObject("addLesson", true);
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
@@ -64,11 +64,12 @@ class AddTypingLessonViewModel extends BaseViewModel {
         rebuildUi();
       });
     }
-    setBusy(false);
+    setBusyForObject("addLesson", false);
+    rebuildUi();
   }
 
-  saveLessonClick() async {
-    setBusy(true);
+  Future<void> saveLessonClick() async {
+    setBusyForObject("saveLesson", true);
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
@@ -85,7 +86,8 @@ class AddTypingLessonViewModel extends BaseViewModel {
         rebuildUi();
       });
     }
-    setBusy(false);
+    setBusyForObject("saveLesson", false);
+    rebuildUi();
   }
 
   Future<void> getTextTopics() async {
@@ -99,25 +101,27 @@ class AddTypingLessonViewModel extends BaseViewModel {
   }
 
   void addTopicClick() async {
-    setBusy(true);
+    setBusyForObject("addTopic", true);
     final response =
         await _topicRepo.addTextTopic(lesson!.id, textController.text);
     response.fold((l) => showBottomSheet(l.message), (r) async {
       showBottomSheet('Topic Added Successfully');
       await getTextTopics();
     });
-    setBusy(false);
+    setBusyForObject("addTopic", false);
+    rebuildUi();
   }
 
   void updateTopicClick() async {
-    setBusy(true);
+    setBusyForObject("updateTopic", true);
     final response =
         await _topicRepo.updateTextTopic(lesson!.id, topics[currentIndex]);
     response.fold((l) => showBottomSheet(l.message), (r) async {
       showBottomSheet('Topic Saved Successfully');
       await getTextTopics();
     });
-    setBusy(false);
+    setBusyForObject("updateTopic", false);
+    rebuildUi();
   }
 
   void showBottomSheet(String description) {

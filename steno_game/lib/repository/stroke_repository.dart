@@ -31,11 +31,16 @@ class StrokeRepository {
       return Left(GameException("Please check your internet connection!"));
     }
   }
-  Future<Either<GameException, None>> setStatus(String strokeId, int status) async {
+
+  Future<Either<GameException, None>> setStatus(
+      String strokeId, int status) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        await _db.collection("strokes").doc(strokeId).set({"status" : status}, SetOptions(merge: true));
+        await _db
+            .collection("strokes")
+            .doc(strokeId)
+            .set({"status": status}, SetOptions(merge: true));
         return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));

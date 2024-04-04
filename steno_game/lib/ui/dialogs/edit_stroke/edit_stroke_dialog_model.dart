@@ -35,7 +35,7 @@ class EditStrokeDialogModel extends BaseViewModel {
   }
 
   void saveClick() async {
-    setBusy(true);
+    setBusyForObject("save", true);
     if (isStrokeEdit) {
       final response = await _strokeRepo.editStroke(
           painterKey, stroke!.id, textController.text, stroke!.filePath);
@@ -56,8 +56,8 @@ class EditStrokeDialogModel extends BaseViewModel {
         showBottomSheet("Updated Successfully");
       });
     }
+    setBusyForObject("save", false);
     rebuildUi();
-    setBusy(false);
   }
 
   void showBottomSheet(String description) {

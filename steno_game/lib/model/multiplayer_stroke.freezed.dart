@@ -22,6 +22,7 @@ MultiplayerStroke _$MultiplayerStrokeFromJson(Map<String, dynamic> json) {
 mixin _$MultiplayerStroke {
   String get id => throw _privateConstructorUsedError;
   String get gameMaster => throw _privateConstructorUsedError;
+  List<String> get correctAnswers => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $MultiplayerStrokeCopyWith<$Res> {
           MultiplayerStroke value, $Res Function(MultiplayerStroke) then) =
       _$MultiplayerStrokeCopyWithImpl<$Res, MultiplayerStroke>;
   @useResult
-  $Res call({String id, String gameMaster, int status});
+  $Res call(
+      {String id, String gameMaster, List<String> correctAnswers, int status});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$MultiplayerStrokeCopyWithImpl<$Res, $Val extends MultiplayerStroke>
   $Res call({
     Object? id = null,
     Object? gameMaster = null,
+    Object? correctAnswers = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -65,6 +68,10 @@ class _$MultiplayerStrokeCopyWithImpl<$Res, $Val extends MultiplayerStroke>
           ? _value.gameMaster
           : gameMaster // ignore: cast_nullable_to_non_nullable
               as String,
+      correctAnswers: null == correctAnswers
+          ? _value.correctAnswers
+          : correctAnswers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -81,7 +88,8 @@ abstract class _$$MultiplayerStrokeImplCopyWith<$Res>
       __$$MultiplayerStrokeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String gameMaster, int status});
+  $Res call(
+      {String id, String gameMaster, List<String> correctAnswers, int status});
 }
 
 /// @nodoc
@@ -97,6 +105,7 @@ class __$$MultiplayerStrokeImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? gameMaster = null,
+    Object? correctAnswers = null,
     Object? status = null,
   }) {
     return _then(_$MultiplayerStrokeImpl(
@@ -108,6 +117,10 @@ class __$$MultiplayerStrokeImplCopyWithImpl<$Res>
           ? _value.gameMaster
           : gameMaster // ignore: cast_nullable_to_non_nullable
               as String,
+      correctAnswers: null == correctAnswers
+          ? _value._correctAnswers
+          : correctAnswers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -120,7 +133,11 @@ class __$$MultiplayerStrokeImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MultiplayerStrokeImpl implements _MultiplayerStroke {
   const _$MultiplayerStrokeImpl(
-      {required this.id, required this.gameMaster, this.status = 0});
+      {required this.id,
+      required this.gameMaster,
+      final List<String> correctAnswers = const [],
+      this.status = 0})
+      : _correctAnswers = correctAnswers;
 
   factory _$MultiplayerStrokeImpl.fromJson(Map<String, dynamic> json) =>
       _$$MultiplayerStrokeImplFromJson(json);
@@ -129,13 +146,22 @@ class _$MultiplayerStrokeImpl implements _MultiplayerStroke {
   final String id;
   @override
   final String gameMaster;
+  final List<String> _correctAnswers;
+  @override
+  @JsonKey()
+  List<String> get correctAnswers {
+    if (_correctAnswers is EqualUnmodifiableListView) return _correctAnswers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_correctAnswers);
+  }
+
   @override
   @JsonKey()
   final int status;
 
   @override
   String toString() {
-    return 'MultiplayerStroke(id: $id, gameMaster: $gameMaster, status: $status)';
+    return 'MultiplayerStroke(id: $id, gameMaster: $gameMaster, correctAnswers: $correctAnswers, status: $status)';
   }
 
   @override
@@ -146,12 +172,15 @@ class _$MultiplayerStrokeImpl implements _MultiplayerStroke {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.gameMaster, gameMaster) ||
                 other.gameMaster == gameMaster) &&
+            const DeepCollectionEquality()
+                .equals(other._correctAnswers, _correctAnswers) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, gameMaster, status);
+  int get hashCode => Object.hash(runtimeType, id, gameMaster,
+      const DeepCollectionEquality().hash(_correctAnswers), status);
 
   @JsonKey(ignore: true)
   @override
@@ -172,6 +201,7 @@ abstract class _MultiplayerStroke implements MultiplayerStroke {
   const factory _MultiplayerStroke(
       {required final String id,
       required final String gameMaster,
+      final List<String> correctAnswers,
       final int status}) = _$MultiplayerStrokeImpl;
 
   factory _MultiplayerStroke.fromJson(Map<String, dynamic> json) =
@@ -181,6 +211,8 @@ abstract class _MultiplayerStroke implements MultiplayerStroke {
   String get id;
   @override
   String get gameMaster;
+  @override
+  List<String> get correctAnswers;
   @override
   int get status;
   @override

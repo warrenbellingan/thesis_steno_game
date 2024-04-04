@@ -39,45 +39,53 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     setBusy(true);
     user = (await _sharedPref.getCurrentUser())!;
     final getQuestions = await _multiStroke.getQuestion(game.id);
-    getQuestions.fold((l) => showBottomSheet(l.message), (questionsData){
+    getQuestions.fold((l) => showBottomSheet(l.message), (questionsData) {
       questions = questionsData;
       rebuildUi();
     });
     setBusy(false);
   }
 
-  Future<void> getStudents() async{
+  Future<void> getStudents() async {
     setBusy(true);
     final results = await _multiStroke.getStudents(game.id);
-    results.fold((l) => showBottomSheet(l.message), (studentsData){
+    results.fold((l) => showBottomSheet(l.message), (studentsData) {
       students = studentsData;
       rebuildUi();
-      streamSubscription = _multiStroke.streamStudents(game.id).listen((studentsData) {
+      streamSubscription =
+          _multiStroke.streamStudents(game.id).listen((studentsData) {
         students = studentsData;
         rebuildUi();
       });
     });
     setBusy(false);
-}
-  void addTextAnswer() async{
-    setBusy(true);
-    final response = await _multiStroke.addAnswer(game.id, answerController.text, null, questions[currentIndex].id);
-    response.fold((l) => showBottomSheet(l.message), (answer) async{
+  }
+
+  void addTextAnswer() async {
+    setBusyForObject("addText", true);
+    final response = await _multiStroke.addAnswer(game.id,
+        answerController.text, null, questions[currentIndex].id, user.id);
+    setBusyForObject("addText", false);
+    response.fold((l) => showBottomSheet(l.message), (answer) async {
       await next();
     });
-    setBusy(false);
   }
-  void addStrokeAnswer() async{
-    setBusy(true);
-    final uploadPicResponse = await _stroke.addStroke(painterKey, questions[currentIndex].data, 0, null);
-    uploadPicResponse.fold((l) => showBottomSheet(l.message), (stroke) async{
-      final response = await _multiStroke.addAnswer(game.id, stroke.strokeImage, stroke.id, questions[currentIndex].id);
-      response.fold((l) => showBottomSheet(l.message), (answer) async{
+
+  void addStrokeAnswer() async {
+    setBusyForObject("addStroke", true);
+    final uploadPicResponse = await _stroke.addStroke(
+        painterKey, questions[currentIndex].data, 0, null);
+    uploadPicResponse.fold((l) => showBottomSheet(l.message), (stroke) async {
+      final response = await _multiStroke.addAnswer(game.id, stroke.strokeImage,
+          stroke.id, questions[currentIndex].id, user.id);
+      response.fold((l) => showBottomSheet(l.message), (answer) async {
         await next();
       });
     });
-    setBusy(false);
+    setBusyForObject("addStroke", false);
+    rebuildUi();
   }
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,
@@ -86,9 +94,9 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     );
   }
 
-  Future<void> next() async{
+  Future<void> next() async {
     currentIndex++;
-    if(currentIndex == questions.length) await getStudents();
+    if (currentIndex == questions.length) await getStudents();
     answerController.clear();
     rebuildUi();
   }

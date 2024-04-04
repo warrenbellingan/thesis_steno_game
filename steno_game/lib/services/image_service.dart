@@ -12,7 +12,7 @@ class ImageService {
   Future<Either<GameException, String>> uploadImage(
       File image, String path) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
-    if(hasInternet){
+    if (hasInternet) {
       try {
         final imageProfile = await _storageRef.child(path).putFile(image);
         final imageUrl = await imageProfile.ref.getDownloadURL();
@@ -20,10 +20,8 @@ class ImageService {
       } catch (e) {
         return Left(GameException(e.toString()));
       }
-    }
-    else {
+    } else {
       return Left(GameException("Please check your internet connection!"));
     }
-
   }
 }

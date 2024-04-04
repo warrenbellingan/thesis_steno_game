@@ -26,12 +26,13 @@ class SignUpViewModel extends BaseViewModel with InputValidation {
   SignUpViewModel(this.user);
 
   init() async {
-    if(user != null) {
+    if (user != null) {
       nameController.text = user!.name;
       roleController.text = "Student";
       rebuildUi();
     }
   }
+
   Future<void> signUp() async {
     if (validateInput()) {
       if (passwordController.text.toString() !=
@@ -39,21 +40,22 @@ class SignUpViewModel extends BaseViewModel with InputValidation {
           passwordController.text.isEmpty) {
         showBottomSheet("Password doesn't match!");
       } else {
-        setBusy(true);
+        setBusyForObject("signup", true);
         final response = await _authenticationService.signUp(
             name: nameController.text.toString(),
             email: emailController.text.toString(),
             password: passwordController.text.toString(),
             role: roleController.text.toString());
-        setBusy(false);
+        setBusyForObject("signup", false);
 
         response.fold((l) {
           showBottomSheet(l.message);
         }, (user) async {
-          setBusy(true);
+          setBusyForObject("signup", true);
           final logInResponse = await _authenticationService.login(
               email: emailController.text, password: passwordController.text);
-          setBusy(false);
+          setBusyForObject("signup", false);
+          rebuildUi();
           logInResponse.fold((l) {
             showBottomSheet("No user found in logging in");
           }, (user) async {

@@ -23,18 +23,18 @@ class LoginView extends StackedView<LoginViewModel> {
   ) {
     return GameBody(
       body: viewModel.isBusy
-          ? GameLoading(
+          ? const GameLoading(
               label: "Logging In",
             )
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  GameTitleText(text: GameUIText.welcomeText),
-                  SizedBox(
+                  const GameTitleText(text: GameUIText.welcomeText),
+                  const SizedBox(
                     height: 10,
                   ),
-                  GameImage(path: GameUiPng.gameAuthLoginPath),
-                  SizedBox(
+                  const GameImage(path: GameUiPng.gameAuthLoginPath),
+                  const SizedBox(
                     height: 25,
                   ),
                   GameTextField(
@@ -45,14 +45,14 @@ class LoginView extends StackedView<LoginViewModel> {
                     controller: viewModel.passwordController,
                     label: GameUIText.passwordText,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   GameButton(
                     text: GameUIText.loginText,
-                    onClick: viewModel.logIn,
+                    onClick: viewModel.logIn, isLoading: viewModel.busy("login"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   GameTextButton(

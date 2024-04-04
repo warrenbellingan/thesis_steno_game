@@ -98,10 +98,12 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                               verticalSpaceSmall,
                               item.type == "stroke"
                                   ? Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: GameColor.primaryColor, width: 1.5),
-                                  ),
-                                  child: GameNetworkImage(path: item.data))
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: GameColor.primaryColor,
+                                            width: 1.5),
+                                      ),
+                                      child: GameNetworkImage(path: item.data))
                                   : Container(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 2, horizontal: 4),
@@ -179,13 +181,13 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                         Expanded(
                                           child: GameButton(
                                             text: "Add",
-                                            onClick: viewModel.addQuiz,
+                                            onClick: viewModel.addQuiz, isLoading: false,
                                           ),
                                         ),
                                         Expanded(
                                           child: GameButton(
                                             text: "Cancel",
-                                            onClick: viewModel.cancelAdd,
+                                            onClick: viewModel.cancelAdd, isLoading: false,
                                           ),
                                         ),
                                       ],
@@ -213,14 +215,14 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                               child: GameButton(
                                                 text: "Stroke",
                                                 onClick: () =>
-                                                    viewModel.editMode(0),
+                                                    viewModel.editMode(0), isLoading: false,
                                               ),
                                             ),
                                             Expanded(
                                               child: GameButton(
                                                 text: "Text",
                                                 onClick: () =>
-                                                    viewModel.editMode(1),
+                                                    viewModel.editMode(1), isLoading: false,
                                               ),
                                             ),
                                           ],
@@ -240,7 +242,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                 ),
                 GameButton(
                   text: "Create Game",
-                  onClick: viewModel.readyGame,
+                  onClick: viewModel.readyGame, isLoading: viewModel.busy("readyGame"),
                 ),
               ],
             ),

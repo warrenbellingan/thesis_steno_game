@@ -7,11 +7,7 @@ import '../common/ui_helpers.dart';
 import '../constants/game_color.dart';
 
 class InGameBar extends StatelessWidget {
-  InGameBar(
-      {super.key,
-      required this.name,
-      this.image,
-      this.isStudent});
+  InGameBar({super.key, required this.name, this.image, this.isStudent});
 
   final navigationSer = locator<NavigationService>();
   final String name;
@@ -36,9 +32,8 @@ class InGameBar extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.circular(50),
-              color: Colors.white
-            ),
+                borderRadius: BorderRadiusDirectional.circular(50),
+                color: Colors.white),
             child: IconButton(
               iconSize: 30,
               onPressed: () {

@@ -53,6 +53,7 @@ import 'package:steno_game/ui/dialogs/add_lesson/add_lesson_dialog.dart';
 import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart';
 import 'package:steno_game/ui/views/add_typing_lesson/add_typing_lesson_view.dart';
 import 'package:steno_game/services/internet_service.dart';
+import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -87,6 +88,7 @@ import 'package:steno_game/services/internet_service.dart';
     MaterialRoute(page: MultiplayerStrokeHostView),
     MaterialRoute(page: AddStrokeLessonView),
     MaterialRoute(page: AddTypingLessonView),
+    MaterialRoute(page: MultiplayerStrokeHostResultsView),
 // @stacked-route
   ],
   dependencies: [

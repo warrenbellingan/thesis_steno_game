@@ -19,10 +19,11 @@ class LoginViewModel extends BaseViewModel with InputValidation {
 
   Future<void> logIn() async {
     if (validateInput()) {
-      setBusy(true);
+      setBusyForObject("login", true);
       final response = await _authenticationService.login(
           email: emailController.text, password: passwordController.text);
-      setBusy(false);
+      setBusyForObject("login", false);
+      rebuildUi();
       response.fold((l) {
         showBottomSheet(l.message);
       }, (user) async {

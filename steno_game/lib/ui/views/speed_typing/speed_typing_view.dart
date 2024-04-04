@@ -69,7 +69,7 @@ class SpeedTypingView extends StackedView<SpeedTypingViewModel> {
                 ),
               ),
             ),
-            GameButton(text: "Start", onClick: () {}),
+            GameButton(text: "Start", onClick: () {}, isLoading: false,),
           ],
         ),
       ),

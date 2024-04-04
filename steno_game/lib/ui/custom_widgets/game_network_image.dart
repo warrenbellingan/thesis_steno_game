@@ -17,12 +17,14 @@ class GameNetworkImage extends StatelessWidget {
       height: height ?? 350,
       imageUrl: path,
       fit: BoxFit.cover,
-      placeholder: (context, url) => Container(
-        padding: const EdgeInsets.all(100),
-        child: const CircularProgressIndicator(
-          color: GameColor.primaryColor,
-        ),
-      ),
+      progressIndicatorBuilder: (context, url, progress) {
+        return const Padding(
+          padding: EdgeInsetsDirectional.all(200),
+          child: CircularProgressIndicator(
+            color: GameColor.primaryColor,
+          ),
+        );
+      },
       errorWidget: (context, url, error) => const Icon(
         Icons.error_outline_sharp,
         color: Colors.red,

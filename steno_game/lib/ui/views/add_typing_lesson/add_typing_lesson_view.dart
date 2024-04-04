@@ -44,11 +44,11 @@ class AddTypingLessonView extends StackedView<AddTypingLessonViewModel> {
                             viewModel.lesson != null
                                 ? GameButton(
                                     text: "Save Lesson",
-                                    onClick: viewModel.saveLessonClick,
+                                    onClick: viewModel.saveLessonClick, isLoading: viewModel.busy("saveLesson"),
                                   )
                                 : GameButton(
                                     text: "Add Lesson",
-                                    onClick: viewModel.addLesson,
+                                    onClick: viewModel.addLesson, isLoading: viewModel.busy("addLesson"),
                                   ),
                           ],
                         ),
@@ -100,10 +100,10 @@ class AddTypingLessonView extends StackedView<AddTypingLessonViewModel> {
                               viewModel.currentIndex == viewModel.topics.length
                                   ? GameButton(
                                       text: "Add",
-                                      onClick: viewModel.addTopicClick)
+                                      onClick: viewModel.addTopicClick, isLoading: viewModel.busy("addTopic"),)
                                   : GameButton(
                                       text: "Save",
-                                      onClick: viewModel.updateTopicClick,
+                                      onClick: viewModel.updateTopicClick, isLoading: viewModel.busy("updateTopic"),
                                     ),
                             ],
                           ),

@@ -88,100 +88,102 @@ class ProfileView extends StackedView<ProfileViewModel> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-
                           ],
                         )
                       ],
                     ),
                     verticalSpaceMedium,
-                    viewModel.user.email != "" ?
-                    Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 4),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: GameColor.secondaryColor,
-                              width: 1,
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    viewModel.user.email != ""
+                        ? Column(
                             children: [
-                              Text(
-                                "Email: ${viewModel.user.email}",
-                                style: const TextStyle(fontSize: 16),
+                              Container(
+                                margin: const EdgeInsets.symmetric(vertical: 4),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: GameColor.secondaryColor,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Email: ${viewModel.user.email}",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    GameIconButton(
+                                        onClick:
+                                            viewModel.showUpdateEmailDialog,
+                                        icon: Icons.edit_rounded)
+                                  ],
+                                ),
                               ),
-                              GameIconButton(
-                                  onClick: viewModel.showUpdateEmailDialog,
-                                  icon: Icons.edit_rounded)
+                              ElevatedButton(
+                                onPressed: viewModel.showUpdatePasswordDialog,
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: const BorderSide(
+                                      color: Colors.black,
+                                      style: BorderStyle.solid,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  shadowColor: Colors.grey,
+                                ),
+                                child: const Text(
+                                  "Change Password",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    letterSpacing: 1,
+                                    wordSpacing: 2,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              verticalSpaceSmall,
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              const Text(
+                                  "Your account is not connected! \n It is recommended to connect it in the game"),
+                              ElevatedButton(
+                                onPressed: viewModel.connectAccount,
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: const BorderSide(
+                                      color: Colors.black,
+                                      style: BorderStyle.solid,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  shadowColor: Colors.grey,
+                                ),
+                                child: const Text(
+                                  "Connect Account",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    letterSpacing: 1,
+                                    wordSpacing: 2,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              verticalSpaceSmall,
                             ],
                           ),
-                        ),
-                        ElevatedButton(
-                          onPressed: viewModel.showUpdatePasswordDialog,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: const BorderSide(
-                                color: Colors.black,
-                                style: BorderStyle.solid,
-                                width: 2,
-                              ),
-                            ),
-                            backgroundColor: Colors.white,
-                            shadowColor: Colors.grey,
-                          ),
-                          child: const Text(
-                            "Change Password",
-                            style: TextStyle(
-                              color: Colors.black,
-                              letterSpacing: 1,
-                              wordSpacing: 2,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        verticalSpaceSmall,
-                      ],
-                    ) : Column(
-                      children: [
-                        const Text("Your account is not connected! \n It is recommended to connect it in the game"),
-                        ElevatedButton(
-                          onPressed: viewModel.connectAccount,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: const BorderSide(
-                                color: Colors.black,
-                                style: BorderStyle.solid,
-                                width: 2,
-                              ),
-                            ),
-                            backgroundColor: Colors.white,
-                            shadowColor: Colors.grey,
-                          ),
-                          child: const Text(
-                            "Connect Account",
-                            style: TextStyle(
-                              color: Colors.black,
-                              letterSpacing: 1,
-                              wordSpacing: 2,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        verticalSpaceSmall,
-                      ],
-                    ),
-
                     if (viewModel.isStudent())
                       Column(
                         children: [
@@ -213,7 +215,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         ],
                       ),
                     verticalSpaceMedium,
-                    GameButton(text: 'Log out', onClick: viewModel.logOut),
+                    GameButton(text: 'Log out', onClick: viewModel.logOut, isLoading: viewModel.busy("logout"),),
                   ],
                 ),
               ));

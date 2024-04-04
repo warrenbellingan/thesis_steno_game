@@ -112,7 +112,6 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-
         User? user = await _sharedPref.getCurrentUser();
         await _db
             .collection("users")
@@ -200,7 +199,6 @@ class UserRepository {
       String friendId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
-
       User? user = await _sharedPref.getCurrentUser();
       try {
         await _db.collection("users").doc(user!.id).update({
@@ -220,7 +218,6 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-
         User? user = await _sharedPref.getCurrentUser();
         await _db.collection("users").doc(friendId).update({
           "friendsRequest": FieldValue.arrayRemove([user!.id])
@@ -238,7 +235,6 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-
         User? user = await _sharedPref.getCurrentUser();
         await _db.collection("users").doc(user!.id).update({
           "friends": FieldValue.arrayUnion([friendId])
@@ -261,7 +257,6 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-
         User? user = await _sharedPref.getCurrentUser();
         await _db.collection('users').doc(user!.id).update({
           "friends": FieldValue.arrayRemove([friendId])

@@ -15,16 +15,16 @@ class AddTypingDialogModel extends BaseViewModel {
   TextEditingController typingKeysController = TextEditingController();
 
   void addClick() async {
-    setBusy(true);
+    setBusyForObject("add", true);
     final response = await _typingRepo.addTyping(
         textController.text, typingKeysController.text);
     response.fold((l) => showBottomSheet(l.message), (r) {
       textController.clear();
       typingKeysController.clear();
-      rebuildUi();
       showBottomSheet("Added Successfully");
     });
-    setBusy(false);
+    setBusyForObject("add", false);
+    rebuildUi();
   }
 
   void showBottomSheet(String description) {

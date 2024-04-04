@@ -34,7 +34,10 @@ class SignUpView extends StackedView<SignUpViewModel> {
                 child: Column(
                   children: [
                     GameBar(),
-                    GameTitleText(text: user == null ? GameUIText.createAccText : "Connect Account"),
+                    GameTitleText(
+                        text: user == null
+                            ? GameUIText.createAccText
+                            : "Connect Account"),
                     const GameImage(path: GameUiPng.gameAuthCreatePath),
                     const SizedBox(
                       height: 25,
@@ -88,7 +91,8 @@ class SignUpView extends StackedView<SignUpViewModel> {
                       label: GameUIText.confirmPassText,
                     ),
                     GameButton(
-                        text: user == null ? GameUIText.createText : "Connect", onClick: viewModel.signUp)
+                        text: user == null ? GameUIText.createText : "Connect",
+                        onClick: viewModel.signUp, isLoading: viewModel.busy("signup"),)
                   ],
                 ),
               ));

@@ -24,13 +24,14 @@ class UpdateNameDialogModel extends BaseViewModel with InputValidation {
   Future<void> updateName() async {
     String? nameValidation = isValidInput(nameTextController.text, "name");
     if (nameValidation == null) {
-      setBusy(true);
+      setBusyForObject("update", true);
       final response = await _userRepo.updateName(nameTextController.text);
       response.fold(
         (l) => showBottomSheet(l.message),
         (r) => showBottomSheet("Name updated successfully"),
       );
-      setBusy(false);
+      setBusyForObject("update", false);
+      rebuildUi();
     } else {
       showBottomSheet(nameValidation);
     }

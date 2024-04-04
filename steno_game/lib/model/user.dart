@@ -5,19 +5,20 @@ part 'user.g.dart';
 
 @Freezed()
 class User with _$User {
-  const factory User(
-      {required String id,
-      required String name,
-      required String email,
-      required String role,
-      String? image,
-      @Default(0) int typingSpeed,
-      @Default(0) double typingAccuracy,
-      @Default([]) List completedLevels,
-      @Default([]) List achievements,
-      @Default(0) int score,
-      @Default([]) List<String> friends,
-      @Default([]) List<String> friendsRequest,}) = _User;
+  const factory User({
+    required String id,
+    required String name,
+    required String email,
+    required String role,
+    String? image,
+    @Default(0) int typingSpeed,
+    @Default(0) double typingAccuracy,
+    @Default([]) List completedLevels,
+    @Default([]) List achievements,
+    @Default(0) int score,
+    @Default([]) List<String> friends,
+    @Default([]) List<String> friendsRequest,
+  }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

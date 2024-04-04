@@ -9,6 +9,7 @@ class AnswerStroke with _$AnswerStroke {
   const factory AnswerStroke({
     required String id,
     required String questionId,
+    required String userId,
     required String data,
     required String? stroke,
   }) = _AnswerStroke;

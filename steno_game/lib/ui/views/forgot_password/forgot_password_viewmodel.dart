@@ -14,16 +14,17 @@ class ForgotPasswordViewModel extends BaseViewModel with InputValidation {
 
   Future<void> forgotPassword() async {
     if (validateEmail()) {
-      setBusy(true);
+      setBusyForObject("forgot", true);
       final response =
           await _authServ.forgotPassword(email: emailController.text);
-      setBusy(false);
+      setBusyForObject("forgot", false);
       response.fold((l) {
         showBottomSheet(l.message);
       }, (r) {
         showBottomSheet(
             "The reset link is send to your email account. Check your email messages!");
       });
+      rebuildUi();
     }
   }
 

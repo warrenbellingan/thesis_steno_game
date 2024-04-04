@@ -40,9 +40,10 @@ class UpdateProfileImageDialogModel extends BaseViewModel {
     if (image == null) {
       showBottomSheet("Please select a new image to save!");
     } else {
-      setBusy(true);
+      setBusyForObject("upload", true);
       final response = await _userRepo.uploadProfilePicture(image!);
-      setBusy(false);
+      setBusyForObject("upload", false);
+      rebuildUi();
       response.fold((l) => showBottomSheet(l.message),
           (r) => showBottomSheet("Photo uploaded successfully"));
     }
