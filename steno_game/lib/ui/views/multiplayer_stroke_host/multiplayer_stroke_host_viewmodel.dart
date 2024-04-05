@@ -47,7 +47,15 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     setBusy(false);
   }
 
+  bool isAllAnswer() {
+    return answers.length == correctAnswers.length + wrongAnswers.length;
+  }
+
   void submitAnswers() async {
+    if(!isAllAnswer()) {
+      showBottomSheet("There is unchecked answers");
+      return;
+    }
     setBusyForObject("submit", true);
     final response =
         await _multiStroke.addCorrectAnswers(game.id, correctAnswers);

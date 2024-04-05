@@ -43,6 +43,28 @@ class MultiplayerStrokeRepository {
     return result.map((doc) => MultiplayerStroke.fromJson(doc.data()!));
   }
 
+  //Resume
+  Future<Either<GameException, None>> addScore(String gameId, int score) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        final user = await _sharedPref.getCurrentUser();
+        await _db
+            .collection("strokeGameEnvironment")
+            .doc(gameId)
+            .collection("students")
+            .doc(user!.id)
+            .set({"score": FieldValue.increment(score)},
+                SetOptions(merge: true));
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
+
   Future<Either<GameException, None>> addCorrectAnswers(
       String gameId, List<String> correctAnswers) async {
     final bool hasInternet = await _internetService.hasInternetConnection();

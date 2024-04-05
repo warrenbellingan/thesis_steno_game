@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
+import 'package:steno_game/model/answer_stroke.dart';
 import 'package:steno_game/model/question_stroke.dart';
 import 'package:steno_game/model/user.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
@@ -28,8 +29,10 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
   GlobalKey painterKey = GlobalKey();
   StrokesMultiplayerViewModel(this.game);
   List<QuestionStroke> questions = [];
+  List<AnswerStroke> answers = [];
 
   StreamSubscription<List<Student>>? streamSubscription;
+  StreamSubscription<MultiplayerStroke>? gameStreamSubscription;
 
   List<Student> students = [];
 
@@ -42,6 +45,29 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     getQuestions.fold((l) => showBottomSheet(l.message), (questionsData) {
       questions = questionsData;
       rebuildUi();
+    });
+    gameStreamSubscription = _multiStroke.streamMultiplayerStroke(game.id).listen((event) async{
+      game = event;
+      if(game.correctAnswers.isNotEmpty) {
+        setBusy(true);
+        final getAnswers = await _multiStroke.getAnswers(game.id);
+        getAnswers.fold((l) => showBottomSheet(l.message), (r) {
+          answers = r;
+          answers = answers.where((element) => element.userId == user.id).toList();
+        });
+        int score = 0;
+        for (var answer in answers) {
+          if(game.correctAnswers.contains(answer.id)) {
+            score += 10;
+          }
+        }
+        final response = await _multiStroke.addScore(game.id, score);
+        response.fold((l) => showBottomSheet(l.message), (r) {
+        });
+        setBusy(false);
+        rebuildUi();
+
+      }
     });
     setBusy(false);
   }
