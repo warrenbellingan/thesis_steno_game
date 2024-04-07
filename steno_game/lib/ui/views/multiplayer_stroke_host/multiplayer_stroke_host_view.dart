@@ -226,7 +226,6 @@ class MultiplayerStrokeHostView
                                                     size: screenWidthFraction(
                                                         context,
                                                         dividedBy: 2),
-
                                                   ),
                                                 ),
                                           verticalSpaceSmall,

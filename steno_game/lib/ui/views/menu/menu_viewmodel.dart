@@ -31,6 +31,7 @@ class MenuViewModel extends BaseViewModel {
   void goToSearchSteno() {
     _navigationServ.navigateToSearchStenoView();
   }
+
   void goToPractice() {
     _navigationServ.navigateToPracticeView();
   }
@@ -42,6 +43,4 @@ class MenuViewModel extends BaseViewModel {
       description: description,
     );
   }
-
-
 }

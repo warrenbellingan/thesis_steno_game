@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
 
 class GameNetworkImage extends StatelessWidget {
-  const GameNetworkImage(
-      {super.key, required this.path, this.size});
+  const GameNetworkImage({super.key, required this.path, this.size});
 
   final String path;
   final double? size;

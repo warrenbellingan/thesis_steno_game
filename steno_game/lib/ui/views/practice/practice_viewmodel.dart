@@ -12,12 +12,13 @@ class PracticeViewModel extends BaseViewModel {
   final _bottomSheet = locator<BottomSheetService>();
   TextEditingController searchController = TextEditingController();
 
-  List<StenoStroke> strokes =  [];
-  
+  List<StenoStroke> strokes = [];
+
   init() async {
     await searchStroke();
   }
-  Future<void> searchStroke() async{
+
+  Future<void> searchStroke() async {
     setBusy(true);
     final results = await _strokeRepo.searchStrokes(searchController.text);
     results.fold((l) => showBottomSheet(l.message), (r) {
@@ -26,6 +27,7 @@ class PracticeViewModel extends BaseViewModel {
     });
     setBusy(false);
   }
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,

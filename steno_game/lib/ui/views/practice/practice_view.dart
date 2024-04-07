@@ -23,37 +23,42 @@ class PracticeView extends StackedView<PracticeViewModel> {
   ) {
     return GameBody(
         body: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GameBar(),
-              GameSearchTextField(
-                controller: viewModel.searchController,
-                onClick: viewModel.searchStroke,
-              ),
-              verticalSpaceSmall,
-              viewModel.isBusy ? const GameLoading() : Container(
-                height: 240,
-                child: Expanded(
-                  child: ListView.builder(
-                    itemCount: viewModel.strokes.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      final stroke = viewModel.strokes[index];
-                      return StrokeImage(
-                        imagePath: stroke.strokeImage, word: stroke.text, size: 180,);
-                    },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GameBar(),
+          GameSearchTextField(
+            controller: viewModel.searchController,
+            onClick: viewModel.searchStroke,
+          ),
+          verticalSpaceSmall,
+          viewModel.isBusy
+              ? const GameLoading()
+              : Container(
+                  height: 240,
+                  child: Expanded(
+                    child: ListView.builder(
+                      itemCount: viewModel.strokes.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final stroke = viewModel.strokes[index];
+                        return StrokeImage(
+                          imagePath: stroke.strokeImage,
+                          word: stroke.text,
+                          size: 180,
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-              verticalSpaceSmall,
-              Painter(globalKey: GlobalKey()),
-              verticalSpaceSmall,
-              verticalSpaceSmall,
-            ],
-          ),
-        ));
+          verticalSpaceSmall,
+          Painter(globalKey: GlobalKey()),
+          verticalSpaceSmall,
+          verticalSpaceSmall,
+        ],
+      ),
+    ));
   }
 
   @override

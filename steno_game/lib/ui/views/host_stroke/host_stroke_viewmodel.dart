@@ -53,7 +53,6 @@ class HostStrokeViewModel extends BaseViewModel {
   }
 
   Future<void> addStrokeQuiz() async {
-
     final addStrokeResponse =
         await _strokeRepo.addStroke(painterKey, textController.text, 1, null);
     addStrokeResponse.fold((l) {
@@ -71,7 +70,6 @@ class HostStrokeViewModel extends BaseViewModel {
   }
 
   Future<void> addTextQuiz() async {
-
     final response = await _multiStrokeRepo.addQuestion(
         game.id, textController.text, "text");
     response.fold((l) => showBottomSheet(l.message), (quiz) {

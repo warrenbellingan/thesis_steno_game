@@ -1,5 +1,6 @@
 import 'package:steno_game/repository/lesson_repository.dart';
 import 'package:steno_game/repository/multiplayer_stroke_repository.dart';
+import 'package:steno_game/repository/quiz_repository.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
@@ -43,6 +44,7 @@ import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dar
 import 'package:steno_game/services/internet_service.dart';
 import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart';
 import 'package:steno_game/ui/views/practice/practice_view.dart';
+import 'package:steno_game/ui/views/quiz/quiz_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -72,6 +74,7 @@ import 'package:steno_game/ui/views/practice/practice_view.dart';
     MaterialRoute(page: AddStrokeLessonView),
     MaterialRoute(page: MultiplayerStrokeHostResultsView),
     MaterialRoute(page: PracticeView),
+    MaterialRoute(page: QuizView),
 // @stacked-route
   ],
   dependencies: [
@@ -88,6 +91,7 @@ import 'package:steno_game/ui/views/practice/practice_view.dart';
     LazySingleton(classType: MultiplayerStrokeRepository),
     LazySingleton(classType: InternetService),
     LazySingleton(classType: SnackbarService),
+    LazySingleton(classType: QuizRepository),
 // @stacked-service
   ],
   bottomsheets: [

@@ -14,6 +14,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../repository/lesson_repository.dart';
 import '../repository/multiplayer_stroke_repository.dart';
+import '../repository/quiz_repository.dart';
 import '../repository/stroke_repository.dart';
 import '../repository/topic_repository.dart';
 import '../repository/user_repository.dart';
@@ -46,4 +47,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => MultiplayerStrokeRepository());
   locator.registerLazySingleton(() => InternetService());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton(() => QuizRepository());
 }

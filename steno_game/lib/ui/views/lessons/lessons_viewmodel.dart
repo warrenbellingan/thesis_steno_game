@@ -18,14 +18,12 @@ class LessonsViewModel extends BaseViewModel {
 
   List<Lesson> lessons = [];
 
-
   init() async {
     user = (await _sharedPref.getCurrentUser())!;
     getLessons("strokes");
   }
 
   Future<void> getLessons(String type) async {
-
     setBusy(true);
     final response = await _lessonRepo.getLessons();
     response.fold((l) => showBottomSheet(l.message), (lessonsData) {
@@ -43,7 +41,7 @@ class LessonsViewModel extends BaseViewModel {
     setBusy(true);
     final response = await _lessonRepo.deleteLesson(lesson.id);
     response.fold((l) => showBottomSheet(l.message), (r) async {
-        await getLessons("strokes");
+      await getLessons("strokes");
       showBottomSheet("Deleted Successfully");
     });
     setBusy(false);

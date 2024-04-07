@@ -4,7 +4,8 @@ import 'package:steno_game/ui/constants/game_color.dart';
 import 'game_network_image.dart';
 
 class StrokeImage extends StatelessWidget {
-  const StrokeImage({super.key, required this.imagePath, required this.word, this.size});
+  const StrokeImage(
+      {super.key, required this.imagePath, required this.word, this.size});
 
   final String imagePath;
   final String word;
