@@ -23,6 +23,7 @@ class AddStrokeDialogModel extends BaseViewModel {
       (l) => showBottomSheet(l.message),
       (r) {
         textController.clear();
+        notifyListeners();
         showBottomSheet("Added Successfully");
       },
     );

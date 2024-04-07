@@ -26,6 +26,7 @@ class InternetService {
   Future<bool> hasInternetConnection() async {
     final List<ConnectivityResult> connectivityResult =
         await (Connectivity().checkConnectivity());
+    print("check intenet connection");
     if (connectivityResult.contains(ConnectivityResult.mobile)) {
       return true;
     } else if (connectivityResult.contains(ConnectivityResult.wifi)) {

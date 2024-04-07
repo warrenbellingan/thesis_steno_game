@@ -56,7 +56,8 @@ class HomeViewModel extends BaseViewModel {
 
   void onDestinationSelected(int index) {
     currentPageIndex = index;
-    changePage(currentPageIndex);
+    pageController.jumpToPage(index);
+    rebuildUi();
   }
 
   void goToProfileView() {

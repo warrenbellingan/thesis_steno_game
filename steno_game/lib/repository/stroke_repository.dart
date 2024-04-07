@@ -179,16 +179,24 @@ class StrokeRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        final results = await _db.collection('strokes').get().then((value) =>
-            value.docs.map((doc) => StenoStroke.fromJson(doc.data())).toList());
-        if (searchText.isNotEmpty) {
-          return Right(results
-              .where((stroke) => stroke.text
-                  .toLowerCase()
-                  .contains(searchText.toString().toLowerCase()))
-              .toList());
+        final query1 = await _db.collection('strokes').where("text", isEqualTo: searchText).get().then((value) => value.docs.map((e) => StenoStroke.fromJson(e.data())).toList());
+        if(query1.isEmpty) {
+          final results = await _db.collection('strokes').get().then((value) =>
+              value.docs.map((doc) => StenoStroke.fromJson(doc.data())).toList());
+          if (searchText.isNotEmpty) {
+            return Right(results
+                .where((stroke) => stroke.text
+                .toLowerCase()
+                .contains(searchText.toString().toLowerCase()))
+                .toList());
+          }
+          return Right(results);
         }
-        return Right(results);
+        else {
+
+          return Right(query1);
+        }
+
       } catch (e) {
         return Left(GameException(e.toString()));
       }

@@ -73,6 +73,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
         showBottomSheet("Saved Successfully");
         lesson = lessonData;
         await getPictureTopics();
+        await getStroke();
         isAddLesson = false;
         rebuildUi();
       });
