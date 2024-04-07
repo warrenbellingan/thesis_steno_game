@@ -82,7 +82,8 @@ class UpdateProfileImageDialog
                 verticalSpaceMedium,
                 GameButton(
                   text: "Save",
-                  onClick: viewModel.uploadImage, isLoading: viewModel.busy("upload"),
+                  onClick: viewModel.uploadImage,
+                  isLoading: viewModel.busy("upload"),
                 ),
                 verticalSpaceMedium,
               ],

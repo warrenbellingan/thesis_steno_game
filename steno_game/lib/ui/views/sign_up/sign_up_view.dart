@@ -91,8 +91,10 @@ class SignUpView extends StackedView<SignUpViewModel> {
                       label: GameUIText.confirmPassText,
                     ),
                     GameButton(
-                        text: user == null ? GameUIText.createText : "Connect",
-                        onClick: viewModel.signUp, isLoading: viewModel.busy("signup"),)
+                      text: user == null ? GameUIText.createText : "Connect",
+                      onClick: viewModel.signUp,
+                      isLoading: viewModel.busy("signup"),
+                    )
                   ],
                 ),
               ));

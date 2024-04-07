@@ -1,7 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
-import 'package:steno_game/model/picture_topic.dart';
 import 'package:steno_game/model/steno_stroke.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
@@ -23,21 +22,8 @@ class TopicViewModel extends BaseViewModel {
   TopicViewModel(this.lesson);
 
   void init() async {
-    if (lesson.type == "strokes") {
-      await getPictureTopics();
-      await getStroke();
-    } else {
-      await getTextTopics();
-    }
-  }
-
-  Future<void> getTextTopics() async {
-    setBusy(true);
-    final response = await _topicRepo.getTextTopic(lesson.id);
-    response.fold((l) => showBottomSheet(l.message), (topicsData) {
-      topics = topicsData;
-    });
-    setBusy(false);
+    await getPictureTopics();
+    await getStroke();
   }
 
   Future<void> getPictureTopics() async {
@@ -74,7 +60,7 @@ class TopicViewModel extends BaseViewModel {
       return;
     }
     currentIndex = index;
-    if (lesson.type == "strokes") await getStroke();
+    await getStroke();
     rebuildUi();
   }
 }

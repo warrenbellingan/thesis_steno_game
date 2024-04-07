@@ -38,7 +38,8 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                   ),
                   GameButton(
                     text: GameUIText.sentResetPassLinkText,
-                    onClick: viewModel.forgotPassword, isLoading: viewModel.busy("forgot"),
+                    onClick: viewModel.forgotPassword,
+                    isLoading: viewModel.busy("forgot"),
                   ),
                 ],
               ),

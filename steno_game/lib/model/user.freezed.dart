@@ -25,8 +25,6 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  int get typingSpeed => throw _privateConstructorUsedError;
-  double get typingAccuracy => throw _privateConstructorUsedError;
   List<dynamic> get completedLevels => throw _privateConstructorUsedError;
   List<dynamic> get achievements => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
@@ -49,8 +47,6 @@ abstract class $UserCopyWith<$Res> {
       String email,
       String role,
       String? image,
-      int typingSpeed,
-      double typingAccuracy,
       List<dynamic> completedLevels,
       List<dynamic> achievements,
       int score,
@@ -76,8 +72,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = null,
     Object? role = null,
     Object? image = freezed,
-    Object? typingSpeed = null,
-    Object? typingAccuracy = null,
     Object? completedLevels = null,
     Object? achievements = null,
     Object? score = null,
@@ -105,14 +99,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      typingSpeed: null == typingSpeed
-          ? _value.typingSpeed
-          : typingSpeed // ignore: cast_nullable_to_non_nullable
-              as int,
-      typingAccuracy: null == typingAccuracy
-          ? _value.typingAccuracy
-          : typingAccuracy // ignore: cast_nullable_to_non_nullable
-              as double,
       completedLevels: null == completedLevels
           ? _value.completedLevels
           : completedLevels // ignore: cast_nullable_to_non_nullable
@@ -150,8 +136,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String email,
       String role,
       String? image,
-      int typingSpeed,
-      double typingAccuracy,
       List<dynamic> completedLevels,
       List<dynamic> achievements,
       int score,
@@ -174,8 +158,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? email = null,
     Object? role = null,
     Object? image = freezed,
-    Object? typingSpeed = null,
-    Object? typingAccuracy = null,
     Object? completedLevels = null,
     Object? achievements = null,
     Object? score = null,
@@ -203,14 +185,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      typingSpeed: null == typingSpeed
-          ? _value.typingSpeed
-          : typingSpeed // ignore: cast_nullable_to_non_nullable
-              as int,
-      typingAccuracy: null == typingAccuracy
-          ? _value.typingAccuracy
-          : typingAccuracy // ignore: cast_nullable_to_non_nullable
-              as double,
       completedLevels: null == completedLevels
           ? _value._completedLevels
           : completedLevels // ignore: cast_nullable_to_non_nullable
@@ -244,8 +218,6 @@ class _$UserImpl implements _User {
       required this.email,
       required this.role,
       this.image,
-      this.typingSpeed = 0,
-      this.typingAccuracy = 0,
       final List<dynamic> completedLevels = const [],
       final List<dynamic> achievements = const [],
       this.score = 0,
@@ -269,12 +241,6 @@ class _$UserImpl implements _User {
   final String role;
   @override
   final String? image;
-  @override
-  @JsonKey()
-  final int typingSpeed;
-  @override
-  @JsonKey()
-  final double typingAccuracy;
   final List<dynamic> _completedLevels;
   @override
   @JsonKey()
@@ -316,7 +282,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, role: $role, image: $image, typingSpeed: $typingSpeed, typingAccuracy: $typingAccuracy, completedLevels: $completedLevels, achievements: $achievements, score: $score, friends: $friends, friendsRequest: $friendsRequest)';
+    return 'User(id: $id, name: $name, email: $email, role: $role, image: $image, completedLevels: $completedLevels, achievements: $achievements, score: $score, friends: $friends, friendsRequest: $friendsRequest)';
   }
 
   @override
@@ -329,10 +295,6 @@ class _$UserImpl implements _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.typingSpeed, typingSpeed) ||
-                other.typingSpeed == typingSpeed) &&
-            (identical(other.typingAccuracy, typingAccuracy) ||
-                other.typingAccuracy == typingAccuracy) &&
             const DeepCollectionEquality()
                 .equals(other._completedLevels, _completedLevels) &&
             const DeepCollectionEquality()
@@ -352,8 +314,6 @@ class _$UserImpl implements _User {
       email,
       role,
       image,
-      typingSpeed,
-      typingAccuracy,
       const DeepCollectionEquality().hash(_completedLevels),
       const DeepCollectionEquality().hash(_achievements),
       score,
@@ -381,8 +341,6 @@ abstract class _User implements User {
       required final String email,
       required final String role,
       final String? image,
-      final int typingSpeed,
-      final double typingAccuracy,
       final List<dynamic> completedLevels,
       final List<dynamic> achievements,
       final int score,
@@ -401,10 +359,6 @@ abstract class _User implements User {
   String get role;
   @override
   String? get image;
-  @override
-  int get typingSpeed;
-  @override
-  double get typingAccuracy;
   @override
   List<dynamic> get completedLevels;
   @override

@@ -36,7 +36,9 @@ class GameButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         ),
         child: isLoading
-            ? const CircularProgressIndicator(color: Colors.white,)
+            ? const CircularProgressIndicator(
+                color: Colors.white,
+              )
             : Text(
                 text,
                 style: const TextStyle(

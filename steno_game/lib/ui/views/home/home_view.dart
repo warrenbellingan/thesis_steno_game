@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:steno_game/services/internet_service.dart';
 import 'package:steno_game/ui/views/menu/menu_view.dart';
-import '../../../app/app.locator.dart';
+import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart';
 import '../../common/ui_helpers.dart';
 import '../../constants/game_color.dart';
 import '../../constants/game_ui_text.dart';
@@ -12,7 +11,6 @@ import '../../custom_widgets/player_profile.dart';
 import '../achievement/achievement_view.dart';
 import '../lessons/lessons_view.dart';
 import '../people/people_view.dart';
-import '../play/play_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver {
@@ -74,7 +72,7 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver {
                     children: [
                       MenuView(viewModel.user),
                       const LessonsView(),
-                      if (viewModel.isStudent()) const PlayView(),
+                      if (viewModel.isStudent()) const StrokePlayView(),
                       if (viewModel.isStudent()) const AchievementView(),
                       const PeopleView(),
                     ],

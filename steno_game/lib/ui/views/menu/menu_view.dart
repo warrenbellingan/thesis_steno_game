@@ -61,18 +61,10 @@ class MenuView extends StackedView<MenuViewModel> {
                 ),
                 verticalSpaceTiny,
                 if (viewModel.isStudent())
-                  Column(
-                    children: [
-                      MenuCard(
-                          text: "Practice Strokes",
-                          onClick: () {},
-                          iconData: Icons.edit),
-                      MenuCard(
-                          text: "Practice Typing",
-                          onClick: () {},
-                          iconData: Icons.keyboard),
-                    ],
-                  ),
+                  MenuCard(
+                      text: "Practice Strokes",
+                      onClick: viewModel.goToPractice,
+                      iconData: Icons.edit),
                 if (!(viewModel.isStudent()))
                   MenuCard(
                       text: "Host Stroke Game",

@@ -4,10 +4,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.dialogs.dart';
 import 'package:steno_game/app/app.locator.dart';
 import 'package:steno_game/model/steno_stroke.dart';
-import 'package:steno_game/model/typing.dart';
 import 'package:steno_game/model/user.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
-import 'package:steno_game/repository/typing_repository.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 import 'package:steno_game/ui/common/temp.dart';
 
@@ -15,7 +13,6 @@ import '../../../app/app.bottomsheets.dart';
 
 class SearchStenoViewModel extends BaseViewModel {
   final _strokeRepo = locator<StrokeRepository>();
-  final _typingRepo = locator<TypingRepository>();
   final _bottomSheet = locator<BottomSheetService>();
   final _navServ = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
@@ -24,10 +21,7 @@ class SearchStenoViewModel extends BaseViewModel {
 
   TextEditingController searchTextController = TextEditingController();
 
-  List<Typing> typingList = [];
   List<StenoStroke> strokeList = [];
-
-  int searchType = 0;
 
   init() async {
     setBusy(true);
@@ -46,22 +40,8 @@ class SearchStenoViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> _searchTyping() async {
-    setBusy(true);
-    final response = await _typingRepo.searchTyping(searchTextController.text);
-    response.fold((l) => showBottomSheet(l.message), (list) {
-      typingList = list;
-      rebuildUi();
-    });
-    setBusy(false);
-  }
-
   Future<void> search() async {
-    if (searchType == 0) {
-      await _searchStroke();
-    } else {
-      await _searchTyping();
-    }
+    await _searchStroke();
   }
 
   void editStrokeDialog(StenoStroke stroke) async {
@@ -71,36 +51,14 @@ class SearchStenoViewModel extends BaseViewModel {
     );
   }
 
-  void editTypingDialog(Typing typing) async {
-    Temporary.typing = typing;
-    await _dialogService.showCustomDialog(
-      variant: DialogType.editTyping,
-    );
-  }
-
   void addSteno() async {
-    if (searchType == 0) {
-      addStrokeDialog();
-    } else {
-      addTypingDialog();
-    }
+    addStrokeDialog();
   }
 
   void addStrokeDialog() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.addStroke,
     );
-  }
-
-  void addTypingDialog() async {
-    await _dialogService.showCustomDialog(
-      variant: DialogType.addTyping,
-    );
-  }
-
-  void setSearchType(int type) {
-    searchType = type;
-    search();
   }
 
   void showBottomSheet(String description) {

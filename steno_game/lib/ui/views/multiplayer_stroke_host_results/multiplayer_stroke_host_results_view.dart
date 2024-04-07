@@ -8,7 +8,8 @@ import 'multiplayer_stroke_host_results_viewmodel.dart';
 
 class MultiplayerStrokeHostResultsView
     extends StackedView<MultiplayerStrokeHostResultsViewModel> {
-  const MultiplayerStrokeHostResultsView(this.game, {Key? key}) : super(key: key);
+  const MultiplayerStrokeHostResultsView(this.game, {Key? key})
+      : super(key: key);
   final MultiplayerStroke game;
   @override
   Widget builder(
@@ -16,12 +17,15 @@ class MultiplayerStrokeHostResultsView
     MultiplayerStrokeHostResultsViewModel viewModel,
     Widget? child,
   ) {
-    return GameBody(body: SingleChildScrollView(
-      child: viewModel.isBusy ? const GameLoading() : const Column(
-        children: [
-          Text("Done"),
-        ],
-      ),
+    return GameBody(
+        body: SingleChildScrollView(
+      child: viewModel.isBusy
+          ? const GameLoading()
+          : const Column(
+              children: [
+                Text("Done"),
+              ],
+            ),
     ));
   }
 

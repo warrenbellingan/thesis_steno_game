@@ -3,7 +3,6 @@ import 'package:steno_game/repository/multiplayer_stroke_repository.dart';
 import 'package:steno_game/repository/picture_quiz_repository.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
-import 'package:steno_game/repository/typing_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:steno_game/ui/dialogs/info_alert/info_alert_dialog.dart';
@@ -21,17 +20,11 @@ import 'package:steno_game/ui/views/achievement/achievement_view.dart';
 import 'package:steno_game/ui/views/lessons/lessons_view.dart';
 import 'package:steno_game/ui/views/people/people_view.dart';
 import 'package:steno_game/ui/views/picture_topic/picture_topic_view.dart';
-import 'package:steno_game/ui/views/play/play_view.dart';
 import 'package:steno_game/ui/views/profile/profile_view.dart';
 import 'package:steno_game/ui/views/quiz_game_stroke/quiz_game_stroke_view.dart';
 import 'package:steno_game/ui/views/stroke_exercise/stroke_exercise_view.dart';
 import 'package:steno_game/ui/views/strokes_multiplayer/strokes_multiplayer_view.dart';
 import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart';
-import 'package:steno_game/ui/views/text_quiz/text_quiz_view.dart';
-import 'package:steno_game/ui/views/text_exercise/text_exercise_view.dart';
-import 'package:steno_game/ui/views/typing_exercise/typing_exercise_view.dart';
-import 'package:steno_game/ui/views/typing_play/typing_play_view.dart';
-import 'package:steno_game/ui/views/speed_typing/speed_typing_view.dart';
 import 'package:steno_game/ui/bottom_sheets/input_validation/input_validation_sheet.dart';
 import 'package:steno_game/ui/views/person/person_view.dart';
 import 'package:steno_game/ui/dialogs/update_profile_image/update_profile_image_dialog.dart';
@@ -47,13 +40,10 @@ import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_
 import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_host_view.dart';
 import 'package:steno_game/ui/dialogs/edit_stroke/edit_stroke_dialog.dart';
 import 'package:steno_game/ui/dialogs/add_stroke/add_stroke_dialog.dart';
-import 'package:steno_game/ui/dialogs/add_typing/add_typing_dialog.dart';
-import 'package:steno_game/ui/dialogs/edit_typing/edit_typing_dialog.dart';
-import 'package:steno_game/ui/dialogs/add_lesson/add_lesson_dialog.dart';
 import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart';
-import 'package:steno_game/ui/views/add_typing_lesson/add_typing_lesson_view.dart';
 import 'package:steno_game/services/internet_service.dart';
 import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart';
+import 'package:steno_game/ui/views/practice/practice_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -67,17 +57,11 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_
     MaterialRoute(page: LessonsView),
     MaterialRoute(page: PeopleView),
     MaterialRoute(page: PictureTopicView),
-    MaterialRoute(page: PlayView),
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: QuizGameStrokeView),
     MaterialRoute(page: StrokeExerciseView),
     MaterialRoute(page: StrokesMultiplayerView),
     MaterialRoute(page: StrokePlayView),
-    MaterialRoute(page: TextQuizView),
-    MaterialRoute(page: TextExerciseView),
-    MaterialRoute(page: TypingExerciseView),
-    MaterialRoute(page: TypingPlayView),
-    MaterialRoute(page: SpeedTypingView),
     MaterialRoute(page: PersonView),
     MaterialRoute(page: TopicView),
     MaterialRoute(page: MenuView),
@@ -87,8 +71,8 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_
     MaterialRoute(page: MultiplayerStrokeWaitingRoomView),
     MaterialRoute(page: MultiplayerStrokeHostView),
     MaterialRoute(page: AddStrokeLessonView),
-    MaterialRoute(page: AddTypingLessonView),
     MaterialRoute(page: MultiplayerStrokeHostResultsView),
+    MaterialRoute(page: PracticeView),
 // @stacked-route
   ],
   dependencies: [
@@ -104,7 +88,6 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_
     LazySingleton(classType: StrokeRepository),
     LazySingleton(classType: PictureQuizRepository),
     LazySingleton(classType: MultiplayerStrokeRepository),
-    LazySingleton(classType: TypingRepository),
     LazySingleton(classType: InternetService),
     LazySingleton(classType: SnackbarService),
 // @stacked-service
@@ -122,9 +105,6 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_
     StackedDialog(classType: UpdatePasswordDialog),
     StackedDialog(classType: EditStrokeDialog),
     StackedDialog(classType: AddStrokeDialog),
-    StackedDialog(classType: AddTypingDialog),
-    StackedDialog(classType: EditTypingDialog),
-    StackedDialog(classType: AddLessonDialog),
 // @stacked-dialog
   ],
 )

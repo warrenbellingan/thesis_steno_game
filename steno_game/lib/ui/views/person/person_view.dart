@@ -224,33 +224,16 @@ class PersonView extends StackedView<PersonViewModel> {
                                 ),
                   verticalSpaceMedium,
                   if (viewModel.isStudent())
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ProfileCard(
-                                title: "Score",
-                                stats: viewModel.viewedUser.score.toString()),
-                            ProfileCard(
-                                title: "Typing Speed",
-                                stats:
-                                    "${viewModel.viewedUser.typingSpeed.toString()}wpm"),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ProfileCard(
-                                title: "Achievements",
-                                stats: viewModel.viewedUser.achievements.length
-                                    .toString()),
-                            ProfileCard(
-                                title: "Typing Accuracy",
-                                stats:
-                                    "${viewModel.viewedUser.typingAccuracy.toString()}%"),
-                          ],
-                        ),
+                        ProfileCard(
+                            title: "Score",
+                            stats: viewModel.viewedUser.score.toString()),
+                        ProfileCard(
+                            title: "Achievements",
+                            stats: viewModel.viewedUser.achievements.length
+                                .toString()),
                       ],
                     ),
                 ],

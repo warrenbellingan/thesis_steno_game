@@ -29,7 +29,7 @@ class PeopleViewModel extends BaseViewModel {
   init() async {
     setBusy(true);
     final getUser = await _authServ.getCurrentUser();
-    getUser.fold((l) => showBottomSheet(l.message), (currentUser) async {
+    getUser.fold((l) {}, (currentUser) async {
       user = currentUser;
       await streamSubscription?.cancel();
       streamSubscription =

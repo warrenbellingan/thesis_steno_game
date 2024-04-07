@@ -181,13 +181,15 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                         Expanded(
                                           child: GameButton(
                                             text: "Add",
-                                            onClick: viewModel.addQuiz, isLoading: false,
+                                            onClick: viewModel.addQuiz,
+                                            isLoading: false,
                                           ),
                                         ),
                                         Expanded(
                                           child: GameButton(
                                             text: "Cancel",
-                                            onClick: viewModel.cancelAdd, isLoading: false,
+                                            onClick: viewModel.cancelAdd,
+                                            isLoading: false,
                                           ),
                                         ),
                                       ],
@@ -215,14 +217,16 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                               child: GameButton(
                                                 text: "Stroke",
                                                 onClick: () =>
-                                                    viewModel.editMode(0), isLoading: false,
+                                                    viewModel.editMode(0),
+                                                isLoading: false,
                                               ),
                                             ),
                                             Expanded(
                                               child: GameButton(
                                                 text: "Text",
                                                 onClick: () =>
-                                                    viewModel.editMode(1), isLoading: false,
+                                                    viewModel.editMode(1),
+                                                isLoading: false,
                                               ),
                                             ),
                                           ],
@@ -242,7 +246,8 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                 ),
                 GameButton(
                   text: "Create Game",
-                  onClick: viewModel.readyGame, isLoading: viewModel.busy("readyGame"),
+                  onClick: viewModel.readyGame,
+                  isLoading: viewModel.busy("readyGame"),
                 ),
               ],
             ),

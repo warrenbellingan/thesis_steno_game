@@ -46,36 +46,12 @@ class TopicView extends StackedView<TopicViewModel> {
                         verticalSpaceSmall,
                         viewModel.topics.isEmpty
                             ? const GameEmpty()
-                            : lesson.type == "strokes"
-                                ? GamePictureTopic(
-                                    image: viewModel.stroke!.strokeImage,
-                                    text: viewModel.stroke!.text,
-                                    description: viewModel
-                                        .topics[viewModel.currentIndex]
-                                        .description,
-                                  )
-                                : Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 2, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                        width: 2,
-                                        style: BorderStyle.solid,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      viewModel
-                                          .topics[viewModel.currentIndex].text,
-                                      textAlign: TextAlign.justify,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        letterSpacing: 2,
-                                      ),
-                                    ),
-                                  ),
+                            : GamePictureTopic(
+                                image: viewModel.stroke!.strokeImage,
+                                text: viewModel.stroke!.text,
+                                description: viewModel
+                                    .topics[viewModel.currentIndex].description,
+                              )
                       ],
                     ),
                   ),

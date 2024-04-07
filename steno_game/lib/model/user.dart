@@ -11,8 +11,6 @@ class User with _$User {
     required String email,
     required String role,
     String? image,
-    @Default(0) int typingSpeed,
-    @Default(0) double typingAccuracy,
     @Default([]) List completedLevels,
     @Default([]) List achievements,
     @Default(0) int score,

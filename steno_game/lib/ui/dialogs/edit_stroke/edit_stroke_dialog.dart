@@ -83,7 +83,11 @@ class EditStrokeDialog extends StackedView<EditStrokeDialogModel> {
                     ),
                   ),
                   verticalSpaceMedium,
-                  GameButton(text: "Save", onClick: viewModel.saveClick, isLoading: viewModel.busy("save"),),
+                  GameButton(
+                    text: "Save",
+                    onClick: viewModel.saveClick,
+                    isLoading: viewModel.busy("save"),
+                  ),
                   verticalSpaceMedium,
                 ],
               ),

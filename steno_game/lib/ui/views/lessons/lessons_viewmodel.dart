@@ -62,11 +62,7 @@ class LessonsViewModel extends BaseViewModel {
   }
 
   void lessonEditClick(Lesson lesson) {
-    if (lesson.type == "stroke") {
-      _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
-    } else {
-      _navigationService.navigateToAddTypingLessonView(lesson: lesson);
-    }
+    _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
   }
 
   void showBottomSheet(String description) {

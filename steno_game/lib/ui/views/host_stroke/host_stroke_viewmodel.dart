@@ -47,7 +47,8 @@ class HostStrokeViewModel extends BaseViewModel {
           id: game.id, gameMaster: game.gameMaster, status: 1);
       _navigation.replaceWithMultiplayerStrokeWaitingRoomView(game: game);
     });
-    setBusyForObject("readyGame", false);  }
+    setBusyForObject("readyGame", false);
+  }
 
   Future<void> addStrokeQuiz() async {
     setBusy(true);

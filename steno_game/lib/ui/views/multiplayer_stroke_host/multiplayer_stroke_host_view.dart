@@ -319,7 +319,11 @@ class MultiplayerStrokeHostView
                     ),
                   ),
                   verticalSpaceSmall,
-                  GameButton(text: "Submit", onClick: viewModel.submitAnswers, isLoading: viewModel.busy("submit"),),
+                  GameButton(
+                    text: "Submit",
+                    onClick: viewModel.submitAnswers,
+                    isLoading: viewModel.busy("submit"),
+                  ),
                 ],
               ));
   }

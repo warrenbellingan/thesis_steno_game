@@ -17,7 +17,6 @@ import '../repository/multiplayer_stroke_repository.dart';
 import '../repository/picture_quiz_repository.dart';
 import '../repository/stroke_repository.dart';
 import '../repository/topic_repository.dart';
-import '../repository/typing_repository.dart';
 import '../repository/user_repository.dart';
 import '../services/authentication_service.dart';
 import '../services/image_service.dart';
@@ -47,7 +46,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => StrokeRepository());
   locator.registerLazySingleton(() => PictureQuizRepository());
   locator.registerLazySingleton(() => MultiplayerStrokeRepository());
-  locator.registerLazySingleton(() => TypingRepository());
   locator.registerLazySingleton(() => InternetService());
   locator.registerLazySingleton(() => SnackbarService());
 }

@@ -48,8 +48,7 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
-      final response =
-          await _lessonRepo.addLesson(lessonTitleController.text, 'strokes');
+      final response = await _lessonRepo.addLesson(lessonTitleController.text);
       response.fold((l) => showBottomSheet(l.message), (lessonData) async {
         showBottomSheet("Added Successfully");
         lesson = lessonData;
@@ -67,12 +66,13 @@ class AddStrokeLessonViewModel extends BaseViewModel {
     if (lessonTitleController.text.isEmpty) {
       showBottomSheet("Lesson Title is Required");
     } else {
-      final response = await _lessonRepo.editLesson(
-          lesson!.id, lessonTitleController.text, 'strokes');
+      final response =
+          await _lessonRepo.editLesson(lesson!.id, lessonTitleController.text);
       response.fold((l) => showBottomSheet(l.message), (lessonData) async {
         showBottomSheet("Saved Successfully");
         lesson = lessonData;
         await getPictureTopics();
+        await getStroke();
         isAddLesson = false;
         rebuildUi();
       });

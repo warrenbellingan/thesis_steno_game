@@ -15,26 +15,27 @@ class StrokePlayView extends StackedView<StrokePlayViewModel> {
     StrokePlayViewModel viewModel,
     Widget? child,
   ) {
-    return GameBody(
-      body: Column(
-        children: [
-          GameBar(),
-          GridView(
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-            ),
-            children: [
-              PlayCard(
-                label: "Multi Player",
-                onClick: viewModel.goToJoinMultiplayerStrokeView,
-              ),
-              PlayCard(
-                  label: "Strokes Quiz", onClick: viewModel.goToStrokeQuizView),
-            ],
+    return Column(
+      children: [
+        GridView(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
           ),
-        ],
-      ),
+          children: [
+            PlayCard(
+              label: "Multiplayer",
+              onClick: viewModel.goToJoinMultiplayerStrokeView,
+              icon: Icons.people_alt_rounded,
+            ),
+            PlayCard(
+              label: "Quiz",
+              onClick: viewModel.goToStrokeQuizView,
+              icon: Icons.quiz,
+            ),
+          ],
+        ),
+      ],
     );
   }
 

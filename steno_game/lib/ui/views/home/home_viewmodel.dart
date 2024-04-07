@@ -16,7 +16,6 @@ class HomeViewModel extends BaseViewModel {
 
   final PageController pageController = PageController(initialPage: 0);
   final _navigationService = locator<NavigationService>();
-  final _dialogService = locator<DialogService>();
 
   StreamSubscription<User?>? streamSubscription;
 
@@ -56,7 +55,8 @@ class HomeViewModel extends BaseViewModel {
 
   void onDestinationSelected(int index) {
     currentPageIndex = index;
-    changePage(currentPageIndex);
+    pageController.jumpToPage(index);
+    rebuildUi();
   }
 
   void goToProfileView() {
@@ -64,9 +64,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void addLesson() async {
-    await _dialogService.showCustomDialog(
-      variant: DialogType.addLesson,
-    );
+    _navigationService.navigateToAddStrokeLessonView(lesson: null);
   }
 
   @override

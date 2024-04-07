@@ -55,7 +55,11 @@ class AddStrokeDialog extends StackedView<AddStrokeDialogModel> {
                   ),
                   Painter(globalKey: viewModel.painterKey),
                   verticalSpaceMedium,
-                  GameButton(text: "Add", onClick: viewModel.addClick, isLoading: viewModel.busy("add"),),
+                  GameButton(
+                    text: "Add",
+                    onClick: viewModel.addClick,
+                    isLoading: viewModel.busy("add"),
+                  ),
                   verticalSpaceMedium,
                 ],
               ),

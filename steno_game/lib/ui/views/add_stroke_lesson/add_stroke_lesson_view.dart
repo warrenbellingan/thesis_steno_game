@@ -44,11 +44,13 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                             viewModel.lesson != null
                                 ? GameButton(
                                     text: "Save Lesson",
-                                    onClick: viewModel.saveLessonClick, isLoading: viewModel.busy("saveLesson"),
+                                    onClick: viewModel.saveLessonClick,
+                                    isLoading: viewModel.busy("saveLesson"),
                                   )
                                 : GameButton(
                                     text: "Add Lesson",
-                                    onClick: viewModel.addLesson, isLoading: viewModel.busy("addLesson"),
+                                    onClick: viewModel.addLesson,
+                                    isLoading: viewModel.busy("addLesson"),
                                   ),
                           ],
                         ),
@@ -157,10 +159,13 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                               viewModel.currentIndex == viewModel.topics.length
                                   ? GameButton(
                                       text: "Add",
-                                      onClick: viewModel.addTopicClick, isLoading: viewModel.busy("addTopic"),)
+                                      onClick: viewModel.addTopicClick,
+                                      isLoading: viewModel.busy("addTopic"),
+                                    )
                                   : GameButton(
                                       text: "Save",
-                                      onClick: viewModel.saveClick, isLoading: viewModel.busy("save"),
+                                      onClick: viewModel.saveClick,
+                                      isLoading: viewModel.busy("save"),
                                     ),
                             ],
                           ),

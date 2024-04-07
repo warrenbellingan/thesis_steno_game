@@ -43,8 +43,6 @@ class UserRepository {
         friends: user.friends,
         friendsRequest: user.friendsRequest,
         score: user.score + gainScore,
-        typingAccuracy: user.typingAccuracy,
-        typingSpeed: user.typingSpeed,
       );
       await _sharedPref.saveUser(updatedUser);
       return const Right(None());

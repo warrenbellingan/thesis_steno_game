@@ -185,37 +185,24 @@ class ProfileView extends StackedView<ProfileViewModel> {
                             ],
                           ),
                     if (viewModel.isStudent())
-                      Column(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ProfileCard(
-                                  title: "Score",
-                                  stats: viewModel.user.score.toString()),
-                              ProfileCard(
-                                  title: "Typing Speed",
-                                  stats:
-                                      "${viewModel.user.typingSpeed.toString()}wpm"),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ProfileCard(
-                                  title: "Achievements",
-                                  stats: viewModel.user.achievements.length
-                                      .toString()),
-                              ProfileCard(
-                                  title: "Typing Accuracy",
-                                  stats:
-                                      "${viewModel.user.typingAccuracy.toString()}%"),
-                            ],
-                          ),
+                          ProfileCard(
+                              title: "Score",
+                              stats: viewModel.user.score.toString()),
+                          ProfileCard(
+                              title: "Achievements",
+                              stats: viewModel.user.achievements.length
+                                  .toString()),
                         ],
                       ),
                     verticalSpaceMedium,
-                    GameButton(text: 'Log out', onClick: viewModel.logOut, isLoading: viewModel.busy("logout"),),
+                    GameButton(
+                      text: 'Log out',
+                      onClick: viewModel.logOut,
+                      isLoading: viewModel.busy("logout"),
+                    ),
                   ],
                 ),
               ));

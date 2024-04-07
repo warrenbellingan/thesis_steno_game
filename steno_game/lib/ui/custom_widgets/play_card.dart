@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../common/ui_helpers.dart';
@@ -6,10 +7,15 @@ import '../constants/game_color.dart';
 typedef OnClick = Function();
 
 class PlayCard extends StatelessWidget {
-  const PlayCard({super.key, required this.label, required this.onClick});
+  const PlayCard(
+      {super.key,
+      required this.label,
+      required this.onClick,
+      required this.icon});
 
   final String label;
   final OnClick onClick;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +33,29 @@ class PlayCard extends StatelessWidget {
             ),
             gradient: GameColor.primaryGradient,
             boxShadow: [primaryShadow()],
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(50),
           ),
-          child: Text(
-            textAlign: TextAlign.center,
-            label,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              wordSpacing: 2,
-              letterSpacing: 1.5,
-              color: Colors.white,
-            ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Icon(
+                  icon,
+                  size: 50,
+                  color: GameColor.secondaryBackgroundColor,
+                ),
+              ),
+              Text(
+                textAlign: TextAlign.center,
+                label,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                  color: GameColor.primaryBackgroundColor,
+                ),
+              ),
+              verticalSpaceMedium,
+            ],
           ),
         ),
       ),

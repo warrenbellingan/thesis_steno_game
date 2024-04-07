@@ -6,10 +6,10 @@ part 'lesson.g.dart';
 
 @Freezed()
 class Lesson with _$Lesson {
-  const factory Lesson(
-      {required String id,
-      required String title,
-      required String type}) = _Lesson;
+  const factory Lesson({
+    required String id,
+    required String title,
+  }) = _Lesson;
 
   factory Lesson.fromJson(Map<String, dynamic> json) => _$LessonFromJson(json);
 }

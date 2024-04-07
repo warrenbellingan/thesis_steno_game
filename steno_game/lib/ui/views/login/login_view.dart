@@ -50,7 +50,8 @@ class LoginView extends StackedView<LoginViewModel> {
                   ),
                   GameButton(
                     text: GameUIText.loginText,
-                    onClick: viewModel.logIn, isLoading: viewModel.busy("login"),
+                    onClick: viewModel.logIn,
+                    isLoading: viewModel.busy("login"),
                   ),
                   const SizedBox(
                     height: 20,

@@ -31,6 +31,9 @@ class MenuViewModel extends BaseViewModel {
   void goToSearchSteno() {
     _navigationServ.navigateToSearchStenoView();
   }
+  void goToPractice() {
+    _navigationServ.navigateToPracticeView();
+  }
 
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
@@ -39,4 +42,6 @@ class MenuViewModel extends BaseViewModel {
       description: description,
     );
   }
+
+
 }

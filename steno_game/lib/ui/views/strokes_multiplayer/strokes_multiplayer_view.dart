@@ -102,7 +102,11 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                   ),
                                 ),
                                 verticalSpaceSmall,
-                                GameButton(text: "Exit", onClick: () {}, isLoading: false,)
+                                GameButton(
+                                  text: "Exit",
+                                  onClick: () {},
+                                  isLoading: false,
+                                )
                               ],
                             )
                           : viewModel.questions[viewModel.currentIndex].type ==
@@ -146,8 +150,10 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                         controller: viewModel.answerController,
                                         label: "Answer"),
                                     GameButton(
-                                        text: "Next",
-                                        onClick: viewModel.addTextAnswer, isLoading: viewModel.busy("addText"),),
+                                      text: "Next",
+                                      onClick: viewModel.addTextAnswer,
+                                      isLoading: viewModel.busy("addText"),
+                                    ),
                                   ],
                                 )
                               : Column(
@@ -210,8 +216,10 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                     ),
                                     verticalSpaceSmall,
                                     GameButton(
-                                        text: "Next",
-                                        onClick: viewModel.addStrokeAnswer, isLoading: viewModel.busy("addStroke"),),
+                                      text: "Next",
+                                      onClick: viewModel.addStrokeAnswer,
+                                      isLoading: viewModel.busy("addStroke"),
+                                    ),
                                   ],
                                 ),
                 ],

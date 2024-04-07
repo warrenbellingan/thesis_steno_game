@@ -52,16 +52,16 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
   }
 
   void submitAnswers() async {
-    if(!isAllAnswer()) {
+    if (!isAllAnswer()) {
       showBottomSheet("There is unchecked answers");
       return;
     }
     setBusyForObject("submit", true);
     final response =
         await _multiStroke.addCorrectAnswers(game.id, correctAnswers);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       final getGame = await _multiStroke.getGame(game.id);
-      getGame.fold((l) => showBottomSheet(l.message), (newGameData){
+      getGame.fold((l) => showBottomSheet(l.message), (newGameData) {
         _nav.replaceWithMultiplayerStrokeHostResultsView(game: newGameData);
       });
     });

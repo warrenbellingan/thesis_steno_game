@@ -11,12 +11,13 @@ class LessonRepository {
   final _internetService = locator<InternetService>();
 
   Future<Either<GameException, Lesson>> addLesson(
-      String title, String type) async {
+    String title,
+  ) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final id = DateTime.now().millisecondsSinceEpoch.toString();
-        Lesson lesson = Lesson(id: id, title: title, type: type);
+        Lesson lesson = Lesson(id: id, title: title);
         await _db.collection('lessons').doc(id).set(lesson.toJson());
         return Right(lesson);
       } catch (e) {
@@ -28,11 +29,11 @@ class LessonRepository {
   }
 
   Future<Either<GameException, Lesson>> editLesson(
-      String id, String title, String type) async {
+      String id, String title) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        Lesson lesson = Lesson(id: id, title: title, type: type);
+        Lesson lesson = Lesson(id: id, title: title);
         await _db.collection('lessons').doc(id).set(lesson.toJson());
         return Right(lesson);
       } catch (e) {
