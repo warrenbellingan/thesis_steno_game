@@ -1,24 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'picture_quiz.dart';
+part of 'quiz.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PictureQuizImpl _$$PictureQuizImplFromJson(Map<String, dynamic> json) =>
-    _$PictureQuizImpl(
+_$QuizImpl _$$QuizImplFromJson(Map<String, dynamic> json) => _$QuizImpl(
       id: json['id'] as String,
-      stroke: json['stroke'] as String,
+      image: json['image'] as String,
       choices:
           (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
       answer: json['answer'] as String,
     );
 
-Map<String, dynamic> _$$PictureQuizImplToJson(_$PictureQuizImpl instance) =>
+Map<String, dynamic> _$$QuizImplToJson(_$QuizImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'stroke': instance.stroke,
+      'image': instance.image,
       'choices': instance.choices,
       'answer': instance.answer,
     };

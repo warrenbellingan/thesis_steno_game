@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/custom_widgets/game_bar.dart';
@@ -20,30 +22,37 @@ class PracticeView extends StackedView<PracticeViewModel> {
     Widget? child,
   ) {
     return GameBody(
-        body: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GameBar(),
-            GameSearchTextField(
-              controller: viewModel.searchController,
-              onClick: viewModel.searchStroke,
-            ),
-            verticalSpaceSmall,
-            viewModel.isBusy ? const GameLoading() : Expanded(
-              child: ListView.builder(
-                itemCount: viewModel.strokes.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final stroke = viewModel.strokes[index];
-                  return StrokeImage(
-                      imagePath: stroke.strokeImage, word: stroke.text, size: 200,);
-                },
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GameBar(),
+              GameSearchTextField(
+                controller: viewModel.searchController,
+                onClick: viewModel.searchStroke,
               ),
-            ),
-            verticalSpaceSmall,
-            Painter(globalKey: GlobalKey()),
-          ],
+              verticalSpaceSmall,
+              viewModel.isBusy ? const GameLoading() : Container(
+                height: 240,
+                child: Expanded(
+                  child: ListView.builder(
+                    itemCount: viewModel.strokes.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final stroke = viewModel.strokes[index];
+                      return StrokeImage(
+                        imagePath: stroke.strokeImage, word: stroke.text, size: 180,);
+                    },
+                  ),
+                ),
+              ),
+              verticalSpaceSmall,
+              Painter(globalKey: GlobalKey()),
+              verticalSpaceSmall,
+              verticalSpaceSmall,
+            ],
+          ),
         ));
   }
 

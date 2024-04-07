@@ -1,6 +1,5 @@
 import 'package:steno_game/repository/lesson_repository.dart';
 import 'package:steno_game/repository/multiplayer_stroke_repository.dart';
-import 'package:steno_game/repository/picture_quiz_repository.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/topic_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
@@ -86,7 +85,6 @@ import 'package:steno_game/ui/views/practice/practice_view.dart';
     LazySingleton(classType: LessonRepository),
     LazySingleton(classType: TopicRepository),
     LazySingleton(classType: StrokeRepository),
-    LazySingleton(classType: PictureQuizRepository),
     LazySingleton(classType: MultiplayerStrokeRepository),
     LazySingleton(classType: InternetService),
     LazySingleton(classType: SnackbarService),

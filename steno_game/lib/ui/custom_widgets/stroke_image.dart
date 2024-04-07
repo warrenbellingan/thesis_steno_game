@@ -29,7 +29,7 @@ class StrokeImage extends StatelessWidget {
           Text(
             word,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               color: Colors.white,
               fontWeight: FontWeight.w700,
               letterSpacing: 1,

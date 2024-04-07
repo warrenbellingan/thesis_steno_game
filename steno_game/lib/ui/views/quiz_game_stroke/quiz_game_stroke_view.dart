@@ -21,31 +21,10 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
     return GameBody(
         body: SingleChildScrollView(
       child: viewModel.isBusy
-          ? GameLoading()
+          ? const GameLoading()
           : Column(
               children: [
-                InGameBar(name: "Warren"),
-                verticalSpaceMedium,
-                Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                      color: Colors.black,
-                      width: 2,
-                      style: BorderStyle.solid,
-                    )),
-                    child:
-                        GameNetworkImage(path: viewModel.stroke.strokeImage)),
-                verticalSpaceMedium,
-                ListView.builder(
-                    itemCount: viewModel.quiz.choices.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      String choiceText = viewModel.quiz.choices[index];
-                      return GameQuizChoice(
-                        choice: choiceText,
-                        onClick: () => viewModel.choiceClick(choiceText),
-                      );
-                    }),
+
               ],
             ),
     ));
@@ -59,6 +38,6 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
 
   @override
   void onViewModelReady(QuizGameStrokeViewModel viewModel) {
-    viewModel.init();
+    // viewModel.init();
   }
 }
