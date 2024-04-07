@@ -19,7 +19,7 @@ class GameBody extends StatelessWidget {
       child: Scaffold(
         backgroundColor: GameColor.primaryBackgroundColor,
         body: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: body,
         ),
         bottomNavigationBar: bottomBar,

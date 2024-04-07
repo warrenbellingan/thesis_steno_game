@@ -93,9 +93,7 @@ class MultiplayerStrokeHostView
                                               color: Colors.black, width: 2)),
                                       child: GameNetworkImage(
                                         path: question.data,
-                                        width: screenWidthFraction(context,
-                                            dividedBy: 2),
-                                        height: screenWidthFraction(context,
+                                        size: screenWidthFraction(context,
                                             dividedBy: 2),
                                       ),
                                     )
@@ -225,12 +223,10 @@ class MultiplayerStrokeHostView
                                                           width: 2)),
                                                   child: GameNetworkImage(
                                                     path: answer.data,
-                                                    width: screenWidthFraction(
+                                                    size: screenWidthFraction(
                                                         context,
                                                         dividedBy: 2),
-                                                    height: screenWidthFraction(
-                                                        context,
-                                                        dividedBy: 2),
+
                                                   ),
                                                 ),
                                           verticalSpaceSmall,

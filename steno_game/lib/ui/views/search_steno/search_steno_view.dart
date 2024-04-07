@@ -8,6 +8,7 @@ import 'package:steno_game/ui/custom_widgets/game_chip.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/game_search_textfield.dart';
+import 'package:steno_game/ui/custom_widgets/stroke_image.dart';
 
 import '../../custom_widgets/game_body.dart';
 import 'search_steno_viewmodel.dart';
@@ -59,31 +60,7 @@ class SearchStenoView extends StackedView<SearchStenoViewModel> {
                             return Stack(
                               alignment: Alignment.topRight,
                               children: [
-                                Container(
-                                  margin: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      GameNetworkImage(
-                                        path: item.strokeImage,
-                                      ),
-                                      Text(
-                                        item.text,
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 1,
-                                          wordSpacing: 3,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                StrokeImage(imagePath: item.strokeImage, word: item.text),
                                 if (viewModel.user.role == "Instructor")
                                   Container(
                                     margin: const EdgeInsets.all(18),

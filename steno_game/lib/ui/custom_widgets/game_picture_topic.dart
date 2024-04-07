@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
+import 'package:steno_game/ui/custom_widgets/stroke_image.dart';
 
 class GamePictureTopic extends StatelessWidget {
   const GamePictureTopic(
@@ -19,26 +20,7 @@ class GamePictureTopic extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-              boxShadow: [primaryShadow()],
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                  color: Colors.black, style: BorderStyle.solid, width: 2)),
-          child: Column(
-            children: [
-              GameNetworkImage(path: image),
-              Text(
-                text,
-                style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1,
-                    wordSpacing: 2),
-              )
-            ],
-          ),
-        ),
+        StrokeImage(imagePath: image, word: text),
         verticalSpaceMedium,
         Container(
           width: double.infinity,

@@ -167,7 +167,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                     verticalSpaceSmall,
                                     GameTextField(
                                       controller: viewModel.textController,
-                                      label: "Stroke Text",
+                                      label: "Stroke Word",
                                       icon: const Icon(
                                         Icons.edit_rounded,
                                         color:
@@ -182,7 +182,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                           child: GameButton(
                                             text: "Add",
                                             onClick: viewModel.addQuiz,
-                                            isLoading: false,
+                                            isLoading: viewModel.busy("addEditQuiz"),
                                           ),
                                         ),
                                         Expanded(
@@ -223,7 +223,7 @@ class HostStrokeView extends StackedView<HostStrokeViewModel> {
                                             ),
                                             Expanded(
                                               child: GameButton(
-                                                text: "Text",
+                                                text: "Word",
                                                 onClick: () =>
                                                     viewModel.editMode(1),
                                                 isLoading: false,

@@ -56,6 +56,7 @@ class EditStrokeDialogModel extends BaseViewModel {
         showBottomSheet("Updated Successfully");
       });
     }
+    isStrokeEdit = false;
     setBusyForObject("save", false);
     rebuildUi();
   }

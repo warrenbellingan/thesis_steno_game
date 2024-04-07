@@ -8,6 +8,7 @@ import 'package:steno_game/ui/custom_widgets/game_navigator.dart';
 import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/game_textfield.dart';
 import 'package:steno_game/ui/custom_widgets/painter.dart';
+import 'package:steno_game/ui/custom_widgets/stroke_image.dart';
 import '../../../model/lesson.dart';
 import '../../constants/game_color.dart';
 import '../../custom_widgets/game_bar.dart';
@@ -75,31 +76,7 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                   ? Painter(globalKey: viewModel.painterKey)
                                   : Column(
                                       children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              boxShadow: [primaryShadow()],
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  color: Colors.black,
-                                                  style: BorderStyle.solid,
-                                                  width: 2)),
-                                          child: Column(
-                                            children: [
-                                              GameNetworkImage(
-                                                  path: viewModel
-                                                      .stroke!.strokeImage),
-                                              Text(
-                                                viewModel.stroke!.text,
-                                                style: const TextStyle(
-                                                    fontSize: 24,
-                                                    fontWeight: FontWeight.w700,
-                                                    letterSpacing: 1,
-                                                    wordSpacing: 2),
-                                              )
-                                            ],
-                                          ),
-                                        ),
+                                        StrokeImage(imagePath: viewModel.stroke!.strokeImage, word: viewModel.stroke!.text),
                                         ElevatedButton(
                                           onPressed: viewModel.editStroke,
                                           style: ElevatedButton.styleFrom(
@@ -126,7 +103,7 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                   viewModel.topics.length)
                                 GameTextField(
                                   controller: viewModel.strokeTextController,
-                                  label: "Stroke Text",
+                                  label: "Word/Phrase",
                                 ),
                               Container(
                                 decoration: BoxDecoration(

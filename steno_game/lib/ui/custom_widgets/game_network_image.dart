@@ -4,24 +4,24 @@ import 'package:steno_game/ui/constants/game_color.dart';
 
 class GameNetworkImage extends StatelessWidget {
   const GameNetworkImage(
-      {super.key, required this.path, this.width, this.height});
+      {super.key, required this.path, this.size});
 
   final String path;
-  final double? width;
-  final double? height;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      width: width ?? 350,
-      height: height ?? 350,
+      width: size ?? 350,
+      height: size ?? 350,
       imageUrl: path,
       fit: BoxFit.cover,
-      progressIndicatorBuilder: (context, url, progress) {
+      placeholder: (context, url) {
         return const Padding(
-          padding: EdgeInsetsDirectional.all(200),
+          padding: EdgeInsetsDirectional.all(130),
           child: CircularProgressIndicator(
             color: GameColor.primaryColor,
+            strokeWidth: 5,
           ),
         );
       },

@@ -32,11 +32,13 @@ class HostStrokeViewModel extends BaseViewModel {
   }
 
   void addQuiz() async {
+    setBusyForObject("addEditQuiz", true);
     if (editingType == 0) {
       await addStrokeQuiz();
     } else if (editingType == 1) {
       await addTextQuiz();
     }
+    setBusyForObject("addEditQuiz", false);
   }
 
   void readyGame() async {
@@ -51,7 +53,7 @@ class HostStrokeViewModel extends BaseViewModel {
   }
 
   Future<void> addStrokeQuiz() async {
-    setBusy(true);
+
     final addStrokeResponse =
         await _strokeRepo.addStroke(painterKey, textController.text, 1, null);
     addStrokeResponse.fold((l) {
@@ -66,11 +68,10 @@ class HostStrokeViewModel extends BaseViewModel {
         rebuildUi();
       });
     });
-    setBusy(false);
   }
 
   Future<void> addTextQuiz() async {
-    setBusy(true);
+
     final response = await _multiStrokeRepo.addQuestion(
         game.id, textController.text, "text");
     response.fold((l) => showBottomSheet(l.message), (quiz) {
@@ -78,7 +79,6 @@ class HostStrokeViewModel extends BaseViewModel {
       cancelAdd();
       rebuildUi();
     });
-    setBusy(false);
   }
 
   void setShowQuizType() {

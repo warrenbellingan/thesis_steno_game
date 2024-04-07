@@ -6,7 +6,6 @@ import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/game_textfield.dart';
 import 'package:steno_game/ui/custom_widgets/painter.dart';
-import '../../../model/steno_stroke.dart';
 import '../../custom_widgets/dialog_bar.dart';
 import '../../custom_widgets/game_button.dart';
 import '../../custom_widgets/game_loading.dart';

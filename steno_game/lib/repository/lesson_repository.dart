@@ -58,13 +58,12 @@ class LessonRepository {
     }
   }
 
-  Future<Either<GameException, List<Lesson>>> getLessons(String type) async {
+  Future<Either<GameException, List<Lesson>>> getLessons() async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final results = await _db
             .collection("lessons")
-            .where("type", isEqualTo: type)
             .orderBy("title")
             .get()
             .then((value) =>
