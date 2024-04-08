@@ -11,12 +11,12 @@ class QuizRepository {
   final _db = FirebaseFirestore.instance;
   final _internetService = locator<InternetService>();
 
-  Future<Either<GameException, None>> addQuiz(String quizId, String image, List<String> choices, String answer) async {
+  Future<Either<GameException, None>> addQuiz(String quizId, String stroke, List<String> choices, String answer) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final id = DateTime.now().millisecondsSinceEpoch.toString();
-        Quiz quiz = Quiz(id: id, image: image, choices: choices, answer: answer);
+        Quiz quiz = Quiz(id: id, stroke: stroke, choices: choices, answer: answer);
         await _db
             .collection("quizzes")
             .doc(quizId)
@@ -29,11 +29,11 @@ class QuizRepository {
       return Left(GameException("Please check your internet connection!"));
     }
   }
-  Future<Either<GameException, None>> updateQuiz(String quizId, String id, String image, List<String> choices, String answer) async {
+  Future<Either<GameException, None>> updateQuiz(String quizId, String id, String stroke, List<String> choices, String answer) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        Quiz quiz = Quiz(id: id, image: image, choices: choices, answer: answer);
+        Quiz quiz = Quiz(id: id, stroke: stroke, choices: choices, answer: answer);
         await _db
             .collection("quizzes")
             .doc(quizId)

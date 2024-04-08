@@ -8,7 +8,7 @@ part 'quiz.g.dart';
 class Quiz with _$Quiz {
   const factory Quiz({
     required String id,
-    required String image,
+    required String stroke,
     required List<String> choices,
     required String answer,
   }) = _Quiz;

@@ -105,8 +105,7 @@ class QuizView extends StackedView<QuizViewModel> {
                                 ),
                                 verticalSpaceSmall,
                                 GameNetworkImage(
-                                    path: viewModel
-                                        .quizzes[viewModel.currentIndex].image),
+                                    path: viewModel.stroke!.strokeImage),
                                 verticalSpaceMedium,
                                 const Text(
                                   "Choices:",

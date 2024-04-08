@@ -1,6 +1,8 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:steno_game/model/steno_stroke.dart';
 import 'package:steno_game/model/user.dart';
+import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 import '../../../app/app.bottomsheets.dart';
@@ -15,6 +17,7 @@ class QuizViewModel extends BaseViewModel {
   final _sharedPref = locator<SharedPreferenceService>();
   final _userRepo = locator<UserRepository>();
   final _nav = locator<NavigationService>();
+  final _strokeRepo = locator<StrokeRepository>();
 
   User? user;
   int currentIndex = 0;
@@ -22,6 +25,7 @@ class QuizViewModel extends BaseViewModel {
   int score = 0;
   bool doneGame = false;
 
+  StenoStroke? stroke;
   Quizzes? game;
   List<Quiz> quizzes = [];
   QuizViewModel(this.game);
@@ -35,8 +39,11 @@ class QuizViewModel extends BaseViewModel {
 
   Future<void> getQuizzes() async {
     final results = await _quizRepo.getQuiz(game!.id);
-    results.fold((l) => showBottomSheet(l.message), (r) {
+    results.fold((l) => showBottomSheet(l.message), (r) async{
       quizzes = r;
+      if(quizzes.isNotEmpty) {
+        await getStroke();
+      }
       rebuildUi();
     });
   }
@@ -58,7 +65,19 @@ class QuizViewModel extends BaseViewModel {
       }
       setBusy(false);
     }
+    else {
+      setBusy(true);
+      await getStroke();
+      setBusy(false);
+      rebuildUi();
+    }
     rebuildUi();
+  }
+  Future<void> getStroke() async {
+    final response = await _strokeRepo.getStroke(quizzes[currentIndex].stroke);
+    response.fold((l) => showBottomSheet(l.message), (r){
+      stroke = r;
+    });
   }
 
   Future<void> addScore() async {

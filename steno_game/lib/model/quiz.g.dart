@@ -8,7 +8,7 @@ part of 'quiz.dart';
 
 _$QuizImpl _$$QuizImplFromJson(Map<String, dynamic> json) => _$QuizImpl(
       id: json['id'] as String,
-      image: json['image'] as String,
+      stroke: json['stroke'] as String,
       choices:
           (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
       answer: json['answer'] as String,
@@ -17,7 +17,7 @@ _$QuizImpl _$$QuizImplFromJson(Map<String, dynamic> json) => _$QuizImpl(
 Map<String, dynamic> _$$QuizImplToJson(_$QuizImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'image': instance.image,
+      'stroke': instance.stroke,
       'choices': instance.choices,
       'answer': instance.answer,
     };

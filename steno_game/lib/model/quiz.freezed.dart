@@ -21,7 +21,7 @@ Quiz _$QuizFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Quiz {
   String get id => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String get stroke => throw _privateConstructorUsedError;
   List<String> get choices => throw _privateConstructorUsedError;
   String get answer => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $QuizCopyWith<$Res> {
   factory $QuizCopyWith(Quiz value, $Res Function(Quiz) then) =
       _$QuizCopyWithImpl<$Res, Quiz>;
   @useResult
-  $Res call({String id, String image, List<String> choices, String answer});
+  $Res call({String id, String stroke, List<String> choices, String answer});
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
   @override
   $Res call({
     Object? id = null,
-    Object? image = null,
+    Object? stroke = null,
     Object? choices = null,
     Object? answer = null,
   }) {
@@ -61,9 +61,9 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
       choices: null == choices
           ? _value.choices
@@ -84,7 +84,7 @@ abstract class _$$QuizImplCopyWith<$Res> implements $QuizCopyWith<$Res> {
       __$$QuizImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String image, List<String> choices, String answer});
+  $Res call({String id, String stroke, List<String> choices, String answer});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$QuizImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? image = null,
+    Object? stroke = null,
     Object? choices = null,
     Object? answer = null,
   }) {
@@ -107,9 +107,9 @@ class __$$QuizImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      stroke: null == stroke
+          ? _value.stroke
+          : stroke // ignore: cast_nullable_to_non_nullable
               as String,
       choices: null == choices
           ? _value._choices
@@ -128,7 +128,7 @@ class __$$QuizImplCopyWithImpl<$Res>
 class _$QuizImpl implements _Quiz {
   const _$QuizImpl(
       {required this.id,
-      required this.image,
+      required this.stroke,
       required final List<String> choices,
       required this.answer})
       : _choices = choices;
@@ -139,7 +139,7 @@ class _$QuizImpl implements _Quiz {
   @override
   final String id;
   @override
-  final String image;
+  final String stroke;
   final List<String> _choices;
   @override
   List<String> get choices {
@@ -153,7 +153,7 @@ class _$QuizImpl implements _Quiz {
 
   @override
   String toString() {
-    return 'Quiz(id: $id, image: $image, choices: $choices, answer: $answer)';
+    return 'Quiz(id: $id, stroke: $stroke, choices: $choices, answer: $answer)';
   }
 
   @override
@@ -162,14 +162,14 @@ class _$QuizImpl implements _Quiz {
         (other.runtimeType == runtimeType &&
             other is _$QuizImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.stroke, stroke) || other.stroke == stroke) &&
             const DeepCollectionEquality().equals(other._choices, _choices) &&
             (identical(other.answer, answer) || other.answer == answer));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, image,
+  int get hashCode => Object.hash(runtimeType, id, stroke,
       const DeepCollectionEquality().hash(_choices), answer);
 
   @JsonKey(ignore: true)
@@ -189,7 +189,7 @@ class _$QuizImpl implements _Quiz {
 abstract class _Quiz implements Quiz {
   const factory _Quiz(
       {required final String id,
-      required final String image,
+      required final String stroke,
       required final List<String> choices,
       required final String answer}) = _$QuizImpl;
 
@@ -198,7 +198,7 @@ abstract class _Quiz implements Quiz {
   @override
   String get id;
   @override
-  String get image;
+  String get stroke;
   @override
   List<String> get choices;
   @override
