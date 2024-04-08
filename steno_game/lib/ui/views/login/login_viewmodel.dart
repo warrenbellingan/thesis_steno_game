@@ -28,6 +28,7 @@ class LoginViewModel extends BaseViewModel with InputValidation {
         showBottomSheet(l.message);
       }, (user) async {
         await _sharedPref.saveUser(user);
+        await _sharedPref.setIsSaveAccount(true);
         _navigationService.replaceWithHomeView();
       });
     }

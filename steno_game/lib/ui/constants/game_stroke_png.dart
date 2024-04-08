@@ -49,7 +49,7 @@ class GameStrokePng {
   static const mediumE = "${pngPath}ě.png";
   static const longE = "${pngPath}ē.png";
   static const shortO = "${pngPath}ŏ.png";
-  static const mediumO = "${pngPath}ŏ.png";
+  static const mediumO = "${pngPath}ö.png";
   static const longO = "${pngPath}ō.png";
   static const shortOO = "${pngPath}ŭ.png";
   static const mediumOO = "${pngPath}ŏŏ.png";

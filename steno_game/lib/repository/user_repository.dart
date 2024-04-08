@@ -20,7 +20,8 @@ class UserRepository {
   Future<Either<GameException, None>> updateScore(int gainScore) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     User? user = await _sharedPref.getCurrentUser();
-    if (hasInternet) {
+    bool? status = await _sharedPref.getIsSaveAccount();
+    if (hasInternet && status!) {
       try {
         await _db
             .collection("users")
@@ -66,7 +67,9 @@ class UserRepository {
       String level) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     User? user = await _sharedPref.getCurrentUser();
-    if (hasInternet) {
+    bool? status = await _sharedPref.getIsSaveAccount();
+
+    if (hasInternet && status!) {
       try {
         await _db.collection("users").doc(user!.id).update({
           "completedLevels": FieldValue.arrayUnion([level])
@@ -171,16 +174,35 @@ class UserRepository {
   Future<Either<GameException, None>> updateName(String name) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
-      try {
+      bool? status = await _sharedPref.getIsSaveAccount();
+      if (status!) {
+        try {
+          User? user = await _sharedPref.getCurrentUser();
+          await _db
+              .collection("users")
+              .doc(user!.id)
+              .set({"name": name}, SetOptions(merge: true));
+          _authServ.getCurrentUser();
+          return const Right(None());
+        } catch (e) {
+          return Left(GameException(e.toString()));
+        }
+      } else {
         User? user = await _sharedPref.getCurrentUser();
-        await _db
-            .collection("users")
-            .doc(user!.id)
-            .set({"name": name}, SetOptions(merge: true));
-        _authServ.getCurrentUser();
+        User updatedUser = User(
+          id: user!.id,
+          name: name,
+          email: user.email,
+          role: user.role,
+          image: user.image,
+          achievements: user.achievements,
+          completedLevels: user.completedLevels,
+          friends: user.friends,
+          friendsRequest: user.friendsRequest,
+          score: user.score,
+        );
+        await _sharedPref.saveUser(updatedUser);
         return const Right(None());
-      } catch (e) {
-        return Left(GameException(e.toString()));
       }
     } else {
       return Left(GameException("Please check your internet connection!"));
@@ -198,15 +220,34 @@ class UserRepository {
         return response.fold(
           (l) => Left(GameException(l.message)),
           (imageUrl) async {
-            try {
-              await _db
-                  .collection("users")
-                  .doc(user.id)
-                  .set({"image": imageUrl}, SetOptions(merge: true));
-              await _authServ.getCurrentUser();
+            bool? status = await _sharedPref.getIsSaveAccount();
+            if (status!) {
+              try {
+                await _db
+                    .collection("users")
+                    .doc(user.id)
+                    .set({"image": imageUrl}, SetOptions(merge: true));
+                await _authServ.getCurrentUser();
+                return const Right(None());
+              } catch (e) {
+                return Left(GameException(e.toString()));
+              }
+            } else {
+              User? user = await _sharedPref.getCurrentUser();
+              User updatedUser = User(
+                id: user!.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                image: imageUrl,
+                achievements: user.achievements,
+                completedLevels: user.completedLevels,
+                friends: user.friends,
+                friendsRequest: user.friendsRequest,
+                score: user.score,
+              );
+              await _sharedPref.saveUser(updatedUser);
               return const Right(None());
-            } catch (e) {
-              return Left(GameException(e.toString()));
             }
           },
         );
@@ -241,15 +282,22 @@ class UserRepository {
   Future<Either<GameException, None>> friendRequest(String friendId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
-      try {
-        User? user = await _sharedPref.getCurrentUser();
-        await _db.collection("users").doc(friendId).update({
-          "friendsRequest": FieldValue.arrayUnion([user!.id])
-        });
-        return const Right(None());
-      } catch (e) {
-        return Left(GameException(e.toString()));
+      bool? status = await _sharedPref.getIsSaveAccount();
+      if(status!) {
+        try {
+          User? user = await _sharedPref.getCurrentUser();
+          await _db.collection("users").doc(friendId).update({
+            "friendsRequest": FieldValue.arrayUnion([user!.id])
+          });
+          return const Right(None());
+        } catch (e) {
+          return Left(GameException(e.toString()));
+        }
       }
+      else {
+        return Left(GameException("Connect your account first"));
+      }
+
     } else {
       return Left(GameException("Please check your internet connection!"));
     }

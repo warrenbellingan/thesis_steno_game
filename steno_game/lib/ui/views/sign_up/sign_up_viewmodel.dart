@@ -60,6 +60,7 @@ class SignUpViewModel extends BaseViewModel with InputValidation {
             showBottomSheet("No user found in logging in");
           }, (user) async {
             await _sharedPref.saveUser(user);
+            await _sharedPref.setIsSaveAccount(true);
             _navigationService.replaceWithHomeView();
           });
         });

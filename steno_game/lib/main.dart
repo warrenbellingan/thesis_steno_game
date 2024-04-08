@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:steno_game/app/app.bottomsheets.dart';
 import 'package:steno_game/app/app.dialogs.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   setupDialogUi();
   setupBottomSheetUi();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MainApp());
 }
 

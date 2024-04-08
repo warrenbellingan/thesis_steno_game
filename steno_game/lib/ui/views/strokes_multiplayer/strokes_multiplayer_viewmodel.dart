@@ -21,6 +21,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
   final _bottomSheet = locator<BottomSheetService>();
   final _sharedPref = locator<SharedPreferenceService>();
   final _stroke = locator<StrokeRepository>();
+  final _nav = locator<NavigationService>();
 
   MultiplayerStroke game;
 
@@ -60,11 +61,17 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
         int score = 0;
         for (var answer in answers) {
           if (game.correctAnswers.contains(answer.id)) {
-            score += 10;
+            score++;
           }
         }
         final response = await _multiStroke.addScore(game.id, score);
         response.fold((l) => showBottomSheet(l.message), (r) {});
+        for(AnswerStroke answer in answers) {
+          if(game.correctAnswers.contains(answer.id) && answer.stroke != null) {
+            final setStroke = await _stroke.setStatus(answer.stroke!, 1);
+            setStroke.fold((l) => showBottomSheet(l.message), (r) => (){});
+          }
+        }
         setBusy(false);
         rebuildUi();
       }
@@ -112,6 +119,9 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     rebuildUi();
   }
 
+  void exit() {
+    _nav.back();
+  }
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,
@@ -130,6 +140,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
   @override
   void dispose() {
     streamSubscription?.cancel();
+    gameStreamSubscription?.cancel();
     super.dispose();
   }
 }

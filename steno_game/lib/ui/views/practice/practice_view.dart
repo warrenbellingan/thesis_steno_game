@@ -46,7 +46,7 @@ class PracticeView extends StackedView<PracticeViewModel> {
                         return StrokeImage(
                           imagePath: stroke.strokeImage,
                           word: stroke.text,
-                          size: 180,
+                          size: 180, isOnline: true,
                         );
                       },
                     ),

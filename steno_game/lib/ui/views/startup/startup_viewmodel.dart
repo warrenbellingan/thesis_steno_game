@@ -41,6 +41,7 @@ class StartupViewModel extends BaseViewModel {
             email: "",
             role: "Student");
         await _sharedPref.saveUser(temporaryUser);
+        await _sharedPref.setIsSaveAccount(false);
         _navigationService.replaceWithHomeView();
       }
     }

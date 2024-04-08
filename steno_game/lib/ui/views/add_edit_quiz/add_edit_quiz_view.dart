@@ -91,8 +91,8 @@ class AddEditQuizView extends StackedView<AddEditQuizViewModel> {
                                     )
                                   : GameButton(
                                       text: "Save Quiz",
-                                      onClick: () {},
-                                      isLoading: false),
+                                      onClick: viewModel.updateQuizzes,
+                                      isLoading: viewModel.busy("add"),),
                             ],
                           ),
                         ),

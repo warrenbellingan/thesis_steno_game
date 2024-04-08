@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:steno_game/model/answer_stroke.dart';
 import 'package:steno_game/model/question_stroke.dart';
 import 'package:steno_game/model/student.dart';
+import 'package:steno_game/repository/user_repository.dart';
 import '../app/app.locator.dart';
 import '../exception/game_exception.dart';
 import '../model/multiplayer_stroke.dart';
@@ -12,6 +13,7 @@ import '../services/shared_preference_service.dart';
 
 class MultiplayerStrokeRepository {
   final _db = FirebaseFirestore.instance;
+  final _userRepo = locator<UserRepository>();
   final _sharedPref = locator<SharedPreferenceService>();
   final _internetService = locator<InternetService>();
 
@@ -56,6 +58,7 @@ class MultiplayerStrokeRepository {
             .doc(user!.id)
             .set({"score": FieldValue.increment(score)},
                 SetOptions(merge: true));
+        await _userRepo.updateScore(score);
         return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));
@@ -154,24 +157,36 @@ class MultiplayerStrokeRepository {
   Future<Either<GameException, None>> joinGame(String gameId) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
-      try {
-        final getUser = await _sharedPref.getCurrentUser();
-        if (getUser != null) {
-          final student =
+      bool? status = await _sharedPref.getIsSaveAccount();
+      if(status != null) {
+        if(status) {
+          try {
+            final getUser = await _sharedPref.getCurrentUser();
+            if (getUser != null) {
+              final student =
               Student(id: getUser.id, name: getUser.name, image: getUser.image);
-          await _db
-              .collection("strokeGameEnvironment")
-              .doc(gameId)
-              .collection("students")
-              .doc(student.id)
-              .set(student.toJson());
-          return const Right(None());
-        } else {
-          return Left(GameException("Current User not found"));
+              await _db
+                  .collection("strokeGameEnvironment")
+                  .doc(gameId)
+                  .collection("students")
+                  .doc(student.id)
+                  .set(student.toJson());
+              return const Right(None());
+            } else {
+              return Left(GameException("Current User not found"));
+            }
+          } catch (e) {
+            return Left(GameException(e.toString()));
+          }
         }
-      } catch (e) {
-        return Left(GameException(e.toString()));
+        else {
+          return Left(GameException("Connect your account first to play"));
+        }
       }
+      else {
+        return Left(GameException("Something went wrong, Restart the App"));
+      }
+
     } else {
       return Left(GameException("Please check your internet connection!"));
     }

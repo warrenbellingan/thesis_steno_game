@@ -104,7 +104,7 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                 verticalSpaceSmall,
                                 GameButton(
                                   text: "Exit",
-                                  onClick: () {},
+                                  onClick: viewModel.exit,
                                   isLoading: false,
                                 )
                               ],

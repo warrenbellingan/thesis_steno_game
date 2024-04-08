@@ -24,6 +24,15 @@ class SharedPreferenceService {
     final sharedPref = await SharedPreferences.getInstance();
     await sharedPref.setBool("USER_STATUS", status);
   }
+  Future<void> setIsSaveAccount(bool status) async {
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setBool("ACCOUNT_STATUS", status);
+  }
+  Future<bool?> getIsSaveAccount() async {
+    final sharedPref = await SharedPreferences.getInstance();
+    final status = sharedPref.getBool("ACCOUNT_STATUS");
+    return status;
+  }
 
   Future<bool?> getIsPreviousOnline() async {
     final sharedPref = await SharedPreferences.getInstance();

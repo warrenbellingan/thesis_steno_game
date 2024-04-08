@@ -3,48 +3,30 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.locator.dart';
+import 'package:steno_game/services/shared_preference_service.dart';
 
 class InternetService {
-  final _snackBar = locator<SnackbarService>();
+  final _sharedPref = locator<SharedPreferenceService>();
 
-  // StreamSubscription<List<ConnectivityResult>>? subscription;
-  //
-  // void streamInternet() {
-  //
-  //   print("Stream called");
-  //    subscription = Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async{
-  //      bool hasInternet = await hasInternetConnection();
-  //      print("Stream listened");
-  //      if(hasInternet) {
-  //        _snackBar.showSnackbar(message: "Internet Connected!", duration: const Duration(seconds: 3));
-  //      }
-  //      else {
-  //        _snackBar.showSnackbar(message: "No Internet Connection!", duration: const Duration(seconds: 3));
-  //      }
-  //   });
-  // }
   Future<bool> hasInternetConnection() async {
     final List<ConnectivityResult> connectivityResult =
         await (Connectivity().checkConnectivity());
-    print("check intenet connection");
+    bool isOnline = false;
     if (connectivityResult.contains(ConnectivityResult.mobile)) {
-      return true;
+      isOnline = true;
     } else if (connectivityResult.contains(ConnectivityResult.wifi)) {
-      return true;
+      isOnline = true;
     } else if (connectivityResult.contains(ConnectivityResult.ethernet)) {
-      return true;
+      isOnline = true;
     } else if (connectivityResult.contains(ConnectivityResult.vpn)) {
-      return true;
+      isOnline = true;
     } else if (connectivityResult.contains(ConnectivityResult.none)) {
-      return false;
+      isOnline = false;
     } else {
-      return false;
+      isOnline = false;
     }
+    await _sharedPref.setIsPreviousOnline(isOnline);
+    print("Has Internet: $isOnline");
+    return isOnline;
   }
-
-  //
-  // void dispose() {
-  //   print("Stream Closed");
-  //   subscription?.cancel();
-  // }
 }

@@ -352,7 +352,8 @@ class StackedRouter extends _i1.RouterBase {
     _i17.TopicView: (data) {
       final args = data.getArgs<TopicViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => _i17.TopicView(args.lesson, key: args.key),
+        builder: (context) =>
+            _i17.TopicView(args.lesson, args.isOnline, key: args.key),
         settings: data,
       );
     },
@@ -426,7 +427,8 @@ class StackedRouter extends _i1.RouterBase {
     _i27.QuizView: (data) {
       final args = data.getArgs<QuizViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => _i27.QuizView(args.game, key: args.key),
+        builder: (context) =>
+            _i27.QuizView(args.game, args.isOnline, key: args.key),
         settings: data,
       );
     },
@@ -530,27 +532,32 @@ class PersonViewArguments {
 class TopicViewArguments {
   const TopicViewArguments({
     required this.lesson,
+    required this.isOnline,
     this.key,
   });
 
   final _i33.Lesson lesson;
 
+  final bool isOnline;
+
   final _i31.Key? key;
 
   @override
   String toString() {
-    return '{"lesson": "$lesson", "key": "$key"}';
+    return '{"lesson": "$lesson", "isOnline": "$isOnline", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant TopicViewArguments other) {
     if (identical(this, other)) return true;
-    return other.lesson == lesson && other.key == key;
+    return other.lesson == lesson &&
+        other.isOnline == isOnline &&
+        other.key == key;
   }
 
   @override
   int get hashCode {
-    return lesson.hashCode ^ key.hashCode;
+    return lesson.hashCode ^ isOnline.hashCode ^ key.hashCode;
   }
 }
 
@@ -719,27 +726,30 @@ class MultiplayerStrokeHostResultsViewArguments {
 class QuizViewArguments {
   const QuizViewArguments({
     required this.game,
+    required this.isOnline,
     this.key,
   });
 
   final _i34.Quizzes game;
 
+  final bool isOnline;
+
   final _i31.Key? key;
 
   @override
   String toString() {
-    return '{"game": "$game", "key": "$key"}';
+    return '{"game": "$game", "isOnline": "$isOnline", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant QuizViewArguments other) {
     if (identical(this, other)) return true;
-    return other.game == game && other.key == key;
+    return other.game == game && other.isOnline == isOnline && other.key == key;
   }
 
   @override
   int get hashCode {
-    return game.hashCode ^ key.hashCode;
+    return game.hashCode ^ isOnline.hashCode ^ key.hashCode;
   }
 }
 
@@ -992,6 +1002,7 @@ extension NavigatorStateExtension on _i35.NavigationService {
 
   Future<dynamic> navigateToTopicView({
     required _i33.Lesson lesson,
+    required bool isOnline,
     _i31.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1000,7 +1011,8 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.topicView,
-        arguments: TopicViewArguments(lesson: lesson, key: key),
+        arguments:
+            TopicViewArguments(lesson: lesson, isOnline: isOnline, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1155,6 +1167,7 @@ extension NavigatorStateExtension on _i35.NavigationService {
 
   Future<dynamic> navigateToQuizView({
     required _i34.Quizzes game,
+    required bool isOnline,
     _i31.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1163,7 +1176,7 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.quizView,
-        arguments: QuizViewArguments(game: game, key: key),
+        arguments: QuizViewArguments(game: game, isOnline: isOnline, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1408,6 +1421,7 @@ extension NavigatorStateExtension on _i35.NavigationService {
 
   Future<dynamic> replaceWithTopicView({
     required _i33.Lesson lesson,
+    required bool isOnline,
     _i31.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1416,7 +1430,8 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.topicView,
-        arguments: TopicViewArguments(lesson: lesson, key: key),
+        arguments:
+            TopicViewArguments(lesson: lesson, isOnline: isOnline, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1571,6 +1586,7 @@ extension NavigatorStateExtension on _i35.NavigationService {
 
   Future<dynamic> replaceWithQuizView({
     required _i34.Quizzes game,
+    required bool isOnline,
     _i31.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -1579,7 +1595,7 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.quizView,
-        arguments: QuizViewArguments(game: game, key: key),
+        arguments: QuizViewArguments(game: game, isOnline: isOnline, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

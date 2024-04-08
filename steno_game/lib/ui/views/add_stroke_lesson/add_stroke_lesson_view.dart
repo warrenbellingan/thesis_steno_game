@@ -5,7 +5,6 @@ import 'package:steno_game/ui/custom_widgets/game_body.dart';
 import 'package:steno_game/ui/custom_widgets/game_button.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import 'package:steno_game/ui/custom_widgets/game_navigator.dart';
-import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/game_textfield.dart';
 import 'package:steno_game/ui/custom_widgets/painter.dart';
 import 'package:steno_game/ui/custom_widgets/stroke_image.dart';
@@ -79,7 +78,7 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                         StrokeImage(
                                             imagePath:
                                                 viewModel.stroke!.strokeImage,
-                                            word: viewModel.stroke!.text),
+                                            word: viewModel.stroke!.text, isOnline: true,),
                                         ElevatedButton(
                                           onPressed: viewModel.editStroke,
                                           style: ElevatedButton.styleFrom(

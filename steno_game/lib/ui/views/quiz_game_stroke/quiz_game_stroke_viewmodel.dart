@@ -4,6 +4,7 @@ import 'package:steno_game/app/app.locator.dart';
 import 'package:steno_game/app/app.router.dart';
 import 'package:steno_game/model/quizzes.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
+import 'package:steno_game/storage/quiz_storage.dart';
 
 import '../../../app/app.bottomsheets.dart';
 import '../../../model/user.dart';
@@ -18,13 +19,40 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   List<Quizzes> quizzes = [];
   User? user;
 
+  bool isOffline = true;
+
   init() async {
     setBusy(true);
     user = await _sharedPref.getCurrentUser();
-    await getQuizzes();
+    if(isOffline) {
+      getQuizzesOffline();
+    }
+    else {
+      await getQuizzes();
+    }
+    setBusy(false);
+  }
+  void selectMode(bool status) async{
+    isOffline = status;
+    if (isOffline) {
+      getQuizzesOffline();
+    }
+    else {
+      await getQuizzes();
+    }
+  }
+
+  void getQuizzesOffline() {
+    quizzes = [];
+    setBusy(true);
+    QuizStorage storage = QuizStorage();
+    quizzes = storage.getQuizzes();
+    rebuildUi();
+    setBusy(false);
   }
 
   Future<void> getQuizzes() async {
+    quizzes = [];
     setBusy(true);
     final results = await _quizRepo.getQuizzes();
     results.fold((l) => showBottomSheet(l.message), (r) {
@@ -35,7 +63,7 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   }
 
   void goToQuiz(Quizzes quiz) {
-    _navigationService.navigateToQuizView(game: quiz);
+    _navigationService.navigateToQuizView(game: quiz, isOnline: !isOffline);
   }
 
   void deleteQuiz(String id) async{
@@ -63,4 +91,5 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   editQuiz(Quizzes quiz) {
     _navigationService.navigateToAddEditQuizView(quizzes: quiz);
   }
+
 }

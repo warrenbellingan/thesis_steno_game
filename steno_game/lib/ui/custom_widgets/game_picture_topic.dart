@@ -6,21 +6,24 @@ import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/stroke_image.dart';
 
 class GamePictureTopic extends StatelessWidget {
-  const GamePictureTopic(
-      {super.key,
-      required this.image,
-      required this.text,
-      required this.description});
+  const GamePictureTopic({
+    super.key,
+    required this.image,
+    required this.text,
+    required this.description,
+    required this.isOnline,
+  });
 
   final String image;
   final String text;
   final String description;
+  final bool isOnline;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        StrokeImage(imagePath: image, word: text),
+        StrokeImage(imagePath: image, word: text, isOnline: isOnline,),
         verticalSpaceMedium,
         Container(
           width: double.infinity,
@@ -37,8 +40,9 @@ class GamePictureTopic extends StatelessWidget {
             description,
             textAlign: TextAlign.justify,
             style: const TextStyle(
-              fontSize: 20,
-              letterSpacing: 2,
+              fontSize: 16,
+              letterSpacing: 1,
+              wordSpacing: 2,
             ),
           ),
         ),

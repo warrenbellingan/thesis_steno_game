@@ -21,7 +21,7 @@ class GameLoading extends StatelessWidget {
             ),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 letterSpacing: 2,
                 wordSpacing: 2,

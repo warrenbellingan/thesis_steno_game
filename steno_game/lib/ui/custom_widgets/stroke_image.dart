@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
+import 'package:steno_game/ui/custom_widgets/game_image.dart';
 
 import 'game_network_image.dart';
 
 class StrokeImage extends StatelessWidget {
   const StrokeImage(
-      {super.key, required this.imagePath, required this.word, this.size});
+      {super.key, required this.imagePath, required this.word, this.size, required this.isOnline});
 
   final String imagePath;
   final String word;
   final double? size;
+  final bool isOnline;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,10 +25,11 @@ class StrokeImage extends StatelessWidget {
       ),
       child: Column(
         children: [
+          isOnline ?
           GameNetworkImage(
             path: imagePath,
             size: size,
-          ),
+          ) : GameImage(path: imagePath,),
           Text(
             word,
             style: const TextStyle(

@@ -14,8 +14,9 @@ import '../../../model/lesson.dart';
 import 'topic_viewmodel.dart';
 
 class TopicView extends StackedView<TopicViewModel> {
-  const TopicView(this.lesson, {Key? key}) : super(key: key);
+  const TopicView(this.lesson, this.isOnline, {Key? key}) : super(key: key);
   final Lesson lesson;
+  final bool isOnline;
 
   @override
   Widget builder(
@@ -50,7 +51,7 @@ class TopicView extends StackedView<TopicViewModel> {
                                 image: viewModel.stroke!.strokeImage,
                                 text: viewModel.stroke!.text,
                                 description: viewModel
-                                    .topics[viewModel.currentIndex].description,
+                                    .topics[viewModel.currentIndex].description, isOnline: isOnline,
                               )
                       ],
                     ),
@@ -74,7 +75,7 @@ class TopicView extends StackedView<TopicViewModel> {
   TopicViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      TopicViewModel(lesson);
+      TopicViewModel(lesson,isOnline);
 
   @override
   void onViewModelReady(TopicViewModel viewModel) {

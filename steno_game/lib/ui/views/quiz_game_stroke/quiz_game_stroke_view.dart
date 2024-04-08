@@ -5,6 +5,7 @@ import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_bar.dart';
 import 'package:steno_game/ui/custom_widgets/game_body.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
+import '../../custom_widgets/game_chip.dart';
 import 'quiz_game_stroke_viewmodel.dart';
 
 class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
@@ -23,6 +24,14 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
               child: Column(
                 children: [
                   GameBar(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GameChip(label: "Offline", onClick: () => viewModel.selectMode(true), isSelected: viewModel.isOffline),
+                      horizontalSpaceLarge,
+                      GameChip(label: "Online", onClick: () => viewModel.selectMode(false), isSelected: !viewModel.isOffline),
+                    ],
+                  ),
                   ListView.builder(
                     itemCount: viewModel.quizzes.length,
                     shrinkWrap: true,
@@ -58,6 +67,7 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
                               ),
                             ),
                           ),
+                          if(viewModel.user!.role == "Instructor" && !viewModel.isOffline)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

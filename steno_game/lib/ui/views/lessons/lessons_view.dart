@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:steno_game/ui/constants/game_color.dart';
+import 'package:steno_game/ui/common/ui_helpers.dart';
+import 'package:steno_game/ui/custom_widgets/game_chip.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
-import '../../../model/lesson.dart';
 import '../../custom_widgets/lesson_main_card.dart';
 import 'lessons_viewmodel.dart';
 
@@ -18,6 +18,14 @@ class LessonsView extends StackedView<LessonsViewModel> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GameChip(label: "Offline", onClick: () => viewModel.selectMode(true), isSelected: viewModel.isOffline),
+              horizontalSpaceLarge,
+              GameChip(label: "Online", onClick: () => viewModel.selectMode(false), isSelected: !viewModel.isOffline),
+            ],
+          ),
           viewModel.isBusy
               ? const GameLoading()
               : ListView.builder(
@@ -33,7 +41,7 @@ class LessonsView extends StackedView<LessonsViewModel> {
                       },
                       onEditClick: () => viewModel.lessonEditClick(item),
                       onDeleteClick: () => viewModel.lessonDeleteClick(item),
-                      isInstructor: viewModel.user.role == "Instructor",
+                      isInstructor: viewModel.user.role == "Instructor" && !viewModel.isOffline,
                     );
                   },
                 ),

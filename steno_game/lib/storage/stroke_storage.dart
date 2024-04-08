@@ -282,7 +282,7 @@ class StrokeStorage {
         status: 1),
     StenoStroke(
         id: "48",
-        text: "ŏ",
+        text: "ö",
         strokeImage: GameStrokePng.mediumO,
         filePath: "",
         status: 1),

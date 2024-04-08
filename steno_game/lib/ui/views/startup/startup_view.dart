@@ -22,12 +22,10 @@ class StartupView extends StackedView<StartupViewModel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             GameImage(
-              path: GameUiPng.gameLogoPath,
-              width: 250,
-              height: 250,
+              path: GameUiPng.gameLogoPath,size: 100,
             ),
             Text(
-              'STENO GAME',
+              'StenoSprint',
               style: TextStyle(
                 color: GameColor.primaryColor,
                 fontSize: 35,

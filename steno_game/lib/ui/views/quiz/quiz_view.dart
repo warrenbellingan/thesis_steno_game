@@ -5,6 +5,7 @@ import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_body.dart';
 import 'package:steno_game/ui/custom_widgets/game_button.dart';
 import 'package:steno_game/ui/custom_widgets/game_empty.dart';
+import 'package:steno_game/ui/custom_widgets/game_image.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/in_game_bar.dart';
@@ -12,9 +13,10 @@ import '../../../model/quizzes.dart';
 import 'quiz_viewmodel.dart';
 
 class QuizView extends StackedView<QuizViewModel> {
-  const QuizView(this.game, {Key? key}) : super(key: key);
+  const QuizView(this.game, this.isOnline, {Key? key}) : super(key: key);
 
   final Quizzes game;
+  final bool isOnline;
 
   @override
   Widget builder(
@@ -57,7 +59,7 @@ class QuizView extends StackedView<QuizViewModel> {
                                   ),
                                 ),
                                 Text(
-                                  "Your Score : ${viewModel.score}!",
+                                  "Your Score : ${viewModel.score}",
                                   style: const TextStyle(
                                     fontSize: 24,
                                     color: GameColor.secondaryBackgroundColor,
@@ -104,9 +106,16 @@ class QuizView extends StackedView<QuizViewModel> {
                                   ),
                                 ),
                                 verticalSpaceSmall,
-                                GameNetworkImage(
-                                    path: viewModel.stroke!.strokeImage),
-                                verticalSpaceMedium,
+                                viewModel.isOnline
+                                    ? GameNetworkImage(
+                                        path: viewModel.stroke!.strokeImage,
+                                        size: 250,
+                                      )
+                                    : GameImage(
+                                        path: viewModel.stroke!.strokeImage,
+                                        size: 250,
+                                      ),
+                                verticalSpaceSmall,
                                 const Text(
                                   "Choices:",
                                   style: TextStyle(
@@ -123,9 +132,7 @@ class QuizView extends StackedView<QuizViewModel> {
                                         .choices
                                         .length,
                                     itemBuilder: (context, index) {
-                                      var choice = viewModel
-                                          .quizzes[viewModel.currentIndex]
-                                          .choices[index];
+                                      var choice = viewModel.choices[index];
                                       return GestureDetector(
                                         onTap: () => viewModel.answer(choice),
                                         child: Container(
@@ -171,7 +178,7 @@ class QuizView extends StackedView<QuizViewModel> {
   QuizViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      QuizViewModel(game);
+      QuizViewModel(game, isOnline);
 
   @override
   void onViewModelReady(QuizViewModel viewModel) {

@@ -5,6 +5,8 @@ import 'package:steno_game/model/user.dart';
 import 'package:steno_game/repository/stroke_repository.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
+import 'package:steno_game/storage/quiz_storage.dart';
+import 'package:steno_game/storage/stroke_storage.dart';
 import '../../../app/app.bottomsheets.dart';
 import '../../../app/app.locator.dart';
 import '../../../model/quiz.dart';
@@ -24,27 +26,51 @@ class QuizViewModel extends BaseViewModel {
   int correctAnswer = 0;
   int score = 0;
   bool doneGame = false;
+  bool isOnline;
 
   StenoStroke? stroke;
   Quizzes? game;
   List<Quiz> quizzes = [];
-  QuizViewModel(this.game);
+  List<String> choices = [];
+  QuizViewModel(this.game, this.isOnline);
 
   init() async {
     setBusy(true);
     user = await _sharedPref.getCurrentUser();
     setBusy(false);
-    await getQuizzes();
+    if(isOnline) {
+      await getQuizzes();
+    }
+    else {
+      getOfflineQuizzes();
+    }
     if(quizzes.isNotEmpty) {
       await getStroke();
     }
   }
 
+  void getOfflineQuizzes() {
+    setBusy(true);
+    QuizStorage storage = QuizStorage();
+    quizzes = storage.getQuiz(game!.id);
+    if(quizzes.isNotEmpty) {
+      quizzes.shuffle();
+      choices = List<String>.from(quizzes[currentIndex].choices);
+      choices.shuffle();
+    }
+    rebuildUi();
+    setBusy(false);
+  }
   Future<void> getQuizzes() async {
     setBusy(true);
     final results = await _quizRepo.getQuiz(game!.id);
     results.fold((l) => showBottomSheet(l.message), (r) async{
       quizzes = r;
+      if(quizzes.isNotEmpty) {
+        quizzes.shuffle();
+        choices = List<String>.from(quizzes[currentIndex].choices);
+        choices.shuffle();
+      }
     });
     rebuildUi();
     setBusy(false);
@@ -71,6 +97,10 @@ class QuizViewModel extends BaseViewModel {
     }
     else {
       await getStroke();
+      if(quizzes.isNotEmpty) {
+        choices = List<String>.from(quizzes[currentIndex].choices);
+        choices.shuffle();
+      }
       rebuildUi();
     }
     setBusy(false);
@@ -79,11 +109,19 @@ class QuizViewModel extends BaseViewModel {
   Future<void> getStroke() async {
     setBusy(true);
     rebuildUi();
-    final response = await _strokeRepo.getStroke(quizzes[currentIndex].stroke);
-    response.fold((l) => showBottomSheet(l.message), (r){
-      stroke = r;
+    if(isOnline) {
+      final response = await _strokeRepo.getStroke(quizzes[currentIndex].stroke);
+      response.fold((l) => showBottomSheet(l.message), (r){
+        stroke = r;
+        rebuildUi();
+      });
+    }
+    else {
+      StrokeStorage storage = StrokeStorage();
+      stroke = storage.getSteno(quizzes[currentIndex].stroke);
       rebuildUi();
-    });
+    }
+
     setBusy(false);
   }
 
