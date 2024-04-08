@@ -43,4 +43,8 @@ class MenuViewModel extends BaseViewModel {
       description: description,
     );
   }
+
+  void goToQuiz() {
+    _navigationServ.navigateToQuizGameStrokeView();
+  }
 }

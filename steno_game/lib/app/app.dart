@@ -45,6 +45,7 @@ import 'package:steno_game/services/internet_service.dart';
 import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart';
 import 'package:steno_game/ui/views/practice/practice_view.dart';
 import 'package:steno_game/ui/views/quiz/quiz_view.dart';
+import 'package:steno_game/ui/views/add_edit_quiz/add_edit_quiz_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -75,6 +76,7 @@ import 'package:steno_game/ui/views/quiz/quiz_view.dart';
     MaterialRoute(page: MultiplayerStrokeHostResultsView),
     MaterialRoute(page: PracticeView),
     MaterialRoute(page: QuizView),
+    MaterialRoute(page: AddEditQuizView),
 // @stacked-route
   ],
   dependencies: [

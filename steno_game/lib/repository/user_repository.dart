@@ -29,6 +29,19 @@ class UserRepository {
         _authServ.getCurrentUser();
         return const Right(None());
       } catch (e) {
+        User updatedUser = User(
+          id: user!.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          image: user.image,
+          achievements: user.achievements,
+          completedLevels: user.completedLevels,
+          friends: user.friends,
+          friendsRequest: user.friendsRequest,
+          score: user.score + gainScore,
+        );
+        await _sharedPref.saveUser(updatedUser);
         return Left(GameException(e.toString()));
       }
     } else {
@@ -43,6 +56,55 @@ class UserRepository {
         friends: user.friends,
         friendsRequest: user.friendsRequest,
         score: user.score + gainScore,
+      );
+      await _sharedPref.saveUser(updatedUser);
+      return const Right(None());
+    }
+  }
+
+  Future<Either<GameException, None>> updateCompletedLevels(
+      String level) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    User? user = await _sharedPref.getCurrentUser();
+    if (hasInternet) {
+      try {
+        await _db.collection("users").doc(user!.id).update({
+          "completedLevels": FieldValue.arrayUnion([level])
+        });
+        _authServ.getCurrentUser();
+        return const Right(None());
+      } catch (e) {
+        List levels = user!.completedLevels;
+        levels.add(level);
+        User updatedUser = User(
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          image: user.image,
+          achievements: user.achievements,
+          completedLevels: levels,
+          friends: user.friends,
+          friendsRequest: user.friendsRequest,
+          score: user.score,
+        );
+        await _sharedPref.saveUser(updatedUser);
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      List levels = user!.completedLevels;
+      levels.add(level);
+      User updatedUser = User(
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        image: user.image,
+        achievements: user.achievements,
+        completedLevels: levels,
+        friends: user.friends,
+        friendsRequest: user.friendsRequest,
+        score: user.score,
       );
       await _sharedPref.saveUser(updatedUser);
       return const Right(None());

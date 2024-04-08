@@ -70,6 +70,11 @@ class MenuView extends StackedView<MenuViewModel> {
                       text: "Host Stroke Game",
                       onClick: viewModel.goToCreateHost,
                       iconData: Icons.play_circle),
+                if (!(viewModel.isStudent()))
+                  MenuCard(
+                      text: "Manage Quizzes",
+                      onClick: viewModel.goToQuiz,
+                      iconData: Icons.quiz),
               ],
             ),
     );
