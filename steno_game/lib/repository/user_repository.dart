@@ -283,7 +283,7 @@ class UserRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       bool? status = await _sharedPref.getIsSaveAccount();
-      if(status!) {
+      if (status!) {
         try {
           User? user = await _sharedPref.getCurrentUser();
           await _db.collection("users").doc(friendId).update({
@@ -293,11 +293,9 @@ class UserRepository {
         } catch (e) {
           return Left(GameException(e.toString()));
         }
-      }
-      else {
+      } else {
         return Left(GameException("Connect your account first"));
       }
-
     } else {
       return Left(GameException("Please check your internet connection!"));
     }

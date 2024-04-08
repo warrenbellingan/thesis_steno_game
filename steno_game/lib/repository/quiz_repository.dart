@@ -15,9 +15,7 @@ class QuizRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        await _db
-            .collection("quizzes")
-            .doc(quizId).delete();
+        await _db.collection("quizzes").doc(quizId).delete();
         return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));
@@ -27,16 +25,20 @@ class QuizRepository {
     }
   }
 
-  Future<Either<GameException, None>> addQuiz(String quizId, String stroke, List<String> choices, String answer) async {
+  Future<Either<GameException, None>> addQuiz(
+      String quizId, String stroke, List<String> choices, String answer) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final id = DateTime.now().millisecondsSinceEpoch.toString();
-        Quiz quiz = Quiz(id: id, stroke: stroke, choices: choices, answer: answer);
+        Quiz quiz =
+            Quiz(id: id, stroke: stroke, choices: choices, answer: answer);
         await _db
             .collection("quizzes")
             .doc(quizId)
-            .collection('quiz').doc(id).set(quiz.toJson());
+            .collection('quiz')
+            .doc(id)
+            .set(quiz.toJson());
         return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));
@@ -45,15 +47,20 @@ class QuizRepository {
       return Left(GameException("Please check your internet connection!"));
     }
   }
-  Future<Either<GameException, None>> updateQuiz(String quizId, String id, String stroke, List<String> choices, String answer) async {
+
+  Future<Either<GameException, None>> updateQuiz(String quizId, String id,
+      String stroke, List<String> choices, String answer) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        Quiz quiz = Quiz(id: id, stroke: stroke, choices: choices, answer: answer);
+        Quiz quiz =
+            Quiz(id: id, stroke: stroke, choices: choices, answer: answer);
         await _db
             .collection("quizzes")
             .doc(quizId)
-            .collection('quiz').doc(id).set(quiz.toJson());
+            .collection('quiz')
+            .doc(id)
+            .set(quiz.toJson());
         return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));
@@ -78,7 +85,9 @@ class QuizRepository {
       return Left(GameException("Please check your internet connection!"));
     }
   }
-  Future<Either<GameException, Quizzes>> updateQuizzes(String quizId, String title) async {
+
+  Future<Either<GameException, Quizzes>> updateQuizzes(
+      String quizId, String title) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
@@ -92,6 +101,7 @@ class QuizRepository {
       return Left(GameException("Please check your internet connection!"));
     }
   }
+
   Future<Either<GameException, List<Quizzes>>> getQuizzes() async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {

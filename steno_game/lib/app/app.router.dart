@@ -6,53 +6,53 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/cupertino.dart' as _i31;
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as _i29;
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i35;
 import 'package:steno_game/model/lesson.dart' as _i33;
 import 'package:steno_game/model/multiplayer_stroke.dart' as _i32;
 import 'package:steno_game/model/quizzes.dart' as _i34;
 import 'package:steno_game/model/user.dart' as _i30;
-import 'package:steno_game/ui/views/achievement/achievement_view.dart' as _i7;
+import 'package:steno_game/ui/views/about/about_view.dart' as _i28;
 import 'package:steno_game/ui/views/add_edit_quiz/add_edit_quiz_view.dart'
-    as _i28;
+    as _i27;
 import 'package:steno_game/ui/views/add_stroke_lesson/add_stroke_lesson_view.dart'
-    as _i24;
+    as _i23;
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
 import 'package:steno_game/ui/views/home/home_view.dart' as _i2;
-import 'package:steno_game/ui/views/host_stroke/host_stroke_view.dart' as _i20;
+import 'package:steno_game/ui/views/host_stroke/host_stroke_view.dart' as _i19;
 import 'package:steno_game/ui/views/join_multiplayer_stroke/join_multiplayer_stroke_view.dart'
-    as _i21;
-import 'package:steno_game/ui/views/lessons/lessons_view.dart' as _i8;
+    as _i20;
+import 'package:steno_game/ui/views/lessons/lessons_view.dart' as _i7;
 import 'package:steno_game/ui/views/login/login_view.dart' as _i4;
-import 'package:steno_game/ui/views/menu/menu_view.dart' as _i18;
+import 'package:steno_game/ui/views/menu/menu_view.dart' as _i17;
 import 'package:steno_game/ui/views/multiplayer_stroke_host/multiplayer_stroke_host_view.dart'
-    as _i23;
-import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart'
-    as _i25;
-import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_stroke_waiting_room_view.dart'
     as _i22;
-import 'package:steno_game/ui/views/people/people_view.dart' as _i9;
-import 'package:steno_game/ui/views/person/person_view.dart' as _i16;
+import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_stroke_host_results_view.dart'
+    as _i24;
+import 'package:steno_game/ui/views/multiplayer_stroke_waiting_room/multiplayer_stroke_waiting_room_view.dart'
+    as _i21;
+import 'package:steno_game/ui/views/people/people_view.dart' as _i8;
+import 'package:steno_game/ui/views/person/person_view.dart' as _i15;
 import 'package:steno_game/ui/views/picture_topic/picture_topic_view.dart'
-    as _i10;
-import 'package:steno_game/ui/views/practice/practice_view.dart' as _i26;
-import 'package:steno_game/ui/views/profile/profile_view.dart' as _i11;
-import 'package:steno_game/ui/views/quiz/quiz_view.dart' as _i27;
+    as _i9;
+import 'package:steno_game/ui/views/practice/practice_view.dart' as _i25;
+import 'package:steno_game/ui/views/profile/profile_view.dart' as _i10;
+import 'package:steno_game/ui/views/quiz/quiz_view.dart' as _i26;
 import 'package:steno_game/ui/views/quiz_game_stroke/quiz_game_stroke_view.dart'
-    as _i12;
+    as _i11;
 import 'package:steno_game/ui/views/search_steno/search_steno_view.dart'
-    as _i19;
+    as _i18;
 import 'package:steno_game/ui/views/sign_up/sign_up_view.dart' as _i5;
 import 'package:steno_game/ui/views/startup/startup_view.dart' as _i3;
 import 'package:steno_game/ui/views/stroke_exercise/stroke_exercise_view.dart'
-    as _i13;
-import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart' as _i15;
+    as _i12;
+import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart' as _i14;
 import 'package:steno_game/ui/views/strokes_multiplayer/strokes_multiplayer_view.dart'
-    as _i14;
-import 'package:steno_game/ui/views/topic/topic_view.dart' as _i17;
+    as _i13;
+import 'package:steno_game/ui/views/topic/topic_view.dart' as _i16;
 
 class Routes {
   static const homeView = '/home-view';
@@ -64,8 +64,6 @@ class Routes {
   static const signUpView = '/sign-up-view';
 
   static const forgotPasswordView = '/forgot-password-view';
-
-  static const achievementView = '/achievement-view';
 
   static const lessonsView = '/lessons-view';
 
@@ -111,13 +109,14 @@ class Routes {
 
   static const addEditQuizView = '/add-edit-quiz-view';
 
+  static const aboutView = '/about-view';
+
   static const all = <String>{
     homeView,
     startupView,
     loginView,
     signUpView,
     forgotPasswordView,
-    achievementView,
     lessonsView,
     peopleView,
     pictureTopicView,
@@ -139,6 +138,7 @@ class Routes {
     practiceView,
     quizView,
     addEditQuizView,
+    aboutView,
   };
 }
 
@@ -165,92 +165,92 @@ class StackedRouter extends _i1.RouterBase {
       page: _i6.ForgotPasswordView,
     ),
     _i1.RouteDef(
-      Routes.achievementView,
-      page: _i7.AchievementView,
-    ),
-    _i1.RouteDef(
       Routes.lessonsView,
-      page: _i8.LessonsView,
+      page: _i7.LessonsView,
     ),
     _i1.RouteDef(
       Routes.peopleView,
-      page: _i9.PeopleView,
+      page: _i8.PeopleView,
     ),
     _i1.RouteDef(
       Routes.pictureTopicView,
-      page: _i10.PictureTopicView,
+      page: _i9.PictureTopicView,
     ),
     _i1.RouteDef(
       Routes.profileView,
-      page: _i11.ProfileView,
+      page: _i10.ProfileView,
     ),
     _i1.RouteDef(
       Routes.quizGameStrokeView,
-      page: _i12.QuizGameStrokeView,
+      page: _i11.QuizGameStrokeView,
     ),
     _i1.RouteDef(
       Routes.strokeExerciseView,
-      page: _i13.StrokeExerciseView,
+      page: _i12.StrokeExerciseView,
     ),
     _i1.RouteDef(
       Routes.strokesMultiplayerView,
-      page: _i14.StrokesMultiplayerView,
+      page: _i13.StrokesMultiplayerView,
     ),
     _i1.RouteDef(
       Routes.strokePlayView,
-      page: _i15.StrokePlayView,
+      page: _i14.StrokePlayView,
     ),
     _i1.RouteDef(
       Routes.personView,
-      page: _i16.PersonView,
+      page: _i15.PersonView,
     ),
     _i1.RouteDef(
       Routes.topicView,
-      page: _i17.TopicView,
+      page: _i16.TopicView,
     ),
     _i1.RouteDef(
       Routes.menuView,
-      page: _i18.MenuView,
+      page: _i17.MenuView,
     ),
     _i1.RouteDef(
       Routes.searchStenoView,
-      page: _i19.SearchStenoView,
+      page: _i18.SearchStenoView,
     ),
     _i1.RouteDef(
       Routes.hostStrokeView,
-      page: _i20.HostStrokeView,
+      page: _i19.HostStrokeView,
     ),
     _i1.RouteDef(
       Routes.joinMultiplayerStrokeView,
-      page: _i21.JoinMultiplayerStrokeView,
+      page: _i20.JoinMultiplayerStrokeView,
     ),
     _i1.RouteDef(
       Routes.multiplayerStrokeWaitingRoomView,
-      page: _i22.MultiplayerStrokeWaitingRoomView,
+      page: _i21.MultiplayerStrokeWaitingRoomView,
     ),
     _i1.RouteDef(
       Routes.multiplayerStrokeHostView,
-      page: _i23.MultiplayerStrokeHostView,
+      page: _i22.MultiplayerStrokeHostView,
     ),
     _i1.RouteDef(
       Routes.addStrokeLessonView,
-      page: _i24.AddStrokeLessonView,
+      page: _i23.AddStrokeLessonView,
     ),
     _i1.RouteDef(
       Routes.multiplayerStrokeHostResultsView,
-      page: _i25.MultiplayerStrokeHostResultsView,
+      page: _i24.MultiplayerStrokeHostResultsView,
     ),
     _i1.RouteDef(
       Routes.practiceView,
-      page: _i26.PracticeView,
+      page: _i25.PracticeView,
     ),
     _i1.RouteDef(
       Routes.quizView,
-      page: _i27.QuizView,
+      page: _i26.QuizView,
     ),
     _i1.RouteDef(
       Routes.addEditQuizView,
-      page: _i28.AddEditQuizView,
+      page: _i27.AddEditQuizView,
+    ),
+    _i1.RouteDef(
+      Routes.aboutView,
+      page: _i28.AboutView,
     ),
   ];
 
@@ -286,156 +286,156 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i7.AchievementView: (data) {
+    _i7.LessonsView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i7.AchievementView(),
+        builder: (context) => const _i7.LessonsView(),
         settings: data,
       );
     },
-    _i8.LessonsView: (data) {
+    _i8.PeopleView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i8.LessonsView(),
+        builder: (context) => const _i8.PeopleView(),
         settings: data,
       );
     },
-    _i9.PeopleView: (data) {
+    _i9.PictureTopicView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i9.PeopleView(),
+        builder: (context) => const _i9.PictureTopicView(),
         settings: data,
       );
     },
-    _i10.PictureTopicView: (data) {
+    _i10.ProfileView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i10.PictureTopicView(),
+        builder: (context) => const _i10.ProfileView(),
         settings: data,
       );
     },
-    _i11.ProfileView: (data) {
+    _i11.QuizGameStrokeView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i11.ProfileView(),
+        builder: (context) => const _i11.QuizGameStrokeView(),
         settings: data,
       );
     },
-    _i12.QuizGameStrokeView: (data) {
+    _i12.StrokeExerciseView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i12.QuizGameStrokeView(),
+        builder: (context) => const _i12.StrokeExerciseView(),
         settings: data,
       );
     },
-    _i13.StrokeExerciseView: (data) {
-      return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i13.StrokeExerciseView(),
-        settings: data,
-      );
-    },
-    _i14.StrokesMultiplayerView: (data) {
+    _i13.StrokesMultiplayerView: (data) {
       final args = data.getArgs<StrokesMultiplayerViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i14.StrokesMultiplayerView(args.game, key: args.key),
+            _i13.StrokesMultiplayerView(args.game, key: args.key),
         settings: data,
       );
     },
-    _i15.StrokePlayView: (data) {
+    _i14.StrokePlayView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i15.StrokePlayView(),
+        builder: (context) => const _i14.StrokePlayView(),
         settings: data,
       );
     },
-    _i16.PersonView: (data) {
+    _i15.PersonView: (data) {
       final args = data.getArgs<PersonViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => _i16.PersonView(args.userId, key: args.key),
+        builder: (context) => _i15.PersonView(args.userId, key: args.key),
         settings: data,
       );
     },
-    _i17.TopicView: (data) {
+    _i16.TopicView: (data) {
       final args = data.getArgs<TopicViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i17.TopicView(args.lesson, args.isOnline, key: args.key),
+            _i16.TopicView(args.lesson, args.isOnline, key: args.key),
         settings: data,
       );
     },
-    _i18.MenuView: (data) {
+    _i17.MenuView: (data) {
       final args = data.getArgs<MenuViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => _i18.MenuView(args.user, key: args.key),
+        builder: (context) => _i17.MenuView(args.user, key: args.key),
         settings: data,
       );
     },
-    _i19.SearchStenoView: (data) {
+    _i18.SearchStenoView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i19.SearchStenoView(),
+        builder: (context) => const _i18.SearchStenoView(),
         settings: data,
       );
     },
-    _i20.HostStrokeView: (data) {
+    _i19.HostStrokeView: (data) {
       final args = data.getArgs<HostStrokeViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => _i20.HostStrokeView(args.game, key: args.key),
+        builder: (context) => _i19.HostStrokeView(args.game, key: args.key),
         settings: data,
       );
     },
-    _i21.JoinMultiplayerStrokeView: (data) {
+    _i20.JoinMultiplayerStrokeView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i21.JoinMultiplayerStrokeView(),
+        builder: (context) => const _i20.JoinMultiplayerStrokeView(),
         settings: data,
       );
     },
-    _i22.MultiplayerStrokeWaitingRoomView: (data) {
+    _i21.MultiplayerStrokeWaitingRoomView: (data) {
       final args = data.getArgs<MultiplayerStrokeWaitingRoomViewArguments>(
           nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i22.MultiplayerStrokeWaitingRoomView(args.game, key: args.key),
+            _i21.MultiplayerStrokeWaitingRoomView(args.game, key: args.key),
         settings: data,
       );
     },
-    _i23.MultiplayerStrokeHostView: (data) {
+    _i22.MultiplayerStrokeHostView: (data) {
       final args =
           data.getArgs<MultiplayerStrokeHostViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i23.MultiplayerStrokeHostView(args.game, key: args.key),
+            _i22.MultiplayerStrokeHostView(args.game, key: args.key),
         settings: data,
       );
     },
-    _i24.AddStrokeLessonView: (data) {
+    _i23.AddStrokeLessonView: (data) {
       final args = data.getArgs<AddStrokeLessonViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i24.AddStrokeLessonView(args.lesson, key: args.key),
+            _i23.AddStrokeLessonView(args.lesson, key: args.key),
         settings: data,
       );
     },
-    _i25.MultiplayerStrokeHostResultsView: (data) {
+    _i24.MultiplayerStrokeHostResultsView: (data) {
       final args = data.getArgs<MultiplayerStrokeHostResultsViewArguments>(
           nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i25.MultiplayerStrokeHostResultsView(args.game, key: args.key),
+            _i24.MultiplayerStrokeHostResultsView(args.game, key: args.key),
         settings: data,
       );
     },
-    _i26.PracticeView: (data) {
+    _i25.PracticeView: (data) {
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i26.PracticeView(),
+        builder: (context) => const _i25.PracticeView(),
         settings: data,
       );
     },
-    _i27.QuizView: (data) {
+    _i26.QuizView: (data) {
       final args = data.getArgs<QuizViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i27.QuizView(args.game, args.isOnline, key: args.key),
+            _i26.QuizView(args.game, args.isOnline, key: args.key),
         settings: data,
       );
     },
-    _i28.AddEditQuizView: (data) {
+    _i27.AddEditQuizView: (data) {
       final args = data.getArgs<AddEditQuizViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => _i28.AddEditQuizView(args.quizzes, key: args.key),
+        builder: (context) => _i27.AddEditQuizView(args.quizzes, key: args.key),
+        settings: data,
+      );
+    },
+    _i28.AboutView: (data) {
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i28.AboutView(),
         settings: data,
       );
     },
@@ -854,20 +854,6 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAchievementView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.achievementView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
   Future<dynamic> navigateToLessonsView([
     int? routerId,
     bool preventDuplicates = true,
@@ -1200,6 +1186,20 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToAboutView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.aboutView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -1267,20 +1267,6 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.forgotPasswordView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> replaceWithAchievementView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.achievementView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1613,6 +1599,20 @@ extension NavigatorStateExtension on _i35.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.addEditQuizView,
         arguments: AddEditQuizViewArguments(quizzes: quizzes, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAboutView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.aboutView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

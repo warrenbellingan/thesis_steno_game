@@ -158,13 +158,13 @@ class MultiplayerStrokeRepository {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       bool? status = await _sharedPref.getIsSaveAccount();
-      if(status != null) {
-        if(status) {
+      if (status != null) {
+        if (status) {
           try {
             final getUser = await _sharedPref.getCurrentUser();
             if (getUser != null) {
-              final student =
-              Student(id: getUser.id, name: getUser.name, image: getUser.image);
+              final student = Student(
+                  id: getUser.id, name: getUser.name, image: getUser.image);
               await _db
                   .collection("strokeGameEnvironment")
                   .doc(gameId)
@@ -178,15 +178,12 @@ class MultiplayerStrokeRepository {
           } catch (e) {
             return Left(GameException(e.toString()));
           }
-        }
-        else {
+        } else {
           return Left(GameException("Connect your account first to play"));
         }
-      }
-      else {
+      } else {
         return Left(GameException("Something went wrong, Restart the App"));
       }
-
     } else {
       return Left(GameException("Please check your internet connection!"));
     }

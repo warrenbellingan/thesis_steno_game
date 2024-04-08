@@ -51,7 +51,8 @@ class TopicView extends StackedView<TopicViewModel> {
                                 image: viewModel.stroke!.strokeImage,
                                 text: viewModel.stroke!.text,
                                 description: viewModel
-                                    .topics[viewModel.currentIndex].description, isOnline: isOnline,
+                                    .topics[viewModel.currentIndex].description,
+                                isOnline: isOnline,
                               )
                       ],
                     ),
@@ -75,7 +76,7 @@ class TopicView extends StackedView<TopicViewModel> {
   TopicViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      TopicViewModel(lesson,isOnline);
+      TopicViewModel(lesson, isOnline);
 
   @override
   void onViewModelReady(TopicViewModel viewModel) {

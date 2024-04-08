@@ -66,10 +66,11 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
         }
         final response = await _multiStroke.addScore(game.id, score);
         response.fold((l) => showBottomSheet(l.message), (r) {});
-        for(AnswerStroke answer in answers) {
-          if(game.correctAnswers.contains(answer.id) && answer.stroke != null) {
+        for (AnswerStroke answer in answers) {
+          if (game.correctAnswers.contains(answer.id) &&
+              answer.stroke != null) {
             final setStroke = await _stroke.setStatus(answer.stroke!, 1);
-            setStroke.fold((l) => showBottomSheet(l.message), (r) => (){});
+            setStroke.fold((l) => showBottomSheet(l.message), (r) => () {});
           }
         }
         setBusy(false);
@@ -122,6 +123,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
   void exit() {
     _nav.back();
   }
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,

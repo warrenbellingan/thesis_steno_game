@@ -61,8 +61,10 @@ class SearchStenoView extends StackedView<SearchStenoViewModel> {
                               alignment: Alignment.topRight,
                               children: [
                                 StrokeImage(
-                                    imagePath: item.strokeImage,
-                                    word: item.text, isOnline: true,),
+                                  imagePath: item.strokeImage,
+                                  word: item.text,
+                                  isOnline: true,
+                                ),
                                 if (viewModel.user.role == "Instructor")
                                   Container(
                                     margin: const EdgeInsets.all(18),

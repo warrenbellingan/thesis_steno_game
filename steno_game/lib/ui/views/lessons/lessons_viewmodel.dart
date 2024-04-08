@@ -26,12 +26,11 @@ class LessonsViewModel extends BaseViewModel {
     getOfflineLessons();
   }
 
-  void selectMode(bool status) async{
+  void selectMode(bool status) async {
     isOffline = status;
     if (isOffline) {
       getOfflineLessons();
-    }
-    else {
+    } else {
       await getLessons();
     }
   }
@@ -45,40 +44,41 @@ class LessonsViewModel extends BaseViewModel {
     rebuildUi();
   }
 
-    Future<void> getLessons() async {
+  Future<void> getLessons() async {
     lessons = [];
     setBusy(true);
     final response = await _lessonRepo.getLessons();
     response.fold((l) => showBottomSheet(l.message), (lessonsData) {
-    lessons = lessonsData;
-    rebuildUi();
+      lessons = lessonsData;
+      rebuildUi();
     });
     setBusy(false);
-    }
+  }
 
-    void lessonClick(Lesson lesson) {
-    _navigationService.navigateToTopicView(lesson: lesson, isOnline: !isOffline);
-    }
+  void lessonClick(Lesson lesson) {
+    _navigationService.navigateToTopicView(
+        lesson: lesson, isOnline: !isOffline);
+  }
 
-    void lessonDeleteClick(Lesson lesson) async {
+  void lessonDeleteClick(Lesson lesson) async {
     setBusy(true);
     final response = await _lessonRepo.deleteLesson(lesson.id);
     response.fold((l) => showBottomSheet(l.message), (r) async {
-    await getLessons();
-    showBottomSheet("Deleted Successfully");
+      await getLessons();
+      showBottomSheet("Deleted Successfully");
     });
     setBusy(false);
-    }
-
-    void lessonEditClick(Lesson lesson) {
-    _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
-    }
-
-    void showBottomSheet(String description) {
-    _bottomSheet.showCustomSheet(
-    variant: BottomSheetType.notice,
-    title: "Notice",
-    description: description,
-    );
-    }
   }
+
+  void lessonEditClick(Lesson lesson) {
+    _navigationService.navigateToAddStrokeLessonView(lesson: lesson);
+  }
+
+  void showBottomSheet(String description) {
+    _bottomSheet.showCustomSheet(
+      variant: BottomSheetType.notice,
+      title: "Notice",
+      description: description,
+    );
+  }
+}

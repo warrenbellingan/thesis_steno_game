@@ -1099,6 +1099,26 @@ class MockSharedPreferenceService extends _i1.Mock
       ) as _i8.Future<void>);
 
   @override
+  _i8.Future<void> setIsSaveAccount(bool? status) => (super.noSuchMethod(
+        Invocation.method(
+          #setIsSaveAccount,
+          [status],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<bool?> getIsSaveAccount() => (super.noSuchMethod(
+        Invocation.method(
+          #getIsSaveAccount,
+          [],
+        ),
+        returnValue: _i8.Future<bool?>.value(),
+        returnValueForMissingStub: _i8.Future<bool?>.value(),
+      ) as _i8.Future<bool?>);
+
+  @override
   _i8.Future<bool?> getIsPreviousOnline() => (super.noSuchMethod(
         Invocation.method(
           #getIsPreviousOnline,

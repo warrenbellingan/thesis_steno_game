@@ -21,6 +21,6 @@ class GameUIText {
   static const menuText = "Menu";
   static const lessonText = "Lesson";
   static const playText = "Play";
-  static const achievementText = "Achievement";
   static const peopleText = "People";
+  static const about = "About Us";
 }

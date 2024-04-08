@@ -21,9 +21,15 @@ class LessonsView extends StackedView<LessonsViewModel> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GameChip(label: "Offline", onClick: () => viewModel.selectMode(true), isSelected: viewModel.isOffline),
+              GameChip(
+                  label: "Offline",
+                  onClick: () => viewModel.selectMode(true),
+                  isSelected: viewModel.isOffline),
               horizontalSpaceLarge,
-              GameChip(label: "Online", onClick: () => viewModel.selectMode(false), isSelected: !viewModel.isOffline),
+              GameChip(
+                  label: "Online",
+                  onClick: () => viewModel.selectMode(false),
+                  isSelected: !viewModel.isOffline),
             ],
           ),
           viewModel.isBusy
@@ -41,7 +47,8 @@ class LessonsView extends StackedView<LessonsViewModel> {
                       },
                       onEditClick: () => viewModel.lessonEditClick(item),
                       onDeleteClick: () => viewModel.lessonDeleteClick(item),
-                      isInstructor: viewModel.user.role == "Instructor" && !viewModel.isOffline,
+                      isInstructor: viewModel.user.role == "Instructor" &&
+                          !viewModel.isOffline,
                     );
                   },
                 ),

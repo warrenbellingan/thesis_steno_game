@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:steno_game/ui/views/about/about_view.dart';
 import 'package:steno_game/ui/views/menu/menu_view.dart';
 import 'package:steno_game/ui/views/stroke_play/stroke_play_view.dart';
 import '../../common/ui_helpers.dart';
@@ -8,7 +9,6 @@ import '../../constants/game_ui_text.dart';
 import '../../custom_widgets/game_body.dart';
 import '../../custom_widgets/game_loading.dart';
 import '../../custom_widgets/player_profile.dart';
-import '../achievement/achievement_view.dart';
 import '../lessons/lessons_view.dart';
 import '../people/people_view.dart';
 import 'home_viewmodel.dart';
@@ -73,8 +73,8 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver {
                       MenuView(viewModel.user),
                       const LessonsView(),
                       if (viewModel.isStudent()) const StrokePlayView(),
-                      if (viewModel.isStudent()) const AchievementView(),
                       const PeopleView(),
+                      const AboutView(),
                     ],
                   ),
                 ),
@@ -145,30 +145,29 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver {
                       ),
                       label: GameUIText.playText,
                     ),
-                  if (viewModel.isStudent())
                     const NavigationDestination(
                       icon: Icon(
-                        Icons.badge_rounded,
+                        Icons.people_alt_rounded,
                         size: 25,
                       ),
                       selectedIcon: Icon(
-                        Icons.badge_rounded,
+                        Icons.people_alt_rounded,
                         color: GameColor.primaryColor,
                         size: 30,
                       ),
-                      label: GameUIText.achievementText,
+                      label: GameUIText.peopleText,
                     ),
                   const NavigationDestination(
                     icon: Icon(
-                      Icons.people_alt_outlined,
+                      Icons.info,
                       size: 25,
                     ),
                     selectedIcon: Icon(
-                      Icons.people_alt_outlined,
+                      Icons.info,
                       color: GameColor.primaryColor,
                       size: 30,
                     ),
-                    label: GameUIText.peopleText,
+                    label: GameUIText.about,
                   ),
                 ],
               ),
@@ -207,12 +206,4 @@ class HomeView extends StackedView<HomeViewModel> with WidgetsBindingObserver {
     viewModel.init();
   }
 
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   if(state == AppLifecycleState.detached) {
-  //     final internet = locator<InternetService>();
-  //     internet.dispose();
-  //   }
-  //   super.didChangeAppLifecycleState(state);
-  // }
 }

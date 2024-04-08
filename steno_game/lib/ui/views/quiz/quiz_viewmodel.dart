@@ -38,13 +38,12 @@ class QuizViewModel extends BaseViewModel {
     setBusy(true);
     user = await _sharedPref.getCurrentUser();
     setBusy(false);
-    if(isOnline) {
+    if (isOnline) {
       await getQuizzes();
-    }
-    else {
+    } else {
       getOfflineQuizzes();
     }
-    if(quizzes.isNotEmpty) {
+    if (quizzes.isNotEmpty) {
       await getStroke();
     }
   }
@@ -53,7 +52,7 @@ class QuizViewModel extends BaseViewModel {
     setBusy(true);
     QuizStorage storage = QuizStorage();
     quizzes = storage.getQuiz(game!.id);
-    if(quizzes.isNotEmpty) {
+    if (quizzes.isNotEmpty) {
       quizzes.shuffle();
       choices = List<String>.from(quizzes[currentIndex].choices);
       choices.shuffle();
@@ -61,12 +60,13 @@ class QuizViewModel extends BaseViewModel {
     rebuildUi();
     setBusy(false);
   }
+
   Future<void> getQuizzes() async {
     setBusy(true);
     final results = await _quizRepo.getQuiz(game!.id);
-    results.fold((l) => showBottomSheet(l.message), (r) async{
+    results.fold((l) => showBottomSheet(l.message), (r) async {
       quizzes = r;
-      if(quizzes.isNotEmpty) {
+      if (quizzes.isNotEmpty) {
         quizzes.shuffle();
         choices = List<String>.from(quizzes[currentIndex].choices);
         choices.shuffle();
@@ -77,7 +77,6 @@ class QuizViewModel extends BaseViewModel {
   }
 
   void answer(String answer) async {
-
     setBusy(true);
     if (answer == quizzes[currentIndex].answer) {
       correctAnswer++;
@@ -94,10 +93,9 @@ class QuizViewModel extends BaseViewModel {
         await addLevel();
       }
       setBusy(false);
-    }
-    else {
+    } else {
       await getStroke();
-      if(quizzes.isNotEmpty) {
+      if (quizzes.isNotEmpty) {
         choices = List<String>.from(quizzes[currentIndex].choices);
         choices.shuffle();
       }
@@ -106,17 +104,18 @@ class QuizViewModel extends BaseViewModel {
     setBusy(false);
     rebuildUi();
   }
+
   Future<void> getStroke() async {
     setBusy(true);
     rebuildUi();
-    if(isOnline) {
-      final response = await _strokeRepo.getStroke(quizzes[currentIndex].stroke);
-      response.fold((l) => showBottomSheet(l.message), (r){
+    if (isOnline) {
+      final response =
+          await _strokeRepo.getStroke(quizzes[currentIndex].stroke);
+      response.fold((l) => showBottomSheet(l.message), (r) {
         stroke = r;
         rebuildUi();
       });
-    }
-    else {
+    } else {
       StrokeStorage storage = StrokeStorage();
       stroke = storage.getSteno(quizzes[currentIndex].stroke);
       rebuildUi();

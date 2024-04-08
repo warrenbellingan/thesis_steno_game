@@ -185,18 +185,9 @@ class ProfileView extends StackedView<ProfileViewModel> {
                             ],
                           ),
                     if (viewModel.isStudent())
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ProfileCard(
-                              title: "Score",
-                              stats: viewModel.user.score.toString()),
-                          ProfileCard(
-                              title: "Achievements",
-                              stats: viewModel.user.achievements.length
-                                  .toString()),
-                        ],
-                      ),
+                      ProfileCard(
+                          title: "Score",
+                          stats: viewModel.user.score.toString()),
                     verticalSpaceMedium,
                     GameButton(
                       text: 'Log out',

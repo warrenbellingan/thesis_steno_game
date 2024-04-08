@@ -27,9 +27,15 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GameChip(label: "Offline", onClick: () => viewModel.selectMode(true), isSelected: viewModel.isOffline),
+                      GameChip(
+                          label: "Offline",
+                          onClick: () => viewModel.selectMode(true),
+                          isSelected: viewModel.isOffline),
                       horizontalSpaceLarge,
-                      GameChip(label: "Online", onClick: () => viewModel.selectMode(false), isSelected: !viewModel.isOffline),
+                      GameChip(
+                          label: "Online",
+                          onClick: () => viewModel.selectMode(false),
+                          isSelected: !viewModel.isOffline),
                     ],
                   ),
                   ListView.builder(
@@ -67,27 +73,29 @@ class QuizGameStrokeView extends StackedView<QuizGameStrokeViewModel> {
                               ),
                             ),
                           ),
-                          if(viewModel.user!.role == "Instructor" && !viewModel.isOffline)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                onPressed: () => viewModel.editQuiz(item),
-                                icon: const Icon(
-                                  Icons.edit_rounded,
-                                  color: Colors.white,
+                          if (viewModel.user!.role == "Instructor" &&
+                              !viewModel.isOffline)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  onPressed: () => viewModel.editQuiz(item),
+                                  icon: const Icon(
+                                    Icons.edit_rounded,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                onPressed: () => viewModel.deleteQuiz(item.id),
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
+                                IconButton(
+                                  onPressed: () =>
+                                      viewModel.deleteQuiz(item.id),
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              horizontalSpaceSmall,
-                            ],
-                          ),
+                                horizontalSpaceSmall,
+                              ],
+                            ),
                         ],
                       );
                     },

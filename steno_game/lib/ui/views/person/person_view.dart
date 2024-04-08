@@ -224,18 +224,9 @@ class PersonView extends StackedView<PersonViewModel> {
                                 ),
                   verticalSpaceMedium,
                   if (viewModel.isStudent())
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ProfileCard(
-                            title: "Score",
-                            stats: viewModel.viewedUser.score.toString()),
-                        ProfileCard(
-                            title: "Achievements",
-                            stats: viewModel.viewedUser.achievements.length
-                                .toString()),
-                      ],
-                    ),
+                    ProfileCard(
+                        title: "Score",
+                        stats: viewModel.viewedUser.score.toString()),
                 ],
               ),
       ),

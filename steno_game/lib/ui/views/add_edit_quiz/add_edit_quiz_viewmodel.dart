@@ -120,7 +120,12 @@ class AddEditQuizViewModel extends BaseViewModel {
   void updateQuizzes() async {
     setBusyForObject("add", true);
 
-    final response = await _quizRepo.updateQuiz(quizzes!.id, quiz[currentPage].id, quiz[currentPage].stroke, getChoices(), correctTextController.text);
+    final response = await _quizRepo.updateQuiz(
+        quizzes!.id,
+        quiz[currentPage].id,
+        quiz[currentPage].stroke,
+        getChoices(),
+        correctTextController.text);
     response.fold((l) => l.message, (r) async {
       await getQuiz();
       rebuildUi();

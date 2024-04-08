@@ -6,7 +6,11 @@ import 'game_network_image.dart';
 
 class StrokeImage extends StatelessWidget {
   const StrokeImage(
-      {super.key, required this.imagePath, required this.word, this.size, required this.isOnline});
+      {super.key,
+      required this.imagePath,
+      required this.word,
+      this.size,
+      required this.isOnline});
 
   final String imagePath;
   final String word;
@@ -25,11 +29,14 @@ class StrokeImage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          isOnline ?
-          GameNetworkImage(
-            path: imagePath,
-            size: size,
-          ) : GameImage(path: imagePath,),
+          isOnline
+              ? GameNetworkImage(
+                  path: imagePath,
+                  size: size,
+                )
+              : GameImage(
+                  path: imagePath,
+                ),
           Text(
             word,
             style: const TextStyle(

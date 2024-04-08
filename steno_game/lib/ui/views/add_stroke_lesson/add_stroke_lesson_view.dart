@@ -76,9 +76,11 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                   : Column(
                                       children: [
                                         StrokeImage(
-                                            imagePath:
-                                                viewModel.stroke!.strokeImage,
-                                            word: viewModel.stroke!.text, isOnline: true,),
+                                          imagePath:
+                                              viewModel.stroke!.strokeImage,
+                                          word: viewModel.stroke!.text,
+                                          isOnline: true,
+                                        ),
                                         ElevatedButton(
                                           onPressed: viewModel.editStroke,
                                           style: ElevatedButton.styleFrom(

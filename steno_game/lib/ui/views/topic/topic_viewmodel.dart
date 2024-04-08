@@ -25,11 +25,10 @@ class TopicViewModel extends BaseViewModel {
   TopicViewModel(this.lesson, this.isOnline);
 
   void init() async {
-    if(isOnline){
+    if (isOnline) {
       await getPictureTopics();
       await getStroke();
-    }
-    else {
+    } else {
       getOfflineTopics();
       getStroke();
     }
@@ -40,7 +39,6 @@ class TopicViewModel extends BaseViewModel {
     TopicStorage storage = TopicStorage();
     topics = storage.getTopics(lesson.id);
     setBusy(false);
-
   }
 
   Future<void> getPictureTopics() async {
@@ -54,15 +52,14 @@ class TopicViewModel extends BaseViewModel {
 
   Future<void> getStroke() async {
     String strokeId = topics[currentIndex].stroke;
-    if(isOnline) {
+    if (isOnline) {
       setBusy(true);
       final response = await _strokeRepo.getStroke(strokeId);
       response.fold((l) => showBottomSheet(l.message), (strokeData) {
         stroke = strokeData;
       });
       setBusy(false);
-    }
-    else {
+    } else {
       StrokeStorage storage = StrokeStorage();
       stroke = storage.getSteno(strokeId);
     }

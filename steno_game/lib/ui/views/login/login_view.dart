@@ -33,7 +33,10 @@ class LoginView extends StackedView<LoginViewModel> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const GameImage(path: GameUiPng.gameAuthLoginPath),
+                  const GameImage(
+                    path: GameUiPng.gameAuthLoginPath,
+                    size: 150,
+                  ),
                   const SizedBox(
                     height: 25,
                   ),

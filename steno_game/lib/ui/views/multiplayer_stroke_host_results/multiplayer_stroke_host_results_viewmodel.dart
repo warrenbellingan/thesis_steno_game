@@ -18,7 +18,6 @@ class MultiplayerStrokeHostResultsViewModel extends BaseViewModel {
   List<Student> students = [];
   StreamSubscription<List<Student>>? streamSubscription;
 
-
   MultiplayerStroke game;
   MultiplayerStrokeHostResultsViewModel(this.game);
 
@@ -30,9 +29,9 @@ class MultiplayerStrokeHostResultsViewModel extends BaseViewModel {
     });
     streamSubscription =
         _multiRepo.streamStudents(game.id).listen((studentsData) {
-          students = studentsData;
-          rebuildUi();
-        });
+      students = studentsData;
+      rebuildUi();
+    });
     final getAnswers = await _multiRepo.getAnswers(game.id);
     getAnswers.fold((l) => showBottomSheet(l.message), (r) {
       answers = r;
@@ -52,6 +51,7 @@ class MultiplayerStrokeHostResultsViewModel extends BaseViewModel {
       description: description,
     );
   }
+
   @override
   void dispose() {
     streamSubscription?.cancel();

@@ -24,20 +24,19 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   init() async {
     setBusy(true);
     user = await _sharedPref.getCurrentUser();
-    if(isOffline) {
+    if (isOffline) {
       getQuizzesOffline();
-    }
-    else {
+    } else {
       await getQuizzes();
     }
     setBusy(false);
   }
-  void selectMode(bool status) async{
+
+  void selectMode(bool status) async {
     isOffline = status;
     if (isOffline) {
       getQuizzesOffline();
-    }
-    else {
+    } else {
       await getQuizzes();
     }
   }
@@ -66,10 +65,10 @@ class QuizGameStrokeViewModel extends BaseViewModel {
     _navigationService.navigateToQuizView(game: quiz, isOnline: !isOffline);
   }
 
-  void deleteQuiz(String id) async{
+  void deleteQuiz(String id) async {
     setBusy(true);
     final response = await _quizRepo.deleteQuiz(id);
-    response.fold((l) => showBottomSheet(l.message), (r) async{
+    response.fold((l) => showBottomSheet(l.message), (r) async {
       await getQuizzes();
       rebuildUi();
     });
@@ -91,5 +90,4 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   editQuiz(Quizzes quiz) {
     _navigationService.navigateToAddEditQuizView(quizzes: quiz);
   }
-
 }

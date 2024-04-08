@@ -16,7 +16,6 @@ import 'package:steno_game/services/image_service.dart';
 import 'package:steno_game/ui/views/login/login_view.dart';
 import 'package:steno_game/ui/views/sign_up/sign_up_view.dart';
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart';
-import 'package:steno_game/ui/views/achievement/achievement_view.dart';
 import 'package:steno_game/ui/views/lessons/lessons_view.dart';
 import 'package:steno_game/ui/views/people/people_view.dart';
 import 'package:steno_game/ui/views/picture_topic/picture_topic_view.dart';
@@ -46,6 +45,7 @@ import 'package:steno_game/ui/views/multiplayer_stroke_host_results/multiplayer_
 import 'package:steno_game/ui/views/practice/practice_view.dart';
 import 'package:steno_game/ui/views/quiz/quiz_view.dart';
 import 'package:steno_game/ui/views/add_edit_quiz/add_edit_quiz_view.dart';
+import 'package:steno_game/ui/views/about/about_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -55,7 +55,6 @@ import 'package:steno_game/ui/views/add_edit_quiz/add_edit_quiz_view.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
-    MaterialRoute(page: AchievementView),
     MaterialRoute(page: LessonsView),
     MaterialRoute(page: PeopleView),
     MaterialRoute(page: PictureTopicView),
@@ -77,6 +76,7 @@ import 'package:steno_game/ui/views/add_edit_quiz/add_edit_quiz_view.dart';
     MaterialRoute(page: PracticeView),
     MaterialRoute(page: QuizView),
     MaterialRoute(page: AddEditQuizView),
+    MaterialRoute(page: AboutView),
 // @stacked-route
   ],
   dependencies: [

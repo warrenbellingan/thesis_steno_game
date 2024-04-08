@@ -28,7 +28,10 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                 children: [
                   GameBar(),
                   GameTitleText(text: GameUIText.forgotPassText),
-                  GameImage(path: GameUiPng.gameAuthForgotPath),
+                  GameImage(
+                    path: GameUiPng.gameAuthForgotPath,
+                    size: 150,
+                  ),
                   SizedBox(
                     height: 25,
                   ),

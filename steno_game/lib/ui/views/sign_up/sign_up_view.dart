@@ -38,7 +38,10 @@ class SignUpView extends StackedView<SignUpViewModel> {
                         text: user == null
                             ? GameUIText.createAccText
                             : "Connect Account"),
-                    const GameImage(path: GameUiPng.gameAuthCreatePath),
+                    const GameImage(
+                      path: GameUiPng.gameAuthCreatePath,
+                      size: 150,
+                    ),
                     const SizedBox(
                       height: 25,
                     ),

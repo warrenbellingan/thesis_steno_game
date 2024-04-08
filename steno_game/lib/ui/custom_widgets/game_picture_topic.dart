@@ -23,7 +23,11 @@ class GamePictureTopic extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        StrokeImage(imagePath: image, word: text, isOnline: isOnline,),
+        StrokeImage(
+          imagePath: image,
+          word: text,
+          isOnline: isOnline,
+        ),
         verticalSpaceMedium,
         Container(
           width: double.infinity,

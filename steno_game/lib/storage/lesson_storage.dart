@@ -1,7 +1,6 @@
 import '../model/lesson.dart';
 
 class LessonStorage {
-
   final List<Lesson> _offlineLessons = [
     const Lesson(id: "1", title: "Consonants - Written Forward"),
     const Lesson(id: "2", title: "Consonants - Written Downward"),
