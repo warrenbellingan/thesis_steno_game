@@ -8,7 +8,6 @@ import 'package:steno_game/ui/custom_widgets/game_empty.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
 import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/in_game_bar.dart';
-
 import '../../../model/quizzes.dart';
 import 'quiz_viewmodel.dart';
 
@@ -45,6 +44,7 @@ class QuizView extends StackedView<QuizViewModel> {
                             child: Column(
                               children: [
                                 Text(
+                                  textAlign: TextAlign.center,
                                   viewModel.correctAnswer ==
                                           viewModel.quizzes.length
                                       ? "Your Great!"

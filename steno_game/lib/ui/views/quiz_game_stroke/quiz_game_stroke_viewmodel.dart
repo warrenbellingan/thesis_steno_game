@@ -38,6 +38,16 @@ class QuizGameStrokeViewModel extends BaseViewModel {
     _navigationService.navigateToQuizView(game: quiz);
   }
 
+  void deleteQuiz(String id) async{
+    setBusy(true);
+    final response = await _quizRepo.deleteQuiz(id);
+    response.fold((l) => showBottomSheet(l.message), (r) async{
+      await getQuizzes();
+      rebuildUi();
+    });
+    setBusy(false);
+  }
+
   void showBottomSheet(String description) {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.notice,
@@ -47,6 +57,10 @@ class QuizGameStrokeViewModel extends BaseViewModel {
   }
 
   void addQuiz() {
-    _navigationService.navigateToAddEditQuizView();
+    _navigationService.navigateToAddEditQuizView(quizzes: null);
+  }
+
+  editQuiz(Quizzes quiz) {
+    _navigationService.navigateToAddEditQuizView(quizzes: quiz);
   }
 }

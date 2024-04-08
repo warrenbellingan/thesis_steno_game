@@ -431,8 +431,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i28.AddEditQuizView: (data) {
+      final args = data.getArgs<AddEditQuizViewArguments>(nullOk: false);
       return _i29.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i28.AddEditQuizView(),
+        builder: (context) => _i28.AddEditQuizView(args.quizzes, key: args.key),
         settings: data,
       );
     },
@@ -739,6 +740,33 @@ class QuizViewArguments {
   @override
   int get hashCode {
     return game.hashCode ^ key.hashCode;
+  }
+}
+
+class AddEditQuizViewArguments {
+  const AddEditQuizViewArguments({
+    required this.quizzes,
+    this.key,
+  });
+
+  final _i34.Quizzes? quizzes;
+
+  final _i31.Key? key;
+
+  @override
+  String toString() {
+    return '{"quizzes": "$quizzes", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant AddEditQuizViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.quizzes == quizzes && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return quizzes.hashCode ^ key.hashCode;
   }
 }
 
@@ -1142,14 +1170,17 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddEditQuizView([
+  Future<dynamic> navigateToAddEditQuizView({
+    required _i34.Quizzes? quizzes,
+    _i31.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.addEditQuizView,
+        arguments: AddEditQuizViewArguments(quizzes: quizzes, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1555,14 +1586,17 @@ extension NavigatorStateExtension on _i35.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAddEditQuizView([
+  Future<dynamic> replaceWithAddEditQuizView({
+    required _i34.Quizzes? quizzes,
+    _i31.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.addEditQuizView,
+        arguments: AddEditQuizViewArguments(quizzes: quizzes, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

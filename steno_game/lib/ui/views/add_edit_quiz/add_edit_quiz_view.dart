@@ -51,7 +51,8 @@ class AddEditQuizView extends StackedView<AddEditQuizViewModel> {
                                         alignment: Alignment.topRight,
                                         children: [
                                           GameNetworkImage(
-                                              path: viewModel.stroke!.strokeImage),
+                                              path: viewModel
+                                                  .stroke!.strokeImage),
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -115,13 +116,14 @@ class AddEditQuizView extends StackedView<AddEditQuizViewModel> {
                           ],
                         ),
                       ),
-                GameNavigator(
-                    previousClick: () =>
-                        viewModel.changePage(viewModel.currentPage - 1),
-                    nextClick: () =>
-                        viewModel.changePage(viewModel.currentPage + 1),
-                    currentPage: viewModel.currentPage + 1,
-                    allPage: viewModel.quiz.length + 1)
+                if (viewModel.isEditing)
+                  GameNavigator(
+                      previousClick: () =>
+                          viewModel.changePage(viewModel.currentPage - 1),
+                      nextClick: () =>
+                          viewModel.changePage(viewModel.currentPage + 1),
+                      currentPage: viewModel.currentPage + 1,
+                      allPage: viewModel.quiz.length + 1)
               ],
             ),
     );
@@ -135,7 +137,6 @@ class AddEditQuizView extends StackedView<AddEditQuizViewModel> {
 
   @override
   void onViewModelReady(AddEditQuizViewModel viewModel) {
-    // TODO: implement onViewModelReady
     viewModel.init();
   }
 }

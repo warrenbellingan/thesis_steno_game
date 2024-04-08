@@ -44,7 +44,6 @@ class AddEditQuizViewModel extends BaseViewModel {
     }
   }
   void addQuiz() async {
-
     setBusyForObject("saveQuiz", true);
     if(quizzes == null) {
       final response = await _quizRepo.addQuizzes(titleTextController.text);
@@ -69,10 +68,13 @@ class AddEditQuizViewModel extends BaseViewModel {
   }
 
   Future<void> getStroke() async {
+    setBusy(true);
     final response = await _strokeRepo.getStroke(quiz[currentPage].stroke);
     response.fold((l) => showBottomSheet(l.message), (r){
       stroke = r;
+      print(stroke);
     });
+    setBusy(false);
   }
 
   Future<void> getQuiz() async {
@@ -93,7 +95,7 @@ class AddEditQuizViewModel extends BaseViewModel {
     setBusyForObject("add", true);
     final addImage = await _strokeRepo.addStroke(painterKey, correctTextController.text, 1, null);
     addImage.fold((l) => showBottomSheet(l.message), (stroke) async{
-      final response = await _quizRepo.addQuiz(quizzes!.id, stroke.strokeImage, getChoices(), correctTextController.text);
+      final response = await _quizRepo.addQuiz(quizzes!.id, stroke.id, getChoices(), correctTextController.text);
       response.fold((l) => l.message, (r) async{
         await getQuiz();
         rebuildUi();

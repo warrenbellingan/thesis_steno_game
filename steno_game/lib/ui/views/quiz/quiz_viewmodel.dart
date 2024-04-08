@@ -33,22 +33,26 @@ class QuizViewModel extends BaseViewModel {
   init() async {
     setBusy(true);
     user = await _sharedPref.getCurrentUser();
-    await getQuizzes();
     setBusy(false);
+    await getQuizzes();
+    if(quizzes.isNotEmpty) {
+      await getStroke();
+    }
   }
 
   Future<void> getQuizzes() async {
+    setBusy(true);
     final results = await _quizRepo.getQuiz(game!.id);
     results.fold((l) => showBottomSheet(l.message), (r) async{
       quizzes = r;
-      if(quizzes.isNotEmpty) {
-        await getStroke();
-      }
-      rebuildUi();
     });
+    rebuildUi();
+    setBusy(false);
   }
 
   void answer(String answer) async {
+
+    setBusy(true);
     if (answer == quizzes[currentIndex].answer) {
       correctAnswer++;
       score += 1;
@@ -66,18 +70,21 @@ class QuizViewModel extends BaseViewModel {
       setBusy(false);
     }
     else {
-      setBusy(true);
       await getStroke();
-      setBusy(false);
       rebuildUi();
     }
+    setBusy(false);
     rebuildUi();
   }
   Future<void> getStroke() async {
+    setBusy(true);
+    rebuildUi();
     final response = await _strokeRepo.getStroke(quizzes[currentIndex].stroke);
     response.fold((l) => showBottomSheet(l.message), (r){
       stroke = r;
+      rebuildUi();
     });
+    setBusy(false);
   }
 
   Future<void> addScore() async {

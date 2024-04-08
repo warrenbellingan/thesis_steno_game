@@ -11,6 +11,22 @@ class QuizRepository {
   final _db = FirebaseFirestore.instance;
   final _internetService = locator<InternetService>();
 
+  Future<Either<GameException, None>> deleteQuiz(String quizId) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db
+            .collection("quizzes")
+            .doc(quizId).delete();
+        return const Right(None());
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
+
   Future<Either<GameException, None>> addQuiz(String quizId, String stroke, List<String> choices, String answer) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
