@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
+import 'package:steno_game/ui/constants/game_color.dart';
 import 'package:steno_game/ui/custom_widgets/game_bar.dart';
 import 'package:steno_game/ui/custom_widgets/game_body.dart';
 import 'package:steno_game/ui/custom_widgets/game_empty.dart';
@@ -73,6 +74,7 @@ class JoinMultiplayerStrokeView
                                   style: const TextStyle(
                                     letterSpacing: 2,
                                     fontSize: 16,
+                                    color: GameColor.primaryColor,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),

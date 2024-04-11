@@ -11,6 +11,7 @@ _$QuestionStrokeImpl _$$QuestionStrokeImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       data: json['data'] as String,
       type: json['type'] as String,
+      strokeText: json['strokeText'] as String?,
     );
 
 Map<String, dynamic> _$$QuestionStrokeImplToJson(
@@ -19,4 +20,5 @@ Map<String, dynamic> _$$QuestionStrokeImplToJson(
       'id': instance.id,
       'data': instance.data,
       'type': instance.type,
+      'strokeText': instance.strokeText,
     };

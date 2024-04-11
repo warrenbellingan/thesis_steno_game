@@ -39,16 +39,26 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                       : viewModel.currentIndex == viewModel.questions.length
                           ? Column(
                               children: [
-                                const Text(
-                                  "Done Answering!",
-                                  style: TextStyle(
-                                    color: GameColor.secondaryBackgroundColor,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 1.5,
-                                    wordSpacing: 4,
+                                   Text(
+                                    viewModel.done ? "Correct answers:" : "Please wait, the game master is checking our answers!",
+                                    style: const TextStyle(
+                                      color: GameColor.secondaryBackgroundColor,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 1.5,
+                                      wordSpacing: 4,
+                                    ),
                                   ),
-                                ),
+                                if (viewModel.done)
+                                  Text(
+                                    "${viewModel.score}/${viewModel.questions.length}",
+                                    style: const TextStyle(
+                                      color: GameColor.secondaryBackgroundColor,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 3,
+                                    ),
+                                  ),
                                 verticalSpaceSmall,
                                 Container(
                                   width: double.infinity,
@@ -89,7 +99,7 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                                   imagePath: student.image,
                                                   withTail: true,
                                                   tailText:
-                                                      "Scores: ${viewModel.students[0].score}",
+                                                      "Scores: ${viewModel.students[index].score}",
                                                 );
                                               })
                                           : const Text(
@@ -102,6 +112,7 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                   ),
                                 ),
                                 verticalSpaceSmall,
+                                if(viewModel.done)
                                 GameButton(
                                   text: "Exit",
                                   onClick: viewModel.exit,
@@ -147,8 +158,13 @@ class StrokesMultiplayerView extends StackedView<StrokesMultiplayerViewModel> {
                                             .questions[viewModel.currentIndex]
                                             .data),
                                     GameTextField(
-                                        controller: viewModel.answerController,
-                                        label: "Answer"),
+                                      controller: viewModel.answerController,
+                                      label: "Answer",
+                                      icon: const Icon(
+                                        Icons.fact_check_rounded,
+                                        color: GameColor.primaryColor,
+                                      ),
+                                    ),
                                     GameButton(
                                       text: "Next",
                                       onClick: viewModel.addTextAnswer,

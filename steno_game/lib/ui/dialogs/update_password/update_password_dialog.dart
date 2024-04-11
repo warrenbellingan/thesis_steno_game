@@ -56,7 +56,7 @@ class UpdatePasswordDialog extends StackedView<UpdatePasswordDialogModel> {
                 ),
                 verticalSpaceSmall,
                 GameButton(
-                  text: "Save",
+                  text: "Update",
                   onClick: viewModel.changePassword,
                   isLoading: viewModel.busy("changePassword"),
                 ),

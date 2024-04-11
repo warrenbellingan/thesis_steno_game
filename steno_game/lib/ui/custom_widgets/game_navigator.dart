@@ -21,36 +21,33 @@ class GameNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      margin: const EdgeInsets.only(top: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 3),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [primaryShadow()],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
               visualDensity: VisualDensity.compact,
-              iconSize: 60,
               onPressed: previousClick,
               icon:
-                  const Icon(color: GameColor.primaryColor, Icons.arrow_left)),
+                  const Icon(color: GameColor.primaryColor, Icons.arrow_circle_left_rounded)),
           Text(
             "$currentPage/$allPage",
-            style: TextStyle(
-              fontSize: 20,
+            style: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               letterSpacing: 5,
             ),
           ),
           IconButton(
               visualDensity: VisualDensity.compact,
-              iconSize: 60,
               onPressed: nextClick,
               icon:
-                  const Icon(color: GameColor.primaryColor, Icons.arrow_right)),
+                  const Icon(color: GameColor.primaryColor, Icons.arrow_circle_right_sharp)),
         ],
       ),
     );

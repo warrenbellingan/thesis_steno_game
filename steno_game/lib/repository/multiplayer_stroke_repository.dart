@@ -98,7 +98,7 @@ class MultiplayerStrokeRepository {
             questionId: questionId,
             data: data,
             stroke: strokeId,
-            userId: userId);
+            userId: userId,);
         await _db
             .collection("strokeGameEnvironment")
             .doc(gameId)
@@ -260,13 +260,13 @@ class MultiplayerStrokeRepository {
   }
 
   Future<Either<GameException, QuestionStroke>> addQuestion(
-      String gameId, String data, String type) async {
+      String gameId, String data, String type, String? strokeText) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
         final id = DateTime.now().millisecondsSinceEpoch.toString();
         QuestionStroke question =
-            QuestionStroke(id: id, data: data, type: type);
+            QuestionStroke(id: id, data: data, type: type, strokeText: strokeText);
         await _db
             .collection("strokeGameEnvironment")
             .doc(gameId)
@@ -274,6 +274,46 @@ class MultiplayerStrokeRepository {
             .doc(id)
             .set(question.toJson());
         return Right(question);
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
+
+  Future<Either<GameException, QuestionStroke>> updateQuestion(
+      String gameId, String id, String data, String type, String? strokeText) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        QuestionStroke question =
+            QuestionStroke(id: id, data: data, type: type, strokeText: strokeText);
+        await _db
+            .collection("strokeGameEnvironment")
+            .doc(gameId)
+            .collection("questions")
+            .doc(id)
+            .set(question.toJson());
+        return Right(question);
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
+Future<Either<GameException, None>> deleteQuestion(
+      String gameId, String id,) async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        await _db
+            .collection("strokeGameEnvironment")
+            .doc(gameId)
+            .collection("questions")
+            .doc(id).delete();
+        return const Right(None());
       } catch (e) {
         return Left(GameException(e.toString()));
       }

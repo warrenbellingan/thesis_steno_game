@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
@@ -8,7 +7,6 @@ import 'package:steno_game/app/app.bottomsheets.dart';
 import 'package:steno_game/model/user.dart';
 import 'package:steno_game/repository/user_repository.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
-
 import '../../../app/app.locator.dart';
 import '../../constants/game_ui_png.dart';
 

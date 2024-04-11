@@ -17,6 +17,36 @@ class UserRepository {
   final _authServ = locator<AuthenticationService>();
   final _internetService = locator<InternetService>();
 
+  Stream<List<User>> streamUsersScore() {
+    final results = _db
+        .collection("users")
+        .where("role", isEqualTo: "Student")
+        .orderBy("score", descending: true)
+        .snapshots();
+    return results.map((snapshots) =>
+        snapshots.docs.map((doc) => User.fromJson(doc.data())).toList());
+  }
+
+  Future<Either<GameException, List<User>>> getTopUsers() async {
+    final bool hasInternet = await _internetService.hasInternetConnection();
+    if (hasInternet) {
+      try {
+        final results = await _db
+            .collection('users')
+            .where("role", isEqualTo: "Student")
+            .orderBy("score", descending: true)
+            .get()
+            .then((value) =>
+                value.docs.map((user) => User.fromJson(user.data())).toList());
+        return Right(results);
+      } catch (e) {
+        return Left(GameException(e.toString()));
+      }
+    } else {
+      return Left(GameException("Please check your internet connection!"));
+    }
+  }
+
   Future<Either<GameException, None>> updateScore(int gainScore) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     User? user = await _sharedPref.getCurrentUser();
@@ -36,7 +66,6 @@ class UserRepository {
           email: user.email,
           role: user.role,
           image: user.image,
-          achievements: user.achievements,
           completedLevels: user.completedLevels,
           friends: user.friends,
           friendsRequest: user.friendsRequest,
@@ -52,7 +81,6 @@ class UserRepository {
         email: user.email,
         role: user.role,
         image: user.image,
-        achievements: user.achievements,
         completedLevels: user.completedLevels,
         friends: user.friends,
         friendsRequest: user.friendsRequest,
@@ -85,7 +113,6 @@ class UserRepository {
           email: user.email,
           role: user.role,
           image: user.image,
-          achievements: user.achievements,
           completedLevels: levels,
           friends: user.friends,
           friendsRequest: user.friendsRequest,
@@ -103,7 +130,6 @@ class UserRepository {
         email: user.email,
         role: user.role,
         image: user.image,
-        achievements: user.achievements,
         completedLevels: levels,
         friends: user.friends,
         friendsRequest: user.friendsRequest,
@@ -195,7 +221,6 @@ class UserRepository {
           email: user.email,
           role: user.role,
           image: user.image,
-          achievements: user.achievements,
           completedLevels: user.completedLevels,
           friends: user.friends,
           friendsRequest: user.friendsRequest,
@@ -240,7 +265,6 @@ class UserRepository {
                 email: user.email,
                 role: user.role,
                 image: imageUrl,
-                achievements: user.achievements,
                 completedLevels: user.completedLevels,
                 friends: user.friends,
                 friendsRequest: user.friendsRequest,

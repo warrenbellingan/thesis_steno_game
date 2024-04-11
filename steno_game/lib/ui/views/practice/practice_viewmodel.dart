@@ -20,7 +20,7 @@ class PracticeViewModel extends BaseViewModel {
 
   Future<void> searchStroke() async {
     setBusy(true);
-    final results = await _strokeRepo.searchStrokes(searchController.text);
+    final results = await _strokeRepo.searchStrokes(searchController.text, [1]);
     results.fold((l) => showBottomSheet(l.message), (r) {
       strokes = r;
       rebuildUi();

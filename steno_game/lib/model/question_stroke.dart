@@ -10,6 +10,7 @@ class QuestionStroke with _$QuestionStroke {
     required String id,
     required String data,
     required String type,
+    required String? strokeText,
   }) = _QuestionStroke;
 
   factory QuestionStroke.fromJson(Map<String, dynamic> json) =>

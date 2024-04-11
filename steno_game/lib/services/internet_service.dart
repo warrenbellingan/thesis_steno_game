@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:steno_game/app/app.locator.dart';
 import 'package:steno_game/services/shared_preference_service.dart';
 

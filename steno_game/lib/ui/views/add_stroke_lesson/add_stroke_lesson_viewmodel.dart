@@ -72,7 +72,9 @@ class AddStrokeLessonViewModel extends BaseViewModel {
         showBottomSheet("Saved Successfully");
         lesson = lessonData;
         await getPictureTopics();
-        await getStroke();
+        if(topics.isNotEmpty) {
+          await getStroke();
+        }
         isAddLesson = false;
         rebuildUi();
       });
@@ -84,8 +86,12 @@ class AddStrokeLessonViewModel extends BaseViewModel {
   Future<void> getPictureTopics() async {
     setBusy(true);
     final response = await _topicRepo.getPictureTopics(lesson!.id);
-    response.fold((l) => showBottomSheet(l.message), (topicsData) {
+    response.fold((l) => showBottomSheet(l.message), (topicsData) async{
       topics = topicsData;
+      if(topics.isNotEmpty) {
+        await getStroke();
+        strokeDescriptionController.text = topics[currentIndex].description;
+      }
     });
     setBusy(false);
   }

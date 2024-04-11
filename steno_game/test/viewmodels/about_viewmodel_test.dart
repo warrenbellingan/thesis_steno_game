@@ -4,7 +4,7 @@ import 'package:steno_game/app/app.locator.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
-  group('PictureTopicViewModel Tests -', () {
+  group('AboutViewModel Tests -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
   });

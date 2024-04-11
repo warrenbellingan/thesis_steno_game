@@ -43,7 +43,7 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                             ),
                             viewModel.lesson != null
                                 ? GameButton(
-                                    text: "Save Lesson",
+                                    text: "Update Lesson",
                                     onClick: viewModel.saveLessonClick,
                                     isLoading: viewModel.busy("saveLesson"),
                                   )
@@ -119,6 +119,7 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                   maxLines: 15,
                                   textAlign: TextAlign.justify,
                                   keyboardType: TextInputType.multiline,
+
                                   controller:
                                       viewModel.strokeDescriptionController,
                                   decoration: InputDecoration(
@@ -126,6 +127,11 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                     filled: true,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    floatingLabelStyle: const TextStyle(
+                                      color: GameColor.primaryColor,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                     labelText: "Description",
                                     labelStyle: const TextStyle(
@@ -144,7 +150,7 @@ class AddStrokeLessonView extends StackedView<AddStrokeLessonViewModel> {
                                       isLoading: viewModel.busy("addTopic"),
                                     )
                                   : GameButton(
-                                      text: "Save",
+                                      text: "Update",
                                       onClick: viewModel.saveClick,
                                       isLoading: viewModel.busy("save"),
                                     ),

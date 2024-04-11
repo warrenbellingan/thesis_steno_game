@@ -18,11 +18,11 @@ class GameButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 12),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          gradient: GameColor.primaryGradient,
+          color: GameColor.secondaryBackgroundColor,
           boxShadow: [
             primaryShadow(),
           ]),
@@ -33,19 +33,20 @@ class GameButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
         ),
         child: isLoading
             ? const CircularProgressIndicator(
+          backgroundColor: GameColor.secondaryBackgroundColor,
                 color: Colors.white,
               )
             : Text(
                 text,
                 style: const TextStyle(
-                  letterSpacing: 1.5,
+                  letterSpacing: 1,
                   color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
       ),

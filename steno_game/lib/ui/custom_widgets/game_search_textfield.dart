@@ -17,7 +17,7 @@ class GameSearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       height: 50,
       decoration: BoxDecoration(boxShadow: [
         primaryShadow(),
@@ -39,7 +39,7 @@ class GameSearchTextField extends StatelessWidget {
             ),
           ),
           suffixIcon: IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: onClick,
           ),
           suffixIconColor: Colors.black,

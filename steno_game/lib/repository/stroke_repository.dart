@@ -175,18 +175,12 @@ class StrokeRepository {
   }
 
   Future<Either<GameException, List<StenoStroke>>> searchStrokes(
-      String searchText) async {
+      String searchText, List<int> status) async {
     final bool hasInternet = await _internetService.hasInternetConnection();
     if (hasInternet) {
       try {
-        final query1 = await _db
-            .collection('strokes')
-            .where("text", isEqualTo: searchText)
-            .get()
-            .then((value) =>
-                value.docs.map((e) => StenoStroke.fromJson(e.data())).toList());
-        if (query1.isEmpty) {
-          final results = await _db.collection('strokes').get().then((value) =>
+          final results = await _db.collection('strokes').where("status", whereIn: status)
+              .get().then((value) =>
               value.docs
                   .map((doc) => StenoStroke.fromJson(doc.data()))
                   .toList());
@@ -198,9 +192,7 @@ class StrokeRepository {
                 .toList());
           }
           return Right(results);
-        } else {
-          return Right(query1);
-        }
+
       } catch (e) {
         return Left(GameException(e.toString()));
       }

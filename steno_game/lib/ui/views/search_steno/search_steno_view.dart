@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/common/ui_helpers.dart';
 import 'package:steno_game/ui/constants/game_color.dart';
-import 'package:steno_game/ui/custom_widgets/game_chip.dart';
 import 'package:steno_game/ui/custom_widgets/game_loading.dart';
-import 'package:steno_game/ui/custom_widgets/game_network_image.dart';
 import 'package:steno_game/ui/custom_widgets/game_search_textfield.dart';
 import 'package:steno_game/ui/custom_widgets/stroke_image.dart';
 

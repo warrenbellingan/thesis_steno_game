@@ -15,7 +15,7 @@ class _PainterState extends State<Painter> {
   var historyDrawingPoints = <DrawingPoint>[];
   var drawingPoints = <DrawingPoint>[];
 
-  double imageSize = 350;
+  double imageSize = 250;
 
   DrawingPoint? currentDrawingPoint;
 
@@ -25,7 +25,7 @@ class _PainterState extends State<Painter> {
       decoration: BoxDecoration(
         border: Border.all(
           color: GameColor.secondaryColor,
-          width: 3,
+          width: 2,
           style: BorderStyle.solid,
         ),
       ),
@@ -34,6 +34,8 @@ class _PainterState extends State<Painter> {
         child: Column(
           children: [
             Container(
+              alignment: Alignment.center,
+              height: 30,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1,
@@ -53,6 +55,7 @@ class _PainterState extends State<Painter> {
                         });
                       }
                     },
+                    iconSize: 15,
                     icon: const Icon(
                       Icons.undo_rounded,
                     ),
@@ -67,6 +70,7 @@ class _PainterState extends State<Painter> {
                         }
                       });
                     },
+                    iconSize: 15,
                     icon: const Icon(
                       Icons.redo_rounded,
                     ),

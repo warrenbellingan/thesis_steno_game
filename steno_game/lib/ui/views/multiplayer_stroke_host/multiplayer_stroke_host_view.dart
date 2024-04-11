@@ -87,16 +87,29 @@ class MultiplayerStrokeHostView
                                 ],
                               ),
                               question.type == "stroke"
-                                  ? Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.black, width: 2)),
-                                      child: GameNetworkImage(
-                                        path: question.data,
-                                        size: screenWidthFraction(context,
-                                            dividedBy: 2),
+                                  ? Column(
+                                    children: [
+                                      Text(
+                                        question.strokeText!,
+                                        style: const TextStyle(
+                                          color: GameColor.primaryColor,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 3,
+                                        ),
                                       ),
-                                    )
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.black, width: 2)),
+                                          child: GameNetworkImage(
+                                            path: question.data,
+                                            size: screenWidthFraction(context,
+                                                dividedBy: 2),
+                                          ),
+                                        ),
+                                    ],
+                                  )
                                   : Container(
                                       padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(

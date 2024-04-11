@@ -28,6 +28,8 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
   TextEditingController answerController = TextEditingController();
 
   GlobalKey painterKey = GlobalKey();
+
+  bool done = false;
   StrokesMultiplayerViewModel(this.game);
   List<QuestionStroke> questions = [];
   List<AnswerStroke> answers = [];
@@ -38,6 +40,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
   List<Student> students = [];
 
   int currentIndex = 0;
+  int score = 0;
   late User user;
   init() async {
     setBusy(true);
@@ -50,7 +53,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
     gameStreamSubscription =
         _multiStroke.streamMultiplayerStroke(game.id).listen((event) async {
       game = event;
-      if (game.correctAnswers.isNotEmpty) {
+      if (game.status == 3) {
         setBusy(true);
         final getAnswers = await _multiStroke.getAnswers(game.id);
         getAnswers.fold((l) => showBottomSheet(l.message), (r) {
@@ -58,7 +61,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
           answers =
               answers.where((element) => element.userId == user.id).toList();
         });
-        int score = 0;
+      score = 0;
         for (var answer in answers) {
           if (game.correctAnswers.contains(answer.id)) {
             score++;
@@ -73,6 +76,7 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
             setStroke.fold((l) => showBottomSheet(l.message), (r) => () {});
           }
         }
+        done = true;
         setBusy(false);
         rebuildUi();
       }
@@ -117,7 +121,9 @@ class StrokesMultiplayerViewModel extends BaseViewModel {
       });
     });
     setBusyForObject("addStroke", false);
-    rebuildUi();
+    setBusy(true);
+    notifyListeners();
+    setBusy(false);
   }
 
   void exit() {

@@ -37,18 +37,23 @@ class _GamePasswordTextFieldState extends State<GamePasswordTextField> {
             keyboardType: TextInputType.visiblePassword,
             obscureText: widget.isObscure,
             decoration: InputDecoration(
-              fillColor: GameColor.primaryBackgroundColor,
+              fillColor: Colors.white,
               filled: true,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
+              floatingLabelStyle: const TextStyle(
+                color: GameColor.primaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
               labelText: widget.label,
               labelStyle: const TextStyle(
                 color: Color(0xFF78746D),
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w400,
               ),
-              prefixIcon: Icon(Icons.lock, color: GameColor.primaryColor),
+              prefixIcon: const Icon(Icons.lock, color: GameColor.primaryColor),
               suffixIcon: IconButton(
                 onPressed: onClick,
                 icon: Transform.scale(
@@ -64,7 +69,7 @@ class _GamePasswordTextFieldState extends State<GamePasswordTextField> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

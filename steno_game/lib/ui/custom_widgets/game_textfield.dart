@@ -25,27 +25,30 @@ class GameTextField extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             controller: controller,
             decoration: InputDecoration(
-              fillColor: GameColor.primaryBackgroundColor,
+              fillColor: Colors.white,
               filled: true,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               labelText: label,
+              floatingLabelStyle: const TextStyle(
+                color: GameColor.primaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
               labelStyle: const TextStyle(
                 color: Color(0xFF78746D),
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w400,
               ),
-              prefixIcon: icon == null
-                  ? Icon(
+              prefixIcon: icon ?? const Icon(
                       Icons.email,
                       color: GameColor.primaryColor,
-                    )
-                  : icon,
+                    ),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
       ],

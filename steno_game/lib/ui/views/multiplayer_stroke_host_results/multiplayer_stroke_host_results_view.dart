@@ -65,7 +65,7 @@ class MultiplayerStrokeHostResultsView
                                   imagePath: student.image,
                                   withTail: true,
                                   tailText:
-                                      "Scores: ${viewModel.students[0].score}",
+                                      "Scores: ${viewModel.students[index].score}",
                                 );
                               })
                           : const Text(

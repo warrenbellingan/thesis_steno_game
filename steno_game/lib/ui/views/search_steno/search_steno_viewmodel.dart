@@ -31,8 +31,12 @@ class SearchStenoViewModel extends BaseViewModel {
   }
 
   Future<void> _searchStroke() async {
+    List<int> status = [1];
+    if(user.role == "Instructor") {
+      status.add(0);
+    }
     setBusy(true);
-    final response = await _strokeRepo.searchStrokes(searchTextController.text);
+    final response = await _strokeRepo.searchStrokes(searchTextController.text, status);
     response.fold((l) => showBottomSheet(l.message), (list) {
       strokeList = list;
       rebuildUi();

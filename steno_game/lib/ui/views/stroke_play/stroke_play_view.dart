@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:steno_game/ui/views/stroke_play/stroke_play_viewmodel.dart';
-
-import '../../custom_widgets/game_bar.dart';
-import '../../custom_widgets/game_body.dart';
 import '../../custom_widgets/play_card.dart';
 
 class StrokePlayView extends StackedView<StrokePlayViewModel> {

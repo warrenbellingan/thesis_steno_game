@@ -60,12 +60,12 @@ class SignUpView extends StackedView<SignUpViewModel> {
                         color: GameColor.secondaryColor,
                         fontWeight: FontWeight.w500,
                       ),
-                      dropdownMenuEntries: [
-                        const DropdownMenuEntry(
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry(
                           value: 1,
                           label: GameUIText.studentText,
                         ),
-                        const DropdownMenuEntry(
+                        DropdownMenuEntry(
                           value: 2,
                           label: GameUIText.instructorText,
                         ),

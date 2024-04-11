@@ -18,7 +18,6 @@ import 'package:steno_game/ui/views/sign_up/sign_up_view.dart';
 import 'package:steno_game/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:steno_game/ui/views/lessons/lessons_view.dart';
 import 'package:steno_game/ui/views/people/people_view.dart';
-import 'package:steno_game/ui/views/picture_topic/picture_topic_view.dart';
 import 'package:steno_game/ui/views/profile/profile_view.dart';
 import 'package:steno_game/ui/views/quiz_game_stroke/quiz_game_stroke_view.dart';
 import 'package:steno_game/ui/views/stroke_exercise/stroke_exercise_view.dart';
@@ -57,7 +56,6 @@ import 'package:steno_game/ui/views/about/about_view.dart';
     MaterialRoute(page: ForgotPasswordView),
     MaterialRoute(page: LessonsView),
     MaterialRoute(page: PeopleView),
-    MaterialRoute(page: PictureTopicView),
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: QuizGameStrokeView),
     MaterialRoute(page: StrokeExerciseView),

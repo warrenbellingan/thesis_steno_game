@@ -12,7 +12,6 @@ class User with _$User {
     required String role,
     String? image,
     @Default([]) List completedLevels,
-    @Default([]) List achievements,
     @Default(0) int score,
     @Default([]) List<String> friends,
     @Default([]) List<String> friendsRequest,

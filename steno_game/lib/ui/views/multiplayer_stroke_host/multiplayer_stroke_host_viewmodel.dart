@@ -60,9 +60,12 @@ class MultiplayerStrokeHostViewModel extends BaseViewModel {
     final response =
         await _multiStroke.addCorrectAnswers(game.id, correctAnswers);
     response.fold((l) => showBottomSheet(l.message), (r) async {
-      final getGame = await _multiStroke.getGame(game.id);
-      getGame.fold((l) => showBottomSheet(l.message), (newGameData) {
-        _nav.replaceWithMultiplayerStrokeHostResultsView(game: newGameData);
+      final setStatus = await _multiStroke.setGameStatus(game.id, 3);
+      setStatus.fold((l) => showBottomSheet(l.message), (r) async{
+        final getGame = await _multiStroke.getGame(game.id);
+        getGame.fold((l) => showBottomSheet(l.message), (newGameData) {
+          _nav.replaceWithMultiplayerStrokeHostResultsView(game: newGameData);
+        });
       });
     });
     setBusyForObject("submit", false);

@@ -34,7 +34,7 @@ class PracticeView extends StackedView<PracticeViewModel> {
           verticalSpaceSmall,
           viewModel.isBusy
               ? const GameLoading()
-              : Container(
+              :  SizedBox(
                   height: 240,
                   child: Expanded(
                     child: ListView.builder(

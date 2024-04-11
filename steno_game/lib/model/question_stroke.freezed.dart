@@ -23,6 +23,7 @@ mixin _$QuestionStroke {
   String get id => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  String? get strokeText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $QuestionStrokeCopyWith<$Res> {
           QuestionStroke value, $Res Function(QuestionStroke) then) =
       _$QuestionStrokeCopyWithImpl<$Res, QuestionStroke>;
   @useResult
-  $Res call({String id, String data, String type});
+  $Res call({String id, String data, String type, String? strokeText});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$QuestionStrokeCopyWithImpl<$Res, $Val extends QuestionStroke>
     Object? id = null,
     Object? data = null,
     Object? type = null,
+    Object? strokeText = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,6 +71,10 @@ class _$QuestionStrokeCopyWithImpl<$Res, $Val extends QuestionStroke>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      strokeText: freezed == strokeText
+          ? _value.strokeText
+          : strokeText // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$QuestionStrokeImplCopyWith<$Res>
       __$$QuestionStrokeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String data, String type});
+  $Res call({String id, String data, String type, String? strokeText});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$QuestionStrokeImplCopyWithImpl<$Res>
     Object? id = null,
     Object? data = null,
     Object? type = null,
+    Object? strokeText = freezed,
   }) {
     return _then(_$QuestionStrokeImpl(
       id: null == id
@@ -112,6 +119,10 @@ class __$$QuestionStrokeImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      strokeText: freezed == strokeText
+          ? _value.strokeText
+          : strokeText // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -120,7 +131,10 @@ class __$$QuestionStrokeImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$QuestionStrokeImpl implements _QuestionStroke {
   const _$QuestionStrokeImpl(
-      {required this.id, required this.data, required this.type});
+      {required this.id,
+      required this.data,
+      required this.type,
+      required this.strokeText});
 
   factory _$QuestionStrokeImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuestionStrokeImplFromJson(json);
@@ -131,10 +145,12 @@ class _$QuestionStrokeImpl implements _QuestionStroke {
   final String data;
   @override
   final String type;
+  @override
+  final String? strokeText;
 
   @override
   String toString() {
-    return 'QuestionStroke(id: $id, data: $data, type: $type)';
+    return 'QuestionStroke(id: $id, data: $data, type: $type, strokeText: $strokeText)';
   }
 
   @override
@@ -144,12 +160,14 @@ class _$QuestionStrokeImpl implements _QuestionStroke {
             other is _$QuestionStrokeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.data, data) || other.data == data) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.strokeText, strokeText) ||
+                other.strokeText == strokeText));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, data, type);
+  int get hashCode => Object.hash(runtimeType, id, data, type, strokeText);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +188,8 @@ abstract class _QuestionStroke implements QuestionStroke {
   const factory _QuestionStroke(
       {required final String id,
       required final String data,
-      required final String type}) = _$QuestionStrokeImpl;
+      required final String type,
+      required final String? strokeText}) = _$QuestionStrokeImpl;
 
   factory _QuestionStroke.fromJson(Map<String, dynamic> json) =
       _$QuestionStrokeImpl.fromJson;
@@ -181,6 +200,8 @@ abstract class _QuestionStroke implements QuestionStroke {
   String get data;
   @override
   String get type;
+  @override
+  String? get strokeText;
   @override
   @JsonKey(ignore: true)
   _$$QuestionStrokeImplCopyWith<_$QuestionStrokeImpl> get copyWith =>

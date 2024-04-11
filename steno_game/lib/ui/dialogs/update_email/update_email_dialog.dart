@@ -53,7 +53,7 @@ class UpdateEmailDialog extends StackedView<UpdateEmailDialogModel> {
                   ),
                 ),
                 GameButton(
-                  text: "Save",
+                  text: "Update",
                   onClick: viewModel.changeEmail,
                   isLoading: viewModel.busy("changeEmail"),
                 ),
